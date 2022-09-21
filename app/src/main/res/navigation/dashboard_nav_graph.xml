@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_nav_graph"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.app.igrow.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/diagnoseFragment"
+        android:name="com.app.igrow.ui.diagnose.DiagnoseFragment"
+        android:label="DiagnoseFragment"
+        tools:layout="@layout/fragment_diagnose" />
+    <fragment
+        android:id="@+id/ProductsFragment"
+        android:name="com.app.igrow.ui.products.ProductsFragment"
+        android:label="ProductsFragment"
+        tools:layout="@layout/fragment_products" />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.app.igrow.ui.shop.ShopFragment"
+        android:label="ShopFragment"
+        tools:layout="@layout/fragment_shop" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.app.igrow.ui.more.MoreFragment"
+        android:label="MoreFragment"
+        tools:layout="@layout/fragment_shop" />
+
+</navigation>
