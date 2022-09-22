@@ -1,13 +1,12 @@
 package com.app.igrow.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.app.igrow.R
 import com.app.igrow.databinding.FragmentHomeBinding
+import com.app.igrow.utils.Utils.getSystemLanguage
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +26,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getSystemLanguage()
     }
 
 }
