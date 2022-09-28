@@ -1,6 +1,5 @@
 package com.app.igrow.di.modules
 
-import com.app.igrow.BuildConfig
 import com.app.igrow.data.remote.ApiResponseCallAdapterFactory
 import com.app.igrow.data.remote.ApiService
 import com.app.igrow.utils.Constants
