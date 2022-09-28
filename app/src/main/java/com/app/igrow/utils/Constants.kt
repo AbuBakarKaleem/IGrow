@@ -77,7 +77,7 @@ object Constants {
     //Distributors Sheet Columns
     const val COL_DISTRIBUTORS_NAME = "distributor_name"
     const val COL_DISTRIBUTORS_NAME_FR = "distributor_name_fr"
-    const val COL_TELEPHONE_TWO = "telephone 2"
+    const val COL_TELEPHONE_TWO = "telephone_2"
     const val COL_EMAIL = "email"
     const val COL_EMAIL_FR = "email_fr"
     const val COL_WEBSITE = "website"
