@@ -18,6 +18,7 @@ object Constants {
     const val SHEET_PRODUCTS = "Products"
     const val SHEET_DISTRIBUTORS = "Distributors"
     const val SHEET_DEALERS = "Dealers"
+    const val DOCUMENT_ID = "igrow"
 
     //Diagnostic Sheet Columns
     const val COL_ID = "id"

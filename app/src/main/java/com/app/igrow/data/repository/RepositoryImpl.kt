@@ -1,25 +1,28 @@
 package com.app.igrow.data.repository
 
-import androidx.annotation.WorkerThread
 import com.app.igrow.data.DataState
-import com.app.igrow.data.remote.*
-import com.app.igrow.data.model.CurrenciesDTO
-import com.app.igrow.data.model.ExchangeRatesDTO
+import com.app.igrow.data.model.sheets.Dealers
+import com.app.igrow.data.model.sheets.Diagnostic
+import com.app.igrow.data.model.sheets.Distributors
+import com.app.igrow.data.remote.ApiService
+import com.app.igrow.utils.Constants
+import com.app.igrow.utils.Constants.DOCUMENT_ID
 import com.app.igrow.utils.StringUtils
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import java.io.IOException
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.isActive
 import javax.inject.Inject
 
 /**
  * This is an implementation of [Repository] to handle communication with [ApiService] server.
  */
 class RepositoryImpl @Inject constructor(
-    private val stringUtils: StringUtils,
-    private val apiService: ApiService,
+    private val stringUtils: StringUtils
 ) : Repository {
 
-  /*  @WorkerThread
+    /*  @WorkerThread
     override suspend fun getCurrencies(): Flow<DataState<CurrenciesDTO>> {
         return flow {
             apiService.getCurrencies().apply {
@@ -67,4 +70,29 @@ class RepositoryImpl @Inject constructor(
         }
     }
 */
+    override suspend fun addDiagnosticData(diagnosticMap: HashMap<String, Diagnostic>): Flow<DataState<String>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
+                    .document(DOCUMENT_ID).set(diagnosticMap)
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.diagnosticDataSavedSuccessMsg())).isSuccess
+                    }.addOnFailureListener { e ->
+                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+                    }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+            }
+            awaitClose()
+        }
+
+    override suspend fun addDistributorsData(distributors: ArrayList<Distributors>): Flow<DataState<String>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun addDealersData(dealers: ArrayList<Dealers>): Flow<DataState<String>> {
+        TODO("Not yet implemented")
+    }
 }

@@ -8,4 +8,7 @@
     <string name="shop">Shop</string>
     <string name="more">More</string>
     <string name="upload_file">Upload File</string>
+    <string name="diagnostic_save_success">Diagnostic Data added successfully</string>
+    <string name="dealer_save_success">Dealer Data added successfully</string>
+    <string name="distributors_save_success">distributors Data added successfully</string>
 </resources>

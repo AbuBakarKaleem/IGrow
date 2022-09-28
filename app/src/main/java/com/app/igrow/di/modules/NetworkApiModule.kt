@@ -1,5 +1,6 @@
 package com.app.igrow.di.modules
 
+import com.app.igrow.BuildConfig
 import com.app.igrow.data.remote.ApiResponseCallAdapterFactory
 import com.app.igrow.data.remote.ApiService
 import com.app.igrow.utils.Constants
@@ -34,16 +35,16 @@ class NetworkApiModule {
             .build()
     }
 
-    /*@Singleton
+    @Singleton
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl("https:\\google.com")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(ApiResponseCallAdapterFactory())
             .build()
-    }*/
+    }
 
     @Singleton
     @Provides
