@@ -9,11 +9,14 @@ import com.app.igrow.data.remote.ApiService
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.DOCUMENT_ID
 import com.app.igrow.utils.StringUtils
+import com.app.igrow.utils.Utils
+import com.bumptech.glide.util.Util
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.isActive
+import okio.Utf8
 import javax.inject.Inject
 
 /**
@@ -22,55 +25,6 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
     private val stringUtils: StringUtils
 ) : Repository {
-
-    /*  @WorkerThread
-    override suspend fun getCurrencies(): Flow<DataState<CurrenciesDTO>> {
-        return flow {
-            apiService.getCurrencies().apply {
-                this.onSuccessSuspend {
-                    data?.let {
-                        if(it.success) {
-                            emit(DataState.success(it))
-                        } else {
-                            emit(DataState.error<CurrenciesDTO>(message = stringUtils.somethingWentWrong()))
-                        }
-                    }?:run{
-                        emit(DataState.error<CurrenciesDTO>(message = stringUtils.somethingWentWrong()))
-                    }
-                }.onErrorSuspend {
-                    emit(DataState.error<CurrenciesDTO>(message()))
-                }.onExceptionSuspend {
-                    if (this.exception is IOException) {
-                        emit(DataState.error<CurrenciesDTO>(stringUtils.noNetworkErrorMessage()))
-                    } else {
-                        emit(DataState.error<CurrenciesDTO>(stringUtils.somethingWentWrong()))
-                    }
-                }
-            }
-        }
-    }
-
-    override suspend fun getExchangeRates(): Flow<DataState<ExchangeRatesDTO>> {
-        return flow {
-            apiService.getExchangeRates().apply {
-                this.onSuccessSuspend {
-                    data?.let {
-                        if (it.success) emit(DataState.success(it))
-                        else emit(DataState.error<ExchangeRatesDTO>(stringUtils.somethingWentWrong()))
-                    }
-                }.onErrorSuspend {
-                    emit(DataState.error<ExchangeRatesDTO>(message()))
-                }.onExceptionSuspend {
-                    if (this.exception is IOException) {
-                        emit(DataState.error<ExchangeRatesDTO>(stringUtils.noNetworkErrorMessage()))
-                    } else {
-                        emit(DataState.error<ExchangeRatesDTO>(stringUtils.somethingWentWrong()))
-                    }
-                }
-            }
-        }
-    }
-*/
     override suspend fun addDiagnosticData(diagnosticMap: HashMap<String, Diagnostic>): Flow<DataState<String>> =
         callbackFlow {
             try {
@@ -142,5 +96,36 @@ class RepositoryImpl @Inject constructor(
             }
             awaitClose()
         }
+
+    override suspend fun getDiagnosticData(id: String): Flow<DataState<Any>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
+                    .document(DOCUMENT_ID).addSnapshotListener { snashot, error ->
+                        if (error != null) {
+                            if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
+                            return@addSnapshotListener
+                        }
+                        if (snashot!!.exists() && snashot.data!!.containsKey(id)) {
+                            val map = snashot.data!![id] as HashMap<*, *>
+                            val finalData = Utils.parseHashMapToObject(map,Diagnostic::class.java) as Diagnostic
+
+                            if (isActive) trySend(DataState.success(finalData))
+                        } else {
+                            if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
+                        }
+
+                    }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<Any>(e.message.toString())).isSuccess
+            }
+            awaitClose()
+        }
+
+    override suspend fun updateDiagnostic(diagnostic: Diagnostic): Flow<DataState<Any>> {
+        TODO("Not yet implemented")
+    }
 
 }

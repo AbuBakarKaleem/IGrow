@@ -5,11 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.view.Gravity
 import android.view.View
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -17,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
 import com.app.igrow.databinding.ActivityAdminBinding
 import com.app.igrow.helpers.FileConverter
+import com.app.igrow.ui.admin.edit.diagnostic.EditDiagnosticActivity
+import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils.getFileMimeType
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.action_type_dialog.view.*
 import org.apache.poi.ss.usermodel.Workbook
 import java.io.InputStream
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -49,10 +47,10 @@ class AdminActivity : AppCompatActivity() {
 
     private fun activateListener() {
         binding.edit.setOnClickListener {
-            showActionTypeDialog("edit")
+            showActionTypeDialog(AdminActionType.EDIT.toString())
         }
         binding.delete.setOnClickListener {
-            showActionTypeDialog("delete")
+            showActionTypeDialog(AdminActionType.DELETE.toString())
         }
     }
 
@@ -130,13 +128,37 @@ class AdminActivity : AppCompatActivity() {
         dialogBuilder.setView(dialogView)
         dialogBuilder.setPositiveButton(getString(R.string.ok), null)
         dialogBuilder.setNegativeButton(getString(R.string.cancel), null)
-
-        //dialogView.action_type
         val alertDialog: AlertDialog = dialogBuilder.create()
+
         alertDialog.setOnShowListener {
             val positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setOnClickListener {
+                //TODO()
+                if (!dialogView.action_type.selectedItem.equals("Select")) {
+                    when (dialogView.action_type.selectedItem.toString()) {
+                        Constants.SHEET_DIAGNOSTIC -> {
+                            //TODO()
+                            if (actionType == AdminActionType.EDIT.toString()) {
+                                startActivity(Intent(this, EditDiagnosticActivity::class.java))
+                            } else {
 
+                            }
+
+                        }
+                        Constants.SHEET_DEALERS -> {
+
+                        }
+                        Constants.SHEET_PRODUCTS -> {
+
+                        }
+                        Constants.SHEET_DISTRIBUTORS -> {
+
+                        }
+                    }
+                } else {
+                    //TODO()
+                    showMessage("Please select an option")
+                }
             }
             val negativeButton = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
             negativeButton.setOnClickListener {
@@ -149,35 +171,39 @@ class AdminActivity : AppCompatActivity() {
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-   /* fun applyBrandingOnDialog(dialog: AlertDialog, title: String) {
-        val positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-        val negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-        val neutral = dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
-        positive.setTextColor(DocumentManager.getLevelFiveColor())
-        positive.setBackgroundColor(DocumentManager.getLevelOneColor())
-        positive.elevation = elevationValue
-        negative.setTextColor(getNegativeButtonTextColor())
-        negative.setBackgroundColor(getNegativeButtonBackgroundColor())
-        negative.elevation = elevationValue
-        var buttonParams: LinearLayout.LayoutParams
-        buttonParams = positive.layoutParams as LinearLayout.LayoutParams
-        buttonParams.weight = 1f
-        buttonParams.width = 0
-        buttonParams.gravity = Gravity.END
-        buttonParams.bottomMargin = 40
-        buttonParams = negative.layoutParams as LinearLayout.LayoutParams
-        buttonParams.weight = 1f
-        buttonParams.width = 0
-        buttonParams.gravity = Gravity.START
-        buttonParams.rightMargin = 40
-        buttonParams.bottomMargin = 40
-        buttonParams = neutral.layoutParams as LinearLayout.LayoutParams
-        buttonParams.weight = 0f
-        buttonParams.width = 0
-        if (!title.isEmpty()) {
-            val s = SpannableString(title.uppercase(Locale.getDefault()))
-            s.setSpan(ForegroundColorSpan(DocumentManager.getLevelOneColor()), 0, s.length, 0)
-            dialog.setTitle(s)
-        }
-    }*/
+
+    /* fun applyBrandingOnDialog(dialog: AlertDialog, title: String) {
+         val positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+         val negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+         val neutral = dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
+         positive.setTextColor(DocumentManager.getLevelFiveColor())
+         positive.setBackgroundColor(DocumentManager.getLevelOneColor())
+         positive.elevation = elevationValue
+         negative.setTextColor(getNegativeButtonTextColor())
+         negative.setBackgroundColor(getNegativeButtonBackgroundColor())
+         negative.elevation = elevationValue
+         var buttonParams: LinearLayout.LayoutParams
+         buttonParams = positive.layoutParams as LinearLayout.LayoutParams
+         buttonParams.weight = 1f
+         buttonParams.width = 0
+         buttonParams.gravity = Gravity.END
+         buttonParams.bottomMargin = 40
+         buttonParams = negative.layoutParams as LinearLayout.LayoutParams
+         buttonParams.weight = 1f
+         buttonParams.width = 0
+         buttonParams.gravity = Gravity.START
+         buttonParams.rightMargin = 40
+         buttonParams.bottomMargin = 40
+         buttonParams = neutral.layoutParams as LinearLayout.LayoutParams
+         buttonParams.weight = 0f
+         buttonParams.width = 0
+         if (!title.isEmpty()) {
+             val s = SpannableString(title.uppercase(Locale.getDefault()))
+             s.setSpan(ForegroundColorSpan(DocumentManager.getLevelOneColor()), 0, s.length, 0)
+             dialog.setTitle(s)
+         }
+     }*/
+    enum class AdminActionType {
+        EDIT, DELETE
+    }
 }

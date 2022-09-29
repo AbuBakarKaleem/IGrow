@@ -53,11 +53,16 @@
     <string name="city_town">City Town</string>
     <string name="region">Region</string>
     <string name="mobile">Mobile</string>
+    <string name="id">ID</string>
+    <string name="edit_diagnostic">Edit Diagnostic</string>
+    <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update</string>
+    <string name="search">Search</string>
+    <string name="no_record_found">No Record Found</string>
 
 
     <string-array name="action_type">
         <item>Select</item>
-        <item>Diagnose</item>
+        <item>Diagnostic</item>
         <item>Products</item>
         <item>Dealers</item>
         <item>Distributors</item>

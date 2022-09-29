@@ -15,8 +15,14 @@
         android:theme="@style/Theme.IGrow"
         tools:targetApi="33">
         <activity
+            android:name=".ui.admin.edit.distributors.EditDistributorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.edit.diagnostic.EditDiagnosticActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.admin.AdminActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,12 +31,10 @@
         </activity>
         <activity
             android:name=".ui.dashboard.DashBoardActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ui.home.MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>

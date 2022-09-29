@@ -11,4 +11,5 @@ class StringUtils(private val appContext: Application) {
     fun distributorDataSavedSuccessMsg() = appContext.getString(R.string.distributors_save_success)
     fun dealerDataSavedSuccessMsg() = appContext.getString(R.string.dealer_save_success)
     fun productsDataSavedSuccessMsg() = appContext.getString(R.string.products_save_success)
+    fun noRecordFoundMsg() = appContext.getString(R.string.no_record_found)
 }

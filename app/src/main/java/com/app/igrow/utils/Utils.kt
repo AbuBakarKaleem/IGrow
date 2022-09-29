@@ -5,7 +5,9 @@ import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.data.model.sheets.Products
+import com.google.gson.GsonBuilder
 import java.util.*
+
 
 object Utils {
 
@@ -26,28 +28,10 @@ object Utils {
         )
     }
 
-    fun sheetListToMap(dataList: ArrayList<Any>): HashMap<String, Any> {
-        val map = HashMap<String, Any>()
-        try {
-            dataList.forEach {
-                when(it){
-                    is Diagnostic->{
-                        map[it.id] = it
-                    }
-                    is Distributors->{
-                        map[it.id] = it
-                    }
-                    is Dealers ->{
-                        map[it.id] = it
-                    }
-                    is Products -> {
-                        map[it.id] = it
-                    }
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return map
+    fun parseHashMapToObject(map: HashMap<*,*>, cls: Class<*>?): Any? {
+        val gsonBuilder = GsonBuilder()
+        val gson = gsonBuilder.create()
+        val jsonString = gson.toJson(map)
+        return gson.fromJson<Any>(jsonString, cls)
     }
 }
