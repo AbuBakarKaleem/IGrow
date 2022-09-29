@@ -18,7 +18,41 @@
     <string name="select">Select Type</string>
     <string name="ok">Ok</string>
     <string name="cancel">cancel</string>
-
+    <string name="crop_name">Crop Name</string>
+    <string name="plant_problem">Plant Problem</string>
+    <string name="causal_agent">Causal Agent</string>
+    <string name="update">Update</string>
+    <string name="control">Control</string>
+    <string name="symptoms_impact">Symptoms Impact</string>
+    <string name="part_affected">Part Affected</string>
+    <string name="enemy_type">Enemy Type</string>
+    <string name="product_category">Product Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="active_ingredient">Active Ingredient</string>
+    <string name="registration_number">Registration Number</string>
+    <string name="composition">Composition</string>
+    <string name="formulation">Formulation</string>
+    <string name="toxicological_class">Toxicological Class</string>
+    <string name="mode_of_action">Mode of action</string>
+    <string name="enemy">Enemy</string>
+    <string name="packaging">Packaging</string>
+    <string name="application_rate">Application Rate</string>
+    <string name="treatment_time">Treatment Time</string>
+    <string name="frequency_of_application">Frequency of Application</string>
+    <string name="method_of_application">Method of Application</string>
+    <string name="restrictions_of_use">Restrictions of Use</string>
+    <string name="re_entry_period">Re-entry Period</string>
+    <string name="time_before_harvest">Time Before Harvest</string>
+    <string name="distributor">Distributor</string>
+    <string name="telephone">Telephone</string>
+    <string name="email">Email</string>
+    <string name="website">Website</string>
+    <string name="facebook">Facebook</string>
+    <string name="dealer_name">Dealer Name</string>
+    <string name="address">Address</string>
+    <string name="city_town">City Town</string>
+    <string name="region">Region</string>
+    <string name="mobile">Mobile</string>
 
 
     <string-array name="action_type">
