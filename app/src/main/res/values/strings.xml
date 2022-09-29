@@ -58,6 +58,8 @@
     <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update</string>
     <string name="search">Search</string>
     <string name="no_record_found">No Record Found</string>
+    <string name="update_success">Data Update Successfully</string>
+    <string name="update_fail">Data did not update</string>
 
 
     <string-array name="action_type">

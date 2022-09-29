@@ -10,13 +10,11 @@ import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.DOCUMENT_ID
 import com.app.igrow.utils.StringUtils
 import com.app.igrow.utils.Utils
-import com.bumptech.glide.util.Util
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.isActive
-import okio.Utf8
 import javax.inject.Inject
 
 /**
@@ -108,7 +106,10 @@ class RepositoryImpl @Inject constructor(
                         }
                         if (snashot!!.exists() && snashot.data!!.containsKey(id)) {
                             val map = snashot.data!![id] as HashMap<*, *>
-                            val finalData = Utils.parseHashMapToObject(map,Diagnostic::class.java) as Diagnostic
+                            val finalData = Utils.parseHashMapToObject(
+                                map,
+                                Diagnostic::class.java
+                            ) as Diagnostic
 
                             if (isActive) trySend(DataState.success(finalData))
                         } else {
@@ -124,8 +125,22 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-    override suspend fun updateDiagnostic(diagnostic: Diagnostic): Flow<DataState<Any>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun updateDiagnostic(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
+                    .document(DOCUMENT_ID).update(diagnostic as Map<String, Any>)
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.UpdateSuccesMsg())).isSuccess
+                    }.addOnFailureListener {
+                        if (isActive) trySend(DataState.error(stringUtils.UpdateFailMsg())).isFailure
 
+                    }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isFailure
+            }
+            awaitClose()
+        }
 }

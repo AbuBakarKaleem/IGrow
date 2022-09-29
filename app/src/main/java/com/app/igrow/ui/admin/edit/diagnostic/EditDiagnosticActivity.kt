@@ -1,12 +1,15 @@
 package com.app.igrow.ui.admin.edit.diagnostic
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.ActivityEditDiagnosticBinding
+import com.app.igrow.utils.StringUtils
+import com.app.igrow.utils.clear
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +23,10 @@ class EditDiagnosticActivity : AppCompatActivity() {
         binding = ActivityEditDiagnosticBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViews()
+    }
+
+    enum class UpdateButtonText {
+        Search, Update
     }
 
     private fun initViews() {
@@ -37,12 +44,24 @@ class EditDiagnosticActivity : AppCompatActivity() {
                 populateDataOnViews(it)
             }
         }
+        viewModel.updateDiagnosticLiveData.observe(this) {
+            val stringUtils = StringUtils(application)
+            if (it.equals(stringUtils.UpdateSuccesMsg())) {
+                reloadAllViews()
+            }
+            showMessage(it)
+        }
     }
 
     private fun activateListeners() {
         binding.btnUpdate.setOnClickListener {
-            if (binding.etDiagnosticId.text?.isNotEmpty() == true) {
-                viewModel.getDiagnostic(binding.etDiagnosticId.text!!.trim().toString())
+            if ((it as Button).text.toString() == UpdateButtonText.Search.toString()) {
+                if (binding.etDiagnosticId.text?.isNotEmpty() == true) {
+                    viewModel.getDiagnostic(binding.etDiagnosticId.text!!.trim().toString())
+                }
+            }
+            if (it.text.equals(UpdateButtonText.Update.toString())) {
+                updateDiagnostic()
             }
         }
         binding.ivBack.setOnClickListener { onBackPressed() }
@@ -57,8 +76,6 @@ class EditDiagnosticActivity : AppCompatActivity() {
             binding.etPartAffected.setText(diagnostic.part_affected)
             binding.etControl.setText(diagnostic.control)
             binding.etSymptomsImpact.setText(diagnostic.symptoms_impact)
-            binding.etDiagnosticId.isEnabled = false
-            changeButtonText(getString(R.string.update))
             showViews()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -75,6 +92,9 @@ class EditDiagnosticActivity : AppCompatActivity() {
         binding.tlControl.gone()
         binding.tlSymptomsImpact.gone()
         binding.tvIdMessage.visible()
+        changeButtonText(getString(R.string.search))
+        binding.etDiagnosticId.isEnabled = true
+        binding.etDiagnosticId.text?.clear()
     }
 
     private fun showViews() {
@@ -86,6 +106,8 @@ class EditDiagnosticActivity : AppCompatActivity() {
         binding.tlControl.visible()
         binding.tlSymptomsImpact.visible()
         binding.tvIdMessage.gone()
+        changeButtonText(getString(R.string.update))
+        binding.etDiagnosticId.isEnabled = false
     }
 
     private fun changeButtonText(value: String) {
@@ -94,6 +116,48 @@ class EditDiagnosticActivity : AppCompatActivity() {
 
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun updateDiagnostic() {
+        try {
+            val diagnostic = Diagnostic(
+                binding.etDiagnosticId.text.toString().trim(),
+                binding.etCropName.text.toString().trim(),
+                "",
+                binding.etEnemyType.text.toString().trim(),
+                "",
+                binding.etPlantHealthProblem.text.toString().trim(),
+                "",
+                binding.etCausalAgent.text.toString().trim(),
+                "",
+                binding.etPartAffected.text.toString().trim(),
+                "", binding.etSymptomsImpact.text.toString(),
+                "",
+                binding.etControl.text.toString(),
+                ""
+            )
+            val upadtedMap = HashMap<String, Diagnostic>()
+            upadtedMap[diagnostic.id] = diagnostic
+            viewModel.updateDiagnostic(upadtedMap)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun reloadAllViews() {
+        clearEditTexts()
+        hideViews()
+    }
+
+    private fun clearEditTexts() {
+
+        binding.etCropName.clear()
+        binding.etEnemyType.clear()
+        binding.etPlantHealthProblem.clear()
+        binding.etCausalAgent.clear()
+        binding.etPartAffected.clear()
+        binding.etControl.clear()
+        binding.etSymptomsImpact.clear()
     }
 
 }
