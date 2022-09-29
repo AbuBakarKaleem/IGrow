@@ -10,5 +10,22 @@
     <string name="upload_file">Upload File</string>
     <string name="diagnostic_save_success">Diagnostic Data added successfully</string>
     <string name="dealer_save_success">Dealer Data added successfully</string>
+    <string name="products_save_success">Products Data added successfully</string>
     <string name="distributors_save_success">distributors Data added successfully</string>
+    <string name="hello_admin">Welcome Admin</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="select">Select Type</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">cancel</string>
+
+
+
+    <string-array name="action_type">
+        <item>Select</item>
+        <item>Diagnose</item>
+        <item>Products</item>
+        <item>Dealers</item>
+        <item>Distributors</item>
+    </string-array>
 </resources>

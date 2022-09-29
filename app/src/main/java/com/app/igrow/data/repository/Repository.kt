@@ -1,11 +1,10 @@
 package com.app.igrow.data.repository
 
 import com.app.igrow.data.DataState
-import com.app.igrow.data.model.CurrenciesDTO
-import com.app.igrow.data.model.ExchangeRatesDTO
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
+import com.app.igrow.data.model.sheets.Products
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -14,9 +13,8 @@ import kotlinx.coroutines.flow.Flow
  */
 interface Repository {
 
-   /* suspend fun getCurrencies(): Flow<DataState<CurrenciesDTO>>
-    suspend fun getExchangeRates(): Flow<DataState<ExchangeRatesDTO>>*/
-    suspend fun addDiagnosticData(diagnostic: HashMap<String,Diagnostic>): Flow<DataState<String>>
-    suspend fun addDistributorsData(distributors: ArrayList<Distributors>): Flow<DataState<String>>
-    suspend fun addDealersData(dealers: ArrayList<Dealers>): Flow<DataState<String>>
+    suspend fun addDiagnosticData(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>>
+    suspend fun addDistributorsData(distributors: HashMap<String, Distributors>): Flow<DataState<String>>
+    suspend fun addDealersData(dealers: HashMap<String,Dealers>): Flow<DataState<String>>
+    suspend fun addProductsData(dealers: HashMap<String, Products>): Flow<DataState<String>>
 }

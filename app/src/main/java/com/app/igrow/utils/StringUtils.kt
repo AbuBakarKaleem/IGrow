@@ -10,4 +10,5 @@ class StringUtils(private val appContext: Application) {
     fun diagnosticDataSavedSuccessMsg() = appContext.getString(R.string.diagnostic_save_success)
     fun distributorDataSavedSuccessMsg() = appContext.getString(R.string.distributors_save_success)
     fun dealerDataSavedSuccessMsg() = appContext.getString(R.string.dealer_save_success)
+    fun productsDataSavedSuccessMsg() = appContext.getString(R.string.products_save_success)
 }

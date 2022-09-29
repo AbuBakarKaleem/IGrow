@@ -4,6 +4,7 @@ import com.app.igrow.data.DataState
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
+import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.data.remote.ApiService
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.DOCUMENT_ID
@@ -88,11 +89,58 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-    override suspend fun addDistributorsData(distributors: ArrayList<Distributors>): Flow<DataState<String>> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun addDistributorsData(distributorsMap: HashMap<String, Distributors>): Flow<DataState<String>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DISTRIBUTORS)
+                    .document(DOCUMENT_ID).set(distributorsMap)
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.distributorDataSavedSuccessMsg())).isSuccess
+                    }.addOnFailureListener { e ->
+                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+                    }
 
-    override suspend fun addDealersData(dealers: ArrayList<Dealers>): Flow<DataState<String>> {
-        TODO("Not yet implemented")
-    }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+            }
+            awaitClose()
+        }
+
+    override suspend fun addDealersData(dealers: HashMap<String, Dealers>): Flow<DataState<String>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DEALERS)
+                    .document(DOCUMENT_ID).set(dealers)
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.dealerDataSavedSuccessMsg())).isSuccess
+                    }.addOnFailureListener { e ->
+                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+                    }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+            }
+            awaitClose()
+        }
+
+    override suspend fun addProductsData(products: HashMap<String, Products>): Flow<DataState<String>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_PRODUCTS)
+                    .document(DOCUMENT_ID).set(products)
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.productsDataSavedSuccessMsg())).isSuccess
+                    }.addOnFailureListener { e ->
+                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+                    }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
+            }
+            awaitClose()
+        }
+
 }

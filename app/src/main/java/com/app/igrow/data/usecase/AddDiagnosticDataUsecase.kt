@@ -8,9 +8,8 @@ import javax.inject.Inject
 
 class AddDiagnosticDataUsecase @Inject constructor(private val repository: Repository) {
 
-    suspend operator fun invoke(list: ArrayList<Diagnostic>): Flow<DataState<String>> {
-        val convertedMap = diagnosticListToMap(list)
-        return repository.addDiagnosticData(convertedMap)
+    suspend operator fun invoke( diagnosticMap: HashMap<String, Diagnostic>): Flow<DataState<String>> {
+        return repository.addDiagnosticData(diagnosticMap)
     }
 
     private fun diagnosticListToMap(diagnosticList: ArrayList<Diagnostic>): HashMap<String, Diagnostic> {
