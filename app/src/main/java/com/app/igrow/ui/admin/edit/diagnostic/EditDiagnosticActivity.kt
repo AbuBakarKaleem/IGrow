@@ -45,6 +45,7 @@ class EditDiagnosticActivity : AppCompatActivity() {
             }
         }
         viewModel.updateDiagnosticLiveData.observe(this) {
+            //Todo()
             val stringUtils = StringUtils(application)
             if (it.equals(stringUtils.UpdateSuccesMsg())) {
                 reloadAllViews()
