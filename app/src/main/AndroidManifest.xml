@@ -30,6 +30,12 @@
             android:name=".ui.admin.diagnostic.DiagnosticActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.admin.dealers.DealersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.product.ProductsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.admin.AdminActivity"
             android:exported="true"/>
         <activity

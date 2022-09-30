@@ -13,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
 import com.app.igrow.databinding.ActivityAdminBinding
 import com.app.igrow.helpers.FileConverter
+import com.app.igrow.ui.admin.dealers.DealersActivity
 import com.app.igrow.ui.admin.diagnostic.DiagnosticActivity
 import com.app.igrow.ui.admin.distributors.DistributorsActivity
+import com.app.igrow.ui.admin.product.ProductsActivity
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils.getFileMimeType
 import dagger.hilt.android.AndroidEntryPoint
@@ -150,10 +152,22 @@ class AdminActivity : AppCompatActivity() {
                             startActivity(intent)
                         }
                         Constants.SHEET_DEALERS -> {
-
+                            val intent=Intent(this, DealersActivity::class.java)
+                            if (actionType == AdminActionType.EDIT.toString()) {
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                            } else {
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                            }
+                            startActivity(intent)
                         }
                         Constants.SHEET_PRODUCTS -> {
-
+                            val intent=Intent(this, ProductsActivity::class.java)
+                            if (actionType == AdminActionType.EDIT.toString()) {
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                            } else {
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                            }
+                            startActivity(intent)
                         }
                         Constants.SHEET_DISTRIBUTORS -> {
                             val intent=Intent(this, DistributorsActivity::class.java)

@@ -68,6 +68,7 @@
     <string name="login">Login</string>
     <string name="email_hint">email</string>
     <string name="password">Password</string>
+    <string name="edit_dealer">Edit Dealer</string>
 
 
     <string-array name="action_type">
