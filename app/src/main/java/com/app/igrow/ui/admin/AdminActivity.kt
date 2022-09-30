@@ -75,6 +75,9 @@ class AdminActivity : AppCompatActivity() {
         viewModel.addDealerLiveData.observe(this) {
             showMessage(it.toString())
         }
+        viewModel.addProductsLiveData.observe(this) {
+            showMessage(it.toString())
+        }
     }
 
     private fun uploadFile() {

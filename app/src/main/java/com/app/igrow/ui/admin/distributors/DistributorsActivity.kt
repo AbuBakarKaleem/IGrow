@@ -87,6 +87,9 @@ class DistributorsActivity : AppCompatActivity() {
             binding.etFacebook.setText(Distributor.facebook)
             binding.etTelephone.setText(Distributor.telephone)
             binding.etWebsite.setText(Distributor.website)
+            binding.etAddress.setText(Distributor.address)
+            binding.etCityTown.setText(Distributor.city_town)
+            binding.etRegion.setText(Distributor.region)
             showViews()
             if (actionType == ActionType.DELETE.toString()) {
                 disableAllViews()
@@ -183,15 +186,15 @@ class DistributorsActivity : AppCompatActivity() {
         try {
             val distributor = Distributors(
                 binding.etId.text.toString().trim(),
-                binding.etDistributorName.toString().trim(),
+                binding.etDistributorName.text.toString().trim(),
                 "",
-                binding.etAddress.toString().trim(),
+                binding.etAddress.text.toString().trim(),
                 "",
-                binding.etCityTown.toString().trim(),
+                binding.etCityTown.text.toString().trim(),
                 "",
-                binding.etRegion.toString().trim(),
+                binding.etRegion.text.toString().trim(),
                 "",
-                binding.etTelephone.toString().trim(),
+                binding.etTelephone.text.toString().trim(),
                 ""
             )
             dataMap[distributor.id] = distributor
@@ -217,14 +220,14 @@ class DistributorsActivity : AppCompatActivity() {
 
     private fun clearEditTexts() {
 
-        binding.tlEmail.clear()
-        binding.tlTelephone.clear()
-        binding.tlWebsite.clear()
-        binding.tlFacebook.clear()
-        binding.tlAddress.clear()
-        binding.tlCityTown.clear()
-        binding.tlRegion.clear()
-        binding.tlDistributorName.clear()
+        binding.etEmail.clear()
+        binding.etTelephone.clear()
+        binding.etWebsite.clear()
+        binding.etFacebook.clear()
+        binding.etAddress.clear()
+        binding.etCityTown.clear()
+        binding.etRegion.clear()
+        binding.etDistributorName.clear()
     }
 
     enum class ActionType {

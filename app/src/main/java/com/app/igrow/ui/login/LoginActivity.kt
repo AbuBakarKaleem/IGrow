@@ -2,6 +2,7 @@ package com.app.igrow.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.databinding.ActivityLoginBinding
 import com.app.igrow.ui.admin.AdminActivity
@@ -14,7 +15,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //binding.etEmail.text = adminEmail.toString()
+        binding.etEmail.setText(adminEmail)
+        binding.etPassword.setText(adminPassword)
         activateListener()
     }
 
@@ -23,6 +25,8 @@ class LoginActivity : AppCompatActivity() {
             if (validation()) {
                 startActivity(Intent(this, AdminActivity::class.java))
                 finish()
+            } else {
+                Toast.makeText(this, "Invalid username/password", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -37,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
             binding.tlPassword.error = "Required"
             return false
         }
-        if (binding.etEmail.text.toString() != adminEmail || binding.etPassword.toString() != adminPassword) {
+        if (binding.etEmail.text.toString() != adminEmail || binding.etPassword.text.toString() != adminPassword) {
             return false
         }
         return true
