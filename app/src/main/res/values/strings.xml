@@ -60,6 +60,11 @@
     <string name="no_record_found">No Record Found</string>
     <string name="update_success">Data Update Successfully</string>
     <string name="update_fail">Data did not update</string>
+    <string name="delete_success">Data delete successfully</string>
+    <string name="delete_fail">Data did not delete</string>
+    <string name="delete_confim_message">Are you sure. You want to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">no</string>
 
 
     <string-array name="action_type">

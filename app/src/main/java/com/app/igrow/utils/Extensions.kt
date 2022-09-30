@@ -14,3 +14,7 @@ fun View.clear() {
     var editText=this as EditText
     editText.text.clear()
 }
+fun View.disable() {
+    var editText=this as EditText
+    editText.isEnabled=false
+}

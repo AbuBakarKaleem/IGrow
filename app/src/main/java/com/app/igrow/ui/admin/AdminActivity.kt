@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
 import com.app.igrow.databinding.ActivityAdminBinding
 import com.app.igrow.helpers.FileConverter
-import com.app.igrow.ui.admin.edit.diagnostic.EditDiagnosticActivity
+import com.app.igrow.ui.admin.diagnostic.DiagnosticActivity
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils.getFileMimeType
 import dagger.hilt.android.AndroidEntryPoint
@@ -137,13 +137,13 @@ class AdminActivity : AppCompatActivity() {
                 if (!dialogView.action_type.selectedItem.equals("Select")) {
                     when (dialogView.action_type.selectedItem.toString()) {
                         Constants.SHEET_DIAGNOSTIC -> {
-                            //TODO()
+                            val intent=Intent(this, DiagnosticActivity::class.java)
                             if (actionType == AdminActionType.EDIT.toString()) {
-                                startActivity(Intent(this, EditDiagnosticActivity::class.java))
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
                             } else {
-
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
                             }
-
+                            startActivity(intent)
                         }
                         Constants.SHEET_DEALERS -> {
 
@@ -204,6 +204,6 @@ class AdminActivity : AppCompatActivity() {
          }
      }*/
     enum class AdminActionType {
-        EDIT, DELETE
+        EDIT, DELETE, TYPE
     }
 }

@@ -1,4 +1,4 @@
-package com.app.igrow.ui.admin.edit.diagnostic
+package com.app.igrow.ui.admin.diagnostic
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
 import com.app.igrow.data.model.sheets.Diagnostic
-import com.app.igrow.data.usecase.GetDiagnosticUsecase
-import com.app.igrow.data.usecase.UpdateDiagnosticUsecase
+import com.app.igrow.data.usecase.admin.diagnostic.DeleteDiagnosticUsecase
+import com.app.igrow.data.usecase.admin.diagnostic.GetDiagnosticUsecase
+import com.app.igrow.data.usecase.admin.diagnostic.UpdateDiagnosticUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
@@ -16,9 +17,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EditDiagnosticViewModel @Inject constructor(
+class DiagnosticActivityViewModel @Inject constructor(
     private val getDiagnosticUsecase: GetDiagnosticUsecase,
-    private val updateDiagnosticUsecase: UpdateDiagnosticUsecase
+    private val updateDiagnosticUsecase: UpdateDiagnosticUsecase,
+    private val deleteDiagnosticUsecase: DeleteDiagnosticUsecase
 ) : ViewModel() {
 
     private var _uiState = MutableLiveData<AdminUIStates>()
@@ -29,6 +31,9 @@ class EditDiagnosticViewModel @Inject constructor(
 
     private var updateDiagnosticMutableLiveData = MutableLiveData<String>()
     var updateDiagnosticLiveData: MutableLiveData<String> = updateDiagnosticMutableLiveData
+
+    private var  deleteDiagnosticMutableLiveData = MutableLiveData<String>()
+    var  deleteDiagnosticLiveData: MutableLiveData<String> =  deleteDiagnosticMutableLiveData
 
     fun getDiagnostic(id:String) {
         _uiState.postValue(LoadingState)
@@ -41,6 +46,23 @@ class EditDiagnosticViewModel @Inject constructor(
                     }
                     is DataState.Error -> {
                         getDiagnosticMutableLiveData.postValue(it.message)
+                        _uiState.postValue(UnloadingState)
+                    }
+                }
+            }
+        }
+    }
+    fun deleteDiagnostic(id: String){
+        _uiState.postValue(LoadingState)
+        viewModelScope.launch {
+            deleteDiagnosticUsecase.invoke(id).collect {
+                when (it) {
+                    is DataState.Success -> {
+                        deleteDiagnosticMutableLiveData.postValue(it.data.toString())
+                        _uiState.postValue(UnloadingState)
+                    }
+                    is DataState.Error -> {
+                        deleteDiagnosticMutableLiveData.postValue(it.message)
                         _uiState.postValue(UnloadingState)
                     }
                 }

@@ -1,5 +1,6 @@
-package com.app.igrow.ui.admin.edit.diagnostic
+package com.app.igrow.ui.admin.diagnostic
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -8,25 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.ActivityEditDiagnosticBinding
-import com.app.igrow.utils.StringUtils
-import com.app.igrow.utils.clear
-import com.app.igrow.utils.gone
-import com.app.igrow.utils.visible
+import com.app.igrow.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class EditDiagnosticActivity : AppCompatActivity() {
+class DiagnosticActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditDiagnosticBinding
-    private val viewModel: EditDiagnosticViewModel by viewModels()
+    private val viewModel: DiagnosticActivityViewModel by viewModels()
+    private var actionType = ActionType.EDIT.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditDiagnosticBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        actionType = intent.getStringExtra(ActionType.TYPE.toString()).toString()
         initViews()
     }
 
     enum class UpdateButtonText {
-        Search, Update
+        Search, Update, Delete
     }
 
     private fun initViews() {
@@ -47,7 +48,15 @@ class EditDiagnosticActivity : AppCompatActivity() {
         viewModel.updateDiagnosticLiveData.observe(this) {
             //Todo()
             val stringUtils = StringUtils(application)
-            if (it.equals(stringUtils.UpdateSuccesMsg())) {
+            if (it.equals(stringUtils.updateSuccesMsg())) {
+                reloadAllViews()
+            }
+            showMessage(it)
+        }
+        viewModel.deleteDiagnosticLiveData.observe(this) {
+            //Todo()
+            val stringUtils = StringUtils(application)
+            if (it.equals(stringUtils.deleteSuccessMsg())) {
                 reloadAllViews()
             }
             showMessage(it)
@@ -64,6 +73,9 @@ class EditDiagnosticActivity : AppCompatActivity() {
             if (it.text.equals(UpdateButtonText.Update.toString())) {
                 updateDiagnostic()
             }
+            if (it.text.equals(UpdateButtonText.Delete.toString())) {
+                showDeleteConfirmationDialog()
+            }
         }
         binding.ivBack.setOnClickListener { onBackPressed() }
     }
@@ -78,10 +90,51 @@ class EditDiagnosticActivity : AppCompatActivity() {
             binding.etControl.setText(diagnostic.control)
             binding.etSymptomsImpact.setText(diagnostic.symptoms_impact)
             showViews()
+            if (actionType == ActionType.DELETE.toString()) {
+                disableAllViews()
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
 
+    }
+
+    private fun showDeleteConfirmationDialog() {
+        try {
+            val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
+            alertBuilder.setMessage(getString(R.string.delete_confim_message))
+            alertBuilder.setCancelable(true)
+
+            alertBuilder.setPositiveButton(
+                getString(R.string.yes)
+            ) { _, _ -> deleteDiagnostic() }
+
+            alertBuilder.setNegativeButton(
+                getString(R.string.no)
+            ) { dialog, _ -> dialog.cancel() }
+
+            val alert11: AlertDialog = alertBuilder.create()
+            alert11.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun deleteDiagnostic() {
+        if (binding.etDiagnosticId.text.toString().isNotEmpty()) {
+            viewModel.deleteDiagnostic(binding.etDiagnosticId.text.toString().trim())
+        }
+    }
+
+    private fun disableAllViews() {
+        binding.etCropName.disable()
+        binding.etEnemyType.disable()
+        binding.etPlantHealthProblem.disable()
+        binding.etCausalAgent.disable()
+        binding.etPartAffected.disable()
+        binding.etControl.disable()
+        binding.etSymptomsImpact.disable()
+        changeButtonText(getString(R.string.delete))
     }
 
     private fun hideViews() {
@@ -161,4 +214,7 @@ class EditDiagnosticActivity : AppCompatActivity() {
         binding.etSymptomsImpact.clear()
     }
 
+    enum class ActionType {
+        EDIT, DELETE, TYPE
+    }
 }

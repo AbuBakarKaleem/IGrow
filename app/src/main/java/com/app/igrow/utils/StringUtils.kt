@@ -2,7 +2,6 @@ package com.app.igrow.utils
 
 import android.app.Application
 import com.app.igrow.R
-import com.app.igrow.data.model.sheets.Diagnostic
 
 class StringUtils(private val appContext: Application) {
     fun noNetworkErrorMessage() = appContext.getString(R.string.message_no_network_connected_str)
@@ -12,6 +11,8 @@ class StringUtils(private val appContext: Application) {
     fun dealerDataSavedSuccessMsg() = appContext.getString(R.string.dealer_save_success)
     fun productsDataSavedSuccessMsg() = appContext.getString(R.string.products_save_success)
     fun noRecordFoundMsg() = appContext.getString(R.string.no_record_found)
-    fun UpdateSuccesMsg() = appContext.getString(R.string.update_success)
-    fun UpdateFailMsg() = appContext.getString(R.string.update_fail)
+    fun updateSuccesMsg() = appContext.getString(R.string.update_success)
+    fun updateFailMsg() = appContext.getString(R.string.update_fail)
+    fun deleteFailMsg() = appContext.getString(R.string.delete_fail)
+    fun deleteSuccessMsg() = appContext.getString(R.string.delete_success)
 }

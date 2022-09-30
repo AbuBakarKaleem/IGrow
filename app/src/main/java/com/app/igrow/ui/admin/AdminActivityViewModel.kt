@@ -9,10 +9,10 @@ import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.data.model.sheets.Products
-import com.app.igrow.data.usecase.AddDealersUsecase
-import com.app.igrow.data.usecase.AddDiagnosticDataUsecase
-import com.app.igrow.data.usecase.AddDistributorsUsecase
-import com.app.igrow.data.usecase.AddProductsUsecase
+import com.app.igrow.data.usecase.admin.dealers.AddDealersUsecase
+import com.app.igrow.data.usecase.admin.diagnostic.AddDiagnosticDataUsecase
+import com.app.igrow.data.usecase.admin.distributors.AddDistributorsUsecase
+import com.app.igrow.data.usecase.admin.products.AddProductsUsecase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

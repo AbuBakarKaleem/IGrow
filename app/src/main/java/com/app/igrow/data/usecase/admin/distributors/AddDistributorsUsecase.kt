@@ -1,4 +1,4 @@
-package com.app.igrow.data.usecase
+package com.app.igrow.data.usecase.admin.distributors
 
 import com.app.igrow.data.DataState
 import com.app.igrow.data.model.sheets.Distributors

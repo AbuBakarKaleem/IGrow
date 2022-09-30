@@ -131,9 +131,28 @@ class RepositoryImpl @Inject constructor(
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
                     .document(DOCUMENT_ID).update(diagnostic as Map<String, Any>)
                     .addOnSuccessListener {
-                        if (isActive) trySend(DataState.success(stringUtils.UpdateSuccesMsg())).isSuccess
+                        if (isActive) trySend(DataState.success(stringUtils.updateSuccesMsg())).isSuccess
                     }.addOnFailureListener {
-                        if (isActive) trySend(DataState.error(stringUtils.UpdateFailMsg())).isFailure
+                        if (isActive) trySend(DataState.error(stringUtils.updateFailMsg())).isFailure
+
+                    }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isFailure
+            }
+            awaitClose()
+        }
+
+    override suspend fun deletDiagnostic(id:String): Flow<DataState<String>> =
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
+                    .document(DOCUMENT_ID).collection(id).document().delete()
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
+                    }.addOnFailureListener {
+                        if (isActive) trySend(DataState.error(stringUtils.deleteFailMsg())).isFailure
 
                     }
 

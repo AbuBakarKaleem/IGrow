@@ -15,10 +15,10 @@
         android:theme="@style/Theme.IGrow"
         tools:targetApi="33">
         <activity
-            android:name=".ui.admin.edit.distributors.EditDistributorsActivity"
+            android:name="com.app.igrow.ui.admin.distributors.DistributorsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.admin.edit.diagnostic.EditDiagnosticActivity"
+            android:name="com.app.igrow.ui.admin.diagnostic.DiagnosticActivity"
             android:exported="false" />
         <activity
             android:name=".ui.admin.AdminActivity"
