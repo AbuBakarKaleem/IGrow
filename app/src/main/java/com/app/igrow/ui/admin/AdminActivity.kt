@@ -14,6 +14,7 @@ import com.app.igrow.R
 import com.app.igrow.databinding.ActivityAdminBinding
 import com.app.igrow.helpers.FileConverter
 import com.app.igrow.ui.admin.diagnostic.DiagnosticActivity
+import com.app.igrow.ui.admin.distributors.DistributorsActivity
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils.getFileMimeType
 import dagger.hilt.android.AndroidEntryPoint
@@ -152,7 +153,13 @@ class AdminActivity : AppCompatActivity() {
 
                         }
                         Constants.SHEET_DISTRIBUTORS -> {
-
+                            val intent=Intent(this, DistributorsActivity::class.java)
+                            if (actionType == AdminActionType.EDIT.toString()) {
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                            } else {
+                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                            }
+                            startActivity(intent)
                         }
                     }
                     alertDialog.dismiss()

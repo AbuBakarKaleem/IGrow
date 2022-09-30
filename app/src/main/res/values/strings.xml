@@ -54,8 +54,8 @@
     <string name="region">Region</string>
     <string name="mobile">Mobile</string>
     <string name="id">ID</string>
-    <string name="edit_diagnostic">Edit Diagnostic</string>
-    <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update</string>
+    <string name="edit_diagnostic">Diagnostic</string>
+    <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update/Delete</string>
     <string name="search">Search</string>
     <string name="no_record_found">No Record Found</string>
     <string name="update_success">Data Update Successfully</string>
