@@ -28,7 +28,7 @@ object Utils {
         )
     }
 
-    fun parseHashMapToObject(map: HashMap<*,*>, cls: Class<*>?): Any? {
+    fun parseHashMapToObject(map: HashMap<String,String>, cls: Class<*>?): Any? {
         val gsonBuilder = GsonBuilder()
         val gson = gsonBuilder.create()
         val jsonString = gson.toJson(map)

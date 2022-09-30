@@ -10,8 +10,9 @@ import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.DOCUMENT_ID
 import com.app.igrow.utils.StringUtils
 import com.app.igrow.utils.Utils
-import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.WriteBatch
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -29,13 +30,15 @@ class RepositoryImpl @Inject constructor(
     override suspend fun addDiagnosticData(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>> =
         callbackFlow {
             try {
-                FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
-                    .document(DOCUMENT_ID).set(diagnostic)
-                    .addOnSuccessListener {
-                        if (isActive) trySend(DataState.success(stringUtils.diagnosticDataSavedSuccessMsg())).isSuccess
-                    }.addOnFailureListener { e ->
-                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
-                    }
+                val colRef: CollectionReference = FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
+                val batch: WriteBatch =  FirebaseFirestore.getInstance().batch()
+                for (data in diagnostic)
+                    batch.set(colRef.document(data.key), data)
+
+                if(batch.commit().isSuccessful)
+                    if (isActive) trySend(DataState.success(stringUtils.diagnosticDataSavedSuccessMsg()))
+                else
+                    if (isActive) trySend(DataState.success(stringUtils.somethingWentWrong()))
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -48,18 +51,14 @@ class RepositoryImpl @Inject constructor(
         callbackFlow {
             try {
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
-                    .document(DOCUMENT_ID).addSnapshotListener { snashot, error ->
+                    .document(id).addSnapshotListener { snashot, error ->
                         if (error != null) {
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
                             return@addSnapshotListener
                         }
-                        if (snashot!!.exists() && snashot.data!!.containsKey(id)) {
-                            val map = snashot.data!![id] as HashMap<*, *>
-                            val finalData = Utils.parseHashMapToObject(
-                                map,
-                                Diagnostic::class.java
-                            ) as Diagnostic
-
+                        if (snashot!!.exists() && snashot.data != null) {
+                            val map = snashot.data!!.values.first() as HashMap<*, *>
+                            val finalData = Utils.parseHashMapToObject(map as HashMap<String, String>, Diagnostic::class.java) as Diagnostic
                             if (isActive) trySend(DataState.success(finalData))
                         } else {
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
@@ -100,8 +99,7 @@ class RepositoryImpl @Inject constructor(
         callbackFlow {
             try {
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
-                    .document(DOCUMENT_ID).collection(id)
-                    .document(FieldValue.arrayRemove(diagnosticMap).toString())
+                    .document(id)
                     .delete()
                     .addOnSuccessListener {
                         if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
@@ -121,13 +119,16 @@ class RepositoryImpl @Inject constructor(
     override suspend fun addDealersData(dealers: HashMap<String, Dealers>): Flow<DataState<String>> =
         callbackFlow {
             try {
-                FirebaseFirestore.getInstance().collection(Constants.SHEET_DEALERS)
-                    .document(DOCUMENT_ID).set(dealers)
-                    .addOnSuccessListener {
-                        if (isActive) trySend(DataState.success(stringUtils.dealerDataSavedSuccessMsg())).isSuccess
-                    }.addOnFailureListener { e ->
-                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
-                    }
+                val colRef: CollectionReference = FirebaseFirestore.getInstance().collection(Constants.SHEET_DEALERS)
+                val batch: WriteBatch =  FirebaseFirestore.getInstance().batch()
+                for (data in dealers)
+                    batch.set(colRef.document(data.key), data)
+
+                if(batch.commit().isSuccessful){
+                    if (isActive) trySend(DataState.success(stringUtils.dealerDataSavedSuccessMsg()))
+                } else {
+                    if (isActive) trySend(DataState.success(stringUtils.somethingWentWrong()))
+                }
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -145,13 +146,9 @@ class RepositoryImpl @Inject constructor(
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
                             return@addSnapshotListener
                         }
-                        if (snashot!!.exists() && snashot.data!!.containsKey(id)) {
-                            val map = snashot.data!![id] as HashMap<*, *>
-                            val finalData = Utils.parseHashMapToObject(
-                                map,
-                                Dealers::class.java
-                            ) as Dealers
-
+                        if (snashot!!.exists() && snashot.data != null) {
+                            val map = snashot.data!!.values.first() as HashMap<*, *>
+                            val finalData = Utils.parseHashMapToObject(map as HashMap<String, String>, Dealers::class.java) as Dealers
                             if (isActive) trySend(DataState.success(finalData))
                         } else {
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
@@ -189,7 +186,7 @@ class RepositoryImpl @Inject constructor(
         callbackFlow {
             try {
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_DEALERS)
-                    .document(DOCUMENT_ID).collection(id).document().delete()
+                    .document(id).delete()
                     .addOnSuccessListener {
                         if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
                     }.addOnFailureListener {
@@ -207,13 +204,16 @@ class RepositoryImpl @Inject constructor(
     override suspend fun addProductsData(products: HashMap<String, Products>): Flow<DataState<String>> =
         callbackFlow {
             try {
-                FirebaseFirestore.getInstance().collection(Constants.SHEET_PRODUCTS)
-                    .document(DOCUMENT_ID).set(products)
-                    .addOnSuccessListener {
-                        if (isActive) trySend(DataState.success(stringUtils.productsDataSavedSuccessMsg())).isSuccess
-                    }.addOnFailureListener { e ->
-                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
-                    }
+                val colRef: CollectionReference = FirebaseFirestore.getInstance().collection(Constants.SHEET_PRODUCTS)
+                val batch: WriteBatch =  FirebaseFirestore.getInstance().batch()
+                for (data in products)
+                    batch.set(colRef.document(data.key), data)
+
+                if(batch.commit().isSuccessful){
+                    if (isActive) trySend(DataState.success(stringUtils.productsDataSavedSuccessMsg()))
+                } else {
+                    if (isActive) trySend(DataState.success(stringUtils.somethingWentWrong()))
+                }
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -231,13 +231,9 @@ class RepositoryImpl @Inject constructor(
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
                             return@addSnapshotListener
                         }
-                        if (snashot!!.exists() && snashot.data!!.containsKey(id)) {
-                            val map = snashot.data!![id] as HashMap<*, *>
-                            val finalData = Utils.parseHashMapToObject(
-                                map,
-                                Products::class.java
-                            ) as Products
-
+                        if (snashot!!.exists() && snashot.data != null) {
+                            val map = snashot.data!!.values.first() as HashMap<*, *>
+                            val finalData = Utils.parseHashMapToObject(map as HashMap<String, String>, Products::class.java) as Products
                             if (isActive) trySend(DataState.success(finalData))
                         } else {
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
@@ -275,7 +271,7 @@ class RepositoryImpl @Inject constructor(
         callbackFlow {
             try {
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_PRODUCTS)
-                    .document(DOCUMENT_ID).collection(id).document().delete()
+                    .document(id).delete()
                     .addOnSuccessListener {
                         if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
                     }.addOnFailureListener {
@@ -294,13 +290,16 @@ class RepositoryImpl @Inject constructor(
     override suspend fun addDistributorsData(distributors: HashMap<String, Distributors>): Flow<DataState<String>> =
         callbackFlow {
             try {
-                FirebaseFirestore.getInstance().collection(Constants.SHEET_DISTRIBUTORS)
-                    .document(DOCUMENT_ID).set(distributors)
-                    .addOnSuccessListener {
-                        if (isActive) trySend(DataState.success(stringUtils.distributorDataSavedSuccessMsg())).isSuccess
-                    }.addOnFailureListener { e ->
-                        if (isActive) trySend(DataState.error<String>(e.message.toString())).isSuccess
-                    }
+                val colRef: CollectionReference = FirebaseFirestore.getInstance().collection(Constants.SHEET_DISTRIBUTORS)
+                val batch: WriteBatch =  FirebaseFirestore.getInstance().batch()
+                for (data in distributors)
+                    batch.set(colRef.document(data.key), data)
+
+                if(batch.commit().isSuccessful){
+                    if (isActive) trySend(DataState.success(stringUtils.distributorDataSavedSuccessMsg()))
+                } else {
+                    if (isActive) trySend(DataState.success(stringUtils.somethingWentWrong()))
+                }
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -318,13 +317,9 @@ class RepositoryImpl @Inject constructor(
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
                             return@addSnapshotListener
                         }
-                        if (snashot!!.exists() && snashot.data!!.containsKey(id)) {
-                            val map = snashot.data!![id] as HashMap<*, *>
-                            val finalData = Utils.parseHashMapToObject(
-                                map,
-                                Distributors::class.java
-                            ) as Distributors
-
+                        if (snashot!!.exists() && snashot.data != null) {
+                            val map = snashot.data!!.values.first() as HashMap<*, *>
+                            val finalData = Utils.parseHashMapToObject(map as HashMap<String, String>, Distributors::class.java) as Distributors
                             if (isActive) trySend(DataState.success(finalData))
                         } else {
                             if (isActive) trySend(DataState.error<Any>(stringUtils.noRecordFoundMsg()))
@@ -362,7 +357,7 @@ class RepositoryImpl @Inject constructor(
         callbackFlow {
             try {
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_DISTRIBUTORS)
-                    .document(DOCUMENT_ID).collection(id).document().delete()
+                    .document(id).delete()
                     .addOnSuccessListener {
                         if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
                     }.addOnFailureListener {
