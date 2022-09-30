@@ -13,15 +13,28 @@ import kotlinx.coroutines.flow.Flow
  */
 interface Repository {
 
-    //Diagnostic CRUD
+    //Diagnostic
     suspend fun addDiagnosticData(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>>
     suspend fun getDiagnosticData(id:String): Flow<DataState<Any>>
     suspend fun updateDiagnostic(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>>
-    suspend fun deletDiagnostic(id:String): Flow<DataState<String>>
+    suspend fun deleteDiagnostic(id:String): Flow<DataState<String>>
 
-
+    //Distributors
     suspend fun addDistributorsData(distributors: HashMap<String, Distributors>): Flow<DataState<String>>
-    suspend fun addProductsData(dealers: HashMap<String, Products>): Flow<DataState<String>>
+    suspend fun getDistributorsData(id:String): Flow<DataState<Any>>
+    suspend fun updateDistributorsData(distributor: HashMap<String, Distributors>): Flow<DataState<String>>
+    suspend fun deleteDistributorsData(id:String): Flow<DataState<String>>
+
+    //Dealers
     suspend fun addDealersData(dealers: HashMap<String,Dealers>): Flow<DataState<String>>
+    suspend fun getDealersData(id:String): Flow<DataState<Any>>
+    suspend fun updateDealersData(dealers: HashMap<String, Dealers>): Flow<DataState<String>>
+    suspend fun deleteDealersData(id:String): Flow<DataState<String>>
+
+    //Products
+    suspend fun addProductsData(products: HashMap<String, Products>): Flow<DataState<String>>
+    suspend fun getProductsData(id:String): Flow<DataState<Any>>
+    suspend fun updateProductsData(products: HashMap<String, Products>): Flow<DataState<String>>
+    suspend fun deleteProductsData(id:String): Flow<DataState<String>>
 
 }
