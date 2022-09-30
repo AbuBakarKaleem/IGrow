@@ -52,10 +52,10 @@ class DiagnosticActivityViewModel @Inject constructor(
             }
         }
     }
-    fun deleteDiagnostic(id: String){
+    fun deleteDiagnostic(id: String,map:HashMap<String,Diagnostic>){
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            deleteDiagnosticUsecase.invoke(id).collect {
+            deleteDiagnosticUsecase.invoke(id,map).collect {
                 when (it) {
                     is DataState.Success -> {
                         deleteDiagnosticMutableLiveData.postValue(it.data.toString())

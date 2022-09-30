@@ -107,7 +107,10 @@ class DiagnosticActivity : AppCompatActivity() {
 
             alertBuilder.setPositiveButton(
                 getString(R.string.yes)
-            ) { _, _ -> deleteDiagnostic() }
+            ) { dialog, _ ->
+                deleteDiagnostic()
+                dialog.dismiss()
+            }
 
             alertBuilder.setNegativeButton(
                 getString(R.string.no)
@@ -122,7 +125,8 @@ class DiagnosticActivity : AppCompatActivity() {
 
     private fun deleteDiagnostic() {
         if (binding.etDiagnosticId.text.toString().isNotEmpty()) {
-            viewModel.deleteDiagnostic(binding.etDiagnosticId.text.toString().trim())
+            var updatedMap=getValuesFromViews()
+            viewModel.deleteDiagnostic(binding.etDiagnosticId.text.toString().trim(),updatedMap)
         }
     }
 
@@ -172,7 +176,8 @@ class DiagnosticActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun updateDiagnostic() {
+    private fun getValuesFromViews():HashMap<String,Diagnostic>{
+        var dataMap=HashMap<String,Diagnostic>()
         try {
             val diagnostic = Diagnostic(
                 binding.etDiagnosticId.text.toString().trim(),
@@ -190,9 +195,16 @@ class DiagnosticActivity : AppCompatActivity() {
                 binding.etControl.text.toString(),
                 ""
             )
-            val upadtedMap = HashMap<String, Diagnostic>()
-            upadtedMap[diagnostic.id] = diagnostic
-            viewModel.updateDiagnostic(upadtedMap)
+            dataMap[diagnostic.id] = diagnostic
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return dataMap
+    }
+    private fun updateDiagnostic(){
+        try {
+            val updatedMap=getValuesFromViews()
+            viewModel.updateDiagnostic(updatedMap)
         } catch (e: Exception) {
             e.printStackTrace()
         }

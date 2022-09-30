@@ -155,6 +155,7 @@ class AdminActivity : AppCompatActivity() {
 
                         }
                     }
+                    alertDialog.dismiss()
                 } else {
                     //TODO()
                     showMessage("Please select an option")

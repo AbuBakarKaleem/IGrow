@@ -9,6 +9,9 @@ import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.usecase.admin.diagnostic.DeleteDiagnosticUsecase
 import com.app.igrow.data.usecase.admin.diagnostic.GetDiagnosticUsecase
 import com.app.igrow.data.usecase.admin.diagnostic.UpdateDiagnosticUsecase
+import com.app.igrow.data.usecase.admin.distributors.DeleteDistributorUsecase
+import com.app.igrow.data.usecase.admin.distributors.GetDistributorUsecase
+import com.app.igrow.data.usecase.admin.distributors.UpdateDistributorUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
@@ -18,9 +21,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DistributorViewModel @Inject constructor(
-    private val getDiagnosticUsecase: GetDiagnosticUsecase,
-    private val updateDiagnosticUsecase: UpdateDiagnosticUsecase,
-    private val deleteDiagnosticUsecase: DeleteDiagnosticUsecase
+    private val getDistributorUsecase: GetDistributorUsecase,
+    private val updateDistributorUsecase: UpdateDistributorUsecase,
+    private val deleteDistributorUsecase: DeleteDistributorUsecase
 ) : ViewModel() {
 
     private var _uiState = MutableLiveData<AdminUIStates>()
@@ -35,7 +38,7 @@ class DistributorViewModel @Inject constructor(
     private var  deleteDiagnosticMutableLiveData = MutableLiveData<String>()
     var  deleteDiagnosticLiveData: MutableLiveData<String> =  deleteDiagnosticMutableLiveData
 
-    fun getDiagnostic(id:String) {
+    /*fun getDiagnostic(id:String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
             getDiagnosticUsecase.invoke(id).collect {
@@ -85,5 +88,5 @@ class DistributorViewModel @Inject constructor(
                 }
             }
         }
-    }
+    }*/
 }

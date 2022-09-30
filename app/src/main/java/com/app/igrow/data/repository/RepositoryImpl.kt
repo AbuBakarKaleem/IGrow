@@ -10,6 +10,7 @@ import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.DOCUMENT_ID
 import com.app.igrow.utils.StringUtils
 import com.app.igrow.utils.Utils
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -92,11 +93,16 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-    override suspend fun deleteDiagnostic(id:String): Flow<DataState<String>> =
+    override suspend fun deleteDiagnostic(
+        id: String,
+        diagnosticMap: HashMap<String, Diagnostic>
+    ): Flow<DataState<String>> =
         callbackFlow {
             try {
                 FirebaseFirestore.getInstance().collection(Constants.SHEET_DIAGNOSTIC)
-                    .document(DOCUMENT_ID).collection(id).document().delete()
+                    .document(DOCUMENT_ID).collection(id)
+                    .document(FieldValue.arrayRemove(diagnosticMap).toString())
+                    .delete()
                     .addOnSuccessListener {
                         if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
                     }.addOnFailureListener {
@@ -353,20 +359,20 @@ class RepositoryImpl @Inject constructor(
         }
 
     override suspend fun deleteDistributorsData(id: String): Flow<DataState<String>> =
-    callbackFlow {
-        try {
-            FirebaseFirestore.getInstance().collection(Constants.SHEET_DISTRIBUTORS)
-                .document(DOCUMENT_ID).collection(id).document().delete()
-                .addOnSuccessListener {
-                    if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
-                }.addOnFailureListener {
-                    if (isActive) trySend(DataState.error(stringUtils.deleteFailMsg())).isFailure
-                }
+        callbackFlow {
+            try {
+                FirebaseFirestore.getInstance().collection(Constants.SHEET_DISTRIBUTORS)
+                    .document(DOCUMENT_ID).collection(id).document().delete()
+                    .addOnSuccessListener {
+                        if (isActive) trySend(DataState.success(stringUtils.deleteSuccessMsg())).isSuccess
+                    }.addOnFailureListener {
+                        if (isActive) trySend(DataState.error(stringUtils.deleteFailMsg())).isFailure
+                    }
 
-        } catch (e: Exception) {
-            e.printStackTrace()
-            if (isActive) trySend(DataState.error<String>(e.message.toString())).isFailure
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error<String>(e.message.toString())).isFailure
+            }
+            awaitClose()
         }
-        awaitClose()
-    }
 }

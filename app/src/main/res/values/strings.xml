@@ -65,6 +65,9 @@
     <string name="delete_confim_message">Are you sure. You want to delete?</string>
     <string name="yes">Yes</string>
     <string name="no">no</string>
+    <string name="login">Login</string>
+    <string name="email_hint">email</string>
+    <string name="password">Password</string>
 
 
     <string-array name="action_type">
