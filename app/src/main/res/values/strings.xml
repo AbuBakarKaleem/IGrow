@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">IGrow</string>
+    <string name="app_name" translatable="false">iGrow</string>
     <string name="message_no_network_connected_str">No network connected!</string>
     <string name="message_something_went_wrong_str">Something went wrong!</string>
     <string name="home">home</string>
@@ -12,7 +12,7 @@
     <string name="dealer_save_success">Dealer Data added successfully</string>
     <string name="products_save_success">Products Data added successfully</string>
     <string name="distributors_save_success">distributors Data added successfully</string>
-    <string name="hello_admin">Welcome Admin</string>
+    <string name="hello_admin">Welcome AgricAdvisors</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="select">Select Type</string>
@@ -65,8 +65,8 @@
     <string name="delete_confim_message">Are you sure. You want to delete?</string>
     <string name="yes">Yes</string>
     <string name="no">no</string>
-    <string name="login">Login</string>
-    <string name="email_hint">email</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="edit_dealer">Edit Dealer</string>
 
