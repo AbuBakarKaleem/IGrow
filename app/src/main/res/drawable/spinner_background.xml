@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- View background color -->
-    <solid android:color="@android:color/transparent"/>
+    <solid android:color="@color/home_diagnose_back_green"/>
 
     <!-- View border color and width -->
     <stroke

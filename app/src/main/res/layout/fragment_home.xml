@@ -1,15 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.HomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
 
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/home"
-        android:layout_gravity="center"/>
+        android:alpha="1"
+        android:background="@drawable/crop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_home"
+        app:layout_constraintBottom_toTopOf="@+id/tv_homeHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_homeHeading"
+        style="@style/headingStyle"
+        android:text="@string/home_heading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+
+    <!--<androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_diagnose_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintGuide_percent="0.2"/>-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vertical_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.59"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_horizontal_six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.61"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/diagnose_container_one"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/home_diagnose_front_green"
+        android:drawableRight="@drawable/icon_search"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:text="@string/diagnose"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:iconGravity="end"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/diagnose_container_two"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:cardBackgroundColor="@color/home_diagnose_back_green"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_two"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_two">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/homeScreenOptionTextStyle"
+            android:text="identity pest and diseases problem" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/product_container_one"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/home_product_front_red"
+        android:drawableLeft="@drawable/ic_lens"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:text="@string/products"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:iconGravity="start"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_three" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/product_container_two"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:cardBackgroundColor="@color/home_diagnose_back_red"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_two"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_four">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/homeScreenOptionTextStyle"
+            android:text="Find registered Crop Protection Products" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shop_container_one"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/home_shop_front_blue"
+        android:drawableRight="@drawable/ic_add_shopping"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:text="@string/shop"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:cornerRadius="10dp"
+        app:iconGravity="end"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_five" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/shop_container_two"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="@color/home_shop_back_blue"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_two"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_six">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/homeScreenOptionTextStyle"
+            android:text="Find a local dealership in your area" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

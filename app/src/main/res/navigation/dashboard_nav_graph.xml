@@ -8,12 +8,25 @@
         android:id="@+id/homeFragment"
         android:name="com.app.igrow.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/homeToDiagnoseFragment"
+            app:destination="@id/diagnoseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/diagnoseFragment"
         android:name="com.app.igrow.ui.diagnose.DiagnoseFragment"
         android:label="DiagnoseFragment"
-        tools:layout="@layout/fragment_diagnose" />
+        tools:layout="@layout/fragment_diagnose">
+        <action
+            android:id="@+id/diagnoseFragmentToDiagnoseSearchResultFragment"
+            app:destination="@id/diagnoseSearchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/diagnoseSearchResultFragment"
+        android:name="com.app.igrow.ui.diagnose.detail.DiagnosticSearchResultFragment"
+        android:label="DiagnoseDetailFragment"
+        tools:layout="@layout/fragment_search_result" />
     <fragment
         android:id="@+id/ProductsFragment"
         android:name="com.app.igrow.ui.products.ProductsFragment"

@@ -1,13 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/screen_background"
     tools:context=".ui.diagnose.DiagnoseFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/diagnose" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading"
+            style="@style/headingStyle"
+            android:text="@string/identify_a_plant_health_problem"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.23" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/icon_search"
+            android:drawablePadding="4dp"
+            android:hint="@string/search_by_name"
+            app:backgroundTint="@color/bright_green"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_two" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_corp"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_crop"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_cropFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="Crop" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_part_affected"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_corp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_part_affected"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_partAffectedFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="Part affected" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_enemy_type"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_part_affected">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_enemy_type"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_typeOfEnemyFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="Type of enemy" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_casual_agent"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_enemy_type">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_casual_agent"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_causalAgentFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="Casual agent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search"
+            style="@style/buttonStyle"
+            android:layout_marginTop="20dp"
+            android:text="Search"
+            app:cornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_casual_agent" />
+
+        <ProgressBar
+            android:id="@+id/pb_diagnostic"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:indeterminateTint="@color/bright_green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

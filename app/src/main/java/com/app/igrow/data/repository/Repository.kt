@@ -37,4 +37,11 @@ interface Repository {
     suspend fun updateProductsData(products: HashMap<String, Products>): Flow<DataState<String>>
     suspend fun deleteProductsData(id:String): Flow<DataState<String>>
 
+    //Users Side repo's
+
+    //Diagnostic
+    suspend fun getColumnData(columnName:String,sheetName:String):Flow<DataState<ArrayList<String>>>
+    suspend fun searchByName(name:String,sheetName:String):Flow<DataState<ArrayList<String>>>
+
+
 }

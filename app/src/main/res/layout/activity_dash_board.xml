@@ -28,6 +28,7 @@
         app:itemIconTint="@drawable/bottom_nav_selected_tab_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/navHostMain"
-        app:menu="@menu/bottom_sheet_menu" />
+        app:menu="@menu/bottom_sheet_menu"
+        app:backgroundTint="@color/bottom_navigation_background"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

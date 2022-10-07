@@ -1,5 +1,6 @@
 package com.app.igrow.data.repository
 
+import android.util.Log
 import com.app.igrow.data.DataState
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
@@ -13,7 +14,6 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.isActive
@@ -40,7 +40,7 @@ class RepositoryImpl @Inject constructor(
                 if (result.isSuccessful) {
                     if (isActive) trySend(DataState.success(stringUtils.diagnosticDataSavedSuccessMsg()))
                 } else {
-                   // if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
+                    // if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
                 }
 
             } catch (e: Exception) {
@@ -135,7 +135,7 @@ class RepositoryImpl @Inject constructor(
                 if (result.isSuccessful) {
                     if (isActive) trySend(DataState.success(stringUtils.dealerDataSavedSuccessMsg()))
                 } else {
-                  //  if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
+                    //  if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
                 }
 
             } catch (e: Exception) {
@@ -226,7 +226,7 @@ class RepositoryImpl @Inject constructor(
                 if (result.isSuccessful) {
                     if (isActive) trySend(DataState.success(stringUtils.productsDataSavedSuccessMsg()))
                 } else {
-                   // if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
+                    // if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
                 }
 
             } catch (e: Exception) {
@@ -302,7 +302,6 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-
     // Distributors CRUD
     override suspend fun addDistributorsData(distributors: HashMap<String, Distributors>): Flow<DataState<String>> =
         callbackFlow {
@@ -315,10 +314,10 @@ class RepositoryImpl @Inject constructor(
 
                 val result = batch.commit()
 
-                if ( result.isSuccessful) {
+                if (result.isSuccessful) {
                     if (isActive) trySend(DataState.success(stringUtils.distributorDataSavedSuccessMsg()))
                 } else {
-                  //  if (isActive) trySend(DataState.success(stringUtils.somethingWentWrong()))
+                    //  if (isActive) trySend(DataState.success(stringUtils.somethingWentWrong()))
                 }
 
             } catch (e: Exception) {
@@ -390,6 +389,76 @@ class RepositoryImpl @Inject constructor(
             } catch (e: Exception) {
                 e.printStackTrace()
                 if (isActive) trySend(DataState.error<String>(e.message.toString())).isFailure
+            }
+            awaitClose()
+        }
+
+    // General
+    override suspend fun getColumnData(
+        columnName: String,
+        sheetName: String
+    ): Flow<DataState<ArrayList<String>>> =
+        callbackFlow {
+            try {
+                try {
+                    val databaseInstance = FirebaseFirestore.getInstance()
+                    databaseInstance.collection(sheetName)
+                        .addSnapshotListener { snapshot, error ->
+                            if (error != null) {
+                                if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg())).isSuccess
+                                Log.e("Firebase Error ", error.localizedMessage)
+                                return@addSnapshotListener
+                            }
+                            if (snapshot != null && !snapshot.isEmpty) {
+                                val dataList = ArrayList<String>()
+                                snapshot.documents.forEach {
+                                    val value = it.data?.values?.first() as HashMap<*, *>
+                                    dataList.add(value[columnName].toString())
+                                }
+                                if (isActive) trySend(DataState.success(dataList.distinct() as ArrayList<String>))
+                            } else {
+                                if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg()))
+                            }
+                        }
+                } catch (e: Exception) {
+                    if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
+                }
+            } catch (e: Exception) {
+                if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
+            }
+            awaitClose()
+        }
+
+    override suspend fun searchByName(
+        name: String,
+        sheetName: String
+    ): Flow<DataState<ArrayList<String>>> =
+        callbackFlow {
+            try {
+                try {
+                    val databaseInstance = FirebaseFirestore.getInstance()
+                    databaseInstance.collection(sheetName)
+                        .addSnapshotListener { snapshot, error ->
+                            if (error != null) {
+                                if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg())).isSuccess
+                                Log.e("Firebase Error ", error.localizedMessage)
+                                return@addSnapshotListener
+                            }
+                            if (snapshot != null && snapshot.documents.isEmpty().not()) {
+                                val dataList = ArrayList<String>()
+                                snapshot.documents.forEach {
+                                    dataList.add(it.get(name).toString())
+                                    if (isActive) trySend(DataState.success(dataList))
+                                }
+                            } else {
+                                if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg()))
+                            }
+                        }
+                } catch (e: Exception) {
+                    if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
+                }
+            } catch (e: Exception) {
+                if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
             }
             awaitClose()
         }

@@ -12,35 +12,29 @@
         android:alpha="1"
         android:background="@drawable/crop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tv_adminHeading"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_adminHeading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
+        style="@style/headingStyle"
         android:text="@string/hello_admin"
-        android:textColor="@color/bright_green"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintBottom_toTopOf="@id/container_one"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintVertical_chainStyle="spread" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_one"
@@ -86,9 +80,9 @@
                 style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_weight="1"
                 android:drawablePadding="6dp"
                 android:text="@string/delete"
                 android:textAllCaps="false"
@@ -108,19 +102,19 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:drawablePadding="6dp"
-            app:backgroundTint="@android:color/holo_green_dark"
             android:text="@string/upload_file"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            app:backgroundTint="@android:color/holo_green_dark"
             app:icon="@drawable/upload_icon"
             app:iconGravity="start"
-            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/inner_container"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/inner_container" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

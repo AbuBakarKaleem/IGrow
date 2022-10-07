@@ -69,6 +69,11 @@
     <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="edit_dealer">Edit Dealer</string>
+    <string name="home_heading">Welcome to your crop protection tool.</string>
+    <string name="identify_a_plant_health_problem">Identify a Plant Health Problem</string>
+    <string name="search_by_name">Search by name</string>
+    <string name="or">or</string>
+    <string name="text_select">Select</string>
 
 
     <string-array name="action_type">
@@ -78,4 +83,6 @@
         <item>Dealers</item>
         <item>Distributors</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -8,5 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bright_green">#24D12B</color>
+    <color name="home_diagnose_front_green">#00B050</color>
+    <color name="home_diagnose_back_green">#C5E0B4</color>
+    <color name="home_product_front_red">#FF0000</color>
+    <color name="home_diagnose_back_red">#FBE5D6</color>
+    <color name="home_shop_front_blue">#5B9BD5</color>
+    <color name="home_shop_back_blue">#DEEBF7</color>
+    <color name="home_options_text_color">#B2A49F</color>
+    <color name="bottom_navigation_background">@color/white</color>
+    <color name="diagnose_text_color">#919191</color>
+    <color name="screen_background">#E5E5E5</color>
 
 </resources>

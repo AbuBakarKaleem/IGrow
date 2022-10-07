@@ -178,13 +178,8 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_update"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                style="@style/buttonStyle"
                 android:text="@string/update"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/bright_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.databinding.ActivityLoginBinding
 import com.app.igrow.ui.admin.AdminActivity
+import com.app.igrow.ui.dashboard.DashBoardActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -23,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
     private fun activateListener() {
         binding.btnLogin.setOnClickListener {
             if (validation()) {
-                startActivity(Intent(this, AdminActivity::class.java))
+                startActivity(Intent(this, DashBoardActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "Invalid username/password", Toast.LENGTH_LONG).show()

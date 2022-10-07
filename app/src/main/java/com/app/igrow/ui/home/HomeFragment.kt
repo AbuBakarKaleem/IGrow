@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.app.igrow.R
 import com.app.igrow.databinding.FragmentHomeBinding
 import com.app.igrow.utils.Utils.getSystemLanguage
 
@@ -26,7 +28,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activateListeners()
         getSystemLanguage()
+    }
+    private fun activateListeners(){
+        binding.diagnoseContainerOne.setOnClickListener {
+            findNavController().navigate(R.id.homeToDiagnoseFragment)
+        }
     }
 
 }

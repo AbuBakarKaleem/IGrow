@@ -10,9 +10,9 @@
         android:alpha="0.3"
         android:background="@drawable/crop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ScrollView
@@ -42,12 +42,13 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_id_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="start"
                 android:text="@string/please_enter_id_of_record_for_update"
                 android:textColor="@android:color/holo_red_dark"
@@ -67,7 +68,6 @@
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -376,13 +376,9 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_update"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
+                style="@style/buttonStyle"
                 android:text="@string/update"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/bright_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
