@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.igrow.databinding.DialogListViewLayoutBinding
 
-class DialogListAdapter(val onImageClicked: (Item: String) -> Unit) :
+class DialogListAdapter(val onImageClicked: (item:String , position: Int) -> Unit) :
     RecyclerView.Adapter<DialogListAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
@@ -18,9 +18,10 @@ class DialogListAdapter(val onImageClicked: (Item: String) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(model: String) {
             itemBinding.apply {
-                this.tvListLabel.text = model
+                val uiValue = model.split(":")[0]
+                this.tvListLabel.text = uiValue?:""
                 this.tvListLabel.setOnClickListener {
-                    onImageClicked(model)
+                    onImageClicked(uiValue ,position)
                 }
             }
         }

@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.igrow.adpters.DialogListAdapter
@@ -37,6 +36,8 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     private lateinit var dialogeLayoutBinding: DialogeLayoutBinding
     private lateinit var dialogListAdapter: DialogListAdapter
     private var diagnosticColumnName = ""
+    private var dialogList = arrayListOf<String>()
+    private var diagnosticFiltersHashMap = HashMap<String,String>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,12 +70,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                 viewModel.getDiagnosticColumnData(COL_TYPE_OF_ENEMY, SHEET_DIAGNOSTIC)
             }
             binding.btnSearch.setOnClickListener {
-                if (diagnosticColumnName.isEmpty()) {
-                    viewModel.searchByName(
-                        binding.etSearch.text.toString().trim(),
-                        SHEET_DIAGNOSTIC
-                    )
-                }
+                viewModel.searchDiagnostic(diagnosticFiltersHashMap)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -95,6 +91,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         }
         viewModel.getDiagnosticColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                dialogList = it
                 showListDialog(it)
             }
         }
@@ -104,18 +101,22 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         if (diagnosticColumnName.isNotEmpty()) {
             when (diagnosticColumnName) {
                 COL_CROP -> {
+                    binding.tvCropFilterText.text = ""
                     binding.tvCropFilterText.text = value
                     return
                 }
                 COL_TYPE_OF_ENEMY -> {
+                    binding.tvTypeOfEnemyFilterText.text = ""
                     binding.tvTypeOfEnemyFilterText.text = value
                     return
                 }
                 COL_PART_AFFECTED -> {
+                    binding.tvPartAffectedFilterText.text = ""
                     binding.tvPartAffectedFilterText.text = value
                     return
                 }
                 COL_CAUSAL_AGENT -> {
+                    binding.tvCausalAgentFilterText.text = ""
                     binding.tvCausalAgentFilterText.text = value
                     return
                 }
@@ -126,21 +127,37 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     private fun showListDialog(dataList: ArrayList<String>) {
         listDialog = Dialog(requireContext())
         listDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
         dialogeLayoutBinding = DialogeLayoutBinding.inflate(LayoutInflater.from(context))
         listDialog.setContentView(dialogeLayoutBinding.root)
+
         listDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         dialogeLayoutBinding.rcListDialog.layoutManager = LinearLayoutManager(requireContext())
         dialogeLayoutBinding.rcListDialog.setHasFixedSize(true)
+
         setDialogListToAdapter(dataList)
+
         dialogeLayoutBinding.rcListDialog.adapter = dialogListAdapter
         listDialog.show()
     }
 
     private fun setDialogListToAdapter(dataList: ArrayList<String>) {
-        dialogListAdapter = DialogListAdapter { item ->
+        dialogListAdapter = DialogListAdapter { uiValue, position ->
+            val selectedValue = dialogList[position]
             listDialog.dismiss()
-            setSelectedValueToView(item)
+
+            setSelectedValueToView(uiValue)
+            populateFiltersObject(selectedValue)
         }
+
         dialogListAdapter.differ.submitList(dataList)
+    }
+
+    private fun populateFiltersObject(value:String){
+        val englishAndFrenchValues = value.split(":")
+        if(diagnosticColumnName.isNotEmpty()){
+            diagnosticFiltersHashMap[diagnosticColumnName] = englishAndFrenchValues[0]
+        }
     }
 }

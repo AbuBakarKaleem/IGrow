@@ -413,7 +413,7 @@ class RepositoryImpl @Inject constructor(
                                 val dataList = ArrayList<String>()
                                 snapshot.documents.forEach {
                                     val value = it.data?.values?.first() as HashMap<*, *>
-                                    dataList.add(value[columnName].toString())
+                                    dataList.add(value[columnName].toString()+":"+ value[columnName+"_fr"].toString())
                                 }
                                 if (isActive) trySend(DataState.success(dataList.distinct() as ArrayList<String>))
                             } else {
@@ -459,6 +459,43 @@ class RepositoryImpl @Inject constructor(
                 }
             } catch (e: Exception) {
                 if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
+            }
+            awaitClose()
+        }
+
+    override suspend fun getAllDiagnosticData(): Flow<DataState<ArrayList<HashMap<String,String>>>> =
+        callbackFlow {
+            try {
+                try {
+                    val databaseInstance = FirebaseFirestore.getInstance()
+                    databaseInstance.collection(Constants.SHEET_DIAGNOSTIC)
+                        .addSnapshotListener { snapshot, error ->
+                            if (error != null) {
+                                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg())).isSuccess
+                                Log.e("Firebase Error ", error.localizedMessage)
+                                return@addSnapshotListener
+                            }
+
+                            if (snapshot != null && snapshot.documents.isEmpty().not()) {
+
+                                val dataList = ArrayList<HashMap<String,String>>()
+
+                                snapshot.documents.forEach { doc ->
+                                    doc.data?.let { it ->
+                                        val map = it.values.first() as HashMap<*, *>
+                                        dataList.add(map as HashMap<String, String>)
+                                    }
+                                }
+                                if (isActive) trySend(DataState.success(dataList))
+                            } else {
+                                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg()))
+                            }
+                        }
+                } catch (e: Exception) {
+                    if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(e.message.toString()))
+                }
+            } catch (e: Exception) {
+                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(e.message.toString()))
             }
             awaitClose()
         }

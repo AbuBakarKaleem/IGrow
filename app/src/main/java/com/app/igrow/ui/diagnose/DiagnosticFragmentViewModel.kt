@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
+import com.app.igrow.data.usecase.admin.diagnostic.FilterDiagnosticsListUsecase
 import com.app.igrow.data.usecase.user.general.GetColumnDataUsecase
 import com.app.igrow.data.usecase.user.general.SearchByNameUsecase
 import com.app.igrow.ui.admin.AdminUIStates
@@ -17,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DiagnosticFragmentViewModel @Inject constructor(
     private val getColumnDataUsecase: GetColumnDataUsecase,
-    private val searchByNameUsecase: SearchByNameUsecase
+    private val searchByNameUsecase: SearchByNameUsecase,
+    private val filterDiagnosticsListUsecase: FilterDiagnosticsListUsecase
 ) : ViewModel() {
 
     private var _uiState = MutableLiveData<AdminUIStates>()
@@ -48,16 +50,16 @@ class DiagnosticFragmentViewModel @Inject constructor(
         }
     }
 
-    fun searchByName(name: String, sheetName: String) {
+    fun searchDiagnostic(filtersMap: HashMap<String,String>) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            searchByNameUsecase.invoke(name = name, sheetName = sheetName).collect {
+            filterDiagnosticsListUsecase.invoke(filters = filtersMap).collect {
                 when (it) {
                     is DataState.Success -> {
-                        searchByNameMutableLiveData.postValue(it.data)
+//                        searchByNameMutableLiveData.postValue(it.data)
                     }
                     is DataState.Error -> {
-                        searchByNameMutableLiveData.postValue(null)
+//                        searchByNameMutableLiveData.postValue(null)
                     }
 
                 }

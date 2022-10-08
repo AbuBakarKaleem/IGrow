@@ -16,6 +16,7 @@ interface Repository {
     //Diagnostic
     suspend fun addDiagnosticData(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>>
     suspend fun getDiagnosticData(id:String): Flow<DataState<Any>>
+    suspend fun getAllDiagnosticData(): Flow<DataState<ArrayList<HashMap<String,String>>>>
     suspend fun updateDiagnostic(diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>>
     suspend fun deleteDiagnostic(id:String,diagnostic: HashMap<String, Diagnostic>): Flow<DataState<String>>
 
