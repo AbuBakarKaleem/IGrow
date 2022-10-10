@@ -11,7 +11,8 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/homeToDiagnoseFragment"
-            app:destination="@id/diagnoseFragment" />
+            app:destination="@id/diagnoseFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/diagnoseFragment"
@@ -19,14 +20,22 @@
         android:label="DiagnoseFragment"
         tools:layout="@layout/fragment_diagnose">
         <action
-            android:id="@+id/diagnoseFragmentToDiagnoseSearchResultFragment"
+            android:id="@+id/toDiagnoseSearchResultFragment"
             app:destination="@id/diagnoseSearchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/diagnoseSearchResultFragment"
         android:name="com.app.igrow.ui.diagnose.detail.DiagnosticSearchResultFragment"
         android:label="DiagnoseDetailFragment"
-        tools:layout="@layout/fragment_search_result" />
+        tools:layout="@layout/fragment_search_result" >
+
+        <argument
+            android:name="filters"
+            app:argType="string[]" />
+
+    </fragment>
+
+
     <fragment
         android:id="@+id/ProductsFragment"
         android:name="com.app.igrow.ui.products.ProductsFragment"

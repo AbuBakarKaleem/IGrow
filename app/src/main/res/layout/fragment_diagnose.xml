@@ -52,7 +52,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_corp"
             style="@style/filterCardViewStyle"
-            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_cropFilterText"
                     style="@style/filterTextViewStyle"
-                    android:text="Crop" />
+                    android:text="@string/crop" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -77,7 +77,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_part_affected"
             style="@style/filterCardViewStyle"
-            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +90,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_partAffectedFilterText"
                     style="@style/filterTextViewStyle"
-                    android:text="Part affected" />
+                    android:text="@string/part_affected" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -102,7 +102,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_enemy_type"
             style="@style/filterCardViewStyle"
-            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -115,7 +115,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_typeOfEnemyFilterText"
                     style="@style/filterTextViewStyle"
-                    android:text="Type of enemy" />
+                    android:text="@string/enemy_type" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -127,7 +127,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_casual_agent"
             style="@style/filterCardViewStyle"
-            app:cardBackgroundColor="@color/home_diagnose_back_green"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +140,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_causalAgentFilterText"
                     style="@style/filterTextViewStyle"
-                    android:text="Casual agent" />
+                    android:text="@string/casual_agent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -153,11 +153,24 @@
             android:id="@+id/btn_search"
             style="@style/buttonStyle"
             android:layout_marginTop="20dp"
-            android:text="Search"
+            android:text="@string/search"
             app:cornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cv_casual_agent" />
+
+
+        <Button
+            android:id="@+id/btn_reset"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_search"
+            android:textAllCaps="false"
+            app:cornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_search" />
 
         <ProgressBar
             android:id="@+id/pb_diagnostic"
@@ -165,6 +178,7 @@
             android:layout_height="45dp"
             android:indeterminateTint="@color/bright_green"
             android:visibility="gone"
+            android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
