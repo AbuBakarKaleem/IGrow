@@ -88,4 +88,6 @@
     <string name="crop">Crop</string>
     <string name="casual_agent">Casual agent</string>
     <string name="clear_search">Clear Search</string>
+    <string name="identification">IDENTIFICATION</string>
+    <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
 </resources>

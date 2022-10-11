@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.igrow.R
 import com.app.igrow.adpters.DialogListAdapter
 import com.app.igrow.base.BaseFragment
+import com.app.igrow.data.model.detail.SearchResult
 import com.app.igrow.databinding.DialogeLayoutBinding
 import com.app.igrow.databinding.FragmentDiagnoseBinding
 import com.app.igrow.ui.admin.LoadingState
@@ -29,6 +30,7 @@ import com.app.igrow.utils.Constants.SHEET_DIAGNOSTIC
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
@@ -43,7 +45,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     private var diagnosticColumnName = ""
     private var dialogList = arrayListOf<String>()
     private var filteredList = arrayListOf<String>()
-    private var diagnosticFiltersHashMap = HashMap<String,String>()
+    private var diagnosticFiltersHashMap = HashMap<String, String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,8 +75,9 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
             }
             binding.btnSearch.setOnClickListener {
                 viewModel.searchDiagnostic(diagnosticFiltersHashMap)
+
             }
-            binding.btnReset.setOnClickListener{
+            binding.btnReset.setOnClickListener {
                 resetAllFilters()
             }
         } catch (e: Exception) {
@@ -102,10 +105,15 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         }
 
         viewModel.filtersLiveData.observe(viewLifecycleOwner) { response ->
-           if (response.isNotEmpty()) {
-               val bundle = bundleOf(ARG_FILTERS_KEY to diagnosticFiltersHashMap)
-               findNavController().navigate(R.id.toDiagnoseSearchResultFragment,bundle)
-           }
+            if (response.isNotEmpty()) {
+                var searchResultData =
+                    SearchResult(diagnosticFiltersHashMap, response)
+                val bundle =
+                    bundleOf(ARG_RESULT_KEY to searchResultData)
+                findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
+            } else {
+               // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -155,7 +163,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
         dialogeLayoutBinding.etListDialogSearch.doAfterTextChanged { editable ->
             if (!editable.isNullOrEmpty() && editable.isNotBlank()) {
-                val myResult = searchList( editable.toString() )
+                val myResult = searchList(editable.toString())
                 setDialogListToAdapter(myResult)
             } else {
                 filteredList.clear()
@@ -171,7 +179,8 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                 return arrayListOf()
             }
             filteredList = dialogList.filter { model ->
-                model.toLowerCase().contains(searchValue.toLowerCase())
+                model.lowercase(Locale.getDefault())
+                    .contains(searchValue.lowercase(Locale.getDefault()))
             } as ArrayList<String>
 
             if (filteredList.isEmpty()) {
@@ -180,14 +189,14 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
             }
             return filteredList
         } catch (ex: Exception) {
-            Log.e(TAG,ex.stackTraceToString())
+            Log.e(TAG, ex.stackTraceToString())
         }
         return arrayListOf()
     }
 
     private fun setDialogListToAdapter(dataList: ArrayList<String>) {
         dialogListAdapter = DialogListAdapter { uiValue, position ->
-            val selectedValue = if(filteredList.isNotEmpty() && position <= filteredList.size){
+            val selectedValue = if (filteredList.isNotEmpty() && position <= filteredList.size) {
                 filteredList[position]
             } else {
                 dialogList[position]
@@ -201,15 +210,15 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         dialogeLayoutBinding.rcListDialog.adapter = dialogListAdapter
     }
 
-    private fun populateFiltersObject(value:String){
+    private fun populateFiltersObject(value: String) {
         val englishAndFrenchValues = value.split(":")
-        if(diagnosticColumnName.isNotEmpty()){
+        if (diagnosticColumnName.isNotEmpty()) {
             diagnosticFiltersHashMap[diagnosticColumnName] = englishAndFrenchValues[0]
         }
     }
 
     private fun resetAllFilters() {
-        if(diagnosticFiltersHashMap.isNotEmpty()){
+        if (diagnosticFiltersHashMap.isNotEmpty()) {
             binding.tvCropFilterText.text = getString(R.string.crop)
             binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)
             binding.tvPartAffectedFilterText.text = getString(R.string.part_affected)
@@ -223,9 +232,15 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         viewModel.getDiagnosticColumnDataLiveData.value = arrayListOf()
     }
 
-    companion object{
+    override fun onResume() {
+        super.onResume()
+        diagnosticFiltersHashMap.clear()
+    }
+
+    companion object {
         const val TAG = " DiagnoseFragment"
-        const val ARG_FILTERS_KEY = "ARG_FILTERS_KEY"
+        const val ARG_RESULT_KEY = "filters"
+        const val ARG_SEARCH_RESULT_ITEM_KEY = "diagnostic_data"
     }
 
 }

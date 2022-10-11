@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
-class FilterDiagnosticsListUsecase @Inject constructor(private val repository: Repository , private val stringUtils: StringUtils) {
+class FilterDiagnosticsListUsecase @Inject constructor(
+    private val repository: Repository,
+    private val stringUtils: StringUtils
+) {
 
     suspend operator fun invoke(filters: HashMap<String, String>): Flow<DataState<ArrayList<HashMap<String, String>>>> =
         callbackFlow {
@@ -39,10 +42,14 @@ class FilterDiagnosticsListUsecase @Inject constructor(private val repository: R
         dataHashMap: ArrayList<HashMap<String, String>>
     ): ArrayList<HashMap<String, String>> {
 
+        if (filters.isEmpty()) {
+            return dataHashMap
+        }
+
         val list = ArrayList<HashMap<String, String>>()
         val localHashMap = ArrayList<HashMap<String, String>>()
 
-        if(localHashMap.isEmpty()){
+        if (localHashMap.isEmpty()) {
             localHashMap.addAll(dataHashMap)
         }
 

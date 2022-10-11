@@ -1,10 +1,10 @@
 package com.app.igrow.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.databinding.FragmentHomeBinding
@@ -31,9 +31,13 @@ class HomeFragment : Fragment() {
         activateListeners()
         getSystemLanguage()
     }
-    private fun activateListeners(){
+
+    private fun activateListeners() {
         binding.diagnoseContainerOne.setOnClickListener {
             findNavController().navigate(R.id.homeToDiagnoseFragment)
+        }
+        binding.productContainerOne.setOnClickListener {
+            findNavController().navigate(R.id.homeToProductsFragment)
         }
     }
 

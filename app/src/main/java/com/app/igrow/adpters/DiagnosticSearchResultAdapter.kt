@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.app.igrow.databinding.DialogListViewLayoutBinding
+import com.app.igrow.data.model.detail.SearchResult
+import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.SearchResultListItemBinding
 
-class DiagnosticSearchResultAdapter (val onImageClicked: (Item: String) -> Unit):
+class DiagnosticSearchResultAdapter (val onImageClicked: (Item: Diagnostic) -> Unit):
     RecyclerView.Adapter<DiagnosticSearchResultAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
@@ -17,24 +18,23 @@ class DiagnosticSearchResultAdapter (val onImageClicked: (Item: String) -> Unit)
         private val itemBinding: SearchResultListItemBinding
     ) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(model: String) {
+        fun bind(model: Diagnostic) {
             itemBinding.apply {
-                this.tvSearchResultName.text= model
-                this.tvSearchResultDetail.text= model
-                //this.ivSearchResult.text= model
-                this.clSearchResult.setOnClickListener {
+                this.tvSearchResultName.text= model.crop
+                this.tvSearchResultDetail.text= model.causal_agent
+                this.cvSearchResult.setOnClickListener {
                     onImageClicked(model)
                 }
             }
         }
     }
-    private val differCallBack = object : DiffUtil.ItemCallback<String>() {
+    private val differCallBack = object : DiffUtil.ItemCallback<Diagnostic>() {
 
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: Diagnostic, newItem: Diagnostic): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Diagnostic, newItem: Diagnostic): Boolean {
             return oldItem == newItem
         }
     }

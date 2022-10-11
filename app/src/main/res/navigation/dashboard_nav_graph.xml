@@ -13,6 +13,9 @@
             android:id="@+id/homeToDiagnoseFragment"
             app:destination="@id/diagnoseFragment"
             />
+        <action
+            android:id="@+id/homeToProductsFragment"
+            app:destination="@id/ProductsFragment" />
     </fragment>
     <fragment
         android:id="@+id/diagnoseFragment"
@@ -31,7 +34,25 @@
 
         <argument
             android:name="filters"
-            app:argType="string[]" />
+            app:argType="com.app.igrow.data.model.detail.SearchResult" />
+        <action
+            android:id="@+id/toDiagnoseSearchResultDetailFragment"
+            app:destination="@id/diagnoseSearchResultDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/diagnoseSearchResultDetailFragment"
+        android:name="com.app.igrow.ui.diagnose.detail.DiagnosticSearchDetailFragment"
+        android:label="DiagnosticSearchDetailFragment"
+        tools:layout="@layout/fragment_diagnostic_search_detail" >
+
+        <argument
+            android:name="diagnostic_data"
+            app:argType="com.app.igrow.data.model.sheets.Diagnostic" />
+        <action
+            android:id="@+id/toProductsFragment"
+            app:destination="@id/ProductsFragment" />
 
     </fragment>
 

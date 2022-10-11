@@ -1,5 +1,9 @@
 package com.app.igrow.data.model.sheets
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Diagnostic(
     var id: String = "",
     var crop: String = "",
@@ -16,4 +20,4 @@ data class Diagnostic(
     var symptoms_impact_fr: String = "",
     var control: String = "",
     var control_fr: String = "",
-)
+): Parcelable

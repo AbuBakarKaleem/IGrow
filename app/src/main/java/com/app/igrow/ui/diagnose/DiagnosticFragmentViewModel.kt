@@ -30,7 +30,8 @@ class DiagnosticFragmentViewModel @Inject constructor(
         getDiagnosticColumnDataMutableLiveData
 
     private var filterResultMutableLiveData = MutableLiveData<ArrayList<HashMap<String, String>>>()
-    var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> = filterResultMutableLiveData
+    var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> =
+        filterResultMutableLiveData
 
     fun getDiagnosticColumnData(columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
@@ -50,7 +51,7 @@ class DiagnosticFragmentViewModel @Inject constructor(
         }
     }
 
-    fun searchDiagnostic(filtersMap: HashMap<String,String>) {
+    fun searchDiagnostic(filtersMap: HashMap<String, String>) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
             filterDiagnosticsListUsecase.invoke(filters = filtersMap).collect {
