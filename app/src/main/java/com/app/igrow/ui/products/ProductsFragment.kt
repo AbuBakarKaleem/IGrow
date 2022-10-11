@@ -128,9 +128,8 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             if (response.isNotEmpty()) {
                 var searchResultData =
                     SearchResult(productFiltersHashMap, response)
-                val bundle =
-                    bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
-                findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
+                val bundle = bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
+                findNavController().navigate(R.id.toProductsSearchResultFragment, bundle)
             } else {
                 // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
             }

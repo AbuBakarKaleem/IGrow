@@ -61,7 +61,35 @@
         android:id="@+id/ProductsFragment"
         android:name="com.app.igrow.ui.products.ProductsFragment"
         android:label="ProductsFragment"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/toProductsSearchResultFragment"
+            app:destination="@id/productsSearchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsSearchResultFragment"
+        android:name="com.app.igrow.ui.products.detail.ProductSearchResultFragment"
+        android:label="ProductsSearchResultFragment"
+        tools:layout="@layout/fragment_product_search_result" >
+        <argument
+            android:name="filters"
+            app:argType="com.app.igrow.data.model.detail.SearchResult" />
+        <action
+            android:id="@+id/toProductSearchResultDetailFragment"
+            app:destination="@id/productSearchResultDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productSearchResultDetailFragment"
+        android:name="com.app.igrow.ui.products.detail.ProductsSearchDetailFragment"
+        android:label="ProductsSearchDetailFragment"
+        tools:layout="@layout/fragment_diagnostic_search_detail" >
+
+        <argument
+            android:name="diagnostic_data"
+            app:argType="com.app.igrow.data.model.sheets.Products" />
+    </fragment>
+
     <fragment
         android:id="@+id/shopFragment"
         android:name="com.app.igrow.ui.shop.ShopFragment"
