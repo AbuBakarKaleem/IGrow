@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background"
+    tools:context=".ui.products.ProductsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading"
+            style="@style/headingStyle"
+            android:text="@string/identify_a_plant_health_problem"
+            android:textColor="@color/home_product_front_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.23" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/icon_search"
+            android:drawablePadding="4dp"
+            android:hint="@string/search_by_name"
+            app:backgroundTint="@color/bright_green"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_two" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_corp"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_crop"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_cropFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="@string/crop" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_enemy"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_corp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_enemy"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_enemyFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="@string/enemy" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_enemy_type"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_enemy">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_enemy_type"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_typeOfEnemyFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="@string/enemy_type" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_product_category"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_enemy_type">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_product_category"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_productCategoryFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="@string/product_category" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_composition"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_product_category">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_composition"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_compositionFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="@string/composition" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_distributor"
+            style="@style/filterCardViewStyle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_composition">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/ll_distributor"
+                style="@style/filterLayoutStyle">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_distributorFilterText"
+                    style="@style/filterTextViewStyle"
+                    android:text="@string/distributor" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    style="@style/filterImageViewStyle"
+                    android:src="@drawable/ic_arrow_down" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search"
+            style="@style/buttonStyle"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/home_product_front_red"
+            android:text="@string/search"
+            app:cornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_distributor" />
+        
+        <Button
+            android:id="@+id/btn_reset"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_search"
+            android:textAllCaps="false"
+            android:textColor="@color/home_product_front_red"
+            app:cornerRadius="30dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_search"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/pb_product"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:elevation="2dp"
+            android:indeterminateTint="@color/bright_green"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

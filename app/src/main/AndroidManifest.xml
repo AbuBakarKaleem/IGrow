@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.app.igrow" >
+    package="com.app.igrow">
 
     <application
         android:name=".IGrowApp"
@@ -13,16 +13,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IGrow"
-        tools:targetApi="33" >
+        tools:targetApi="33">
         <activity
-            android:name=".ui.home.MainActivity"
-            android:exported="true" >
+            android:name=".ui.login.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.admin.distributors.DistributorsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.diagnostic.DiagnosticActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.dealers.DealersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.product.ProductsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.admin.AdminActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".ui.dashboard.DashBoardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.home.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

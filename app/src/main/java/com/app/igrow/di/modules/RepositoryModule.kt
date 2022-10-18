@@ -27,6 +27,6 @@ class RepositoryModule {
     @Singleton
     @Provides
     fun provideRepository(stringUtils: StringUtils, apiService: ApiService): Repository {
-        return RepositoryImpl(stringUtils, apiService)
+        return RepositoryImpl(stringUtils)
     }
 }

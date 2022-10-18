@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:orderInCategory="1"
+        android:title="@string/home"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/diagnoseFragment"
+        android:icon="@drawable/ic_lens"
+        android:orderInCategory="2"
+        android:title="@string/diagnose"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/ProductsFragment"
+        android:icon="@drawable/ic_product"
+        android:orderInCategory="3"
+        android:title="@string/products"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/shopFragment"
+        android:icon="@drawable/ic_add_shopping"
+        android:orderInCategory="4"
+        android:title="@string/shop"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/moreFragment"
+        android:icon="@drawable/ic_menu"
+        android:orderInCategory="5"
+        android:title="@string/more"
+        app:showAsAction="always" />
+
+</menu>

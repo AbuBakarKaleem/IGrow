@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "862671731779",
+    "project_id": "igrow-aeed4",
+    "storage_bucket": "igrow-aeed4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862671731779:android:2d6f386204892697d0a8f6",
+        "android_client_info": {
+          "package_name": "com.app.igrow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862671731779-7s4shie751kemfcs3kl2sj7o6mrd0mb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFiEJ47fRnawCrctm9rJulv3_CzTOVvZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862671731779-7s4shie751kemfcs3kl2sj7o6mrd0mb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

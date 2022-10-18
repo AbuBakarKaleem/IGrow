@@ -1,5 +1,103 @@
 <resources>
-    <string name="app_name">IGrow</string>
+    <string name="app_name" translatable="false">iGrow</string>
     <string name="message_no_network_connected_str">No network connected!</string>
     <string name="message_something_went_wrong_str">Something went wrong!</string>
+    <string name="home">home</string>
+    <string name="diagnose">Diagnose</string>
+    <string name="products">Products</string>
+    <string name="shop">Shop</string>
+    <string name="more">More</string>
+    <string name="upload_file">Upload File</string>
+    <string name="diagnostic_save_success">Diagnostic Data added successfully</string>
+    <string name="dealer_save_success">Dealer Data added successfully</string>
+    <string name="products_save_success">Products Data added successfully</string>
+    <string name="distributors_save_success">distributors Data added successfully</string>
+    <string name="hello_admin">Welcome AgricAdvisors</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="select">Select Type</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">cancel</string>
+    <string name="crop_name">Crop Name</string>
+    <string name="plant_problem">Plant Problem</string>
+    <string name="causal_agent">Causal Agent</string>
+    <string name="update">Update</string>
+    <string name="control">Control</string>
+    <string name="symptoms_impact">Symptoms Impact</string>
+    <string name="part_affected">Part Affected</string>
+    <string name="enemy_type">Enemy Type</string>
+    <string name="product_category">Product Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="active_ingredient">Active Ingredient</string>
+    <string name="registration_number">Registration Number</string>
+    <string name="composition">Composition</string>
+    <string name="formulation">Formulation</string>
+    <string name="toxicological_class">Toxicological Class</string>
+    <string name="mode_of_action">Mode of action</string>
+    <string name="enemy">Enemy</string>
+    <string name="packaging">Packaging</string>
+    <string name="application_rate">Application Rate</string>
+    <string name="treatment_time">Treatment Time</string>
+    <string name="frequency_of_application">Frequency of Application</string>
+    <string name="method_of_application">Method of Application</string>
+    <string name="restrictions_of_use">Restrictions of Use</string>
+    <string name="re_entry_period">Re-entry Period</string>
+    <string name="time_before_harvest">Time Before Harvest</string>
+    <string name="distributor">Distributor</string>
+    <string name="telephone">Telephone</string>
+    <string name="email">Email</string>
+    <string name="website">Website</string>
+    <string name="facebook">Facebook</string>
+    <string name="dealer_name">Dealer Name</string>
+    <string name="address">Address</string>
+    <string name="city_town">City Town</string>
+    <string name="region">Region</string>
+    <string name="mobile">Mobile</string>
+    <string name="id">ID</string>
+    <string name="edit_diagnostic">Diagnostic</string>
+    <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update/Delete</string>
+    <string name="search">Search</string>
+    <string name="no_record_found">No Record Found</string>
+    <string name="update_success">Data Update Successfully</string>
+    <string name="update_fail">Data did not update</string>
+    <string name="delete_success">Data delete successfully</string>
+    <string name="delete_fail">Data did not delete</string>
+    <string name="delete_confim_message">Are you sure. You want to delete?</string>
+    <string name="yes">Yes</string>
+    <string name="no">no</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email_hint">Email</string>
+    <string name="password">Password</string>
+    <string name="edit_dealer">Edit Dealer</string>
+    <string name="home_heading">Welcome to your crop protection tool.</string>
+    <string name="identify_a_plant_health_problem">Identify a Plant Health Problem</string>
+    <string name="search_by_name">Search by name</string>
+    <string name="or">or</string>
+    <string name="text_select">Select</string>
+
+
+    <string-array name="action_type">
+        <item>Select</item>
+        <item>Diagnostic</item>
+        <item>Products</item>
+        <item>Dealers</item>
+        <item>Distributors</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="crop">Crop</string>
+    <string name="casual_agent">Casual agent</string>
+    <string name="clear_search">Clear Search</string>
+    <string name="identification">Identifcation</string>
+    <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
+    <string name="type">Type</string>
+    <string name="condition">Condition</string>
+    <string name="symptoms_amp_impact"><![CDATA[Symptoms & Impact]]></string>
+    <string name="leaves">Leaves</string>
+    <string name="cultural_control">Cultural control</string>
+    <string name="biological_control">Biological Control</string>
+    <string name="chemical_control">Chemical Control</string>
+    <string name="outlined_button">Outlined button</string>
+    <string name="help">Help</string>
+    <string name="product">Product</string>
 </resources>
