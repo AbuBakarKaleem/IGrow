@@ -413,7 +413,8 @@ class RepositoryImpl @Inject constructor(
                                 val dataList = ArrayList<String>()
                                 snapshot.documents.forEach {
                                     val value = it.data?.values?.first() as HashMap<*, *>
-                                    dataList.add(value[columnName].toString()+":"+ value[columnName+"_fr"].toString())
+                                    //dataList.add(value[columnName].toString()+":"+ value[columnName+"_fr"].toString())
+                                    dataList.add(value[columnName].toString())
                                 }
                                 if (isActive) trySend(DataState.success(dataList.distinct() as ArrayList<String>))
                             } else {

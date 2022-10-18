@@ -18,4 +18,87 @@
     <string name="select">Select Type</string>
     <string name="ok">Ok</string>
     <string name="cancel">cancel</string>
+
+
+    <string name="crop_name">Nom de la culture</string>
+    <string name="plant_problem">Problème de plante</string>
+    <string name="causal_agent">Agent causal</string>
+    <string name="update">mettre à jour</string>
+    <string name="control">Contrôler</string>
+    <string name="symptoms_impact">Impact des symptômes</string>
+    <string name="part_affected">Partie affectée</string>
+    <string name="enemy_type">Type d\'ennemi</string>
+    <string name="product_category">catégorie de produit</string>
+    <string name="product_name">nom du produit</string>
+    <string name="active_ingredient">Ingrédient actif</string>
+    <string name="registration_number">Numéro d\'enregistrement</string>
+    <string name="composition">Composition</string>
+    <string name="formulation">Formulation</string>
+    <string name="toxicological_class">Classe toxicologique</string>
+    <string name="mode_of_action">Mode d\'action</string>
+    <string name="enemy">Ennemi</string>
+    <string name="packaging">Emballage</string>
+    <string name="application_rate">Taux d\'application</string>
+    <string name="treatment_time">Temps de traitement</string>
+    <string name="frequency_of_application">Fréquence d\'application</string>
+    <string name="method_of_application">Méthode d\'application</string>
+    <string name="restrictions_of_use">Restrictions d\'utilisation</string>
+    <string name="re_entry_period">Période de réintégration</string>
+    <string name="time_before_harvest">Temps avant la récolte</string>
+    <string name="distributor">Distributeur</string>
+    <string name="telephone">Téléphone</string>
+    <string name="email">E-mail</string>
+    <string name="website">Site Internet</string>
+    <string name="facebook">Facebook</string>
+    <string name="dealer_name">Nom du revendeur</string>
+    <string name="address">Adresse</string>
+    <string name="city_town">Ville Ville</string>
+    <string name="region">Région</string>
+    <string name="mobile">Mobile</string>
+    <string name="id">ID</string>
+    <string name="edit_diagnostic">Diagnostique</string>
+    <string name="please_enter_id_of_record_for_update">Veuillez saisir l\'ID de l\'enregistrement pour la mise à jour/la suppression</string>
+    <string name="search">Chercher</string>
+    <string name="no_record_found">Aucun Enregistrement Trouvé</string>
+    <string name="update_success">Mise à jour des données réussie</string>
+    <string name="update_fail">Les données n\'ont pas été mises à jour</string>
+    <string name="delete_success">Les données ont été supprimées avec succès</string>
+    <string name="delete_fail">Data did not delete</string>
+    <string name="delete_confirm_message">Êtes-vous sûr. Vous voulez supprimer ?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="sign_in">S\'identifier</string>
+    <string name="email_hint">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="edit_dealer">Modifier le concessionnaire</string>
+    <string name="home_heading">Bienvenue dans votre outil de protection des cultures.</string>
+    <string name="identify_a_plant_health_problem">Identifier un problème phytosanitaire</string>
+    <string name="search_by_name">Rechercher par nom</string>
+    <string name="or">ou</string>
+    <string name="text_select">Sélectionner</string>
+    <string name="text_select_language">Choisir la langue</string>
+    <string name="language_english">Anglais</string>
+    <string name="language_french">Français</string>
+
+
+    <string-array name="action_type">
+        <item>Select</item>
+        <item>Diagnostic</item>
+        <item>Products</item>
+        <item>Dealers</item>
+        <item>Distributors</item>
+    </string-array>
+
+    <string-array name="selectLanguage">
+        <item>@string/text_select_language</item>
+        <item>@string/language_english</item>
+        <item>@string/language_french</item>
+    </string-array>
+
+    <string name="crop">Recadrer</string>
+    <string name="casual_agent">Agent occasionnel</string>
+    <string name="clear_search">Effacer la recherche</string>
+    <string name="identification">IDENTIFICATION</string>
+    <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
+
 </resources>

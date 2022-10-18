@@ -23,10 +23,16 @@ import com.app.igrow.databinding.FragmentDiagnoseBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT
+import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT_FR
 import com.app.igrow.utils.Constants.COL_CROP
+import com.app.igrow.utils.Constants.COL_CROP_FR
 import com.app.igrow.utils.Constants.COL_PART_AFFECTED
+import com.app.igrow.utils.Constants.COL_PART_AFFECTED_FR
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
+import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Constants.SHEET_DIAGNOSTIC
+import com.app.igrow.utils.Utils
+import com.app.igrow.utils.Utils.getLocalizeColumnName
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,26 +58,29 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
         activateListener()
         activateObserver()
+        var selectedLang = Utils.getSystemLanguage()
+        println("Selected Language$selectedLang")
     }
 
     private fun activateListener() {
         try {
 
             binding.llCrop.setOnClickListener {
-                diagnosticColumnName = COL_CROP
-                viewModel.getDiagnosticColumnData(COL_CROP, SHEET_DIAGNOSTIC)
+                // diagnosticColumnName = COL_CROP
+                diagnosticColumnName = getLocalizeColumnName(COL_CROP)
+                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.llPartAffected.setOnClickListener {
-                diagnosticColumnName = COL_PART_AFFECTED
-                viewModel.getDiagnosticColumnData(COL_PART_AFFECTED, SHEET_DIAGNOSTIC)
+                diagnosticColumnName = getLocalizeColumnName(COL_PART_AFFECTED)
+                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.llCasualAgent.setOnClickListener {
-                diagnosticColumnName = COL_CAUSAL_AGENT
-                viewModel.getDiagnosticColumnData(COL_CAUSAL_AGENT, SHEET_DIAGNOSTIC)
+                diagnosticColumnName = getLocalizeColumnName(COL_CAUSAL_AGENT)
+                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.llEnemyType.setOnClickListener {
-                diagnosticColumnName = COL_TYPE_OF_ENEMY
-                viewModel.getDiagnosticColumnData(COL_TYPE_OF_ENEMY, SHEET_DIAGNOSTIC)
+                diagnosticColumnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
+                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.btnSearch.setOnClickListener {
                 viewModel.searchDiagnostic(diagnosticFiltersHashMap)
@@ -112,7 +121,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                     bundleOf(ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
             } else {
-               // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
+                // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -120,22 +129,22 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     private fun setSelectedValueToView(value: String) {
         if (diagnosticColumnName.isNotEmpty()) {
             when (diagnosticColumnName) {
-                COL_CROP -> {
+                COL_CROP, COL_CROP_FR -> {
                     binding.tvCropFilterText.text = ""
                     binding.tvCropFilterText.text = value
                     return
                 }
-                COL_TYPE_OF_ENEMY -> {
+                COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
                     binding.tvTypeOfEnemyFilterText.text = ""
                     binding.tvTypeOfEnemyFilterText.text = value
                     return
                 }
-                COL_PART_AFFECTED -> {
+                COL_PART_AFFECTED, COL_PART_AFFECTED_FR -> {
                     binding.tvPartAffectedFilterText.text = ""
                     binding.tvPartAffectedFilterText.text = value
                     return
                 }
-                COL_CAUSAL_AGENT -> {
+                COL_CAUSAL_AGENT, COL_CAUSAL_AGENT_FR -> {
                     binding.tvCausalAgentFilterText.text = ""
                     binding.tvCausalAgentFilterText.text = value
                     return
@@ -211,9 +220,10 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     }
 
     private fun populateFiltersObject(value: String) {
-        val englishAndFrenchValues = value.split(":")
+        // val englishAndFrenchValues = value.split(":")
+        println("Value ====>$value")
         if (diagnosticColumnName.isNotEmpty()) {
-            diagnosticFiltersHashMap[diagnosticColumnName] = englishAndFrenchValues[0]
+            diagnosticFiltersHashMap[diagnosticColumnName] = value
         }
     }
 
@@ -235,6 +245,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     override fun onResume() {
         super.onResume()
         diagnosticFiltersHashMap.clear()
+        filteredList.clear()
     }
 
     companion object {

@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
+import com.app.igrow.base.BaseActivity
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.databinding.DealerDetailsFormBinding
 import com.app.igrow.utils.*
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DealersActivity : AppCompatActivity() {
+class DealersActivity : BaseActivity() {
 
     private lateinit var binding: DealerDetailsFormBinding
     private val viewModel: DealersViewModel by viewModels()
@@ -104,7 +104,7 @@ class DealersActivity : AppCompatActivity() {
     private fun showDeleteConfirmationDialog() {
         try {
             val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-            alertBuilder.setMessage(getString(R.string.delete_confim_message))
+            alertBuilder.setMessage(getString(R.string.delete_confirm_message))
             alertBuilder.setCancelable(true)
 
             alertBuilder.setPositiveButton(

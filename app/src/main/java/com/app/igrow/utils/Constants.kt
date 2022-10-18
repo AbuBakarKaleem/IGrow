@@ -99,4 +99,7 @@ object Constants {
     const val COL_MOBILE_FR = "mobile_fr"
     const val COL_DISTRIBUTORS = "distributors"
     const val COL_DISTRIBUTORS_FR = "distributors_fr"
+
+    // Session Manager Constant
+    const val currentLanguage = "language"
 }

@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.igrow.databinding.DialogListViewLayoutBinding
+import com.app.igrow.utils.Utils
 
-class DialogListAdapter(val onImageClicked: (item:String , position: Int) -> Unit) :
+class DialogListAdapter(val onImageClicked: (item: String, position: Int) -> Unit) :
     RecyclerView.Adapter<DialogListAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
@@ -18,10 +19,10 @@ class DialogListAdapter(val onImageClicked: (item:String , position: Int) -> Uni
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(model: String) {
             itemBinding.apply {
-                val uiValue = model.split(":")[0]
-                this.tvListLabel.text = uiValue?:""
+               // var uiValue=getLocalizeValue(model)
+                this.tvListLabel.text = model
                 this.tvListLabel.setOnClickListener {
-                    onImageClicked(uiValue ,position)
+                    onImageClicked(model, position)
                 }
             }
         }
@@ -52,5 +53,12 @@ class DialogListAdapter(val onImageClicked: (item:String , position: Int) -> Uni
     }
 
     override fun getItemCount() = differ.currentList.size
+    private fun getLocalizeValue(value:String):String{
+        return if(Utils.getSystemLanguage().split("-")[0] == "fr"){
+            value.split(":")[1]
+        }else{
+            value.split(":")[0]
+        }
+    }
 
 }

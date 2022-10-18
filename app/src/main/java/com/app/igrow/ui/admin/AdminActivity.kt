@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
+import com.app.igrow.base.BaseActivity
 import com.app.igrow.databinding.ActivityAdminBinding
 import com.app.igrow.helpers.FileConverter
 import com.app.igrow.ui.admin.dealers.DealersActivity
@@ -26,7 +26,7 @@ import java.io.InputStream
 
 
 @AndroidEntryPoint
-class AdminActivity : AppCompatActivity() {
+class AdminActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAdminBinding
     private val viewModel: AdminActivityViewModel by viewModels()
@@ -90,7 +90,7 @@ class AdminActivity : AppCompatActivity() {
         val mimeTypes = getFileMimeType()
         uploadFileIntent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
         uploadFileIntent =
-            Intent.createChooser(uploadFileIntent, getString(com.app.igrow.R.id.upload_file))
+            Intent.createChooser(uploadFileIntent, getString(R.id.upload_file))
         uploadFileLauncher.launch(uploadFileIntent)
 
     }
@@ -116,7 +116,7 @@ class AdminActivity : AppCompatActivity() {
     }
 
     private fun uploadFileData() {
-        var isListsCreated = fileConverter.createSheetsDataLists(workbook)
+        val isListsCreated = fileConverter.createSheetsDataLists(workbook)
         if (isListsCreated) {
             println(" All Lists are Created===>>")
             viewModel.addDiagnosticData(fileConverter.getDiagnosticMap())
@@ -143,38 +143,62 @@ class AdminActivity : AppCompatActivity() {
                 if (!dialogView.action_type.selectedItem.equals("Select")) {
                     when (dialogView.action_type.selectedItem.toString()) {
                         Constants.SHEET_DIAGNOSTIC -> {
-                            val intent=Intent(this, DiagnosticActivity::class.java)
+                            val intent = Intent(this, DiagnosticActivity::class.java)
                             if (actionType == AdminActionType.EDIT.toString()) {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.EDIT.toString()
+                                )
                             } else {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.DELETE.toString()
+                                )
                             }
                             startActivity(intent)
                         }
                         Constants.SHEET_DEALERS -> {
-                            val intent=Intent(this, DealersActivity::class.java)
+                            val intent = Intent(this, DealersActivity::class.java)
                             if (actionType == AdminActionType.EDIT.toString()) {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.EDIT.toString()
+                                )
                             } else {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.DELETE.toString()
+                                )
                             }
                             startActivity(intent)
                         }
                         Constants.SHEET_PRODUCTS -> {
-                            val intent=Intent(this, ProductsActivity::class.java)
+                            val intent = Intent(this, ProductsActivity::class.java)
                             if (actionType == AdminActionType.EDIT.toString()) {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.EDIT.toString()
+                                )
                             } else {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.DELETE.toString()
+                                )
                             }
                             startActivity(intent)
                         }
                         Constants.SHEET_DISTRIBUTORS -> {
-                            val intent=Intent(this, DistributorsActivity::class.java)
+                            val intent = Intent(this, DistributorsActivity::class.java)
                             if (actionType == AdminActionType.EDIT.toString()) {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.EDIT.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.EDIT.toString()
+                                )
                             } else {
-                                intent.putExtra(AdminActionType.TYPE.toString(),AdminActionType.DELETE.toString())
+                                intent.putExtra(
+                                    AdminActionType.TYPE.toString(),
+                                    AdminActionType.DELETE.toString()
+                                )
                             }
                             startActivity(intent)
                         }
