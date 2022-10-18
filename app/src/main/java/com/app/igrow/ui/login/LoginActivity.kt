@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.app.igrow.base.BaseActivity
 import com.app.igrow.databinding.ActivityLoginBinding
 import com.app.igrow.ui.admin.AdminActivity
 import com.app.igrow.ui.dashboard.DashBoardActivity
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val adminEmail: String = "test@test.com"
     private val adminPassword: String = "123"

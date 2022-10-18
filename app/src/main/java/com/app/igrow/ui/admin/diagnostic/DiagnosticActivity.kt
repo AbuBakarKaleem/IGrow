@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
+import com.app.igrow.base.BaseActivity
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.ActivityEditDiagnosticBinding
 import com.app.igrow.utils.*
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class DiagnosticActivity : AppCompatActivity() {
+class DiagnosticActivity : BaseActivity() {
     private lateinit var binding: ActivityEditDiagnosticBinding
     private val viewModel: DiagnosticActivityViewModel by viewModels()
     private var actionType = ActionType.EDIT.toString()
@@ -102,7 +102,7 @@ class DiagnosticActivity : AppCompatActivity() {
     private fun showDeleteConfirmationDialog() {
         try {
             val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-            alertBuilder.setMessage(getString(R.string.delete_confim_message))
+            alertBuilder.setMessage(getString(R.string.delete_confirm_message))
             alertBuilder.setCancelable(true)
 
             alertBuilder.setPositiveButton(

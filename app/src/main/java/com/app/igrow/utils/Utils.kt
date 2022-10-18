@@ -27,6 +27,12 @@ object Utils {
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  // .xls & .xlsx
         )
     }
+    fun getLocalizeColumnName(actualName: String): String {
+        if (Utils.getSystemLanguage().split("-")[0] == "fr") {
+            return actualName + "_fr"
+        }
+        return actualName
+    }
 
     fun parseHashMapToObject(map: HashMap<String,String>, cls: Class<*>?): Any? {
         val gsonBuilder = GsonBuilder()

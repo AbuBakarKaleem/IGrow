@@ -5,24 +5,24 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
+import com.app.igrow.base.BaseActivity
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.databinding.ActivityDistributorsBinding
 import com.app.igrow.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DistributorsActivity : AppCompatActivity() {
+class DistributorsActivity : BaseActivity() {
     private lateinit var binding: ActivityDistributorsBinding
     private val viewModel: DistributorViewModel by viewModels()
-    private var actionType = DistributorsActivity.ActionType.EDIT.toString()
+    private var actionType = ActionType.EDIT.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDistributorsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         actionType =
-            intent.getStringExtra(DistributorsActivity.ActionType.TYPE.toString()).toString()
+            intent.getStringExtra(ActionType.TYPE.toString()).toString()
         initViews()
     }
 
@@ -65,15 +65,15 @@ class DistributorsActivity : AppCompatActivity() {
 
     private fun activateListeners() {
         binding.btnUpdate.setOnClickListener {
-            if ((it as Button).text.toString() == DistributorsActivity.UpdateButtonText.Search.toString()) {
+            if ((it as Button).text.toString() == UpdateButtonText.Search.toString()) {
                 if (binding.etId.text?.isNotEmpty() == true) {
                     viewModel.getDistributor(binding.etId.text!!.trim().toString())
                 }
             }
-            if (it.text.equals(DistributorsActivity.UpdateButtonText.Update.toString())) {
+            if (it.text.equals(UpdateButtonText.Update.toString())) {
                 updateDistributor()
             }
-            if (it.text.equals(DistributorsActivity.UpdateButtonText.Delete.toString())) {
+            if (it.text.equals(UpdateButtonText.Delete.toString())) {
                 showDeleteConfirmationDialog()
             }
         }
@@ -103,7 +103,7 @@ class DistributorsActivity : AppCompatActivity() {
     private fun showDeleteConfirmationDialog() {
         try {
             val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-            alertBuilder.setMessage(getString(R.string.delete_confim_message))
+            alertBuilder.setMessage(getString(R.string.delete_confirm_message))
             alertBuilder.setCancelable(true)
 
             alertBuilder.setPositiveButton(
@@ -182,7 +182,7 @@ class DistributorsActivity : AppCompatActivity() {
     }
 
     private fun getValuesFromViews(): HashMap<String, Distributors> {
-        var dataMap = HashMap<String, Distributors>()
+        val dataMap = HashMap<String, Distributors>()
         try {
             val distributor = Distributors(
                 binding.etId.text.toString().trim(),

@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.app.igrow.R
+import com.app.igrow.base.BaseActivity
 import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.ProductDetailsFormBinding
 import com.app.igrow.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.product_details_form.*
 
 
 @AndroidEntryPoint
-class ProductsActivity : AppCompatActivity() {
+class ProductsActivity : BaseActivity() {
 
     private lateinit var binding: ProductDetailsFormBinding
     private val viewModel: ProductsViewModel by viewModels()
@@ -118,7 +117,7 @@ class ProductsActivity : AppCompatActivity() {
     private fun showDeleteConfirmationDialog() {
         try {
             val alertBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-            alertBuilder.setMessage(getString(R.string.delete_confim_message))
+            alertBuilder.setMessage(getString(R.string.delete_confirm_message))
             alertBuilder.setCancelable(true)
 
             alertBuilder.setPositiveButton(

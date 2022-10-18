@@ -6,11 +6,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.app.igrow.R
+import com.app.igrow.base.BaseActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashBoardActivity : AppCompatActivity() {
+class DashBoardActivity : BaseActivity() {
 
     lateinit var navController: NavController
     lateinit var bottomNavigationView: BottomNavigationView
