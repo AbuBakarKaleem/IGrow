@@ -12,21 +12,21 @@
         android:alpha="1"
         android:background="@drawable/bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardUseCompatPadding="true"
-        android:clipToPadding="true"
         android:layout_margin="10dp"
+        android:clipToPadding="true"
+        app:cardUseCompatPadding="true"
         app:contentPadding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/container"
@@ -47,10 +47,10 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:text="@string/sign_in"
+                android:textAllCaps="true"
                 android:textColor="@color/bright_green"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textAllCaps="true"
                 app:layout_constraintBottom_toTopOf="@+id/container"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,17 +60,17 @@
                 android:id="@+id/tl_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                app:startIconDrawable="@drawable/ic_email"
-                android:hint="@string/email_hint">
+                android:hint="@string/email_hint"
+                app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_email"
-                    android:textCursorDrawable="@color/bright_green"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textCursorDrawable="@color/bright_green" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,8 +80,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:startIconDrawable="@drawable/ic_lock"
-                android:hint="@string/password">
+                android:hint="@string/password"
+                app:startIconDrawable="@drawable/ic_lock">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
@@ -93,8 +93,8 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 style="@style/buttonStyle"
-                app:cornerRadius="30dp"
                 android:text="@string/sign_in"
+                app:cornerRadius="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

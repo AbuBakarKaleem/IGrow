@@ -100,7 +100,6 @@
     <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
     <string name="type">Type</string>
     <string name="condition">Condition</string>
-    <string name="symptoms_amp_impact"><![CDATA[Symptoms & Impact]]></string>
     <string name="leaves">Leaves</string>
     <string name="cultural_control">Cultural control</string>
     <string name="biological_control">Biological Control</string>
@@ -108,4 +107,7 @@
     <string name="outlined_button">Outlined button</string>
     <string name="help">Help</string>
     <string name="product">Product</string>
+    <string name="setting">Settings</string>
+    <string name="language_change_warning_message">Language change requires app to restart.</string>
+    <string name="language_change_continue_message">Do want to continue?</string>
 </resources>
