@@ -196,7 +196,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
     private fun setDialogListToAdapter(dataList: ArrayList<String>) {
         dialogListAdapter = DialogListAdapter { uiValue, position ->
-            val selectedValue = if (filteredList.isNotEmpty() && position <= filteredList.size) {
+            val selectedValue = if (filteredList.isNotEmpty() && position < filteredList.size) {
                 filteredList[position]
             } else {
                 dialogList[position]

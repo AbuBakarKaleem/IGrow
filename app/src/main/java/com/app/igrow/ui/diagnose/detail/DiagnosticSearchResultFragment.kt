@@ -38,6 +38,9 @@ class DiagnosticSearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(searchResultList.isNotEmpty())
+            searchResultList.clear()
+
         arguments?.let { arg ->
             val searchArgs = arg.get(DiagnoseFragment.ARG_RESULT_KEY) as SearchResult
             searchArgs.filterMap.forEach {

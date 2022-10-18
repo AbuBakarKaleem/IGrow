@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="bright_green">#24D12B</color>
+    <color name="dark_green">#208F24</color>
     <color name="home_diagnose_front_green">#00B050</color>
     <color name="home_diagnose_back_green">#C5E0B4</color>
     <color name="home_product_front_red">#FF0000</color>

@@ -88,6 +88,16 @@
     <string name="crop">Crop</string>
     <string name="casual_agent">Casual agent</string>
     <string name="clear_search">Clear Search</string>
-    <string name="identification">IDENTIFICATION</string>
+    <string name="identification">Identifcation</string>
     <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
+    <string name="type">Type</string>
+    <string name="condition">Condition</string>
+    <string name="symptoms_amp_impact"><![CDATA[Symptoms & Impact]]></string>
+    <string name="leaves">Leaves</string>
+    <string name="cultural_control">Cultural control</string>
+    <string name="biological_control">Biological Control</string>
+    <string name="chemical_control">Chemical Control</string>
+    <string name="outlined_button">Outlined button</string>
+    <string name="help">Help</string>
+    <string name="product">Product</string>
 </resources>

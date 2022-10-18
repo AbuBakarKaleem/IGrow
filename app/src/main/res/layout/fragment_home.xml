@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="1"
-        android:background="@drawable/crop"
+        android:background="@drawable/bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logo"
@@ -37,49 +37,12 @@
         app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintVertical_chainStyle="spread" />
 
-
-    <!--<androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_diagnose_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintGuide_percent="0.2"/>-->
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_vertical_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.34"
+        app:layout_constraintGuide_percent="0.35"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,30 +51,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45"
+        app:layout_constraintGuide_percent="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_horizontal_five"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.59"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_six"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -120,101 +66,166 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/diagnose_container_one"
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/home_diagnose_front_green"
-        android:drawableRight="@drawable/icon_search"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp"
-        android:text="@string/diagnose"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:iconGravity="end"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal" />
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/diagnose_container_two"
-        android:layout_width="wrap_content"
+        android:id="@+id/diagnose_btn"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:cardBackgroundColor="@color/home_diagnose_back_green"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="@color/bright_green"
         app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_two">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/homeScreenOptionTextStyle"
-            android:text="identity pest and diseases problem" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_start_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_diagnose_green"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_btn_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Diagnose"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_forward_icon"
+                app:layout_constraintStart_toEndOf="@id/iv_start_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_forward_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/product_container_one"
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/home_product_front_red"
-        android:drawableLeft="@drawable/ic_lens"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp"
-        android:text="@string/products"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:iconGravity="start"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_three" />
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/product_container_two"
-        android:layout_width="wrap_content"
+        android:id="@+id/product_btn"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:cardBackgroundColor="@color/home_diagnose_back_red"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="@color/home_product_front_red"
         app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical_two"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_four">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_three">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/homeScreenOptionTextStyle"
-            android:text="Find registered Crop Protection Products" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_product_start_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_product_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_product_btn_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_product_forward_icon"
+                app:layout_constraintStart_toEndOf="@id/iv_product_start_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_product_forward_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/shop_container_one"
-        style="@style/Widget.MaterialComponents.Button.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/home_shop_front_blue"
-        android:drawableRight="@drawable/ic_add_shopping"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp"
-        android:text="@string/shop"
-        android:textAllCaps="false"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:cornerRadius="10dp"
-        app:iconGravity="end"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_five" />
-
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/shop_container_two"
-        android:layout_width="wrap_content"
+        android:id="@+id/shop_btn"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="@color/home_shop_back_blue"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="@color/home_shop_front_blue"
         app:cardCornerRadius="10dp"
-        app:layout_constraintStart_toEndOf="@id/guideline_vertical_two"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_six">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_five">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/homeScreenOptionTextStyle"
-            android:text="Find a local dealership in your area" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_shop_start_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_add_shopping"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/iv_shop_btn_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shops"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_shop_forward_icon"
+                app:layout_constraintStart_toEndOf="@id/iv_shop_start_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_shop_forward_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
 

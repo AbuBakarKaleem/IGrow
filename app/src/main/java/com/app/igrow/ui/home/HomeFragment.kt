@@ -33,10 +33,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun activateListeners() {
-        binding.diagnoseContainerOne.setOnClickListener {
+        binding.diagnoseBtn.setOnClickListener {
             findNavController().navigate(R.id.homeToDiagnoseFragment)
         }
-        binding.productContainerOne.setOnClickListener {
+        binding.productBtn.setOnClickListener {
             findNavController().navigate(R.id.homeToProductsFragment)
         }
     }
