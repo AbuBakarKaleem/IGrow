@@ -1,8 +1,8 @@
 package com.app.igrow.ui.more
 
-import android.app.AlarmManager
-import android.app.PendingIntent
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,11 +14,8 @@ import android.widget.AdapterView.OnItemSelectedListener
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.databinding.FragmentMoreBinding
-import com.app.igrow.ui.login.LoginActivity
 import com.app.igrow.utils.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlin.system.exitProcess
 
 
 @AndroidEntryPoint
@@ -51,12 +48,10 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
                 if (position != 0) {
                     when (binding.spinnerLanguage.selectedItem) {
                         getString(R.string.language_english) -> {
-                            myPref.setLanguage("en")
-                            restartApp(requireContext())
+                            showWarningDialog("en")
                         }
                         getString(R.string.language_french) -> {
-                            myPref.setLanguage("fr")
-                            restartApp(requireContext())
+                            showWarningDialog("fr")
                         }
                     }
                 }
@@ -67,7 +62,8 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
             }
         }
     }
-    fun restartApp(context: Context) {
+
+    private fun restartApp(context: Context) {
         Handler().postDelayed({
             val packageManager = context.packageManager
             val intent = packageManager.getLaunchIntentForPackage(context.packageName)
@@ -76,6 +72,30 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
             context.startActivity(mainIntent)
             Runtime.getRuntime().exit(0)
         }, 1000)
+    }
+
+    fun showWarningDialog(selectedLanguage: String) {
+        val dialogClickListener =
+            DialogInterface.OnClickListener { dialog, buttonType ->
+                when (buttonType) {
+                    DialogInterface.BUTTON_POSITIVE -> {
+                        myPref.setLanguage(selectedLanguage)
+                        restartApp(requireContext())
+                    }
+
+                    DialogInterface.BUTTON_NEGATIVE -> {
+                        binding.spinnerLanguage.setSelection(0)
+                        dialog.dismiss()
+                    }
+                }
+            }
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle(getString(R.string.language_change_warning_message))
+        builder.setMessage(getString(R.string.language_change_continue_message))
+            .setPositiveButton(getString(R.string.yes), dialogClickListener)
+            .setNegativeButton(getString(R.string.no), dialogClickListener)
+            .show()
     }
 
 }
