@@ -1,5 +1,9 @@
 package com.app.igrow.data.model.sheets
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Dealers(
     var id: String = "",
     var dealer_name: String = "",
@@ -16,4 +20,4 @@ data class Dealers(
     var mobile_fr: String = "",
     var distributors: String = "",
     var distributors_fr: String = ""
-)
+) : Parcelable

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/screen_background"
-    tools:context=".ui.diagnose.DiagnoseFragment">
+    tools:context=".ui.products.ProductsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,39 +19,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_heading"
-            style="@style/headingStyle"
-            android:text="@string/identify_a_plant_health_problem"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
+            app:layout_constraintGuide_percent="0.01" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.23" />
+            app:layout_constraintGuide_begin="100dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_heading"
+            style="@style/headingStyle"
+            android:text="Find local Dealer"
+            android:textColor="@color/home_shop_front_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableTint="@color/bright_green"
             android:drawableStart="@drawable/icon_search"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
-            app:backgroundTint="@color/bright_green"
+            android:drawableTint="@color/home_shop_front_blue"
+            app:backgroundTint="@color/home_shop_front_blue"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline_two" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_corp"
+            android:id="@+id/cv_region"
             style="@style/filterCardViewStyle"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
@@ -60,13 +61,13 @@
             app:layout_constraintTop_toBottomOf="@+id/et_search">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_crop"
+                android:id="@+id/ll_region"
                 style="@style/filterLayoutStyle">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_cropFilterText"
+                    android:id="@+id/tv_regionFilterText"
                     style="@style/filterTextViewStyle"
-                    android:text="@string/crop" />
+                    android:text="@string/region" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -76,22 +77,22 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_part_affected"
+            android:id="@+id/cv_city_town"
             style="@style/filterCardViewStyle"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_corp">
+            app:layout_constraintTop_toBottomOf="@+id/cv_region">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_part_affected"
+                android:id="@+id/ll_city_town"
                 style="@style/filterLayoutStyle">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_partAffectedFilterText"
+                    android:id="@+id/tv_city_town_filter_text"
                     style="@style/filterTextViewStyle"
-                    android:text="@string/part_affected" />
+                    android:text="@string/city_town" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -101,47 +102,22 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_enemy_type"
+            android:id="@+id/cv_distributor"
             style="@style/filterCardViewStyle"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_part_affected">
+            app:layout_constraintTop_toBottomOf="@+id/cv_city_town">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_enemy_type"
+                android:id="@+id/ll_distributor"
                 style="@style/filterLayoutStyle">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_typeOfEnemyFilterText"
+                    android:id="@+id/tv_distributor_filter_text"
                     style="@style/filterTextViewStyle"
-                    android:text="@string/enemy_type" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    style="@style/filterImageViewStyle"
-                    android:src="@drawable/ic_arrow_down" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_casual_agent"
-            style="@style/filterCardViewStyle"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_enemy_type">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/ll_casual_agent"
-                style="@style/filterLayoutStyle">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_causalAgentFilterText"
-                    style="@style/filterTextViewStyle"
-                    android:text="@string/casual_agent" />
+                    android:text="@string/distributor" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     style="@style/filterImageViewStyle"
@@ -154,12 +130,12 @@
             android:id="@+id/btn_search"
             style="@style/buttonStyle"
             android:layout_marginTop="20dp"
+            android:backgroundTint="@color/home_shop_front_blue"
             android:text="@string/search"
             app:cornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_casual_agent" />
-
+            app:layout_constraintTop_toBottomOf="@+id/cv_distributor" />
 
         <Button
             android:id="@+id/btn_reset"
@@ -168,23 +144,26 @@
             android:layout_height="wrap_content"
             android:text="@string/clear_search"
             android:textAllCaps="false"
+            android:textColor="@color/home_shop_front_blue"
             app:cornerRadius="30dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_search" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_search"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ProgressBar
-            android:id="@+id/pb_diagnostic"
+            android:id="@+id/pb_distributors"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:indeterminateTint="@color/bright_green"
-            android:visibility="gone"
             android:elevation="2dp"
+            android:indeterminateTint="@color/home_shop_front_blue"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </ScrollView>

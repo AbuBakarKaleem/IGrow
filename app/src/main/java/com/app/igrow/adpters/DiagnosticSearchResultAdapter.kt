@@ -1,27 +1,28 @@
 package com.app.igrow.adpters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.app.igrow.data.model.detail.SearchResult
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.SearchResultListItemBinding
+import com.app.igrow.utils.Utils
 
 class DiagnosticSearchResultAdapter (val onImageClicked: (Item: Diagnostic) -> Unit):
     RecyclerView.Adapter<DiagnosticSearchResultAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
-        private val context: Context,
         private val itemBinding: SearchResultListItemBinding
     ) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(model: Diagnostic) {
             itemBinding.apply {
-                this.tvSearchResultName.text= model.crop
-                this.tvSearchResultDetail.text= model.causal_agent
+                var value = if(Utils.isLocaleFrench()) model.crop_fr  else model.crop
+                this.tvSearchResultName.text = value
+
+                value = if(Utils.isLocaleFrench()) model.causal_agent_fr  else model.causal_agent
+                this.tvSearchResultDetail.text = value
                 this.cvSearchResult.setOnClickListener {
                     onImageClicked(model)
                 }
@@ -46,7 +47,7 @@ class DiagnosticSearchResultAdapter (val onImageClicked: (Item: Diagnostic) -> U
             parent,
             false
         )
-        return ItemViewHolder(parent.context, binding)
+        return ItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

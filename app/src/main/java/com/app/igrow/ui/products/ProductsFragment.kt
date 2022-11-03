@@ -126,7 +126,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
         viewModel.filtersLiveData.observe(viewLifecycleOwner) { response ->
             if (response.isNotEmpty()) {
-                var searchResultData =
+                val searchResultData =
                     SearchResult(productFiltersHashMap, response)
                 val bundle = bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toProductsSearchResultFragment, bundle)
@@ -254,6 +254,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.tvCompositionFilterText.text = getString(R.string.causal_agent)
             binding.tvProductCategoryFilterText.text = getText(R.string.product_category)
             binding.tvDistributorFilterText.text = getText(R.string.distributor)
+            productFiltersHashMap.clear()
         }
     }
 

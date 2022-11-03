@@ -1,4 +1,4 @@
-package com.app.igrow.ui.diagnose.detail
+package com.app.igrow.ui.dealer.alldealers
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DiagnosticSearchResultViewModel @Inject constructor(
+class DealersListViewModel @Inject constructor(
     private val filterDataListOfGivenSheetUseCase: FilterDataListOfGivenSheetUseCase
 ) : ViewModel() {
 
@@ -31,7 +31,7 @@ class DiagnosticSearchResultViewModel @Inject constructor(
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
             filterDataListOfGivenSheetUseCase.invoke(
-                sheetName = Constants.SHEET_DIAGNOSTIC,
+                sheetName = Constants.SHEET_DEALERS,
                 filters = filtersMap
             ).collect {
                 _uiState.postValue(UnloadingState)

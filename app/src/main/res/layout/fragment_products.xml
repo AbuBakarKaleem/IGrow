@@ -19,13 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.05" />
+            app:layout_constraintGuide_percent="0.01" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_heading"
             style="@style/headingStyle"
             android:text="@string/identify_a_plant_health_problem"
-            android:textColor="@color/home_product_front_red"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.23" />
+            app:layout_constraintGuide_begin="100dp" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_search"
@@ -45,7 +45,8 @@
             android:drawableStart="@drawable/icon_search"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
-            app:backgroundTint="@color/bright_green"
+            android:drawableTint="@android:color/holo_red_dark"
+            app:backgroundTint="@android:color/holo_red_dark"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline_two" />
@@ -203,7 +204,7 @@
             android:id="@+id/btn_search"
             style="@style/buttonStyle"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/home_product_front_red"
+            android:backgroundTint="@android:color/holo_red_dark"
             android:text="@string/search"
             app:cornerRadius="30dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -217,7 +218,7 @@
             android:layout_height="wrap_content"
             android:text="@string/clear_search"
             android:textAllCaps="false"
-            android:textColor="@color/home_product_front_red"
+            android:textColor="@android:color/holo_red_dark"
             app:cornerRadius="30dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -230,7 +231,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:elevation="2dp"
-            android:indeterminateTint="@color/bright_green"
+            android:indeterminateTint="@color/home_product_front_red"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

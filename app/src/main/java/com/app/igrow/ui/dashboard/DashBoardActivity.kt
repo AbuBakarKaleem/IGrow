@@ -38,4 +38,10 @@ class DashBoardActivity : BaseActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        println("-=->> ${fragmentManager.fragments}")
+    }
+
 }

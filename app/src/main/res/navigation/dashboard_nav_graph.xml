@@ -11,11 +11,13 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/homeToDiagnoseFragment"
-            app:destination="@id/diagnoseFragment"
-            />
+            app:destination="@id/diagnoseFragment" />
         <action
             android:id="@+id/homeToProductsFragment"
             app:destination="@id/ProductsFragment" />
+        <action
+            android:id="@+id/homeToDealerFragment"
+            app:destination="@id/dealerFragment" />
     </fragment>
     <fragment
         android:id="@+id/diagnoseFragment"
@@ -68,9 +70,9 @@
     </fragment>
     <fragment
         android:id="@+id/productsSearchResultFragment"
-        android:name="com.app.igrow.ui.products.detail.ProductSearchResultFragment"
+        android:name="com.app.igrow.ui.products.detail.ProductListFragment"
         android:label="ProductsSearchResultFragment"
-        tools:layout="@layout/fragment_product_search_result" >
+        tools:layout="@layout/fragment_product_list" >
         <argument
             android:name="filters"
             app:argType="com.app.igrow.data.model.detail.SearchResult" />
@@ -81,24 +83,61 @@
 
     <fragment
         android:id="@+id/productSearchResultDetailFragment"
-        android:name="com.app.igrow.ui.products.detail.ProductsSearchDetailFragment"
+        android:name="com.app.igrow.ui.products.detail.ProductDetailFragment"
         android:label="ProductsSearchDetailFragment"
-        tools:layout="@layout/fragment_diagnostic_search_detail" >
+        tools:layout="@layout/fragment_product_detail" >
 
         <argument
             android:name="diagnostic_data"
             app:argType="com.app.igrow.data.model.sheets.Products" />
+
+        <action
+            android:id="@+id/toDealerFragment"
+            app:destination="@id/dealerFragment" />
+
     </fragment>
 
     <fragment
-        android:id="@+id/shopFragment"
-        android:name="com.app.igrow.ui.shop.ShopFragment"
-        android:label="ShopFragment"
-        tools:layout="@layout/fragment_shop" />
+        android:id="@+id/dealerFragment"
+        android:name="com.app.igrow.ui.dealer.DealersFragment"
+        android:label="DealerFragment"
+        tools:layout="@layout/fragment_dealer">
+
+        <action
+            android:id="@+id/toDealersListFragment"
+            app:destination="@id/dealersListFragment" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/moreFragment"
         android:name="com.app.igrow.ui.more.MoreFragment"
         android:label="MoreFragment"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_more" />
+
+    <fragment
+        android:id="@+id/dealersListFragment"
+        android:name="com.app.igrow.ui.dealer.alldealers.DealersListFragment"
+        android:label="DealersListFragment"
+        tools:layout="@layout/fragment_dealer_list" >
+
+        <argument
+            android:name="dealers_data"
+            app:argType="com.app.igrow.data.model.sheets.Dealers" />
+
+        <action
+            android:id="@+id/toDealersDetailsFragment"
+            app:destination="@id/dealersDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dealersDetailFragment"
+        android:name="com.app.igrow.ui.dealer.detail.DealerDetailFragment"
+        android:label="DealersDetailFragment"
+        tools:layout="@layout/fragment_dealer_detail" />
+
+
+
 
 </navigation>

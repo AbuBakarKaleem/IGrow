@@ -11,6 +11,7 @@
         style="@style/headingStyle"
         android:text="Search Result"
         android:gravity="start"
+        android:textColor="@color/home_shop_front_blue"
         android:layout_marginStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

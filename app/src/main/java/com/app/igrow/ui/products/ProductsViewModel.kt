@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
-import com.app.igrow.data.usecase.admin.diagnostic.FilterDiagnosticsListUsecase
+import com.app.igrow.data.usecase.admin.diagnostic.FilterDataListOfGivenSheetUseCase
 import com.app.igrow.data.usecase.user.general.GetColumnDataUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
+import com.app.igrow.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductsViewModel @Inject constructor(
     private val getColumnDataUsecase: GetColumnDataUsecase,
-    private val filterDiagnosticsListUsecase: FilterDiagnosticsListUsecase
+    private val filterDataListOfGivenSheetUseCase: FilterDataListOfGivenSheetUseCase
 ) : ViewModel() {
     private var _uiState = MutableLiveData<AdminUIStates>()
     var uiStateLiveData: LiveData<AdminUIStates> = _uiState
@@ -51,7 +52,10 @@ class ProductsViewModel @Inject constructor(
     fun searchProduct(filtersMap: HashMap<String, String>) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            filterDiagnosticsListUsecase.invoke(filters = filtersMap).collect {
+            filterDataListOfGivenSheetUseCase.invoke(
+                sheetName = Constants.SHEET_PRODUCTS,
+                filters = filtersMap
+            ).collect {
                 _uiState.postValue(UnloadingState)
 
                 when (it) {

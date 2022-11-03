@@ -39,6 +39,10 @@ class HomeFragment : Fragment() {
         binding.productBtn.setOnClickListener {
             findNavController().navigate(R.id.homeToProductsFragment)
         }
+        binding.shopBtn.setOnClickListener {
+            findNavController().navigate(R.id.homeToDealerFragment)
+        }
+
     }
 
 }
