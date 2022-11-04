@@ -2,6 +2,7 @@ package com.app.igrow.data.repository
 
 import android.util.Log
 import com.app.igrow.data.DataState
+import com.app.igrow.data.local.repository.LocalRepository
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
@@ -23,6 +24,7 @@ import javax.inject.Inject
  * This is an implementation of [Repository] to handle communication with [ApiService] server.
  */
 class RepositoryImpl @Inject constructor(
+    private val localRepository: LocalRepository,
     private val stringUtils: StringUtils
 ) : Repository {
 
@@ -464,7 +466,7 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-    override suspend fun getAllDataOfGivenSheet(sheetName: String): Flow<DataState<ArrayList<HashMap<String,String>>>> =
+    override suspend fun getAllDataOfGivenSheet(sheetName: String): Flow<DataState<ArrayList<HashMap<String, String>>>> =
         callbackFlow {
             try {
                 try {
@@ -472,14 +474,18 @@ class RepositoryImpl @Inject constructor(
                     databaseInstance.collection(sheetName)
                         .addSnapshotListener { snapshot, error ->
                             if (error != null) {
-                                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg())).isSuccess
+                                if (isActive) trySend(
+                                    DataState.error<ArrayList<HashMap<String, String>>>(
+                                        stringUtils.noRecordFoundMsg()
+                                    )
+                                ).isSuccess
                                 Log.e("Firebase Error ", error.localizedMessage)
                                 return@addSnapshotListener
                             }
 
                             if (snapshot != null && snapshot.documents.isEmpty().not()) {
 
-                                val dataList = ArrayList<HashMap<String,String>>()
+                                val dataList = ArrayList<HashMap<String, String>>()
 
                                 snapshot.documents.forEach { doc ->
                                     doc.data?.let { it ->
@@ -487,16 +493,34 @@ class RepositoryImpl @Inject constructor(
                                         dataList.add(map as HashMap<String, String>)
                                     }
                                 }
+                                when (sheetName) {
+                                    Constants.SHEET_DIAGNOSTIC -> {
+
+                                    }
+                                    Constants.SHEET_DEALERS -> {
+
+                                    }
+                                    Constants.SHEET_DISTRIBUTORS -> {
+
+                                    }
+                                    Constants.SHEET_PRODUCTS -> {
+
+                                    }
+                                }
                                 if (isActive) trySend(DataState.success(dataList))
                             } else {
-                                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg()))
+                                if (isActive) trySend(
+                                    DataState.error<ArrayList<HashMap<String, String>>>(
+                                        stringUtils.noRecordFoundMsg()
+                                    )
+                                )
                             }
                         }
                 } catch (e: Exception) {
-                    if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(e.message.toString()))
+                    if (isActive) trySend(DataState.error<ArrayList<HashMap<String, String>>>(e.message.toString()))
                 }
             } catch (e: Exception) {
-                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(e.message.toString()))
+                if (isActive) trySend(DataState.error<ArrayList<HashMap<String, String>>>(e.message.toString()))
             }
             awaitClose()
         }

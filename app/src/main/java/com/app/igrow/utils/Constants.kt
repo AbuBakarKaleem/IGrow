@@ -11,7 +11,7 @@ object Constants {
     const val DEFAULT_SOURCE_CURRENCY = "USD"
     const val REMOVE_SOURCE_STRING_FOR_USD = "USDUSD"
     const val WORKER_TAG = "FetchDataWorker"
-    const val DATABASE_NAME = "myDataBase.db"
+    const val DATABASE_NAME = "IGrowDatabase.db"
     const val TABLE_CURRENCY = "currencies"
     const val TABLE_CURRENCY_RATES = "currency_rates"
     const val SHEET_DIAGNOSTIC = "Diagnostic"
