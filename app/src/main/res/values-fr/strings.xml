@@ -4,7 +4,7 @@
     <string name="message_something_went_wrong_str">Quelque chose s\'est mal passé !</string>
     <string name="home">Maison</string>
     <string name="diagnose">Diagnostiquer</string>
-    <string name="products">Des produits</string>
+    <string name="products">Produits</string>
     <string name="shop">Boutique</string>
     <string name="more">Suite</string>
     <string name="upload_file">Upload File</string>
@@ -18,6 +18,7 @@
     <string name="select">Select Type</string>
     <string name="ok">Ok</string>
     <string name="cancel">cancel</string>
+    <string name="dealer_info">Dealer Info</string>
 
 
     <string name="crop_name">Nom de la culture</string>
@@ -101,7 +102,21 @@
     <string name="crop">Recadrer</string>
     <string name="casual_agent">Agent occasionnel</string>
     <string name="clear_search">Effacer la recherche</string>
-    <string name="identification">IDENTIFICATION</string>
+    <string name="identification">Identification</string>
     <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
+    <string name="note_notice">Lisez toujours létiquette avant dutiliser un pesticide</string>
+
+    <string name="results">Results</string>
+
+    <string name="type">Type</string>
+    <string name="condition">Condition</string>
+    <string name="symptoms_amp_impact"><![CDATA[Symptoms & Impact]]></string>
+    <string name="leaves">Leaves</string>
+    <string name="cultural_control">Cultural control</string>
+    <string name="biological_control">Biological Control</string>
+    <string name="chemical_control">Chemical Control</string>
+    <string name="outlined_button">Outlined button</string>
+    <string name="help">Help</string>
+    <string name="product">Product</string>
 
 </resources>

@@ -1,5 +1,6 @@
-package com.app.igrow.ui.diagnose.detail
+package com.app.igrow.ui.products.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,76 +11,75 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
-import com.app.igrow.adpters.DiagnosticSearchResultAdapter
+import com.app.igrow.adpters.ProductsSearchResultAdapter
 import com.app.igrow.data.model.detail.SearchResult
-import com.app.igrow.data.model.sheets.Dealers
-import com.app.igrow.data.model.sheets.Diagnostic
-import com.app.igrow.databinding.FragmentSearchResultBinding
+import com.app.igrow.data.model.sheets.Products
+import com.app.igrow.databinding.FragmentProductListBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Utils
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DiagnosticSearchResultFragment : Fragment() {
+class ProductListFragment : Fragment() {
 
-    private lateinit var fragmentSearchResultBinding: FragmentSearchResultBinding
-    private val binding get() = fragmentSearchResultBinding
-    private var dataListFromArgs = arrayListOf<Diagnostic>()
-    private val viewModel: DiagnosticSearchResultViewModel by viewModels()
-    private var filtersMap = HashMap<String,String>()
-    private lateinit var adapter: DiagnosticSearchResultAdapter
+    private lateinit var fragmentProductListBinding: FragmentProductListBinding
+    private val binding get() = fragmentProductListBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let { arg ->
-            val args = arg.get(DiagnoseFragment.ARG_RESULT_KEY) as SearchResult
-
-            filtersMap = args.filterMap
-
-            // getting dataList  from args
-            args.searchResultList.forEach {
-                dataListFromArgs.add(
-                    Utils.parseHashMapToObject(
-                        it,
-                        Diagnostic::class.java
-                    ) as Diagnostic
-                )
-            }
-        }
-    }
+    private var dataListFromArgs = arrayListOf<Products>()
+    private lateinit var adapter: ProductsSearchResultAdapter
+    private var filtersMap= HashMap<String,String>()
+    private val viewModel:ProductsListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        fragmentSearchResultBinding =
-            FragmentSearchResultBinding.inflate(inflater, container, false)
+        fragmentProductListBinding =
+            FragmentProductListBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        arguments?.let { arg ->
+            val args = arg.get(DiagnoseFragment.ARG_RESULT_KEY) as SearchResult
+            filtersMap = args.filterMap
+
+            args.searchResultList.forEach {
+                dataListFromArgs.add(
+                    Utils.parseHashMapToObject(
+                        it,
+                        Products::class.java
+                    ) as Products
+                )
+            }
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initialSetup()
         activateObserver()
-
+        initialSetup()
     }
 
     private fun initialSetup() {
-        filtersMap.map {
+
+        filtersMap.forEach{
             addChipToGroup(it)
         }
 
-        adapter = DiagnosticSearchResultAdapter {
+        adapter = ProductsSearchResultAdapter {
             val itemBundle = bundleOf(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to it)
-            findNavController().navigate(R.id.toDiagnoseSearchResultDetailFragment,itemBundle)
+            findNavController().navigate(R.id.toProductSearchResultDetailFragment, itemBundle)
         }
 
-        binding.rcSearchResult.adapter = adapter
+        binding.rcProductSearchResult.adapter = adapter
         updateDataInList(dataListFromArgs)
-
     }
 
     private fun addChipToGroup(filter: Map.Entry<String, String>) {
@@ -111,24 +111,21 @@ class DiagnosticSearchResultFragment : Fragment() {
                     dataListFromArgs.add(
                         Utils.parseHashMapToObject(
                             it,
-                            Diagnostic::class.java
-                        ) as Diagnostic
+                            Products::class.java
+                        ) as Products
                     )
                 }
                 updateDataInList(dataListFromArgs)
-                binding.rcSearchResult.scrollToPosition(0)
+                binding.rcProductSearchResult.scrollToPosition(0)
             }
         }
     }
 
-    private fun updateDataInList(myList: ArrayList<Diagnostic>) {
+
+    private fun updateDataInList(myList: ArrayList<Products>) {
         binding.tvCount.text = myList.size.toString() +" "+ getString(R.string.results)
         adapter.differ.submitList(myList)
         adapter.notifyDataSetChanged()
     }
 
-    override fun onStop() {
-        super.onStop()
-        viewModel.filtersLiveData.value =  arrayListOf()
-    }
 }

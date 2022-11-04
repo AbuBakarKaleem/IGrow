@@ -9,9 +9,9 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class IGrowApp : Application() {
+
     override fun onCreate() {
         super.onCreate()
-        appClass = this
         PreferenceManager.getInstance(this)
     }
 
@@ -19,10 +19,21 @@ class IGrowApp : Application() {
         super.attachBaseContext(LocaleHelper.onAttach(base))
     }
 
+    init {
+        instance = this
+    }
+
     companion object {
-        private var appClass: IGrowApp? = null
-        fun getInstance(): IGrowApp? {
-            return appClass
+        private var instance: IGrowApp? = null
+        fun getInstance(): IGrowApp {
+            synchronized(IGrowApp::class.java) {
+                if (instance == null)
+                    instance =
+                        IGrowApp()
+
+            }
+            return instance!!
         }
     }
+
 }

@@ -464,12 +464,12 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-    override suspend fun getAllDiagnosticData(): Flow<DataState<ArrayList<HashMap<String,String>>>> =
+    override suspend fun getAllDataOfGivenSheet(sheetName: String): Flow<DataState<ArrayList<HashMap<String,String>>>> =
         callbackFlow {
             try {
                 try {
                     val databaseInstance = FirebaseFirestore.getInstance()
-                    databaseInstance.collection(Constants.SHEET_DIAGNOSTIC)
+                    databaseInstance.collection(sheetName)
                         .addSnapshotListener { snapshot, error ->
                             if (error != null) {
                                 if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg())).isSuccess

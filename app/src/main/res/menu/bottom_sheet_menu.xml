@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/diagnoseFragment"
-        android:icon="@drawable/ic_lens"
+        android:icon="@drawable/ic_diagnose_green"
         android:orderInCategory="2"
         android:title="@string/diagnose"
         app:showAsAction="always" />
@@ -24,7 +24,7 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/shopFragment"
+        android:id="@+id/dealerFragment"
         android:icon="@drawable/ic_add_shopping"
         android:orderInCategory="4"
         android:title="@string/shop"

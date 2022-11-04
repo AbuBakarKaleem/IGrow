@@ -1,4 +1,4 @@
-package com.app.igrow.ui.diagnose
+package com.app.igrow.ui.dealer
 
 import android.app.Dialog
 import android.graphics.Color
@@ -19,39 +19,32 @@ import com.app.igrow.adpters.DialogListAdapter
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.detail.SearchResult
 import com.app.igrow.databinding.DialogeLayoutBinding
-import com.app.igrow.databinding.FragmentDiagnoseBinding
+import com.app.igrow.databinding.FragmentDealerBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
-import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT
-import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT_FR
-import com.app.igrow.utils.Constants.COL_CROP
-import com.app.igrow.utils.Constants.COL_CROP_FR
-import com.app.igrow.utils.Constants.COL_PART_AFFECTED
-import com.app.igrow.utils.Constants.COL_PART_AFFECTED_FR
-import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
-import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
-import com.app.igrow.utils.Constants.SHEET_DIAGNOSTIC
+import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils
-import com.app.igrow.utils.Utils.getLocalizeColumnName
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
+class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
 
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDiagnoseBinding
-        get() = FragmentDiagnoseBinding::inflate
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDealerBinding
+        get() = FragmentDealerBinding::inflate
 
-    private val viewModel: DiagnosticFragmentViewModel by viewModels()
-    private lateinit var listDialog: Dialog
-    private lateinit var dialogeLayoutBinding: DialogeLayoutBinding
-    private lateinit var dialogListAdapter: DialogListAdapter
-    private var diagnosticColumnName = ""
+    private val viewModel: DealersViewModel by viewModels()
+
+    private var distributorsFiltersHashMap = HashMap<String, String>()
+    private var distributorColumnName = ""
     private var dialogList = arrayListOf<String>()
     private var filteredList = arrayListOf<String>()
-    private var diagnosticFiltersHashMap = HashMap<String, String>()
+    private lateinit var dialogListAdapter: DialogListAdapter
+    private lateinit var listDialog: Dialog
+    private lateinit var dialogeLayoutBinding: DialogeLayoutBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,26 +56,23 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     private fun activateListener() {
         try {
 
-            binding.llCrop.setOnClickListener {
-                diagnosticColumnName = getLocalizeColumnName(COL_CROP)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+            binding.llRegion.setOnClickListener {
+                distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_REGION)
+                viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DEALERS)
             }
-            binding.llPartAffected.setOnClickListener {
-                diagnosticColumnName = getLocalizeColumnName(COL_PART_AFFECTED)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+            binding.llCityTown.setOnClickListener {
+                distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_CITY_TOWN)
+                viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DEALERS)
             }
-            binding.llCasualAgent.setOnClickListener {
-                diagnosticColumnName = getLocalizeColumnName(COL_CAUSAL_AGENT)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+            binding.llDistributor.setOnClickListener {
+                distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME)
+                    viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DISTRIBUTORS)
             }
-            binding.llEnemyType.setOnClickListener {
-                diagnosticColumnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
-            }
-            binding.btnSearch.setOnClickListener {
-                viewModel.searchDiagnostic(diagnosticFiltersHashMap)
 
+            binding.btnSearch.setOnClickListener {
+                viewModel.searchDistributor(distributorsFiltersHashMap)
             }
+
             binding.btnReset.setOnClickListener {
                 resetAllFilters()
             }
@@ -90,20 +80,20 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
             e.printStackTrace()
         }
     }
-
+    
     private fun activateObserver() {
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is LoadingState -> {
-                    binding.pbDiagnostic.visible()
+                    binding.pbDistributors.visible()
                 }
                 is UnloadingState -> {
-                    binding.pbDiagnostic.gone()
+                    binding.pbDistributors.gone()
 
                 }
             }
         }
-        viewModel.getDiagnosticColumnDataLiveData.observe(viewLifecycleOwner) {
+        viewModel.getDistributorColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
                 dialogList = it
                 showListDialog(it)
@@ -112,40 +102,11 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
         viewModel.filtersLiveData.observe(viewLifecycleOwner) { response ->
             if (response.isNotEmpty()) {
-                var searchResultData =
-                    SearchResult(diagnosticFiltersHashMap, response)
+                val searchResultData =
+                    SearchResult(distributorsFiltersHashMap, response)
                 val bundle =
-                    bundleOf(ARG_RESULT_KEY to searchResultData)
-                findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
-            } else {
-                // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-    private fun setSelectedValueToView(value: String) {
-        if (diagnosticColumnName.isNotEmpty()) {
-            when (diagnosticColumnName) {
-                COL_CROP, COL_CROP_FR -> {
-                    binding.tvCropFilterText.text = ""
-                    binding.tvCropFilterText.text = value
-                    return
-                }
-                COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
-                    binding.tvTypeOfEnemyFilterText.text = ""
-                    binding.tvTypeOfEnemyFilterText.text = value
-                    return
-                }
-                COL_PART_AFFECTED, COL_PART_AFFECTED_FR -> {
-                    binding.tvPartAffectedFilterText.text = ""
-                    binding.tvPartAffectedFilterText.text = value
-                    return
-                }
-                COL_CAUSAL_AGENT, COL_CAUSAL_AGENT_FR -> {
-                    binding.tvCausalAgentFilterText.text = ""
-                    binding.tvCausalAgentFilterText.text = value
-                    return
-                }
+                    bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
+                findNavController().navigate(R.id.toDealersListFragment, bundle)
             }
         }
     }
@@ -178,6 +139,15 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         }
     }
 
+    private fun resetAllFilters() {
+        if (distributorsFiltersHashMap.isNotEmpty()) {
+            binding.tvRegionFilterText.text = getString(R.string.region)
+            binding.tvCityTownFilterText.text = getString(R.string.city_town)
+            binding.tvDistributorFilterText.text = getString(R.string.distributor)
+            distributorsFiltersHashMap.clear()
+        }
+    }
+
     private fun searchList(searchValue: String): ArrayList<String> {
         try {
             filteredList.clear()
@@ -195,7 +165,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
             }
             return filteredList
         } catch (ex: Exception) {
-            Log.e(TAG, ex.stackTraceToString())
+            Log.e(DiagnoseFragment.TAG, ex.stackTraceToString())
         }
         return arrayListOf()
     }
@@ -211,43 +181,48 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
             setSelectedValueToView(uiValue)
             populateFiltersObject(selectedValue)
         }
-
         dialogListAdapter.differ.submitList(dataList)
         dialogeLayoutBinding.rcListDialog.adapter = dialogListAdapter
     }
 
     private fun populateFiltersObject(value: String) {
-        if (diagnosticColumnName.isNotEmpty()) {
-            diagnosticFiltersHashMap[diagnosticColumnName] = value
+        if (distributorColumnName.isNotEmpty()) {
+            distributorsFiltersHashMap[distributorColumnName] = value
         }
     }
 
-    private fun resetAllFilters() {
-        if (diagnosticFiltersHashMap.isNotEmpty()) {
-            binding.tvCropFilterText.text = getString(R.string.crop)
-            binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)
-            binding.tvPartAffectedFilterText.text = getString(R.string.part_affected)
-            binding.tvCausalAgentFilterText.text = getString(R.string.causal_agent)
-            diagnosticFiltersHashMap.clear()
+    private fun setSelectedValueToView(value: String) {
+        if (distributorColumnName.isNotEmpty()) {
+            when (distributorColumnName) {
+                Constants.COL_REGION, Constants.COL_REGION_FR -> {
+                    binding.tvRegionFilterText.text = ""
+                    binding.tvRegionFilterText.text = value
+                    return
+                }
+                Constants.COL_CITY_TOWN, Constants.COL_CITY_TOWN_FR -> {
+                    binding.tvCityTownFilterText.text = ""
+                    binding.tvCityTownFilterText.text = value
+                    return
+                }
+                Constants.COL_DISTRIBUTORS_NAME, Constants.COL_DISTRIBUTORS_NAME_FR -> {
+                    binding.tvDistributorFilterText.text = ""
+                    binding.tvDistributorFilterText.text = value
+                    return
+                }
+            }
         }
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.filtersLiveData.value = arrayListOf()
-        viewModel.getDiagnosticColumnDataLiveData.value = arrayListOf()
+        viewModel.getDistributorColumnDataLiveData.value = arrayListOf()
     }
 
     override fun onResume() {
         super.onResume()
-        diagnosticFiltersHashMap.clear()
+        distributorsFiltersHashMap.clear()
         filteredList.clear()
-    }
-
-    companion object {
-        const val TAG = " DiagnoseFragment"
-        const val ARG_RESULT_KEY = "filters"
-        const val ARG_SEARCH_RESULT_ITEM_KEY = "diagnostic_data"
     }
 
 }
