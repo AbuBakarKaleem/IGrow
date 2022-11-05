@@ -1,5 +1,6 @@
 package com.app.igrow.data.local.repository
 
+import android.util.Log
 import com.app.igrow.data.DataState
 import com.app.igrow.data.local.abstraction.DistributorsRepo
 import com.app.igrow.data.local.dao.DistributorsDao
@@ -14,16 +15,24 @@ class DistributorsRepoImpl @Inject constructor(
     private val distributorsDao: DistributorsDao,
     private val stringUtils: StringUtils
 ) : DistributorsRepo {
-    override suspend fun getAllDistributors(): Flow<DataState<ArrayList<DistributorsEntityName>>> = callbackFlow{
-        var result = distributorsDao.getAllDistributors()
-        if (result.isEmpty()) {
-            trySend(DataState.error(stringUtils.noRecordFoundMsg()))
+    override suspend fun getAllDistributors():ArrayList<DistributorsEntityName> {
+        val result = distributorsDao.getAllDistributors()
+        return if (result.isEmpty()) {
+            arrayListOf()
         } else {
-            trySend(DataState.success(result as ArrayList<DistributorsEntityName>))
+            (result as ArrayList<DistributorsEntityName>)
         }
     }
 
     override suspend fun insertDistributors(dataList: List<DistributorsEntityName>) {
-        TODO("Not yet implemented")
+        try {
+            distributorsDao.insertDistributors(dataList)
+        } catch (e: Exception) {
+            Log.e(DiagnosticRepoImpl.TAG, e.printStackTrace().toString())
+        }    }
+
+    companion object {
+        const val TAG = "DistributorsRepoImpl"
     }
+
 }

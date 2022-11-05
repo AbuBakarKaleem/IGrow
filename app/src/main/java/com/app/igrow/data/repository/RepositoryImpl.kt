@@ -1,6 +1,7 @@
 package com.app.igrow.data.repository
 
 import android.util.Log
+import com.app.igrow.IGrowApp
 import com.app.igrow.data.DataState
 import com.app.igrow.data.local.repository.LocalRepository
 import com.app.igrow.data.model.sheets.Dealers
@@ -8,16 +9,14 @@ import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.data.remote.ApiService
-import com.app.igrow.utils.Constants
-import com.app.igrow.utils.StringUtils
-import com.app.igrow.utils.Utils
+import com.app.igrow.utils.*
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.isActive
 import javax.inject.Inject
 
 /**
@@ -469,7 +468,10 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getAllDataOfGivenSheet(sheetName: String): Flow<DataState<ArrayList<HashMap<String, String>>>> =
         callbackFlow {
             try {
-                try {
+                if (Utils.isInternetAvailable(IGrowApp.getInstance()).not()) {
+                    val localDbData = getDataFromLocal(sheetName)
+                    if (isActive) trySend(DataState.success(localDbData))
+                } else {
                     val databaseInstance = FirebaseFirestore.getInstance()
                     databaseInstance.collection(sheetName)
                         .addSnapshotListener { snapshot, error ->
@@ -493,21 +495,15 @@ class RepositoryImpl @Inject constructor(
                                         dataList.add(map as HashMap<String, String>)
                                     }
                                 }
-                                when (sheetName) {
-                                    Constants.SHEET_DIAGNOSTIC -> {
 
-                                    }
-                                    Constants.SHEET_DEALERS -> {
-
-                                    }
-                                    Constants.SHEET_DISTRIBUTORS -> {
-
-                                    }
-                                    Constants.SHEET_PRODUCTS -> {
-
-                                    }
+                                // inserting data into local DB for given sheetName
+                                // getting data form local DB for given sheetName
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    insertDataIntoDb(sheetName, dataList)
+                                    val localDbData = getDataFromLocal(sheetName)
+                                    if (isActive) trySend(DataState.success(localDbData))
                                 }
-                                if (isActive) trySend(DataState.success(dataList))
+
                             } else {
                                 if (isActive) trySend(
                                     DataState.error<ArrayList<HashMap<String, String>>>(
@@ -516,12 +512,67 @@ class RepositoryImpl @Inject constructor(
                                 )
                             }
                         }
-                } catch (e: Exception) {
-                    if (isActive) trySend(DataState.error<ArrayList<HashMap<String, String>>>(e.message.toString()))
                 }
             } catch (e: Exception) {
                 if (isActive) trySend(DataState.error<ArrayList<HashMap<String, String>>>(e.message.toString()))
             }
             awaitClose()
         }
+
+
+    private fun insertDataIntoDb(
+        sheetName: String,
+        dataList: ArrayList<HashMap<String, String>>,
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+
+            when (sheetName) {
+                Constants.SHEET_DIAGNOSTIC -> {
+                    val dbConvertedDBEntity = dataList.toDiagnosticEntityModel()
+                    localRepository.getDiagnosticRepoImpl().insertDiagnostic(dbConvertedDBEntity)
+                }
+                Constants.SHEET_DEALERS -> {
+                    val dbConvertedDBEntity = dataList.toDealerEntityModel()
+                    localRepository.getDealersRepoImpl().insertDealers(dbConvertedDBEntity)
+                }
+                Constants.SHEET_DISTRIBUTORS -> {
+                    val dbConvertedDBEntity = dataList.toDealerEntityModel()
+                    localRepository.getDealersRepoImpl().insertDealers(dbConvertedDBEntity)
+                }
+                Constants.SHEET_PRODUCTS -> {
+
+                }
+            }
+
+        }
+    }
+
+    private suspend fun getDataFromLocal(
+        sheetName: String,
+    ): ArrayList<HashMap<String, String>> {
+        var result: ArrayList<HashMap<String, String>> = ArrayList()
+
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            when (sheetName) {
+                Constants.SHEET_DIAGNOSTIC -> {
+                    result = localRepository.getDiagnosticRepoImpl().getAllDiagnostic()
+                        .toDiagnosticUIModel()
+                }
+                Constants.SHEET_DEALERS -> {
+                    result = localRepository.getDealersRepoImpl().getAllDealers().toDealerUIModel()
+                }
+                Constants.SHEET_DISTRIBUTORS -> {
+                    result = localRepository.getDistributorsImpl().getAllDistributors()
+                        .toDistributorUIModel()
+                }
+                Constants.SHEET_PRODUCTS -> {
+
+                }
+            }
+        }
+        return result
+    }
+
 }
+
+

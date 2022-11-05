@@ -1,31 +1,37 @@
 package com.app.igrow.data.local.repository
 
-import com.app.igrow.data.DataState
+import android.util.Log
 import com.app.igrow.data.local.abstraction.DealersRepo
 import com.app.igrow.data.local.dao.DealersDao
 import com.app.igrow.data.local.models.entities.DealersEntityName
 import com.app.igrow.utils.StringUtils
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 class DealersRepoImpl @Inject constructor(
     private val dealersDao: DealersDao,
     private val stringUtils: StringUtils
 ) : DealersRepo {
-    override suspend fun getAllDealers(): Flow<DataState<ArrayList<DealersEntityName>>> =
-        callbackFlow {
-            var result = dealersDao.getAllDealers()
-            if (result.isEmpty()) {
-                trySend(DataState.error(stringUtils.noRecordFoundMsg()))
-            } else {
-                result
-                trySend(DataState.success(result as ArrayList<DealersEntityName>))
-            }
+
+    override suspend fun getAllDealers(): ArrayList<DealersEntityName> {
+        val result = dealersDao.getAllDealers()
+        return if (result.isEmpty()) {
+            arrayListOf()
+        } else {
+            (result as ArrayList<DealersEntityName>)
         }
+    }
+
 
     override suspend fun insertDealers(dataList: List<DealersEntityName>) {
-        TODO("Not yet implemented")
+        try {
+            dealersDao.insertDealers(dataList)
+        } catch (e: Exception) {
+            Log.e(TAG, e.printStackTrace().toString())
+        }
+    }
+
+    companion object {
+        const val TAG = "DealersRepoImpl"
     }
 
 }

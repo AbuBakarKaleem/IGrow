@@ -1,4 +1,4 @@
-package com.app.igrow.ui
+package com.app.igrow.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent

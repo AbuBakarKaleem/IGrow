@@ -1,29 +1,35 @@
 package com.app.igrow.data.local.repository
 
-import com.app.igrow.data.DataState
+import android.util.Log
 import com.app.igrow.data.local.abstraction.DiagnosticRepo
 import com.app.igrow.data.local.dao.DiagnosticDao
 import com.app.igrow.data.local.models.entities.DiagnosticEntityName
-import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.utils.StringUtils
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
 
 class DiagnosticRepoImpl @Inject constructor(
     private val diagnosticDao: DiagnosticDao,
-    private val stringUtils: StringUtils
+    private val stringUtils: StringUtils,
 ) : DiagnosticRepo {
-    override suspend fun getAllDiagnostic(): Flow<DataState<ArrayList<DiagnosticEntityName>>> = callbackFlow {
-        var result = diagnosticDao.getAllDiagnostics()
-        if (result.isEmpty()) {
-            trySend(DataState.error(stringUtils.noRecordFoundMsg()))
+    override suspend fun getAllDiagnostic(): ArrayList<DiagnosticEntityName> {
+        val result = diagnosticDao.getAllDiagnostics()
+        return if (result.isEmpty()) {
+            arrayListOf()
         } else {
-            trySend(DataState.success(result as ArrayList<DiagnosticEntityName>))
+            (result as ArrayList<DiagnosticEntityName>)
         }
     }
 
-    override suspend fun insertDiagnostic(dataList: List<DiagnosticEntityName>)  {
-        TODO("Not yet implemented")
+    override suspend fun insertDiagnostic(dataList: List<DiagnosticEntityName>) {
+        try {
+            diagnosticDao.insertDiagnostic(dataList)
+        } catch (e: Exception) {
+            Log.e(TAG, e.printStackTrace().toString())
+        }
+
+    }
+
+    companion object {
+        const val TAG = "DiagnosticRepoImpl"
     }
 }

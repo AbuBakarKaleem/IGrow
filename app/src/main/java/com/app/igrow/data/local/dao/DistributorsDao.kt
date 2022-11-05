@@ -12,7 +12,7 @@ import com.app.igrow.utils.Constants
 @Dao
 abstract class DistributorsDao {
     @Query("Select *FROM ${Constants.SHEET_DISTRIBUTORS}")
-    abstract fun getAllDistributors(): List<Distributors>
+    abstract fun getAllDistributors(): List<DistributorsEntityName>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertDistributors(dataList: List<DistributorsEntityName>)

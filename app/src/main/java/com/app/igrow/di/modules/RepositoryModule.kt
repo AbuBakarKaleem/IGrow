@@ -1,7 +1,7 @@
 package com.app.igrow.di.modules
 
 import android.app.Application
-import com.app.igrow.data.remote.ApiService
+import com.app.igrow.data.local.repository.LocalRepository
 import com.app.igrow.data.repository.Repository
 import com.app.igrow.data.repository.RepositoryImpl
 import com.app.igrow.utils.StringUtils
@@ -26,7 +26,7 @@ class RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRepository(stringUtils: StringUtils, apiService: ApiService): Repository {
-        return RepositoryImpl(stringUtils)
+    fun provideRepository(stringUtils: StringUtils, localRepository: LocalRepository): Repository {
+        return RepositoryImpl(localRepository,stringUtils)
     }
 }
