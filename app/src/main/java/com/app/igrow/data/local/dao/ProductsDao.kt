@@ -11,8 +11,11 @@ import com.app.igrow.utils.Constants
 @Dao
 abstract class ProductsDao {
     @Query("Select *FROM ${Constants.SHEET_PRODUCTS}")
-    abstract fun getAllProducts(): List<Products>
+    abstract fun getAllProducts(): List<ProductsEntityName>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertProducts(dataList: List<ProductsEntityName>)
+
+    @Query("SELECT COUNT(*) FROM ${Constants.SHEET_PRODUCTS}")
+    abstract fun getProductsCount(): Int
 }

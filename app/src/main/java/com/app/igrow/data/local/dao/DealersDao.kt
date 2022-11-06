@@ -14,4 +14,7 @@ abstract class DealersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertDealers(dataList: List<DealersEntityName>)
+
+    @Query("SELECT COUNT(*) FROM ${Constants.SHEET_DEALERS}")
+    abstract fun getDealerCount(): Int
 }

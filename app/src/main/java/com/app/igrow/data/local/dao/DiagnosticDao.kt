@@ -15,4 +15,7 @@ abstract class DiagnosticDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertDiagnostic(dataList: List<DiagnosticEntityName>)
+
+    @Query("SELECT COUNT(*) FROM ${Constants.SHEET_DIAGNOSTIC}")
+    abstract fun getDiagnosticCount(): Int
 }

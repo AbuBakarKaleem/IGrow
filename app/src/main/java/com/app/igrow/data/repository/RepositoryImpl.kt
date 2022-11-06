@@ -536,11 +536,12 @@ class RepositoryImpl @Inject constructor(
                     localRepository.getDealersRepoImpl().insertDealers(dbConvertedDBEntity)
                 }
                 Constants.SHEET_DISTRIBUTORS -> {
-                    val dbConvertedDBEntity = dataList.toDealerEntityModel()
-                    localRepository.getDealersRepoImpl().insertDealers(dbConvertedDBEntity)
+                    val dbConvertedDBEntity = dataList.toDistributorEntityModel()
+                    localRepository.getDistributorsImpl().insertDistributors(dbConvertedDBEntity)
                 }
                 Constants.SHEET_PRODUCTS -> {
-
+                    val dbConvertedDBEntity = dataList.toProductsEntityModel()
+                    localRepository.getProductsImpl().insertProducts(dbConvertedDBEntity)
                 }
             }
 
@@ -559,14 +560,15 @@ class RepositoryImpl @Inject constructor(
                         .toDiagnosticUIModel()
                 }
                 Constants.SHEET_DEALERS -> {
-                    result = localRepository.getDealersRepoImpl().getAllDealers().toDealerUIModel()
+                    result = localRepository.getDealersRepoImpl().getAllDealers()
+                        .toDealerUIModel()
                 }
                 Constants.SHEET_DISTRIBUTORS -> {
                     result = localRepository.getDistributorsImpl().getAllDistributors()
                         .toDistributorUIModel()
                 }
                 Constants.SHEET_PRODUCTS -> {
-
+                    result = localRepository.getProductsImpl().getAllProducts().toProductsUIModel()
                 }
             }
         }

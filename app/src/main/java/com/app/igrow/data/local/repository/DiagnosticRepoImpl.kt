@@ -29,6 +29,10 @@ class DiagnosticRepoImpl @Inject constructor(
 
     }
 
+    override suspend fun getDiagnosticCount(): Int {
+        return diagnosticDao.getDiagnosticCount()
+    }
+
     companion object {
         const val TAG = "DiagnosticRepoImpl"
     }

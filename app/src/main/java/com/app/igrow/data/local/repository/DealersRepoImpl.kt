@@ -30,6 +30,10 @@ class DealersRepoImpl @Inject constructor(
         }
     }
 
+    override suspend fun getDealersCount(): Int {
+        return dealersDao.getDealerCount()
+    }
+
     companion object {
         const val TAG = "DealersRepoImpl"
     }
