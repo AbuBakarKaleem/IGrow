@@ -9,9 +9,7 @@ import com.app.igrow.utils.Constants
 data class DiagnosticEntityName(
     @PrimaryKey
     var id: String = "",
-    @ColumnInfo(name = Constants.COL_CROP)
     var crop: String = "",
-    @ColumnInfo(name = Constants.COL_CROP_FR)
     var crop_fr: String = "",
     var type_of_enemy: String = "",
     var type_of_enemy_fr: String = "",
