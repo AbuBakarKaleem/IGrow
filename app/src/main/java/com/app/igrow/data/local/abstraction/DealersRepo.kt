@@ -6,4 +6,5 @@ interface DealersRepo {
     suspend fun getAllDealers(): ArrayList<DealersEntityName>
     suspend fun insertDealers(dataList: List<DealersEntityName>)
     suspend fun getDealersCount():Int
+    suspend fun getDealersColumnData(columnName: String):List<String>
 }

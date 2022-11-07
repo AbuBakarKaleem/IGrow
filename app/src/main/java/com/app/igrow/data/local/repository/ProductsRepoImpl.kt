@@ -33,4 +33,8 @@ class ProductsRepoImpl @Inject constructor(
     override suspend fun getProductsCount(): Int {
         return productsDao.getProductsCount()
     }
+
+    override suspend fun getProductsColumnData(columnName: String): List<String> {
+        return productsDao.getProductsColumnData(columnName = columnName)
+    }
 }

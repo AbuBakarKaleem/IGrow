@@ -401,7 +401,15 @@ class RepositoryImpl @Inject constructor(
     ): Flow<DataState<ArrayList<String>>> =
         callbackFlow {
             try {
-                try {
+                if (Utils.isInternetAvailable(IGrowApp.getInstance()).not()) {
+                    val dataList =
+                        getColumnDataFromLocal(sheetName = sheetName, columnName = columnName)
+                    if (dataList.isEmpty().not()) {
+                        if (isActive) trySend(DataState.success(dataList))
+                    } else {
+                        if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg()))
+                    }
+                } else {
                     val databaseInstance = FirebaseFirestore.getInstance()
                     databaseInstance.collection(sheetName)
                         .addSnapshotListener { snapshot, error ->
@@ -422,8 +430,6 @@ class RepositoryImpl @Inject constructor(
                                 if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg()))
                             }
                         }
-                } catch (e: Exception) {
-                    if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
                 }
             } catch (e: Exception) {
                 if (isActive) trySend(DataState.error<ArrayList<String>>(e.message.toString()))
@@ -549,7 +555,7 @@ class RepositoryImpl @Inject constructor(
     }
 
     private suspend fun getDataFromLocal(
-        sheetName: String,
+        sheetName: String
     ): ArrayList<HashMap<String, String>> {
         var result: ArrayList<HashMap<String, String>> = ArrayList()
 
@@ -573,6 +579,37 @@ class RepositoryImpl @Inject constructor(
             }
         }
         return result
+    }
+
+    private suspend fun getColumnDataFromLocal(
+        sheetName: String,
+        columnName: String
+    ): ArrayList<String> {
+        var dataList = ArrayList<String>()
+        when (sheetName) {
+            Constants.SHEET_DIAGNOSTIC -> {
+                dataList =
+                    localRepository.getDiagnosticRepoImpl()
+                        .getDiagnosticColumnData(columnName = columnName) as ArrayList<String>
+            }
+            Constants.SHEET_DEALERS -> {
+                dataList =
+                    localRepository.getDealersRepoImpl()
+                        .getDealersColumnData(columnName = columnName) as ArrayList<String>
+            }
+            Constants.SHEET_DISTRIBUTORS -> {
+                dataList =
+                    localRepository.getDistributorsImpl()
+                        .getDistributorsColumnData(columnName = columnName) as ArrayList<String>
+            }
+            Constants.SHEET_PRODUCTS -> {
+                dataList =
+                    localRepository.getProductsImpl()
+                        .getProductsColumnData(columnName = columnName) as ArrayList<String>
+            }
+        }
+
+        return dataList
     }
 
 }

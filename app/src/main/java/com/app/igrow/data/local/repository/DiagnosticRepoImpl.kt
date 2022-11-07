@@ -33,6 +33,10 @@ class DiagnosticRepoImpl @Inject constructor(
         return diagnosticDao.getDiagnosticCount()
     }
 
+    override suspend fun getDiagnosticColumnData(columnName: String): List<String> {
+        return diagnosticDao.getDiagnosticColumnData(columnName = columnName)
+    }
+
     companion object {
         const val TAG = "DiagnosticRepoImpl"
     }

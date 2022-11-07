@@ -8,4 +8,5 @@ interface ProductsRepo {
     suspend fun getAllProducts(): ArrayList<ProductsEntityName>
     suspend fun insertProducts(dataList: List<ProductsEntityName>)
     suspend fun getProductsCount():Int
+    suspend fun getProductsColumnData(columnName: String):List<String>
 }

@@ -18,4 +18,9 @@ abstract class DiagnosticDao {
 
     @Query("SELECT COUNT(*) FROM ${Constants.SHEET_DIAGNOSTIC}")
     abstract fun getDiagnosticCount(): Int
+
+    @Query("SELECT DISTINCT :columnName FROM ${Constants.SHEET_DIAGNOSTIC}")
+    abstract fun getDiagnosticColumnData(columnName: String): List<String>
+
+
 }

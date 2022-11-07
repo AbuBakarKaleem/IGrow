@@ -6,4 +6,5 @@ interface DiagnosticRepo {
     suspend fun getAllDiagnostic(): ArrayList<DiagnosticEntityName>
     suspend fun insertDiagnostic(dataList: List<DiagnosticEntityName>)
     suspend fun getDiagnosticCount():Int
+    suspend fun getDiagnosticColumnData(columnName: String):List<String>
 }

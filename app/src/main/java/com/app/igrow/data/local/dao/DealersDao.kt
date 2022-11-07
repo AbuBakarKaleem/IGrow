@@ -17,4 +17,7 @@ abstract class DealersDao {
 
     @Query("SELECT COUNT(*) FROM ${Constants.SHEET_DEALERS}")
     abstract fun getDealerCount(): Int
+
+    @Query("SELECT DISTINCT :columnName FROM ${Constants.SHEET_DEALERS}")
+    abstract fun getDealersColumnData(columnName: String): List<String>
 }

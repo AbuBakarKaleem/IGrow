@@ -34,6 +34,10 @@ class DealersRepoImpl @Inject constructor(
         return dealersDao.getDealerCount()
     }
 
+    override suspend fun getDealersColumnData(columnName: String): List<String> {
+        return dealersDao.getDealersColumnData(columnName = columnName)
+    }
+
     companion object {
         const val TAG = "DealersRepoImpl"
     }

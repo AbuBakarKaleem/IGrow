@@ -4,9 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.app.igrow.data.local.models.entities.DiagnosticEntityName
 import com.app.igrow.data.local.models.entities.DistributorsEntityName
-import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.utils.Constants
 
 @Dao
@@ -19,4 +17,7 @@ abstract class DistributorsDao {
 
     @Query("SELECT COUNT(*) FROM ${Constants.SHEET_DISTRIBUTORS}")
     abstract fun getDistributorsCount(): Int
+
+    @Query("SELECT DISTINCT :columnName FROM ${Constants.SHEET_DISTRIBUTORS}")
+    abstract fun getDistributorsColumnData(columnName: String): List<String>
 }

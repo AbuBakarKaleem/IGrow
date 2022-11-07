@@ -7,4 +7,5 @@ interface DistributorsRepo {
     suspend fun getAllDistributors(): ArrayList<DistributorsEntityName>
     suspend fun insertDistributors(dataList: List<DistributorsEntityName>)
     suspend fun getDistributorsCount():Int
+    suspend fun getDistributorsColumnData(columnName: String):List<String>
 }

@@ -32,6 +32,10 @@ class DistributorsRepoImpl @Inject constructor(
         return distributorsDao.getDistributorsCount()
     }
 
+    override suspend fun getDistributorsColumnData(columnName: String): List<String> {
+        return distributorsDao.getDistributorsColumnData(columnName = columnName)
+    }
+
     companion object {
         const val TAG = "DistributorsRepoImpl"
     }
