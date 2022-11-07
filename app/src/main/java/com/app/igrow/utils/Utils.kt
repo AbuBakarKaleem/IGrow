@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.google.gson.GsonBuilder
 import java.util.*
 
@@ -58,6 +59,7 @@ object Utils {
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",  // .xls & .xlsx
         )
     }
+
     fun getLocalizeColumnName(actualName: String): String {
         if (Utils.getSystemLanguage().split("-")[0] == "fr") {
             return actualName + "_fr"
@@ -69,11 +71,23 @@ object Utils {
         return getSystemLanguage() == "fr"
     }
 
-    fun parseHashMapToObject(map: HashMap<String,String>, cls: Class<*>?): Any? {
+    fun parseHashMapToObject(map: HashMap<String, String>, cls: Class<*>?): Any? {
         val gsonBuilder = GsonBuilder()
         val gson = gsonBuilder.create()
         val jsonString = gson.toJson(map)
         return gson.fromJson<Any>(jsonString, cls)
+    }
+
+    fun getColumnDataCustomQuery(sheetName: String, columnName: String): SimpleSQLiteQuery {
+        try {
+            if (sheetName.isNotEmpty() && columnName.isNotEmpty()) {
+                val customQuery: String = "SELECT DISTINCT $columnName FROM $sheetName"
+                return SimpleSQLiteQuery(customQuery)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return SimpleSQLiteQuery("")
     }
 
 }

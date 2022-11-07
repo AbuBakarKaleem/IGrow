@@ -1,9 +1,7 @@
 package com.app.igrow.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.app.igrow.data.local.models.entities.DealersEntityName
 import com.app.igrow.utils.Constants
 
@@ -18,6 +16,6 @@ abstract class DealersDao {
     @Query("SELECT COUNT(*) FROM ${Constants.SHEET_DEALERS}")
     abstract fun getDealerCount(): Int
 
-    @Query("SELECT DISTINCT :columnName FROM ${Constants.SHEET_DEALERS}")
-    abstract fun getDealersColumnData(columnName: String): List<String>
+    @RawQuery
+    abstract fun getDealersColumnData(query: SupportSQLiteQuery): List<String>
 }

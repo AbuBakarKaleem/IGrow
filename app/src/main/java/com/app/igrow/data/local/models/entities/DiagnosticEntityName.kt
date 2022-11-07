@@ -1,5 +1,6 @@
 package com.app.igrow.data.local.models.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.app.igrow.utils.Constants
@@ -8,7 +9,9 @@ import com.app.igrow.utils.Constants
 data class DiagnosticEntityName(
     @PrimaryKey
     var id: String = "",
+    @ColumnInfo(name = Constants.COL_CROP)
     var crop: String = "",
+    @ColumnInfo(name = Constants.COL_CROP_FR)
     var crop_fr: String = "",
     var type_of_enemy: String = "",
     var type_of_enemy_fr: String = "",

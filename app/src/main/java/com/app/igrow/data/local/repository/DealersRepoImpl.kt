@@ -5,6 +5,7 @@ import com.app.igrow.data.local.abstraction.DealersRepo
 import com.app.igrow.data.local.dao.DealersDao
 import com.app.igrow.data.local.models.entities.DealersEntityName
 import com.app.igrow.utils.StringUtils
+import com.app.igrow.utils.Utils
 import javax.inject.Inject
 
 class DealersRepoImpl @Inject constructor(
@@ -34,8 +35,13 @@ class DealersRepoImpl @Inject constructor(
         return dealersDao.getDealerCount()
     }
 
-    override suspend fun getDealersColumnData(columnName: String): List<String> {
-        return dealersDao.getDealersColumnData(columnName = columnName)
+    override suspend fun getDealersColumnData(sheetName: String, columnName: String): List<String> {
+        return dealersDao.getDealersColumnData(
+            Utils.getColumnDataCustomQuery(
+                sheetName = sheetName,
+                columnName = columnName
+            )
+        )
     }
 
     companion object {

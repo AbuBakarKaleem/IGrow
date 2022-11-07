@@ -5,6 +5,7 @@ import com.app.igrow.data.local.abstraction.ProductsRepo
 import com.app.igrow.data.local.dao.ProductsDao
 import com.app.igrow.data.local.models.entities.ProductsEntityName
 import com.app.igrow.utils.StringUtils
+import com.app.igrow.utils.Utils
 import javax.inject.Inject
 
 class ProductsRepoImpl @Inject constructor(
@@ -34,7 +35,15 @@ class ProductsRepoImpl @Inject constructor(
         return productsDao.getProductsCount()
     }
 
-    override suspend fun getProductsColumnData(columnName: String): List<String> {
-        return productsDao.getProductsColumnData(columnName = columnName)
+    override suspend fun getProductsColumnData(
+        sheetName: String,
+        columnName: String
+    ): List<String> {
+        return productsDao.getProductsColumnData(
+            Utils.getColumnDataCustomQuery(
+                sheetName = sheetName,
+                columnName = columnName
+            )
+        )
     }
 }

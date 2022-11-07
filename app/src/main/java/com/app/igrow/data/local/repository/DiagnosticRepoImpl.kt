@@ -5,7 +5,9 @@ import com.app.igrow.data.local.abstraction.DiagnosticRepo
 import com.app.igrow.data.local.dao.DiagnosticDao
 import com.app.igrow.data.local.models.entities.DiagnosticEntityName
 import com.app.igrow.utils.StringUtils
+import com.app.igrow.utils.Utils
 import javax.inject.Inject
+
 
 class DiagnosticRepoImpl @Inject constructor(
     private val diagnosticDao: DiagnosticDao,
@@ -33,8 +35,16 @@ class DiagnosticRepoImpl @Inject constructor(
         return diagnosticDao.getDiagnosticCount()
     }
 
-    override suspend fun getDiagnosticColumnData(columnName: String): List<String> {
-        return diagnosticDao.getDiagnosticColumnData(columnName = columnName)
+    override suspend fun getDiagnosticColumnData(
+        sheetName: String,
+        columnName: String
+    ): List<String> {
+        return diagnosticDao.getDiagnosticColumnData(
+            Utils.getColumnDataCustomQuery(
+                sheetName = sheetName,
+                columnName = columnName
+            )
+        )
     }
 
     companion object {

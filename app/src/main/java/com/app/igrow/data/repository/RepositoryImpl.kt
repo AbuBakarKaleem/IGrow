@@ -586,26 +586,40 @@ class RepositoryImpl @Inject constructor(
         columnName: String
     ): ArrayList<String> {
         var dataList = ArrayList<String>()
-        when (sheetName) {
-            Constants.SHEET_DIAGNOSTIC -> {
-                dataList =
-                    localRepository.getDiagnosticRepoImpl()
-                        .getDiagnosticColumnData(columnName = columnName) as ArrayList<String>
-            }
-            Constants.SHEET_DEALERS -> {
-                dataList =
-                    localRepository.getDealersRepoImpl()
-                        .getDealersColumnData(columnName = columnName) as ArrayList<String>
-            }
-            Constants.SHEET_DISTRIBUTORS -> {
-                dataList =
-                    localRepository.getDistributorsImpl()
-                        .getDistributorsColumnData(columnName = columnName) as ArrayList<String>
-            }
-            Constants.SHEET_PRODUCTS -> {
-                dataList =
-                    localRepository.getProductsImpl()
-                        .getProductsColumnData(columnName = columnName) as ArrayList<String>
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            when (sheetName) {
+                Constants.SHEET_DIAGNOSTIC -> {
+                    dataList =
+                        localRepository.getDiagnosticRepoImpl()
+                            .getDiagnosticColumnData(
+                                sheetName = sheetName,
+                                columnName = columnName
+                            ) as ArrayList<String>
+                }
+                Constants.SHEET_DEALERS -> {
+                    dataList =
+                        localRepository.getDealersRepoImpl()
+                            .getDealersColumnData(
+                                sheetName = sheetName,
+                                columnName = columnName
+                            ) as ArrayList<String>
+                }
+                Constants.SHEET_DISTRIBUTORS -> {
+                    dataList =
+                        localRepository.getDistributorsImpl()
+                            .getDistributorsColumnData(
+                                sheetName = sheetName,
+                                columnName = columnName
+                            ) as ArrayList<String>
+                }
+                Constants.SHEET_PRODUCTS -> {
+                    dataList =
+                        localRepository.getProductsImpl()
+                            .getProductsColumnData(
+                                sheetName = sheetName,
+                                columnName = columnName
+                            ) as ArrayList<String>
+                }
             }
         }
 
