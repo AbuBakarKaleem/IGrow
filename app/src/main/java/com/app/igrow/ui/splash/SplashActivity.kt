@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.activity.viewModels
@@ -15,7 +14,7 @@ import com.app.igrow.databinding.ActivitySplashBinding
 import com.app.igrow.ui.dashboard.DashBoardActivity
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils
-import com.app.igrow.utils.visible
+import com.app.igrow.utils.gone
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")
@@ -48,7 +47,6 @@ class SplashActivity : BaseActivity() {
 
     private fun navigateToNext() {
 
-        binding.pbProduct.visible()
         binding.ivLogo.animate().alpha(1F).setDuration(2000)
             .setInterpolator(DecelerateInterpolator())
             .withEndAction(
@@ -56,16 +54,17 @@ class SplashActivity : BaseActivity() {
                     binding.ivLogo.animate().alpha(0F).setDuration(2000)
                         .setInterpolator(AccelerateInterpolator()).start()
 
+                    binding.pbProduct.gone()
                     startActivity(Intent(this, DashBoardActivity::class.java))
                     finish()
                 }).start()
     }
 
     private fun createDatabase() {
-        viewModel.createDatabase(Constants.SHEET_DIAGNOSTIC)
-        viewModel.createDatabase(Constants.SHEET_DISTRIBUTORS)
-        viewModel.createDatabase(Constants.SHEET_DEALERS)
-        viewModel.createDatabase(Constants.SHEET_PRODUCTS)
+        viewModel.insertDataForGivenTable(Constants.SHEET_DIAGNOSTIC)
+        viewModel.insertDataForGivenTable(Constants.SHEET_DISTRIBUTORS)
+        viewModel.insertDataForGivenTable(Constants.SHEET_DEALERS)
+        viewModel.insertDataForGivenTable(Constants.SHEET_PRODUCTS)
         navigateToNext()
     }
 

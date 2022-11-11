@@ -120,5 +120,8 @@
     <string name="outlined_button">Outlined button</string>
     <string name="help">Help</string>
     <string name="product">Product</string>
+    <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
+    <string name="search_by_title">Search by title</string>
+    <string name="learning_material">Learning Material</string>
 
 </resources>

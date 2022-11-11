@@ -116,4 +116,7 @@
     <string name="language_change_continue_message">Do want to continue?</string>
     <string name="note_notice">Always read the label before using a pesticide</string>
     <string name="dealer_info">Dealer Info</string>
+    <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
+    <string name="search_by_title">Search by title</string>
+    <string name="learning_material">Learning Material</string>
 </resources>

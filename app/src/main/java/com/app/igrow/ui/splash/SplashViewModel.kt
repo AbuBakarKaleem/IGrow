@@ -39,7 +39,7 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-    fun createDatabase(sheetName: String) {
+    fun insertDataForGivenTable(sheetName: String) {
         val filtersMap = HashMap<String, String>()
         _uiState.postValue(LoadingState)
         viewModelScope.launch {

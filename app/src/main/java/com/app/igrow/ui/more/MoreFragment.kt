@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.databinding.FragmentMoreBinding
@@ -60,6 +61,10 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
             override fun onNothingSelected(parentView: AdapterView<*>?) {
                 // do nothing
             }
+        }
+
+        binding.btnLearningMaterial.setOnClickListener {
+            findNavController().navigate(R.id.toLearningsFragment)
         }
     }
 
