@@ -1,28 +1,29 @@
 package com.app.igrow.data.repository
 
 import android.util.Log
+import com.app.igrow.IGrowApp
 import com.app.igrow.data.DataState
+import com.app.igrow.data.local.repository.LocalRepository
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.data.remote.ApiService
-import com.app.igrow.utils.Constants
-import com.app.igrow.utils.StringUtils
-import com.app.igrow.utils.Utils
+import com.app.igrow.utils.*
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.isActive
 import javax.inject.Inject
 
 /**
  * This is an implementation of [Repository] to handle communication with [ApiService] server.
  */
 class RepositoryImpl @Inject constructor(
+    private val localRepository: LocalRepository,
     private val stringUtils: StringUtils
 ) : Repository {
 
@@ -464,22 +465,29 @@ class RepositoryImpl @Inject constructor(
             awaitClose()
         }
 
-    override suspend fun getAllDataOfGivenSheet(sheetName: String): Flow<DataState<ArrayList<HashMap<String,String>>>> =
+    override suspend fun getAllDataOfGivenSheet(sheetName: String): Flow<DataState<ArrayList<HashMap<String, String>>>> =
         callbackFlow {
             try {
-                try {
+                if (Utils.isInternetAvailable(IGrowApp.getInstance()).not()) {
+                    val localDbData = getDataFromLocal(sheetName)
+                    if (isActive) trySend(DataState.success(localDbData))
+                } else {
                     val databaseInstance = FirebaseFirestore.getInstance()
                     databaseInstance.collection(sheetName)
                         .addSnapshotListener { snapshot, error ->
                             if (error != null) {
-                                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg())).isSuccess
+                                if (isActive) trySend(
+                                    DataState.error<ArrayList<HashMap<String, String>>>(
+                                        stringUtils.noRecordFoundMsg()
+                                    )
+                                ).isSuccess
                                 Log.e("Firebase Error ", error.localizedMessage)
                                 return@addSnapshotListener
                             }
 
                             if (snapshot != null && snapshot.documents.isEmpty().not()) {
 
-                                val dataList = ArrayList<HashMap<String,String>>()
+                                val dataList = ArrayList<HashMap<String, String>>()
 
                                 snapshot.documents.forEach { doc ->
                                     doc.data?.let { it ->
@@ -487,17 +495,86 @@ class RepositoryImpl @Inject constructor(
                                         dataList.add(map as HashMap<String, String>)
                                     }
                                 }
-                                if (isActive) trySend(DataState.success(dataList))
+
+                                // inserting data into local DB for given sheetName
+                                // getting data form local DB for given sheetName
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    insertDataIntoDb(sheetName, dataList)
+                                    val localDbData = getDataFromLocal(sheetName)
+                                    if (isActive) trySend(DataState.success(localDbData))
+                                }
+
                             } else {
-                                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(stringUtils.noRecordFoundMsg()))
+                                if (isActive) trySend(
+                                    DataState.error<ArrayList<HashMap<String, String>>>(
+                                        stringUtils.noRecordFoundMsg()
+                                    )
+                                )
                             }
                         }
-                } catch (e: Exception) {
-                    if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(e.message.toString()))
                 }
             } catch (e: Exception) {
-                if (isActive) trySend(DataState.error<ArrayList<HashMap<String,String>>>(e.message.toString()))
+                if (isActive) trySend(DataState.error<ArrayList<HashMap<String, String>>>(e.message.toString()))
             }
             awaitClose()
         }
+
+
+    private fun insertDataIntoDb(
+        sheetName: String,
+        dataList: ArrayList<HashMap<String, String>>,
+    ) {
+        CoroutineScope(Dispatchers.IO).launch {
+
+            when (sheetName) {
+                Constants.SHEET_DIAGNOSTIC -> {
+                    val dbConvertedDBEntity = dataList.toDiagnosticEntityModel()
+                    localRepository.getDiagnosticRepoImpl().insertDiagnostic(dbConvertedDBEntity)
+                }
+                Constants.SHEET_DEALERS -> {
+                    val dbConvertedDBEntity = dataList.toDealerEntityModel()
+                    localRepository.getDealersRepoImpl().insertDealers(dbConvertedDBEntity)
+                }
+                Constants.SHEET_DISTRIBUTORS -> {
+                    val dbConvertedDBEntity = dataList.toDistributorEntityModel()
+                    localRepository.getDistributorsImpl().insertDistributors(dbConvertedDBEntity)
+                }
+                Constants.SHEET_PRODUCTS -> {
+                    val dbConvertedDBEntity = dataList.toProductsEntityModel()
+                    localRepository.getProductsImpl().insertProducts(dbConvertedDBEntity)
+                }
+            }
+
+        }
+    }
+
+    private suspend fun getDataFromLocal(
+        sheetName: String,
+    ): ArrayList<HashMap<String, String>> {
+        var result: ArrayList<HashMap<String, String>> = ArrayList()
+
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            when (sheetName) {
+                Constants.SHEET_DIAGNOSTIC -> {
+                    result = localRepository.getDiagnosticRepoImpl().getAllDiagnostic()
+                        .toDiagnosticUIModel()
+                }
+                Constants.SHEET_DEALERS -> {
+                    result = localRepository.getDealersRepoImpl().getAllDealers()
+                        .toDealerUIModel()
+                }
+                Constants.SHEET_DISTRIBUTORS -> {
+                    result = localRepository.getDistributorsImpl().getAllDistributors()
+                        .toDistributorUIModel()
+                }
+                Constants.SHEET_PRODUCTS -> {
+                    result = localRepository.getProductsImpl().getAllProducts().toProductsUIModel()
+                }
+            }
+        }
+        return result
+    }
+
 }
+
+

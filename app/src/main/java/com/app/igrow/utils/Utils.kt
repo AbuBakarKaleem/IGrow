@@ -75,4 +75,5 @@ object Utils {
         val jsonString = gson.toJson(map)
         return gson.fromJson<Any>(jsonString, cls)
     }
+
 }

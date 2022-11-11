@@ -112,7 +112,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
         viewModel.filtersLiveData.observe(viewLifecycleOwner) { response ->
             if (response.isNotEmpty()) {
-                var searchResultData =
+                val searchResultData =
                     SearchResult(diagnosticFiltersHashMap, response)
                 val bundle =
                     bundleOf(ARG_RESULT_KEY to searchResultData)

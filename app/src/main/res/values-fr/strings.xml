@@ -83,6 +83,8 @@
     <string name="setting">Réglages</string>
     <string name="language_change_warning_message">Le changement de langue nécessite le redémarrage de l\'application</string>
     <string name="language_change_continue_message">Voulez-vous continuer ?</string>
+    <string name="no_internet_error">Pas de connexion Internet</string>
+    <string name="no_internet_error_message">Veuillez connecter un Internet </string>
 
 
     <string-array name="action_type">
@@ -118,5 +120,8 @@
     <string name="outlined_button">Outlined button</string>
     <string name="help">Help</string>
     <string name="product">Product</string>
+    <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
+    <string name="search_by_title">Search by title</string>
+    <string name="learning_material">Learning Material</string>
 
 </resources>
