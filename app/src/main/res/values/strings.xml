@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">iGrow</string>
     <string name="message_no_network_connected_str">No network connected!</string>
     <string name="message_something_went_wrong_str">Something went wrong!</string>
-    <string name="home">home</string>
+    <string name="home">Home</string>
     <string name="diagnose">Diagnose</string>
     <string name="products">Products</string>
     <string name="shop">Shop</string>

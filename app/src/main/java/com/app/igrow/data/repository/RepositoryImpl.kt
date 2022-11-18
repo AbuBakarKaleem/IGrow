@@ -421,8 +421,13 @@ class RepositoryImpl @Inject constructor(
                             if (snapshot != null && !snapshot.isEmpty) {
                                 val dataList = ArrayList<String>()
                                 snapshot.documents.forEach {
-                                    val value = it.data?.values?.first() as HashMap<*, *>
-                                    //dataList.add(value[columnName].toString()+":"+ value[columnName+"_fr"].toString())
+                                    var value:HashMap<String,String> = HashMap()
+                                    value = if (it.data?.values?.asIterable()?.elementAt(0) is HashMap<*, *>) {
+                                        it.data?.values?.first() as HashMap<String, String>
+                                    } else {
+                                        it.data?.values?.asIterable()?.elementAt(1) as HashMap<String, String>
+                                    }
+
                                     dataList.add(value[columnName].toString())
                                 }
                                 if (isActive) trySend(DataState.success(dataList.distinct() as ArrayList<String>))
@@ -497,8 +502,17 @@ class RepositoryImpl @Inject constructor(
 
                                 snapshot.documents.forEach { doc ->
                                     doc.data?.let { it ->
-                                        val map = it.values.first() as HashMap<*, *>
-                                        dataList.add(map as HashMap<String, String>)
+                                        var map:HashMap<String,String> = HashMap()
+                                        map = if (it.values.asIterable()
+                                                .elementAt(0) is HashMap<*, *>
+                                        ) {
+                                            it.values.first() as HashMap<String, String>
+                                        } else {
+                                            it.values.asIterable()
+                                                .elementAt(1) as HashMap<String, String>
+                                        }
+
+                                        dataList.add(map)
                                     }
                                 }
 

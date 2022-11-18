@@ -59,7 +59,8 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
         filters.forEach { filterKey ->
             localHashMap.forEach { data ->
                 if ( sheetName == Constants.SHEET_DEALERS ) {
-                    if ( filters.contains(Constants.COL_DISTRIBUTORS_NAME) ) {
+                    if ( filterKey.key == Constants.COL_DISTRIBUTORS_NAME &&
+                        filters.contains(Constants.COL_DISTRIBUTORS_NAME) ) {
                         val result = data[Constants.COL_DISTRIBUTORS]?:""
                         if ( result.contains(filterKey.value) ) {
                             list.add(data)

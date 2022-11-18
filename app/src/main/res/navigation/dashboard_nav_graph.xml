@@ -11,13 +11,24 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/homeToDiagnoseFragment"
-            app:destination="@id/diagnoseFragment" />
+            app:destination="@id/diagnoseFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            />
         <action
             android:id="@+id/homeToProductsFragment"
-            app:destination="@id/ProductsFragment" />
+            app:destination="@id/ProductsFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"/>
         <action
             android:id="@+id/homeToDealerFragment"
-            app:destination="@id/dealerFragment" />
+            app:destination="@id/dealerFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/diagnoseFragment"
@@ -101,6 +112,9 @@
         android:id="@+id/dealerFragment"
         android:name="com.app.igrow.ui.dealer.DealersFragment"
         android:label="DealerFragment"
+        app:popUpToInclusive="true"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/homeFragment"
         tools:layout="@layout/fragment_dealer">
 
         <action

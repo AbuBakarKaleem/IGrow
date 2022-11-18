@@ -37,7 +37,6 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
             val intent =
                 Intent(Intent.ACTION_VIEW, Uri.parse(videoClickUrl))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setPackage("com.google.android.youtube");
             startActivity(intent)
         }, { shareItemClick ->
             shareAppLink(shareItemClick)

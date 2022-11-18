@@ -35,7 +35,9 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             val isDatebaseEmpty =
                 isLocalDatabaseEmptyUsecase.invoke()
-            isLocalDatBaseEmpty.postValue(isDatebaseEmpty)
+            isLocalDatBaseEmpty?.let {
+                it.postValue(isDatebaseEmpty)
+            }
         }
     }
 

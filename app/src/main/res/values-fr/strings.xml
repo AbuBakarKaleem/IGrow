@@ -7,18 +7,18 @@
     <string name="products">Produits</string>
     <string name="shop">Boutique</string>
     <string name="more">Suite</string>
-    <string name="upload_file">Upload File</string>
-    <string name="diagnostic_save_success">Diagnostic Data added successfully</string>
-    <string name="dealer_save_success">Dealer Data added successfully</string>
-    <string name="products_save_success">Products Data added successfully</string>
-    <string name="distributors_save_success">distributors Data added successfully</string>
-    <string name="hello_admin">Welcome Admin</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="select">Select Type</string>
-    <string name="ok">Ok</string>
-    <string name="cancel">cancel</string>
-    <string name="dealer_info">Dealer Info</string>
+    <string name="upload_file">Téléverser un fichier</string>
+    <string name="diagnostic_save_success">Données de diagnostic ajoutées avec succès</string>
+    <string name="dealer_save_success">Les données du concessionnaire ont été ajoutées avec succès</string>
+    <string name="products_save_success">Produits Données ajoutées avec succès</string>
+    <string name="distributors_save_success">Les données des distributeurs ont été ajoutées avec succès</string>
+    <string name="hello_admin">Bienvenue administrateur</string>
+    <string name="edit">Éditer</string>
+    <string name="delete">Effacer</string>
+    <string name="select">Sélectionner le genre</string>
+    <string name="ok">D\'accord</string>
+    <string name="cancel">Annuler</string>
+    <string name="dealer_info">Informations sur le revendeur</string>
 
 
     <string name="crop_name">Nom de la culture</string>
@@ -108,20 +108,20 @@
     <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
     <string name="note_notice">Lisez toujours létiquette avant dutiliser un pesticide</string>
 
-    <string name="results">Results</string>
+    <string name="results">Résultats</string>
 
-    <string name="type">Type</string>
+    <string name="type">Taper</string>
     <string name="condition">Condition</string>
     <string name="symptoms_amp_impact"><![CDATA[Symptoms & Impact]]></string>
-    <string name="leaves">Leaves</string>
-    <string name="cultural_control">Cultural control</string>
-    <string name="biological_control">Biological Control</string>
-    <string name="chemical_control">Chemical Control</string>
-    <string name="outlined_button">Outlined button</string>
-    <string name="help">Help</string>
-    <string name="product">Product</string>
-    <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
-    <string name="search_by_title">Search by title</string>
-    <string name="learning_material">Learning Material</string>
+    <string name="leaves">Feuilles</string>
+    <string name="cultural_control">Contrôle culturel</string>
+    <string name="biological_control">Contrôle biologique</string>
+    <string name="chemical_control">Lutte chimique</string>
+    <string name="outlined_button">Bouton souligné</string>
+    <string name="help">Aider</string>
+    <string name="product">Produit</string>
+    <string name="learn_about_crop_protection_products">En savoir plus sur les produits \nde protection des cultures</string>
+    <string name="search_by_title">Rechercher par titre</string>
+    <string name="learning_material">Matériel d\'apprentissage</string>
 
 </resources>
