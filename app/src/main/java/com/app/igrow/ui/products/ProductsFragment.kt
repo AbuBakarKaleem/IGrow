@@ -24,6 +24,7 @@ import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Constants
+import com.app.igrow.utils.Utils
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -94,8 +95,13 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 )
             }
             binding.btnSearch.setOnClickListener {
-                viewModel.searchProduct(productFiltersHashMap)
-
+                if (binding.etSearch.text.toString().isNotEmpty()) {
+                    val map = HashMap<String, String>()
+                    map[Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTOR)] = binding.etSearch.text.toString().trim()
+                    viewModel.searchProduct(map)
+                } else {
+                    viewModel.searchProduct(productFiltersHashMap)
+                }
             }
             binding.btnReset.setOnClickListener {
                 resetAllFilters()

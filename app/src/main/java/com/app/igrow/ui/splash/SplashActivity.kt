@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import com.app.igrow.R
 import com.app.igrow.base.BaseActivity
 import com.app.igrow.databinding.ActivitySplashBinding
+import com.app.igrow.ui.country.CountrySelectionActivity
 import com.app.igrow.ui.dashboard.DashBoardActivity
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils
@@ -49,15 +50,17 @@ class SplashActivity : BaseActivity() {
 
         binding.ivLogo.animate().alpha(1F).setDuration(2000)
             .setInterpolator(DecelerateInterpolator())
-            .withEndAction(
-                Runnable {
-                    binding.ivLogo.animate().alpha(0F).setDuration(2000)
-                        .setInterpolator(AccelerateInterpolator()).start()
-
-                    binding.pbProduct.gone()
+            .withEndAction {
+                binding.ivLogo.animate().alpha(0F).setDuration(2000)
+                    .setInterpolator(AccelerateInterpolator()).start()
+                binding.pbProduct.gone()
+                if (getPreferenceManager()?.getCountry()?.isEmpty() == true) {
+                    startActivity(Intent(this, CountrySelectionActivity::class.java))
+                } else {
                     startActivity(Intent(this, DashBoardActivity::class.java))
-                    finish()
-                }).start()
+                }
+                finish()
+            }.start()
     }
 
     private fun createDatabase() {

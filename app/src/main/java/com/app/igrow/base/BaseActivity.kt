@@ -21,4 +21,8 @@ open class BaseActivity : AppCompatActivity() {
         super.attachBaseContext(LocaleHelper.onAttach(base))
     }
 
+   public fun getPreferenceManager(): PreferenceManager? {
+        return mySharePreference
+    }
+
 }

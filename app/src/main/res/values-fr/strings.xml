@@ -72,9 +72,9 @@
     <string name="email_hint">E-mail</string>
     <string name="password">Mot de passe</string>
     <string name="edit_dealer">Modifier le concessionnaire</string>
-    <string name="home_heading">Bienvenue dans votre outil de protection des cultures.</string>
-    <string name="identify_a_plant_health_problem">Identifier un problème phytosanitaire</string>
-    <string name="search_by_name">Rechercher par nom</string>
+    <string name="home_heading">Identifiez et trouvez la bonne solution pour protéger vos cultures contre les ravageurs et les maladies.</string>
+    <string name="identify_a_plant_health_problem">Identifiez les ravageurs et les maladies de votre ferme</string>
+    <string name="search_by_name">Rechercher par nom Ou sélectionner</string>
     <string name="or">ou</string>
     <string name="text_select">Sélectionner</string>
     <string name="text_select_language">Choisir la langue</string>
@@ -85,6 +85,7 @@
     <string name="language_change_continue_message">Voulez-vous continuer ?</string>
     <string name="no_internet_error">Pas de connexion Internet</string>
     <string name="no_internet_error_message">Veuillez connecter un Internet </string>
+    <string name="slogan">Cultivons ensemble</string>
 
 
     <string-array name="action_type">
@@ -123,5 +124,8 @@
     <string name="learn_about_crop_protection_products">En savoir plus sur les produits \nde protection des cultures</string>
     <string name="search_by_title">Rechercher par titre</string>
     <string name="learning_material">Matériel d\'apprentissage</string>
+    <string name="welcome_message">Bienvenue sur iGrow, votre outil de protection des cultures</string>
+    <string name="text_select_country">Choisissez le pays</string>
+    <string name="text_solution">La solution</string>
 
 </resources>

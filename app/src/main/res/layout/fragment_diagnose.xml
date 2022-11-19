@@ -12,14 +12,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.05" />
+            app:layout_constraintGuide_percent="0.03" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_heading"
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.23" />
+            app:layout_constraintGuide_percent="0.20" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_search"
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:drawableTint="@color/bright_green"
-            android:drawableStart="@drawable/icon_search"
+            android:drawableStart="@drawable/icon_search_green"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
             app:backgroundTint="@color/bright_green"

@@ -70,9 +70,9 @@
     <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="edit_dealer">Edit Dealer</string>
-    <string name="home_heading">Welcome to your \n Crop Protection Tool.</string>
-    <string name="identify_a_plant_health_problem">Identify a Plant Health Problem</string>
-    <string name="search_by_name">Search by name</string>
+    <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
+    <string name="identify_a_plant_health_problem">Identify pests and diseases in your farm</string>
+    <string name="search_by_name">Search by name Or select</string>
     <string name="or">or</string>
     <string name="text_select">Select</string>
     <string name="text_select_language">Select Language</string>
@@ -80,7 +80,8 @@
     <string name="language_french">French</string>
     <string name="no_internet_error">No Internet Connection</string>
     <string name="no_internet_error_message">Please connect an Internet </string>
-
+    <string name="text_select_country">Select Country</string>
+    <string name="text_solution">Solution</string>
 
     <string-array name="action_type">
         <item>Select</item>
@@ -94,6 +95,36 @@
         <item>@string/text_select_language</item>
         <item>@string/language_english</item>
         <item>@string/language_french</item>
+    </string-array>
+
+    <string-array name="countryList">
+        <item>@string/text_select_country</item>
+        <item>Belgium</item>
+        <item>Burundi</item>
+        <item>Benin</item>
+        <item>Burkina</item>
+        <item>Canada</item>
+        <item>Cameroon</item>
+        <item>Chad</item>
+        <item>Congo</item>
+        <item>Comoros</item>
+        <item>Djibouti</item>
+        <item>Equatorial Guinea</item>
+        <item>France</item>
+        <item>Gabon</item>
+        <item>Guinea</item>
+        <item>Haiti</item>
+        <item>Luxembourg</item>
+        <item>Mali</item>
+        <item>Madagascar</item>
+        <item>Monaco</item>
+        <item>Niger</item>
+        <item>Rwanda</item>
+        <item>Senegal</item>
+        <item>Seychelles</item>
+        <item>Togo</item>
+        <item>Switzerland</item>
+        <item>Vanuatu	Oceania</item>
     </string-array>
 
     <string name="crop">Crop</string>
@@ -119,4 +150,6 @@
     <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
     <string name="search_by_title">Search by title</string>
     <string name="learning_material">Learning Material</string>
+    <string name="slogan">Let\'s grow together</string>
+    <string name="welcome_message">Welcome to iGrow, your crop protection tool.</string>
 </resources>

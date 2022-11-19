@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
+class DealersFragment : BaseFragment<FragmentDealerBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDealerBinding
         get() = FragmentDealerBinding::inflate
@@ -66,11 +66,21 @@ class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
             }
             binding.llDistributor.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME)
-                    viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DISTRIBUTORS)
+                viewModel.getDistributorColumnData(
+                    distributorColumnName,
+                    Constants.SHEET_DISTRIBUTORS
+                )
             }
 
             binding.btnSearch.setOnClickListener {
-                viewModel.searchDistributor(distributorsFiltersHashMap)
+
+                if (binding.etSearch.text.toString().isNotEmpty()) {
+                    val map = HashMap<String, String>()
+                    map[Utils.getLocalizeColumnName(Constants.COL_DEALER_NAME)] = binding.etSearch.text.toString().trim()
+                    viewModel.searchDistributor(map)
+                } else {
+                    viewModel.searchDistributor(distributorsFiltersHashMap)
+                }
             }
 
             binding.btnReset.setOnClickListener {
@@ -80,7 +90,7 @@ class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
             e.printStackTrace()
         }
     }
-    
+
     private fun activateObserver() {
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {

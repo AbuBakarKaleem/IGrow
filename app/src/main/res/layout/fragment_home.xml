@@ -21,7 +21,7 @@
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:src="@drawable/igrow_logo"
         app:layout_constraintBottom_toTopOf="@+id/tv_homeHeading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,44 +30,17 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_homeHeading"
         style="@style/headingStyle"
-        android:textColor="@android:color/black"
-        android:text="@string/home_heading"
-        android:textSize="20sp"
-        android:padding="10dp"
         android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="@string/home_heading"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/diagnose_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_horizontal_five"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.61"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="1"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/diagnose_btn"
@@ -77,9 +50,12 @@
         android:layout_marginEnd="15dp"
         app:cardBackgroundColor="@color/transparent_green"
         app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/product_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_two">
+        app:layout_constraintTop_toBottomOf="@id/tv_homeHeading"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -132,9 +108,12 @@
         android:layout_marginEnd="15dp"
         app:cardBackgroundColor="@color/home_product_front_red"
         app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/shop_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_three">
+        app:layout_constraintTop_toBottomOf="@id/diagnose_btn"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -146,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/ic_product_white"
+                android:src="@drawable/ic_product"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -157,9 +136,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/products"
                 android:textAllCaps="true"
-                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_product_forward_icon"
                 app:layout_constraintStart_toEndOf="@id/iv_product_start_icon"
@@ -187,9 +166,12 @@
         android:layout_marginEnd="15dp"
         app:cardBackgroundColor="@color/transparent_blue"
         app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_five">
+        app:layout_constraintTop_toBottomOf="@id/product_btn"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -213,8 +195,8 @@
                 android:text="@string/shop"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textStyle="bold"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_shop_forward_icon"
                 app:layout_constraintStart_toEndOf="@id/iv_shop_start_icon"

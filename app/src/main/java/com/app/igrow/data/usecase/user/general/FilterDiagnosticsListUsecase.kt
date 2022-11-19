@@ -4,6 +4,7 @@ import com.app.igrow.data.DataState
 import com.app.igrow.data.repository.Repository
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.StringUtils
+import com.app.igrow.utils.Utils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import javax.inject.Inject
@@ -13,7 +14,10 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
     private val stringUtils: StringUtils
 ) {
 
-    suspend operator fun invoke(sheetName:String, filters: HashMap<String, String>): Flow<DataState<ArrayList<HashMap<String, String>>>> =
+    suspend operator fun invoke(
+        sheetName: String,
+        filters: HashMap<String, String>
+    ): Flow<DataState<ArrayList<HashMap<String, String>>>> =
         callbackFlow {
 
             val dataList = repository.getAllDataOfGivenSheet(sheetName = sheetName)
@@ -58,15 +62,16 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
 
         filters.forEach { filterKey ->
             localHashMap.forEach { data ->
-                if ( sheetName == Constants.SHEET_DEALERS ) {
-                    if ( filterKey.key == Constants.COL_DISTRIBUTORS_NAME &&
-                        filters.contains(Constants.COL_DISTRIBUTORS_NAME) ) {
-                        val result = data[Constants.COL_DISTRIBUTORS]?:""
-                        if ( result.contains(filterKey.value) ) {
+                if (sheetName == Constants.SHEET_DEALERS) {
+                    if (filterKey.key == Constants.COL_DISTRIBUTORS_NAME &&
+                        filters.contains(Constants.COL_DISTRIBUTORS_NAME)
+                    ) {
+                        val result = data[Constants.COL_DISTRIBUTORS] ?: ""
+                        if (result.contains(filterKey.value)) {
                             list.add(data)
                         }
                     } else {
-                        if ( filterKey.value == data[filterKey.key] ) {
+                        if (filterKey.value == data[filterKey.key]) {
                             list.add(data)
                         }
                     }

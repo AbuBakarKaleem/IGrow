@@ -28,10 +28,10 @@ import com.app.igrow.utils.Constants.COL_CROP
 import com.app.igrow.utils.Constants.COL_CROP_FR
 import com.app.igrow.utils.Constants.COL_PART_AFFECTED
 import com.app.igrow.utils.Constants.COL_PART_AFFECTED_FR
+import com.app.igrow.utils.Constants.COL_PLANT_HEALTH_PROBLEM
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Constants.SHEET_DIAGNOSTIC
-import com.app.igrow.utils.Utils
 import com.app.igrow.utils.Utils.getLocalizeColumnName
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
@@ -80,7 +80,13 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                 viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.btnSearch.setOnClickListener {
-                viewModel.searchDiagnostic(diagnosticFiltersHashMap)
+                if (binding.etSearch.text.toString().isNotEmpty()) {
+                    val map = HashMap<String, String>()
+                    map[getLocalizeColumnName(COL_PLANT_HEALTH_PROBLEM)] = binding.etSearch.text.toString().trim()
+                    viewModel.searchDiagnostic(map)
+                } else {
+                    viewModel.searchDiagnostic(diagnosticFiltersHashMap)
+                }
 
             }
             binding.btnReset.setOnClickListener {
