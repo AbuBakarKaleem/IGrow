@@ -42,14 +42,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableStart="@drawable/icon_search"
+            android:drawableStart="@drawable/icon_search_red"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
-            android:drawableTint="@android:color/holo_red_dark"
             app:backgroundTint="@android:color/holo_red_dark"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline_two" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_or_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or_select"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            app:layout_constraintBottom_toTopOf="@id/cv_corp"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_corp"
@@ -58,7 +68,7 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_search">
+            app:layout_constraintTop_toBottomOf="@+id/tv_or_select">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_crop"

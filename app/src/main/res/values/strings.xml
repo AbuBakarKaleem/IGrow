@@ -72,7 +72,9 @@
     <string name="edit_dealer">Edit Dealer</string>
     <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
     <string name="identify_a_plant_health_problem">Identify pests and diseases in your farm</string>
-    <string name="search_by_name">Search by name Or select</string>
+    <string name="search_by_name">Search by name</string>
+    <string name="or_select">Or select</string>
+
     <string name="or">or</string>
     <string name="text_select">Select</string>
     <string name="text_select_language">Select Language</string>
@@ -152,4 +154,5 @@
     <string name="learning_material">Learning Material</string>
     <string name="slogan">Let\'s grow together</string>
     <string name="welcome_message">Welcome to iGrow, your crop protection tool.</string>
+    <string name="no_data_found">No data found</string>
 </resources>

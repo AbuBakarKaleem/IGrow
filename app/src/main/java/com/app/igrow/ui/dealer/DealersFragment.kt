@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -117,6 +118,9 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
                 val bundle =
                     bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDealersListFragment, bundle)
+            } else {
+                if( viewModel.showEmptyListMsg() )
+                    Toast.makeText(requireContext(), getString(R.string.no_data_found), Toast.LENGTH_LONG).show()
             }
         }
     }

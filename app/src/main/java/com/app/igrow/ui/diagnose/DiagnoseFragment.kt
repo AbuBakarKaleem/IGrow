@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -124,7 +125,8 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                     bundleOf(ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
             } else {
-                // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
+                if( viewModel.showEmptyListMsg() )
+                    Toast.makeText(requireContext(), getString(R.string.no_data_found), Toast.LENGTH_LONG).show()
             }
         }
     }

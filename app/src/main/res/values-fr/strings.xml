@@ -20,6 +20,8 @@
     <string name="cancel">Annuler</string>
     <string name="dealer_info">Informations sur le revendeur</string>
 
+    <string name="no_data_found">Aucune donnée disponible</string>
+    <string name="or_select">Ou sélectionnez</string>
 
     <string name="crop_name">Nom de la culture</string>
     <string name="plant_problem">Problème de plante</string>

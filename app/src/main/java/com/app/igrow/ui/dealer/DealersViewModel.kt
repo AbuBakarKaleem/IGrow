@@ -32,6 +32,8 @@ class DealersViewModel@Inject constructor(
     var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> =
         filterResultMutableLiveData
 
+    private var showEmptyResponseMsg = false
+
     fun getDistributorColumnData(columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
@@ -62,6 +64,7 @@ class DealersViewModel@Inject constructor(
                 when (it) {
                     is DataState.Success -> {
                         it.data?.let { response ->
+                            showEmptyResponseMsg = response.isEmpty()
                             filterResultMutableLiveData.postValue(response)
                         }
                     }
@@ -72,5 +75,8 @@ class DealersViewModel@Inject constructor(
             }
         }
     }
+
+    fun showEmptyListMsg() =  showEmptyResponseMsg
+
 
 }
