@@ -45,6 +45,7 @@
             android:drawableStart="@drawable/icon_search_green"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
+            android:imeOptions="actionDone"
             app:backgroundTint="@color/bright_green"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
