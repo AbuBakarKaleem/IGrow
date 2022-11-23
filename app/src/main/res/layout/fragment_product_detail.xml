@@ -83,7 +83,7 @@
             android:text="@string/identification"
             android:textAllCaps="true"
             android:textColor="@color/bright_green"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -254,7 +254,7 @@
             android:text="Direction of Use"
             android:textAllCaps="true"
             android:textColor="@color/bright_green"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -484,7 +484,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/llShop"
@@ -515,21 +515,6 @@
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="12sp"
                 app:icon="@drawable/ic_help"
-                app:iconGravity="start"
-                app:iconTint="@android:color/holo_red_dark" />
-
-            <com.google.android.material.button.MaterialButton
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Share"
-                android:textAllCaps="false"
-                android:textColor="@android:color/holo_red_dark"
-                android:textSize="12sp"
-                app:icon="@drawable/ic_share"
                 app:iconGravity="start"
                 app:iconTint="@android:color/holo_red_dark" />
 

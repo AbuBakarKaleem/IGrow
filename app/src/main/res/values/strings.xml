@@ -44,16 +44,16 @@
     <string name="results">Results</string>
     <string name="re_entry_period">Re-entry Period</string>
     <string name="time_before_harvest">Time Before Harvest</string>
-    <string name="distributor">Distributor</string>
+    <string name="distributor">Distributor\'s</string>
     <string name="telephone">Telephone</string>
     <string name="email">Email</string>
     <string name="website">Website</string>
     <string name="facebook">Facebook</string>
     <string name="dealer_name">Dealer Name</string>
     <string name="address">Address</string>
-    <string name="city_town">City Town</string>
+    <string name="city_town">City/Town</string>
     <string name="region">Region</string>
-    <string name="mobile">Mobile</string>
+    <string name="whatsapp">Whatsapp</string>
     <string name="id">ID</string>
     <string name="edit_diagnostic">Diagnostic</string>
     <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update/Delete</string>
@@ -73,7 +73,7 @@
     <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
     <string name="identify_a_plant_health_problem">Identify pests and diseases in your farm</string>
     <string name="search_by_name">Search by name</string>
-    <string name="or_select">Or select</string>
+    <string name="or_select">or select</string>
 
     <string name="or">or</string>
     <string name="text_select">Select</string>
@@ -101,32 +101,7 @@
 
     <string-array name="countryList">
         <item>@string/text_select_country</item>
-        <item>Belgium</item>
-        <item>Burundi</item>
-        <item>Benin</item>
-        <item>Burkina</item>
-        <item>Canada</item>
         <item>Cameroon</item>
-        <item>Chad</item>
-        <item>Congo</item>
-        <item>Comoros</item>
-        <item>Djibouti</item>
-        <item>Equatorial Guinea</item>
-        <item>France</item>
-        <item>Gabon</item>
-        <item>Guinea</item>
-        <item>Haiti</item>
-        <item>Luxembourg</item>
-        <item>Mali</item>
-        <item>Madagascar</item>
-        <item>Monaco</item>
-        <item>Niger</item>
-        <item>Rwanda</item>
-        <item>Senegal</item>
-        <item>Seychelles</item>
-        <item>Togo</item>
-        <item>Switzerland</item>
-        <item>Vanuatu	Oceania</item>
     </string-array>
 
     <string name="crop">Crop</string>
@@ -149,10 +124,13 @@
     <string name="language_change_continue_message">Do want to continue?</string>
     <string name="note_notice">Always read the label before using a pesticide</string>
     <string name="dealer_info">Dealer Info</string>
-    <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
+    <string name="learn_about_crop_protection_products">Learn More About \n Crop Protection</string>
     <string name="search_by_title">Search by title</string>
-    <string name="learning_material">Learning Material</string>
+    <string name="learning_material">Learning</string>
     <string name="slogan">Let\'s grow together</string>
     <string name="welcome_message">Welcome to iGrow, your crop protection tool.</string>
     <string name="no_data_found">No data found</string>
+    <string name="find_local_dealer">Find a local \n Crop Protection dealer</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="location_amp_contact"><![CDATA[Location & Contact]]></string>
 </resources>

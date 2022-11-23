@@ -2,7 +2,7 @@
 <resources>
     <string name="message_no_network_connected_str">Aucun réseau connecté !</string>
     <string name="message_something_went_wrong_str">Quelque chose s\'est mal passé !</string>
-    <string name="home">Maison</string>
+    <string name="home">Accueil</string>
     <string name="diagnose">Diagnostiquer</string>
     <string name="products">Produits</string>
     <string name="shop">Boutique</string>
@@ -18,10 +18,10 @@
     <string name="select">Sélectionner le genre</string>
     <string name="ok">D\'accord</string>
     <string name="cancel">Annuler</string>
-    <string name="dealer_info">Informations sur le revendeur</string>
+    <string name="dealer_info">Informations sur la boutique</string>
 
     <string name="no_data_found">Aucune donnée disponible</string>
-    <string name="or_select">Ou sélectionnez</string>
+    <string name="or_select">ou sélectionnez</string>
 
     <string name="crop_name">Nom de la culture</string>
     <string name="plant_problem">Problème de plante</string>
@@ -48,20 +48,20 @@
     <string name="restrictions_of_use">Restrictions d\'utilisation</string>
     <string name="re_entry_period">Période de réintégration</string>
     <string name="time_before_harvest">Temps avant la récolte</string>
-    <string name="distributor">Distributeur</string>
+    <string name="distributor">Distributeur(s)</string>
     <string name="telephone">Téléphone</string>
     <string name="email">E-mail</string>
     <string name="website">Site Internet</string>
     <string name="facebook">Facebook</string>
     <string name="dealer_name">Nom du revendeur</string>
     <string name="address">Adresse</string>
-    <string name="city_town">Ville Ville</string>
+    <string name="city_town">Ville/Village</string>
     <string name="region">Région</string>
-    <string name="mobile">Mobile</string>
+    <string name="whatsapp">Whatsapp</string>
     <string name="id">ID</string>
     <string name="edit_diagnostic">Diagnostique</string>
     <string name="please_enter_id_of_record_for_update">Veuillez saisir l\'ID de l\'enregistrement pour la mise à jour/la suppression</string>
-    <string name="search">Chercher</string>
+    <string name="search">Rechercher</string>
     <string name="no_record_found">Aucun Enregistrement Trouvé</string>
     <string name="update_success">Mise à jour des données réussie</string>
     <string name="update_fail">Les données n\'ont pas été mises à jour</string>
@@ -76,7 +76,7 @@
     <string name="edit_dealer">Modifier le concessionnaire</string>
     <string name="home_heading">Identifiez et trouvez la bonne solution pour protéger vos cultures contre les ravageurs et les maladies.</string>
     <string name="identify_a_plant_health_problem">Identifiez les ravageurs et les maladies de votre ferme</string>
-    <string name="search_by_name">Rechercher par nom Ou sélectionner</string>
+    <string name="search_by_name">Rechercher par nom</string>
     <string name="or">ou</string>
     <string name="text_select">Sélectionner</string>
     <string name="text_select_language">Choisir la langue</string>
@@ -121,13 +121,16 @@
     <string name="biological_control">Contrôle biologique</string>
     <string name="chemical_control">Lutte chimique</string>
     <string name="outlined_button">Bouton souligné</string>
-    <string name="help">Aider</string>
+    <string name="help">Aide</string>
     <string name="product">Produit</string>
-    <string name="learn_about_crop_protection_products">En savoir plus sur les produits \nde protection des cultures</string>
+    <string name="learn_about_crop_protection_products">En apprendre plus sur \nla protection des cultures</string>
     <string name="search_by_title">Rechercher par titre</string>
-    <string name="learning_material">Matériel d\'apprentissage</string>
+    <string name="learning_material">Apprentissage</string>
     <string name="welcome_message">Bienvenue sur iGrow, votre outil de protection des cultures</string>
     <string name="text_select_country">Choisissez le pays</string>
     <string name="text_solution">La solution</string>
+    <string name="find_local_dealer">Recherchez une \n boutique phytosanitaire</string>
+    <string name="suppliers">Fournisseurs</string>
+    <string name="location_amp_contact"><![CDATA[LOCALISATION & Contact]]></string>
 
 </resources>
