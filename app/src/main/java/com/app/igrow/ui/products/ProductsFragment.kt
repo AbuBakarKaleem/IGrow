@@ -97,12 +97,12 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             }
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
-                    val map = HashMap<String, String>()
-                    map[Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTOR)] = binding.etSearch.text.toString().trim()
-                    viewModel.searchProduct(map)
-                } else {
-                    viewModel.searchProduct(productFiltersHashMap)
+                    productFiltersHashMap.clear()
+                    productFiltersHashMap[Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTOR)] =
+                        binding.etSearch.text.toString().trim()
                 }
+                viewModel.searchProduct(productFiltersHashMap)
+
             }
             binding.btnReset.setOnClickListener {
                 resetAllFilters()
@@ -138,8 +138,12 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 val bundle = bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toProductsSearchResultFragment, bundle)
             } else {
-                if( viewModel.showEmptyListMsg() )
-                    Toast.makeText(requireContext(), getString(R.string.no_data_found), Toast.LENGTH_LONG).show()
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
     }
@@ -255,6 +259,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
     }
 
     private fun resetAllFilters() {
+        binding.etSearch.text?.clear()
         if (productFiltersHashMap.isNotEmpty()) {
             binding.tvCropFilterText.text = getString(R.string.crop)
             binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)

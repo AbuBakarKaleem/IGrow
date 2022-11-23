@@ -76,12 +76,11 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
             binding.btnSearch.setOnClickListener {
 
                 if (binding.etSearch.text.toString().isNotEmpty()) {
-                    val map = HashMap<String, String>()
-                    map[Utils.getLocalizeColumnName(Constants.COL_DEALER_NAME)] = binding.etSearch.text.toString().trim()
-                    viewModel.searchDistributor(map)
-                } else {
-                    viewModel.searchDistributor(distributorsFiltersHashMap)
+                    distributorsFiltersHashMap.clear()
+                    distributorsFiltersHashMap[Utils.getLocalizeColumnName(Constants.COL_DEALER_NAME)] =
+                        binding.etSearch.text.toString().trim()
                 }
+                viewModel.searchDistributor(distributorsFiltersHashMap)
             }
 
             binding.btnReset.setOnClickListener {
@@ -119,8 +118,12 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
                     bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDealersListFragment, bundle)
             } else {
-                if( viewModel.showEmptyListMsg() )
-                    Toast.makeText(requireContext(), getString(R.string.no_data_found), Toast.LENGTH_LONG).show()
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
     }
@@ -154,6 +157,7 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
     }
 
     private fun resetAllFilters() {
+        binding.etSearch.text?.clear()
         if (distributorsFiltersHashMap.isNotEmpty()) {
             binding.tvRegionFilterText.text = getString(R.string.region)
             binding.tvCityTownFilterText.text = getString(R.string.city_town)

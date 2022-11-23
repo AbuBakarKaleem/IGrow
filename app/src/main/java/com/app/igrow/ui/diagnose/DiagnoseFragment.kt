@@ -82,12 +82,11 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
             }
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
-                    val map = HashMap<String, String>()
-                    map[getLocalizeColumnName(COL_PLANT_HEALTH_PROBLEM)] = binding.etSearch.text.toString().trim()
-                    viewModel.searchDiagnostic(map)
-                } else {
-                    viewModel.searchDiagnostic(diagnosticFiltersHashMap)
+                    diagnosticFiltersHashMap.clear()
+                    diagnosticFiltersHashMap[getLocalizeColumnName(COL_PLANT_HEALTH_PROBLEM)] =
+                        binding.etSearch.text.toString().trim()
                 }
+                viewModel.searchDiagnostic(diagnosticFiltersHashMap)
 
             }
             binding.btnReset.setOnClickListener {
@@ -125,8 +124,12 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                     bundleOf(ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
             } else {
-                if( viewModel.showEmptyListMsg() )
-                    Toast.makeText(requireContext(), getString(R.string.no_data_found), Toast.LENGTH_LONG).show()
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
     }
@@ -231,6 +234,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     }
 
     private fun resetAllFilters() {
+        binding.etSearch.text?.clear()
         if (diagnosticFiltersHashMap.isNotEmpty()) {
             binding.tvCropFilterText.text = getString(R.string.crop)
             binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)
