@@ -220,38 +220,6 @@ class AdminActivity : BaseActivity() {
     private fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
-    /* fun applyBrandingOnDialog(dialog: AlertDialog, title: String) {
-         val positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-         val negative = dialog.getButton(AlertDialog.BUTTON_NEGATIVE)
-         val neutral = dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
-         positive.setTextColor(DocumentManager.getLevelFiveColor())
-         positive.setBackgroundColor(DocumentManager.getLevelOneColor())
-         positive.elevation = elevationValue
-         negative.setTextColor(getNegativeButtonTextColor())
-         negative.setBackgroundColor(getNegativeButtonBackgroundColor())
-         negative.elevation = elevationValue
-         var buttonParams: LinearLayout.LayoutParams
-         buttonParams = positive.layoutParams as LinearLayout.LayoutParams
-         buttonParams.weight = 1f
-         buttonParams.width = 0
-         buttonParams.gravity = Gravity.END
-         buttonParams.bottomMargin = 40
-         buttonParams = negative.layoutParams as LinearLayout.LayoutParams
-         buttonParams.weight = 1f
-         buttonParams.width = 0
-         buttonParams.gravity = Gravity.START
-         buttonParams.rightMargin = 40
-         buttonParams.bottomMargin = 40
-         buttonParams = neutral.layoutParams as LinearLayout.LayoutParams
-         buttonParams.weight = 0f
-         buttonParams.width = 0
-         if (!title.isEmpty()) {
-             val s = SpannableString(title.uppercase(Locale.getDefault()))
-             s.setSpan(ForegroundColorSpan(DocumentManager.getLevelOneColor()), 0, s.length, 0)
-             dialog.setTitle(s)
-         }
-     }*/
     enum class AdminActionType {
         EDIT, DELETE, TYPE
     }

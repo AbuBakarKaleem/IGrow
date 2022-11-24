@@ -31,6 +31,8 @@ class ProductsViewModel @Inject constructor(
     var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> =
         filterResultMutableLiveData
 
+    private var showEmptyResponseMsg = false
+
     fun getProductColumnData(columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
@@ -61,6 +63,7 @@ class ProductsViewModel @Inject constructor(
                 when (it) {
                     is DataState.Success -> {
                         it.data?.let { response ->
+                            showEmptyResponseMsg = response.isEmpty()
                             filterResultMutableLiveData.postValue(response)
                         }
                     }
@@ -71,5 +74,8 @@ class ProductsViewModel @Inject constructor(
             }
         }
     }
+
+    fun showEmptyListMsg() =  showEmptyResponseMsg
+
 
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -28,10 +29,10 @@ import com.app.igrow.utils.Constants.COL_CROP
 import com.app.igrow.utils.Constants.COL_CROP_FR
 import com.app.igrow.utils.Constants.COL_PART_AFFECTED
 import com.app.igrow.utils.Constants.COL_PART_AFFECTED_FR
+import com.app.igrow.utils.Constants.COL_PLANT_HEALTH_PROBLEM
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Constants.SHEET_DIAGNOSTIC
-import com.app.igrow.utils.Utils
 import com.app.igrow.utils.Utils.getLocalizeColumnName
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
@@ -80,6 +81,11 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                 viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.btnSearch.setOnClickListener {
+                if (binding.etSearch.text.toString().isNotEmpty()) {
+                    diagnosticFiltersHashMap.clear()
+                    diagnosticFiltersHashMap[getLocalizeColumnName(COL_PLANT_HEALTH_PROBLEM)] =
+                        binding.etSearch.text.toString().trim()
+                }
                 viewModel.searchDiagnostic(diagnosticFiltersHashMap)
 
             }
@@ -118,7 +124,12 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                     bundleOf(ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDiagnoseSearchResultFragment, bundle)
             } else {
-                // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
     }
@@ -223,6 +234,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     }
 
     private fun resetAllFilters() {
+        binding.etSearch.text?.clear()
         if (diagnosticFiltersHashMap.isNotEmpty()) {
             binding.tvCropFilterText.text = getString(R.string.crop)
             binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)

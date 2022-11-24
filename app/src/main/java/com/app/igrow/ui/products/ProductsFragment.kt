@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -24,6 +25,7 @@ import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Constants
+import com.app.igrow.utils.Utils
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -94,6 +96,11 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 )
             }
             binding.btnSearch.setOnClickListener {
+                if (binding.etSearch.text.toString().isNotEmpty()) {
+                    productFiltersHashMap.clear()
+                    productFiltersHashMap[Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTOR)] =
+                        binding.etSearch.text.toString().trim()
+                }
                 viewModel.searchProduct(productFiltersHashMap)
 
             }
@@ -131,7 +138,12 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 val bundle = bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toProductsSearchResultFragment, bundle)
             } else {
-                // Toast.makeText(requireContext(), "No data found", Toast.LENGTH_LONG).show()
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
     }
@@ -247,6 +259,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
     }
 
     private fun resetAllFilters() {
+        binding.etSearch.text?.clear()
         if (productFiltersHashMap.isNotEmpty()) {
             binding.tvCropFilterText.text = getString(R.string.crop)
             binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)

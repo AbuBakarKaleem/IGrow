@@ -31,25 +31,59 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_heading"
             style="@style/headingStyle"
-            android:text="Find local Dealer"
+            android:text="@string/find_local_dealer"
             android:textColor="@color/home_shop_front_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="30dp"
+            app:contentPaddingBottom="10dp"
+            app:contentPaddingLeft="10dp"
+            app:contentPaddingRight="10dp"
+            app:contentPaddingTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/et_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_two">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_add_shopping_blue" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableStart="@drawable/icon_search"
+            android:drawableStart="@drawable/icon_search_blue"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
-            android:drawableTint="@color/home_shop_front_blue"
+            android:imeOptions="actionDone"
             app:backgroundTint="@color/home_shop_front_blue"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_two" />
+            app:layout_constraintTop_toBottomOf="@id/header_icon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_or_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or_select"
+            android:textColor="@color/home_shop_front_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            app:layout_constraintBottom_toTopOf="@id/cv_corp"/>
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_region"
@@ -58,7 +92,7 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_search">
+            app:layout_constraintTop_toBottomOf="@+id/tv_or_select">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_region"
@@ -75,6 +109,7 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </com.google.android.material.card.MaterialCardView>
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_city_town"
@@ -125,6 +160,8 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </com.google.android.material.card.MaterialCardView>
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_search"

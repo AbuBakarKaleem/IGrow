@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -31,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
+class DealersFragment : BaseFragment<FragmentDealerBinding>() {
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDealerBinding
         get() = FragmentDealerBinding::inflate
@@ -66,10 +67,19 @@ class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
             }
             binding.llDistributor.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME)
-                    viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DISTRIBUTORS)
+                viewModel.getDistributorColumnData(
+                    distributorColumnName,
+                    Constants.SHEET_DISTRIBUTORS
+                )
             }
 
             binding.btnSearch.setOnClickListener {
+
+                if (binding.etSearch.text.toString().isNotEmpty()) {
+                    distributorsFiltersHashMap.clear()
+                    distributorsFiltersHashMap[Utils.getLocalizeColumnName(Constants.COL_DEALER_NAME)] =
+                        binding.etSearch.text.toString().trim()
+                }
                 viewModel.searchDistributor(distributorsFiltersHashMap)
             }
 
@@ -80,7 +90,7 @@ class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
             e.printStackTrace()
         }
     }
-    
+
     private fun activateObserver() {
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -107,6 +117,13 @@ class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
                 val bundle =
                     bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
                 findNavController().navigate(R.id.toDealersListFragment, bundle)
+            } else {
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
     }
@@ -140,6 +157,7 @@ class DealersFragment :  BaseFragment<FragmentDealerBinding>() {
     }
 
     private fun resetAllFilters() {
+        binding.etSearch.text?.clear()
         if (distributorsFiltersHashMap.isNotEmpty()) {
             binding.tvRegionFilterText.text = getString(R.string.region)
             binding.tvCityTownFilterText.text = getString(R.string.city_town)

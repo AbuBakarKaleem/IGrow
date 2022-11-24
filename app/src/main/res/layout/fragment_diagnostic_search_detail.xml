@@ -63,7 +63,7 @@
             android:text="@string/identification"
             android:textAllCaps="true"
             android:textColor="@color/bright_green"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -170,7 +170,7 @@
             android:text="@string/search_detail_symptoms_impact"
             android:textAllCaps="true"
             android:textColor="@color/bright_green"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -250,7 +250,7 @@
             android:text="@string/control"
             android:textAllCaps="true"
             android:textColor="@color/bright_green"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -328,7 +328,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/llControlProduct"
@@ -356,19 +356,6 @@
                 android:textAllCaps="false"
                 android:textSize="12sp"
                 app:icon="@drawable/ic_help"
-                app:iconGravity="start" />
-
-            <com.google.android.material.button.MaterialButton
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Share"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                app:icon="@drawable/ic_share"
                 app:iconGravity="start" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

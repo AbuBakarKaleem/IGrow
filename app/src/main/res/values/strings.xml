@@ -44,16 +44,16 @@
     <string name="results">Results</string>
     <string name="re_entry_period">Re-entry Period</string>
     <string name="time_before_harvest">Time Before Harvest</string>
-    <string name="distributor">Distributor</string>
+    <string name="distributor">Distributor\'s</string>
     <string name="telephone">Telephone</string>
     <string name="email">Email</string>
     <string name="website">Website</string>
     <string name="facebook">Facebook</string>
     <string name="dealer_name">Dealer Name</string>
     <string name="address">Address</string>
-    <string name="city_town">City Town</string>
+    <string name="city_town">City/Town</string>
     <string name="region">Region</string>
-    <string name="mobile">Mobile</string>
+    <string name="whatsapp">Whatsapp</string>
     <string name="id">ID</string>
     <string name="edit_diagnostic">Diagnostic</string>
     <string name="please_enter_id_of_record_for_update">Please Enter ID of Record for Update/Delete</string>
@@ -70,9 +70,11 @@
     <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="edit_dealer">Edit Dealer</string>
-    <string name="home_heading">Welcome to your \n Crop Protection Tool.</string>
-    <string name="identify_a_plant_health_problem">Identify a Plant Health Problem</string>
+    <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
+    <string name="identify_a_plant_health_problem">Identify pests and diseases in your farm</string>
     <string name="search_by_name">Search by name</string>
+    <string name="or_select">or select</string>
+
     <string name="or">or</string>
     <string name="text_select">Select</string>
     <string name="text_select_language">Select Language</string>
@@ -80,7 +82,8 @@
     <string name="language_french">French</string>
     <string name="no_internet_error">No Internet Connection</string>
     <string name="no_internet_error_message">Please connect an Internet </string>
-
+    <string name="text_select_country">Select Country</string>
+    <string name="text_solution">Solution</string>
 
     <string-array name="action_type">
         <item>Select</item>
@@ -94,6 +97,11 @@
         <item>@string/text_select_language</item>
         <item>@string/language_english</item>
         <item>@string/language_french</item>
+    </string-array>
+
+    <string-array name="countryList">
+        <item>@string/text_select_country</item>
+        <item>Cameroon</item>
     </string-array>
 
     <string name="crop">Crop</string>
@@ -116,7 +124,13 @@
     <string name="language_change_continue_message">Do want to continue?</string>
     <string name="note_notice">Always read the label before using a pesticide</string>
     <string name="dealer_info">Dealer Info</string>
-    <string name="learn_about_crop_protection_products">Learn About Crop \nProtection Products</string>
+    <string name="learn_about_crop_protection_products">Learn More About \n Crop Protection</string>
     <string name="search_by_title">Search by title</string>
-    <string name="learning_material">Learning Material</string>
+    <string name="learning_material">Learning</string>
+    <string name="slogan">Let\'s grow together</string>
+    <string name="welcome_message">Welcome to iGrow, your crop protection tool.</string>
+    <string name="no_data_found">No data found</string>
+    <string name="find_local_dealer">Find a local \n Crop Protection dealer</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="location_amp_contact"><![CDATA[Location & Contact]]></string>
 </resources>

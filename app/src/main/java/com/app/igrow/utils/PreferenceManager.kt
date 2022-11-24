@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.app.igrow.IGrowApp
+import com.app.igrow.utils.Constants.country
 import com.app.igrow.utils.Constants.currentLanguage
 
 
@@ -13,11 +14,11 @@ class PreferenceManager(context: Context?) {
         pref = if (context != null) {
             PreferenceManager.getDefaultSharedPreferences(context)
         } else {
-            IGrowApp.getInstance()?.let { PreferenceManager.getDefaultSharedPreferences(it) }
+            IGrowApp.getInstance().let { PreferenceManager.getDefaultSharedPreferences(it) }
         }
     }
 
-    companion object{
+    companion object {
         private var instance: com.app.igrow.utils.PreferenceManager? = null
         private var pref: SharedPreferences? = null
 
@@ -33,7 +34,15 @@ class PreferenceManager(context: Context?) {
         return pref!!.getString(currentLanguage, "en")
     }
 
-    fun setLanguage(b: String?) {
-        pref!!.edit().putString(currentLanguage, b).apply()
+    fun setLanguage(language: String?) {
+        pref!!.edit().putString(currentLanguage, language).apply()
+    }
+
+    fun getCountry(): String? {
+        return pref!!.getString(country, "")
+    }
+
+    fun setCountry(countryName: String?) {
+        pref!!.edit().putString(country, countryName).apply()
     }
 }

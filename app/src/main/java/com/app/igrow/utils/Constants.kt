@@ -102,4 +102,5 @@ object Constants {
 
     // Session Manager Constant
     const val currentLanguage = "language"
+    const val country = "country"
 }

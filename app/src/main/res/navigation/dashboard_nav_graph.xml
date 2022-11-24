@@ -131,7 +131,11 @@
 
         <action
             android:id="@+id/toLearningsFragment"
-            app:destination="@id/learningsFragment" />
+            app:destination="@id/learningsFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/moreFragment"
+            />
 
     </fragment>
 

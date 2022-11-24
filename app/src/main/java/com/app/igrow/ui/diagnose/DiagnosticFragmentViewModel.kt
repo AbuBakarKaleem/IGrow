@@ -34,6 +34,8 @@ class DiagnosticFragmentViewModel @Inject constructor(
     var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> =
         filterResultMutableLiveData
 
+    private var showEmptyResponseMsg = false
+
     fun getDiagnosticColumnData(columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
@@ -64,6 +66,7 @@ class DiagnosticFragmentViewModel @Inject constructor(
                 when (it) {
                     is DataState.Success -> {
                         it.data?.let { response ->
+                            showEmptyResponseMsg = response.isEmpty()
                             filterResultMutableLiveData.postValue(response)
                         }
                     }
@@ -74,5 +77,7 @@ class DiagnosticFragmentViewModel @Inject constructor(
             }
         }
     }
+
+    fun showEmptyListMsg() =  showEmptyResponseMsg
 
 }
