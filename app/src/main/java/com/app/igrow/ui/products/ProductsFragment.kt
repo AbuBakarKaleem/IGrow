@@ -25,6 +25,18 @@ import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Constants
+import com.app.igrow.utils.Constants.COL_COMPOSITION
+import com.app.igrow.utils.Constants.COL_COMPOSITION_FR
+import com.app.igrow.utils.Constants.COL_CROP
+import com.app.igrow.utils.Constants.COL_CROP_FR
+import com.app.igrow.utils.Constants.COL_DISTRIBUTOR
+import com.app.igrow.utils.Constants.COL_DISTRIBUTOR_FR
+import com.app.igrow.utils.Constants.COL_ENEMY
+import com.app.igrow.utils.Constants.COL_ENEMY_FR
+import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY
+import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY_FR
+import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
+import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Utils
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
@@ -57,48 +69,48 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
         try {
 
             binding.llCrop.setOnClickListener {
-                productColumnName = Constants.COL_CROP
-                viewModel.getProductColumnData(Constants.COL_CROP, Constants.SHEET_PRODUCTS)
+                productColumnName = COL_CROP
+                viewModel.getProductColumnData(COL_CROP, Constants.SHEET_PRODUCTS)
             }
             binding.llEnemy.setOnClickListener {
-                productColumnName = Constants.COL_ENEMY
+                productColumnName = COL_ENEMY
                 viewModel.getProductColumnData(
-                    Constants.COL_ENEMY,
+                    COL_ENEMY,
                     Constants.SHEET_PRODUCTS
                 )
             }
             binding.llComposition.setOnClickListener {
-                productColumnName = Constants.COL_COMPOSITION
+                productColumnName = COL_COMPOSITION
                 viewModel.getProductColumnData(
-                    Constants.COL_COMPOSITION,
+                    COL_COMPOSITION,
                     Constants.SHEET_PRODUCTS
                 )
             }
             binding.llEnemyType.setOnClickListener {
-                productColumnName = Constants.COL_TYPE_OF_ENEMY
+                productColumnName = COL_TYPE_OF_ENEMY
                 viewModel.getProductColumnData(
-                    Constants.COL_TYPE_OF_ENEMY,
+                    COL_TYPE_OF_ENEMY,
                     Constants.SHEET_PRODUCTS
                 )
             }
             binding.llProductCategory.setOnClickListener {
-                productColumnName = Constants.COL_PRODUCTS_CATEGORY
+                productColumnName = COL_PRODUCTS_CATEGORY
                 viewModel.getProductColumnData(
-                    Constants.COL_PRODUCTS_CATEGORY,
+                    COL_PRODUCTS_CATEGORY,
                     Constants.SHEET_PRODUCTS
                 )
             }
             binding.llDistributor.setOnClickListener {
-                productColumnName = Constants.COL_DISTRIBUTOR
+                productColumnName = COL_DISTRIBUTOR
                 viewModel.getProductColumnData(
-                    Constants.COL_DISTRIBUTOR,
+                    COL_DISTRIBUTOR,
                     Constants.SHEET_PRODUCTS
                 )
             }
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
                     productFiltersHashMap.clear()
-                    productFiltersHashMap[Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTOR)] =
+                    productFiltersHashMap[Utils.getLocalizeColumnName(COL_DISTRIBUTOR)] =
                         binding.etSearch.text.toString().trim()
                 }
                 viewModel.searchProduct(productFiltersHashMap)
@@ -126,6 +138,9 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
         }
         viewModel.getProductColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                if (productColumnName.isNotEmpty()) {
+                    addPlaceholderInFilterList(it)
+                }
                 dialogList = it
                 showListDialog(it)
             }
@@ -145,6 +160,36 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                         Toast.LENGTH_LONG
                     ).show()
             }
+        }
+    }
+
+    private fun addPlaceholderInFilterList(dataList: ArrayList<String>) {
+        when (productColumnName) {
+            COL_CROP, COL_CROP_FR -> {
+                dataList.add(0, getString(R.string.crop))
+                return
+            }
+            COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
+                dataList.add(0, getString(R.string.enemy_type))
+                return
+            }
+            COL_ENEMY, COL_ENEMY_FR -> {
+                dataList.add(0, getString(R.string.enemy))
+                return
+            }
+            COL_COMPOSITION, COL_COMPOSITION_FR -> {
+                dataList.add(0, getString(R.string.composition))
+                return
+            }
+            COL_PRODUCTS_CATEGORY, COL_PRODUCTS_CATEGORY_FR -> {
+                dataList.add(0, getString(R.string.product_category))
+                return
+            }
+            COL_DISTRIBUTOR, COL_DISTRIBUTOR_FR -> {
+                dataList.add(0, getString(R.string.distributor))
+                return
+            }
+
         }
     }
 
@@ -217,32 +262,32 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
     private fun setSelectedValueToView(value: String) {
         if (productColumnName.isNotEmpty()) {
             when (productColumnName) {
-                Constants.COL_CROP -> {
+                COL_CROP, COL_CROP_FR -> {
                     binding.tvCropFilterText.text = ""
                     binding.tvCropFilterText.text = value
                     return
                 }
-                Constants.COL_TYPE_OF_ENEMY -> {
+                COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
                     binding.tvTypeOfEnemyFilterText.text = ""
                     binding.tvTypeOfEnemyFilterText.text = value
                     return
                 }
-                Constants.COL_ENEMY -> {
+                COL_ENEMY, COL_ENEMY_FR -> {
                     binding.tvEnemyFilterText.text = ""
                     binding.tvEnemyFilterText.text = value
                     return
                 }
-                Constants.COL_COMPOSITION -> {
+                COL_COMPOSITION, COL_COMPOSITION_FR -> {
                     binding.tvCompositionFilterText.text = ""
                     binding.tvCompositionFilterText.text = value
                     return
                 }
-                Constants.COL_PRODUCTS_CATEGORY -> {
+                COL_PRODUCTS_CATEGORY, COL_PRODUCTS_CATEGORY_FR -> {
                     binding.tvProductCategoryFilterText.text = ""
                     binding.tvProductCategoryFilterText.text = value
                     return
                 }
-                Constants.COL_DISTRIBUTOR -> {
+                COL_DISTRIBUTOR, COL_DISTRIBUTOR_FR -> {
                     binding.tvDistributorFilterText.text = ""
                     binding.tvDistributorFilterText.text = value
                     return
@@ -253,7 +298,14 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
     private fun populateFiltersObject(value: String) {
         val englishAndFrenchValues = value.split(":")
-        if (productColumnName.isNotEmpty()) {
+        if (productColumnName.isNotEmpty() &&
+            englishAndFrenchValues[0] != getString(R.string.crop) &&
+            englishAndFrenchValues[0] != getString(R.string.enemy_type) &&
+            englishAndFrenchValues[0] != getString(R.string.enemy) &&
+            englishAndFrenchValues[0] != getString(R.string.composition) &&
+            englishAndFrenchValues[0] != getString(R.string.product_category) &&
+            englishAndFrenchValues[0] != getString(R.string.distributor)
+        ) {
             productFiltersHashMap[productColumnName] = englishAndFrenchValues[0]
         }
     }
@@ -264,7 +316,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.tvCropFilterText.text = getString(R.string.crop)
             binding.tvTypeOfEnemyFilterText.text = getString(R.string.enemy_type)
             binding.tvEnemyFilterText.text = getString(R.string.enemy)
-            binding.tvCompositionFilterText.text = getString(R.string.causal_agent)
+            binding.tvCompositionFilterText.text = getString(R.string.composition)
             binding.tvProductCategoryFilterText.text = getText(R.string.product_category)
             binding.tvDistributorFilterText.text = getText(R.string.distributor)
             productFiltersHashMap.clear()

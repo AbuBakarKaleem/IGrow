@@ -45,7 +45,8 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
     private var filteredList = arrayListOf<String>()
     private lateinit var dialogListAdapter: DialogListAdapter
     private lateinit var listDialog: Dialog
-    private lateinit var dialogeLayoutBinding: DialogeLayoutBinding
+    private lateinit var dialogLayoutBinding: DialogeLayoutBinding
+    private var selectedFilter = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -105,6 +106,9 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
         }
         viewModel.getDistributorColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                if (distributorColumnName.isNotEmpty()) {
+                    addPlaceholderInFilterList(it)
+                }
                 dialogList = it
                 showListDialog(it)
             }
@@ -132,20 +136,20 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
         listDialog = Dialog(requireContext())
         listDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        dialogeLayoutBinding = DialogeLayoutBinding.inflate(LayoutInflater.from(context))
-        listDialog.setContentView(dialogeLayoutBinding.root)
+        dialogLayoutBinding = DialogeLayoutBinding.inflate(LayoutInflater.from(context))
+        listDialog.setContentView(dialogLayoutBinding.root)
 
         listDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        dialogeLayoutBinding.rcListDialog.layoutManager = LinearLayoutManager(requireContext())
-        dialogeLayoutBinding.rcListDialog.setHasFixedSize(true)
+        dialogLayoutBinding.rcListDialog.layoutManager = LinearLayoutManager(requireContext())
+        dialogLayoutBinding.rcListDialog.setHasFixedSize(true)
 
         setDialogListToAdapter(dataList)
 
         listDialog.show()
 
 
-        dialogeLayoutBinding.etListDialogSearch.doAfterTextChanged { editable ->
+        dialogLayoutBinding.etListDialogSearch.doAfterTextChanged { editable ->
             if (!editable.isNullOrEmpty() && editable.isNotBlank()) {
                 val myResult = searchList(editable.toString())
                 setDialogListToAdapter(myResult)
@@ -200,12 +204,30 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
             populateFiltersObject(selectedValue)
         }
         dialogListAdapter.differ.submitList(dataList)
-        dialogeLayoutBinding.rcListDialog.adapter = dialogListAdapter
+        dialogLayoutBinding.rcListDialog.adapter = dialogListAdapter
     }
 
     private fun populateFiltersObject(value: String) {
-        if (distributorColumnName.isNotEmpty()) {
+        if (distributorColumnName.isNotEmpty() &&
+            (value == getString(R.string.region)).not() &&
+            (value == getString(R.string.city_town)).not() &&
+            (value == getString(R.string.distributor)).not()
+        ) {
             distributorsFiltersHashMap[distributorColumnName] = value
+        }
+    }
+
+    private fun addPlaceholderInFilterList(dataList: ArrayList<String>){
+        when (distributorColumnName) {
+            Constants.COL_REGION, Constants.COL_REGION_FR -> {
+                dataList.add(0, getString(R.string.region))
+            }
+            Constants.COL_CITY_TOWN, Constants.COL_CITY_TOWN_FR -> {
+                dataList.add(0, getString(R.string.city_town))
+            }
+            Constants.COL_DISTRIBUTORS_NAME, Constants.COL_DISTRIBUTORS_NAME_FR -> {
+                dataList.add(0, getString(R.string.distributor))
+            }
         }
     }
 
