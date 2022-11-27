@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import com.app.igrow.R
 import com.app.igrow.adpters.LearningListAdapter
 import com.app.igrow.base.BaseFragment
+import com.app.igrow.data.model.sheets.Videos
 import com.app.igrow.databinding.FragmentLearningsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
 
 
-    private var youtubeVideosList = arrayListOf<String>()
+    private var youtubeVideosList = arrayListOf<Videos>()
+    private val viewModel: LearningViewModel by viewModels()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLearningsBinding
         get() = FragmentLearningsBinding::inflate
 
@@ -25,52 +30,47 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        createMockDataList()
-        initView()
-        activateListener()
+        viewModel.getLearningData()
+        activateObserver()
     }
 
-    private fun initView() {
-
+    private fun initRecyclerView() {
         adapter = LearningListAdapter({ videoClickUrl ->
-            val intent =
-                Intent(Intent.ACTION_VIEW, Uri.parse(videoClickUrl))
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoClickUrl.link))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }, { shareItemClick ->
-            shareAppLink(shareItemClick)
+            shareAppLink(shareItemClick.link)
         })
-
         binding.rcLearnings.adapter = adapter
         updateDataInList(youtubeVideosList)
-
     }
 
-
-    private fun activateListener() {
-
+    private fun activateObserver() {
+        viewModel.getLearningDataLiveData.observe(viewLifecycleOwner) {
+            if (it == null || it.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.no_data_found),
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                youtubeVideosList.addAll(it)
+                initRecyclerView()
+            }
+        }
     }
 
-
-    private fun shareAppLink(youtubeVideoLink:String) {
+    private fun shareAppLink(youtubeVideoLink: String) {
         val i = Intent(Intent.ACTION_SEND)
         i.type = "text/plain"
         i.putExtra(Intent.EXTRA_SUBJECT, youtubeVideoLink)
         startActivity(Intent.createChooser(i, "Share Video URL"))
     }
 
-    private fun updateDataInList(myList: ArrayList<String>) {
+    private fun updateDataInList(myList: ArrayList<Videos>) {
         adapter.differ.submitList(myList)
         adapter.notifyDataSetChanged()
-    }
-
-
-    private fun createMockDataList() {
-        youtubeVideosList.add("https://www.youtube.com/watch?v=1f0bObjoAqI")
-        youtubeVideosList.add("https://www.youtube.com/watch?v=O0KSZn5QuX0")
-        youtubeVideosList.add("https://www.youtube.com/watch?v=jso5-dz7mjY")
-        youtubeVideosList.add("https://www.youtube.com/watch?v=K93e8MpKwo0")
     }
 
 }

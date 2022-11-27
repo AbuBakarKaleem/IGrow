@@ -4,10 +4,7 @@ import android.util.Log
 import com.app.igrow.IGrowApp
 import com.app.igrow.data.DataState
 import com.app.igrow.data.local.repository.LocalRepository
-import com.app.igrow.data.model.sheets.Dealers
-import com.app.igrow.data.model.sheets.Diagnostic
-import com.app.igrow.data.model.sheets.Distributors
-import com.app.igrow.data.model.sheets.Products
+import com.app.igrow.data.model.sheets.*
 import com.app.igrow.data.remote.ApiService
 import com.app.igrow.utils.*
 import com.google.firebase.firestore.CollectionReference
@@ -421,11 +418,14 @@ class RepositoryImpl @Inject constructor(
                             if (snapshot != null && !snapshot.isEmpty) {
                                 val dataList = ArrayList<String>()
                                 snapshot.documents.forEach {
-                                    var value:HashMap<String,String> = HashMap()
-                                    value = if (it.data?.values?.asIterable()?.elementAt(0) is HashMap<*, *>) {
+                                    var value: HashMap<String, String> = HashMap()
+                                    value = if (it.data?.values?.asIterable()
+                                            ?.elementAt(0) is HashMap<*, *>
+                                    ) {
                                         it.data?.values?.first() as HashMap<String, String>
                                     } else {
-                                        it.data?.values?.asIterable()?.elementAt(1) as HashMap<String, String>
+                                        it.data?.values?.asIterable()
+                                            ?.elementAt(1) as HashMap<String, String>
                                     }
 
                                     dataList.add(value[columnName].toString())
@@ -502,7 +502,7 @@ class RepositoryImpl @Inject constructor(
 
                                 snapshot.documents.forEach { doc ->
                                     doc.data?.let { it ->
-                                        var map:HashMap<String,String> = HashMap()
+                                        var map: HashMap<String, String> = HashMap()
                                         map = if (it.values.asIterable()
                                                 .elementAt(0) is HashMap<*, *>
                                         ) {
@@ -538,7 +538,6 @@ class RepositoryImpl @Inject constructor(
             }
             awaitClose()
         }
-
 
     private fun insertDataIntoDb(
         sheetName: String,
@@ -638,6 +637,29 @@ class RepositoryImpl @Inject constructor(
         }
 
         return dataList
+    }
+
+    override suspend fun getLearningData(): Flow<DataState<ArrayList<Videos>>> = callbackFlow {
+        val databaseInstance = FirebaseFirestore.getInstance()
+        databaseInstance.collection(Constants.SHEET_VIDEOS).addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                if (isActive) trySend(DataState.error<ArrayList<Videos>>(stringUtils.somethingWentWrong()))
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.isEmpty.not()) {
+                val videosList = ArrayList<Videos>()
+                for (doc in snapshot.documents) {
+                    val videosObject = doc.toObject(Videos::class.java)
+                    if (videosObject != null) {
+                        videosList.add(videosObject)
+                    }
+                }
+                if (isActive) trySend(DataState.success(videosList))
+            } else {
+                if (isActive) trySend(DataState.error<ArrayList<Videos>>(stringUtils.somethingWentWrong()))
+            }
+        }
+        awaitClose()
     }
 
 }

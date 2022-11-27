@@ -5,19 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.app.igrow.data.model.sheets.Videos
 import com.app.igrow.databinding.LearningsListItemBinding
 
-class LearningListAdapter(val onItemClicked: (Item: String) -> Unit,
-                          val onShareClicked: (Item: String) -> Unit) :
+class LearningListAdapter(val onItemClicked: (Item: Videos) -> Unit,
+                          val onShareClicked: (Item: Videos) -> Unit) :
     RecyclerView.Adapter<LearningListAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
         private val itemBinding: LearningsListItemBinding
     ) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(model: String) {
+        fun bind(model: Videos) {
             itemBinding.apply {
-                this.tvSearchResultName.text = model    
+                this.tvSearchResultName.text = model.title
                 this.tvSearchResultName.setOnClickListener {
                     onItemClicked(model)
                 }
@@ -28,13 +29,13 @@ class LearningListAdapter(val onItemClicked: (Item: String) -> Unit,
         }
     }
 
-    private val differCallBack = object : DiffUtil.ItemCallback<String>() {
+    private val differCallBack = object : DiffUtil.ItemCallback<Videos>() {
 
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: Videos, newItem: Videos): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Videos, newItem: Videos): Boolean {
             return oldItem == newItem
         }
     }

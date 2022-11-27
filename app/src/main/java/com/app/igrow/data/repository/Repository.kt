@@ -1,10 +1,7 @@
 package com.app.igrow.data.repository
 
 import com.app.igrow.data.DataState
-import com.app.igrow.data.model.sheets.Dealers
-import com.app.igrow.data.model.sheets.Diagnostic
-import com.app.igrow.data.model.sheets.Distributors
-import com.app.igrow.data.model.sheets.Products
+import com.app.igrow.data.model.sheets.*
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -44,6 +41,8 @@ interface Repository {
     suspend fun searchByName(name:String,sheetName:String):Flow<DataState<ArrayList<String>>>
 
     suspend fun getAllDataOfGivenSheet(sheetName:String): Flow<DataState<ArrayList<HashMap<String,String>>>>
+
+    suspend fun getLearningData():Flow<DataState<ArrayList<Videos>>>
 
 
 }

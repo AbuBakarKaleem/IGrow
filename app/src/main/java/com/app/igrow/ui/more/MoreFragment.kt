@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.databinding.FragmentMoreBinding
 import com.app.igrow.utils.PreferenceManager
+import com.app.igrow.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -64,7 +66,15 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
         }
 
         binding.btnLearningMaterial.setOnClickListener {
-            findNavController().navigate(R.id.toLearningsFragment)
+            if (Utils.isInternetAvailable(requireContext())) {
+                findNavController().navigate(R.id.toLearningsFragment)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    getText(R.string.no_internet_error),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 
