@@ -7,6 +7,7 @@ import com.app.igrow.data.local.repository.LocalRepository
 import com.app.igrow.data.model.sheets.*
 import com.app.igrow.data.remote.ApiService
 import com.app.igrow.utils.*
+import com.app.igrow.utils.Constants.SHEET_VIDEOS
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.WriteBatch
@@ -641,7 +642,7 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getLearningData(): Flow<DataState<ArrayList<Videos>>> = callbackFlow {
         val databaseInstance = FirebaseFirestore.getInstance()
-        databaseInstance.collection(Constants.SHEET_VIDEOS).addSnapshotListener { snapshot, error ->
+        databaseInstance.collection(SHEET_VIDEOS).addSnapshotListener { snapshot, error ->
             if (error != null) {
                 if (isActive) trySend(DataState.error<ArrayList<Videos>>(stringUtils.somethingWentWrong()))
                 return@addSnapshotListener
