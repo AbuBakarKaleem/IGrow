@@ -9,8 +9,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_heading"
         style="@style/headingStyle"
-        android:text="Search Result"
-        android:gravity="start"
+        android:text="@string/search_result"
+        android:gravity="center"
         android:layout_marginStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

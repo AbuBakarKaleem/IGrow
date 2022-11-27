@@ -75,8 +75,10 @@
     <string name="password">Mot de passe</string>
     <string name="edit_dealer">Modifier le concessionnaire</string>
     <string name="home_heading">Identifiez et trouvez la bonne solution pour protéger vos cultures contre les ravageurs et les maladies.</string>
-    <string name="identify_a_plant_health_problem">Identifiez les ravageurs et les maladies de votre ferme</string>
+    <string name="identify_a_plant_health_problem">Rechercher un produit phytosanitaire</string>
     <string name="search_by_name">Rechercher par nom</string>
+    <string name="search_by_product_name">Rechercher par nom de produit</string>
+
     <string name="or">ou</string>
     <string name="text_select">Sélectionner</string>
     <string name="text_select_language">Choisir la langue</string>
@@ -132,5 +134,6 @@
     <string name="find_local_dealer">Recherchez une \n boutique phytosanitaire</string>
     <string name="suppliers">Fournisseurs</string>
     <string name="location_amp_contact"><![CDATA[LOCALISATION & Contact]]></string>
+    <string name="search_result">Résultat de la recherche</string>
 
 </resources>

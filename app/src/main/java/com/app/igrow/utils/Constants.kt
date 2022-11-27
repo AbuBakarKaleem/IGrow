@@ -102,6 +102,7 @@ object Constants {
     const val COL_DISTRIBUTORS_FR = "distributors_fr"
 
     // Session Manager Constant
-    const val currentLanguage = "language"
-    const val country = "country"
+    const val KEY_LANGUAGE = "language"
+    const val KEY_COUNTRY = "country"
+    const val DEFAULT_LANGUAGE = "fr"
 }
