@@ -111,6 +111,9 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         }
         viewModel.getDiagnosticColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                if (diagnosticColumnName.isNotEmpty()) {
+                    addPlaceholderInFilterList(it)
+                }
                 dialogList = it
                 showListDialog(it)
             }
@@ -130,6 +133,27 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                         getString(R.string.no_data_found),
                         Toast.LENGTH_LONG
                     ).show()
+            }
+        }
+    }
+
+    private fun addPlaceholderInFilterList(dataList: ArrayList<String>) {
+        when (diagnosticColumnName) {
+            COL_CROP, COL_CROP_FR -> {
+                dataList.add(0, getString(R.string.crop))
+                return
+            }
+            COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
+                dataList.add(0, getString(R.string.enemy_type))
+                return
+            }
+            COL_PART_AFFECTED, COL_PART_AFFECTED_FR -> {
+                dataList.add(0, getString(R.string.part_affected))
+                return
+            }
+            COL_CAUSAL_AGENT, COL_CAUSAL_AGENT_FR -> {
+                dataList.add(0, getString(R.string.causal_agent))
+                return
             }
         }
     }
@@ -228,7 +252,12 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
     }
 
     private fun populateFiltersObject(value: String) {
-        if (diagnosticColumnName.isNotEmpty()) {
+        if (diagnosticColumnName.isNotEmpty() &&
+            value != getString(R.string.crop) &&
+            value != getString(R.string.enemy_type) &&
+            value != getString(R.string.part_affected) &&
+            value != getString(R.string.causal_agent)
+        ) {
             diagnosticFiltersHashMap[diagnosticColumnName] = value
         }
     }
