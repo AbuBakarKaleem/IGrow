@@ -135,5 +135,6 @@
     <string name="suppliers">Fournisseurs</string>
     <string name="location_amp_contact"><![CDATA[LOCALISATION & Contact]]></string>
     <string name="search_result">Résultat de la recherche</string>
+    <string name="more_info">PLUS D’INFO</string>
 
 </resources>

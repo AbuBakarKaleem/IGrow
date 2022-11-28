@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.databinding.ProductSearchResultListItemBinding
+import com.app.igrow.utils.Utils
 
 class DealersListAdapter(val onItemClicked: (Item: Dealers) -> Unit) :
     RecyclerView.Adapter<DealersListAdapter.ItemViewHolder>() {
@@ -17,8 +18,11 @@ class DealersListAdapter(val onItemClicked: (Item: Dealers) -> Unit) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(model: Dealers) {
             itemBinding.apply {
-                this.tvSearchResultName.text = model.dealer_name
-                this.tvSearchResultDetail.text = model.city_town
+                var value = if (Utils.isLocaleFrench()) model.dealer_name_fr else model.dealer_name
+                this.tvSearchResultName.text = value
+
+                value = if (Utils.isLocaleFrench()) model.city_town_fr else model.city_town
+                this.tvSearchResultDetail.text = value
                 this.cvSearchResult.setOnClickListener {
                     onItemClicked(model)
                 }

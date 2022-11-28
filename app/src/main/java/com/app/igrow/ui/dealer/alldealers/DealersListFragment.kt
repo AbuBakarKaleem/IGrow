@@ -18,6 +18,9 @@ import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Utils
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class DealersListFragment : BaseFragment<FragmentDealerListBinding>() {
@@ -118,7 +121,7 @@ class DealersListFragment : BaseFragment<FragmentDealerListBinding>() {
 
     private fun updateDataInList(myList: ArrayList<Dealers>) {
         binding.tvCount.text = myList.size.toString() + " " + getString(R.string.results)
-        adapter.differ.submitList(myList)
+        adapter.differ.submitList(myList.sortedBy { it.dealer_name.lowercase(Locale.getDefault()) })
         adapter.notifyDataSetChanged()
     }
 

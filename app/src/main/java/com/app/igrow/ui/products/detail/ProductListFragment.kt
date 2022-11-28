@@ -1,6 +1,5 @@
 package com.app.igrow.ui.products.detail
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +18,7 @@ import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Utils
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
@@ -28,8 +28,8 @@ class ProductListFragment : Fragment() {
 
     private var dataListFromArgs = arrayListOf<Products>()
     private lateinit var adapter: ProductsSearchResultAdapter
-    private var filtersMap= HashMap<String,String>()
-    private val viewModel:ProductsListViewModel by viewModels()
+    private var filtersMap = HashMap<String, String>()
+    private val viewModel: ProductsListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,7 +69,7 @@ class ProductListFragment : Fragment() {
 
     private fun initialSetup() {
 
-        filtersMap.forEach{
+        filtersMap.forEach {
             addChipToGroup(it)
         }
 
@@ -123,8 +123,8 @@ class ProductListFragment : Fragment() {
 
 
     private fun updateDataInList(myList: ArrayList<Products>) {
-        binding.tvCount.text = myList.size.toString() +" "+ getString(R.string.results)
-        adapter.differ.submitList(myList)
+        binding.tvCount.text = myList.size.toString() + " " + getString(R.string.results)
+        adapter.differ.submitList(myList.sortedBy { it.product_name.lowercase(Locale.getDefault()) })
         adapter.notifyDataSetChanged()
     }
 
