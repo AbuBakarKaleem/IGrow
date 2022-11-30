@@ -8,4 +8,5 @@ interface DistributorsRepo {
     suspend fun insertDistributors(dataList: List<DistributorsEntityName>)
     suspend fun getDistributorsCount(): Int
     suspend fun getDistributorsColumnData(sheetName: String, columnName: String): List<String>
+    suspend fun getDistributorByName(name:String,columnName: String): DistributorsEntityName
 }

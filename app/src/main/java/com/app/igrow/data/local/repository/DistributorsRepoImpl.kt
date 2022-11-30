@@ -45,6 +45,18 @@ class DistributorsRepoImpl @Inject constructor(
         )
     }
 
+    override suspend fun getDistributorByName(
+        name: String,
+        columnName: String
+    ): DistributorsEntityName {
+        if (name.isNotEmpty() && columnName.isNotEmpty()) {
+            val query =  Utils.getDistributorByName(name, columnName)
+            val data  = distributorsDao.getDistributorByName(query)
+            return data
+        }
+        return DistributorsEntityName()
+    }
+
     companion object {
         const val TAG = "DistributorsRepoImpl"
     }

@@ -61,7 +61,7 @@ object Utils {
     }
 
     fun getLocalizeColumnName(actualName: String): String {
-        if (Utils.getSystemLanguage().split("-")[0] == "fr") {
+        if (getSystemLanguage().split("-")[0] == "fr") {
             return actualName + "_fr"
         }
         return actualName
@@ -82,6 +82,18 @@ object Utils {
         try {
             if (sheetName.isNotEmpty() && columnName.isNotEmpty()) {
                 val customQuery: String = "SELECT DISTINCT $columnName FROM $sheetName"
+                return SimpleSQLiteQuery(customQuery)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return SimpleSQLiteQuery("")
+    }
+
+    fun getDistributorByName(name: String, columnName: String): SimpleSQLiteQuery {
+        try {
+            if (name.isNotEmpty() && columnName.isNotEmpty()) {
+                val customQuery = "SELECT * FROM Distributors WHERE $columnName = ':AGROCHEM  A.C.'"
                 return SimpleSQLiteQuery(customQuery)
             }
         } catch (e: Exception) {

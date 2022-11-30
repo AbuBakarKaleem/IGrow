@@ -43,6 +43,7 @@ interface Repository {
     suspend fun getAllDataOfGivenSheet(sheetName:String): Flow<DataState<ArrayList<HashMap<String,String>>>>
 
     suspend fun getLearningData():Flow<DataState<ArrayList<Videos>>>
+    suspend fun getDistributorDataByName(name : String,columnName:String): Flow<DataState<Distributors>>
 
 
 }

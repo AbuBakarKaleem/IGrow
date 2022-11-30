@@ -4,15 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.FragmentProductDetailBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.utils.Constants.COL_DISTRIBUTORS_NAME
+import com.app.igrow.utils.Constants.COL_DISTRIBUTORS_NAME_FR
 import com.app.igrow.utils.Utils.isLocaleFrench
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
+
+    private val viewModel: ProductDetailViewModel by viewModels()
+
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailBinding
         get() = FragmentProductDetailBinding::inflate
 
@@ -23,6 +32,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
             setPopulateViews(itemArgs)
         }
         activateListener()
+        activateObserver()
     }
 
     private fun setPopulateViews(product: Products) {
@@ -77,7 +87,27 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         }
 
         binding.tvDealer.setOnClickListener {
-
+            val value: String =
+                if (isLocaleFrench()) COL_DISTRIBUTORS_NAME_FR else COL_DISTRIBUTORS_NAME
+            viewModel.getDistributorByName(binding.tvDealer.text.toString().trim(), value)
         }
+    }
+
+    private fun activateObserver() {
+        viewModel.getDistributorByNameDataLiveData.observe(viewLifecycleOwner) {
+            if (it.id.isNotEmpty()) {
+                moveToDistributorScreen()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.no_data_found),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
+    private fun moveToDistributorScreen() {
+
     }
 }

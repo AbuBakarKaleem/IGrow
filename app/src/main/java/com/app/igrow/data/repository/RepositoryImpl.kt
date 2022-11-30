@@ -663,6 +663,29 @@ class RepositoryImpl @Inject constructor(
         awaitClose()
     }
 
+    override suspend fun getDistributorDataByName(
+        name: String,
+        columnName: String
+    ): Flow<DataState<Distributors>> =
+        callbackFlow {
+
+            try {
+                withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+                    val distributorData = localRepository.getDistributorsImpl()
+                        .getDistributorByName(name = name, columnName = columnName)
+                    if (distributorData != null) if (isActive) trySend(
+                        DataState.success(
+                            distributorData as Distributors
+                        )
+                    )
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
+            }
+            awaitClose()
+        }
+
 }
 
 
