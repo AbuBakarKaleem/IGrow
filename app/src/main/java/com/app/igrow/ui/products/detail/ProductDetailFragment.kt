@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
@@ -96,7 +97,8 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     private fun activateObserver() {
         viewModel.getDistributorByNameDataLiveData.observe(viewLifecycleOwner) {
             if (it.id.isNotEmpty()) {
-                moveToDistributorScreen()
+                val itemBundle = bundleOf(DiagnoseFragment.ARG_DISTRIBUTOR_DATA_KEY to it)
+                findNavController().navigate(R.id.toDistributorDetail, itemBundle)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -105,11 +107,5 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
                 ).show()
             }
         }
-    }
-
-    private fun moveToDistributorScreen() {
-
-        Toast.makeText(requireContext(), "Data received ", Toast.LENGTH_LONG).show()
-
     }
 }

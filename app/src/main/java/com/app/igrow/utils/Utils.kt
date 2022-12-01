@@ -93,7 +93,6 @@ object Utils {
     fun getDistributorByName(name: String, columnName: String): SimpleSQLiteQuery {
         try {
             if (name.isNotEmpty() && columnName.isNotEmpty()) {
-                var name = "AGROCHEM  A.C."
                 val customQuery = "SELECT * FROM Distributors WHERE $columnName ='$name'"
                 return SimpleSQLiteQuery(customQuery)
             }

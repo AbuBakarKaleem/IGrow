@@ -50,9 +50,12 @@ class DistributorsRepoImpl @Inject constructor(
         columnName: String
     ): DistributorsEntityName {
         if (name.isNotEmpty() && columnName.isNotEmpty()) {
-            val query =  Utils.getDistributorByName(name, columnName)
-            val data  = distributorsDao.getDistributorByName(query)
-            return data
+            return distributorsDao.getDistributorByName(
+                Utils.getDistributorByName(
+                    name,
+                    columnName
+                )
+            )
         }
         return DistributorsEntityName()
     }

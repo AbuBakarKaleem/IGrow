@@ -289,6 +289,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         const val TAG = " DiagnoseFragment"
         const val ARG_RESULT_KEY = "filters"
         const val ARG_SEARCH_RESULT_ITEM_KEY = "diagnostic_data"
+        const val ARG_DISTRIBUTOR_DATA_KEY = "data"
     }
 
 }
