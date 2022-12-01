@@ -185,6 +185,29 @@ fun ArrayList<DistributorsEntityName>.toDistributorUIModel(): ArrayList<HashMap<
     return distributorUIModelList
 }
 
+fun DistributorsEntityName.toDistributorUIModel(): Distributors {
+
+    val distributorUIModel = Distributors()
+
+    distributorUIModel.id = this.id
+    distributorUIModel.distributor_name = this.distributor_name
+    distributorUIModel.distributor_name_fr = this.distributor_name_fr
+    distributorUIModel.address = this.address
+    distributorUIModel.address_fr = this.address_fr
+    distributorUIModel.city_town = this.city_town
+    distributorUIModel.city_town_fr = this.city_town_fr
+    distributorUIModel.region = this.region
+    distributorUIModel.region_fr = this.region_fr
+    distributorUIModel.telephone = this.telephone
+    distributorUIModel.telephone_2 = this.telephone_2
+    distributorUIModel.email = this.email
+    distributorUIModel.email_fr = this.email_fr
+    distributorUIModel.website = this.website
+    distributorUIModel.facebook = this.facebook
+
+    return distributorUIModel
+}
+
 // Products Mappers
 fun ArrayList<HashMap<String, String>>.toProductsEntityModel(): List<ProductsEntityName> {
     val productsEntityName: MutableList<ProductsEntityName> = ArrayList()
@@ -240,10 +263,10 @@ fun ArrayList<HashMap<String, String>>.toProductsEntityModel(): List<ProductsEnt
     return productsEntityName
 }
 
-fun ArrayList<ProductsEntityName>.toProductsUIModel(): ArrayList<HashMap<String,String>>{
+fun ArrayList<ProductsEntityName>.toProductsUIModel(): ArrayList<HashMap<String, String>> {
     val productsUIModelList: ArrayList<HashMap<String, String>> = ArrayList()
 
-    this.forEach {products ->
+    this.forEach { products ->
         val entry: HashMap<String, String> = HashMap<String, String>()
 
         entry[Constants.COL_ID] = products.id
@@ -261,7 +284,7 @@ fun ArrayList<ProductsEntityName>.toProductsUIModel(): ArrayList<HashMap<String,
         entry[Constants.COL_ACTIVE_INGREDIENT_FR] = products.active_ingredient_fr
         entry[Constants.COL_COMPOSITION] = products.composition
         entry[Constants.COL_COMPOSITION_FR] = products.composition_fr
-        entry[Constants.COL_FORMULATION]   = products.formulation
+        entry[Constants.COL_FORMULATION] = products.formulation
         entry[Constants.COL_FORMULATION_FR] = products.formulation_fr
         entry[Constants.COL_TOXICOLOGICAL_CLASS] = products.toxicological_class
         entry[Constants.COL_TOXICOLOGICAL_CLASS_FR] = products.toxicological_class_fr

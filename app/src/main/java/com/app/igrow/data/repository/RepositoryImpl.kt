@@ -673,11 +673,8 @@ class RepositoryImpl @Inject constructor(
                 withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
                     val distributorData = localRepository.getDistributorsImpl()
                         .getDistributorByName(name = name, columnName = columnName)
-                    if (distributorData != null) if (isActive) trySend(
-                        DataState.success(
-                            distributorData as Distributors
-                        )
-                    )
+                        .toDistributorUIModel()
+                    if (isActive) trySend(DataState.success(distributorData))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

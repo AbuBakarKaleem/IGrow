@@ -109,5 +109,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
     private fun moveToDistributorScreen() {
 
+        Toast.makeText(requireContext(), "Data received ", Toast.LENGTH_LONG).show()
+
     }
 }
