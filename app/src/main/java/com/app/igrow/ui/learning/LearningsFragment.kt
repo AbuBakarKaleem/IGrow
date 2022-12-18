@@ -73,4 +73,18 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
         youtubeVideosList.add("https://www.youtube.com/watch?v=K93e8MpKwo0")
     }
 
+    fun getTitleQuietly(youtubeUrl: String?): String? {
+        try {
+            if (youtubeUrl != null) {
+//                val embededURL = URL("http://www.youtube.com/oembed?url=" +
+//                        youtubeUrl + "&format=json"
+//                )
+//                return JSONObject(IOUtils.toString(embededURL)).getString("title")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
 }
