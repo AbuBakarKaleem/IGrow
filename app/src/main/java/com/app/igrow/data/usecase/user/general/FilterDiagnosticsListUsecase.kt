@@ -70,6 +70,12 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                         if (result.contains(filterKey.value)) {
                             list.add(data)
                         }
+                    } else if (filterKey.key == Constants.COL_DEALER_NAME &&
+                        filters.contains(Constants.COL_DEALER_NAME)) {
+                        val result = data[Constants.COL_DEALER_NAME] ?: ""
+                        if (result.toLowerCase().contains(filterKey.value.toLowerCase())) {
+                            list.add(data)
+                        }
                     } else {
                         if (filterKey.value == data[filterKey.key]) {
                             list.add(data)

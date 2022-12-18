@@ -12,6 +12,7 @@ import android.view.Window
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -87,6 +88,13 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
             binding.btnReset.setOnClickListener {
                 resetAllFilters()
             }
+
+            binding.etSearch.doAfterTextChanged { editable ->
+                if (editable != null && (editable.isEmpty() || editable.isBlank())) {
+                    distributorsFiltersHashMap.remove(Constants.COL_DEALER_NAME)
+                }
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -263,6 +271,7 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
         super.onResume()
         distributorsFiltersHashMap.clear()
         filteredList.clear()
+        binding.etSearch.text?.clear()
     }
 
 }

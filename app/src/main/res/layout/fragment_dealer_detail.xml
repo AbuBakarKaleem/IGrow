@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_hyperlink"
                         android:textSize="16sp"
                         tools:text="+9123123123123" />
 
@@ -195,9 +195,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:textColor="@color/black"
+                        android:textColor="@color/blue_hyperlink"
                         android:textSize="16sp"
-                        tools:text="Mobile" />
+                        tools:text="+912312312321" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
