@@ -1,9 +1,14 @@
 package com.app.igrow.ui.distributor
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.fragment.findNavController
+import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.databinding.FragmentDistributorDetailBinding
@@ -22,6 +27,21 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
             val itemArgs = it.get(DiagnoseFragment.ARG_DISTRIBUTOR_DATA_KEY) as Distributors
             setPopulateViews(itemArgs)
         }
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.distributorDetailToProductsFragment)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback);
+
+
+        binding.btnWebsite.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.agricadvisors.com/"))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
     private fun setPopulateViews(distributor: Distributors) {
@@ -37,7 +57,5 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
         binding.tvEmail.text = value
         value = if (Utils.isLocaleFrench()) distributor.address_fr else distributor.address
         binding.tvAddress.text = value
-        value = if (Utils.isLocaleFrench()) distributor.distributor_name_fr else distributor.distributor_name
-        binding.tvDistributors.text = value
     }
 }

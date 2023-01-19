@@ -40,8 +40,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/header_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             app:cardCornerRadius="30dp"
             app:contentPaddingBottom="10dp"
             app:contentPaddingLeft="10dp"
@@ -53,8 +53,8 @@
             app:layout_constraintTop_toBottomOf="@id/guideline_two">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@mipmap/ic_flask_red" />
 
@@ -68,7 +68,9 @@
             android:drawableStart="@drawable/icon_search_red"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_product_name"
+            android:maxLines="1"
             android:imeOptions="actionDone"
+            android:inputType="text"
             app:backgroundTint="@android:color/holo_red_dark"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

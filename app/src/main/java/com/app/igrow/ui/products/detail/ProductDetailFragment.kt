@@ -39,7 +39,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     private fun setPopulateViews(product: Products) {
         var value = if (isLocaleFrench()) product.product_name_fr else product.product_name
         binding.tvProductName.text = value
-        value = if (isLocaleFrench()) product.composition_fr else product.composition
+        value = if (isLocaleFrench()) product.product_category else product.product_category_fr
         binding.tvActiveAgent.text = value
         value = if (isLocaleFrench()) product.distributor_fr else product.distributor
         binding.tvDealer.text = value
@@ -87,7 +87,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
             findNavController().navigate(R.id.toDealerFragment)
         }
 
-        binding.tvDealer.setOnClickListener {
+        binding.distributorsBtn.setOnClickListener {
             val value: String =
                 if (isLocaleFrench()) COL_DISTRIBUTORS_NAME_FR else COL_DISTRIBUTORS_NAME
             viewModel.getDistributorByName(binding.tvDealer.text.toString().trim(), value)

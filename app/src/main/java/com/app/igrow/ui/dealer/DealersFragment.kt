@@ -114,6 +114,7 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
         }
         viewModel.getDistributorColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                it.sort()
                 if (distributorColumnName.isNotEmpty()) {
                     addPlaceholderInFilterList(it)
                 }
@@ -217,24 +218,26 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
 
     private fun populateFiltersObject(value: String) {
         if (distributorColumnName.isNotEmpty() &&
-            (value == getString(R.string.region)).not() &&
-            (value == getString(R.string.city_town)).not() &&
-            (value == getString(R.string.distributor)).not()
+            (value == getString(R.string.all_region)).not() &&
+            (value == getString(R.string.all_city_towns)).not() &&
+            (value == getString(R.string.all_distributors)).not()
         ) {
             distributorsFiltersHashMap[distributorColumnName] = value
+        } else {
+            distributorsFiltersHashMap.remove(distributorColumnName)
         }
     }
 
     private fun addPlaceholderInFilterList(dataList: ArrayList<String>){
         when (distributorColumnName) {
             Constants.COL_REGION, Constants.COL_REGION_FR -> {
-                dataList.add(0, getString(R.string.region))
+                dataList.add(0, getString(R.string.all_region))
             }
             Constants.COL_CITY_TOWN, Constants.COL_CITY_TOWN_FR -> {
-                dataList.add(0, getString(R.string.city_town))
+                dataList.add(0, getString(R.string.all_city_towns))
             }
             Constants.COL_DISTRIBUTORS_NAME, Constants.COL_DISTRIBUTORS_NAME_FR -> {
-                dataList.add(0, getString(R.string.distributor))
+                dataList.add(0, getString(R.string.all_distributors))
             }
         }
     }

@@ -23,12 +23,12 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="15dp"
-        android:drawableStart="@drawable/icon_search"
+        android:drawableStart="@drawable/icon_search_black"
         android:drawablePadding="4dp"
         android:drawableTint="@color/black"
         android:hint="@string/search_by_title"
         app:backgroundTint="@color/black"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_heading" />
@@ -45,8 +45,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_heading"
+        app:layout_constraintTop_toBottomOf="@+id/et_search"
         tools:itemCount="3"
         tools:listitem="@layout/learnings_list_item" />
+
+    <TextView
+        android:id="@+id/tv_no_record_found"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_record_found"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/et_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

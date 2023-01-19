@@ -35,6 +35,7 @@ import com.app.igrow.utils.Constants.COL_ENEMY
 import com.app.igrow.utils.Constants.COL_ENEMY_FR
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY_FR
+import com.app.igrow.utils.Constants.COL_PRODUCT_NAME
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Utils
@@ -111,12 +112,19 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
                     productFiltersHashMap.clear()
-                    productFiltersHashMap[Utils.getLocalizeColumnName(COL_DISTRIBUTOR)] =
+                    productFiltersHashMap[Utils.getLocalizeColumnName(COL_PRODUCT_NAME)] =
                         binding.etSearch.text.toString().trim()
                 }
                 viewModel.searchProduct(productFiltersHashMap)
 
             }
+
+            binding.etSearch.doAfterTextChanged { editable ->
+                if (editable != null && (editable.isEmpty() || editable.isBlank())) {
+                    productFiltersHashMap.remove(Constants.COL_PRODUCT_NAME)
+                }
+            }
+
             binding.btnReset.setOnClickListener {
                 resetAllFilters()
             }
@@ -139,6 +147,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
         }
         viewModel.getProductColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                it.sort()
                 if (productColumnName.isNotEmpty()) {
                     addPlaceholderInFilterList(it)
                 }
@@ -167,27 +176,27 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
     private fun addPlaceholderInFilterList(dataList: ArrayList<String>) {
         when (productColumnName) {
             COL_CROP, COL_CROP_FR -> {
-                dataList.add(0, getString(R.string.crop))
+                dataList.add(0, getString(R.string.all_crops))
                 return
             }
             COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
-                dataList.add(0, getString(R.string.enemy_type))
+                dataList.add(0, getString(R.string.all_enemy_types))
                 return
             }
             COL_ENEMY, COL_ENEMY_FR -> {
-                dataList.add(0, getString(R.string.enemy))
+                dataList.add(0, getString(R.string.all_enemies))
                 return
             }
             COL_COMPOSITION, COL_COMPOSITION_FR -> {
-                dataList.add(0, getString(R.string.composition))
+                dataList.add(0, getString(R.string.all_compositions))
                 return
             }
             COL_PRODUCTS_CATEGORY, COL_PRODUCTS_CATEGORY_FR -> {
-                dataList.add(0, getString(R.string.product_category))
+                dataList.add(0, getString(R.string.all_product_categories))
                 return
             }
             COL_DISTRIBUTOR, COL_DISTRIBUTOR_FR -> {
-                dataList.add(0, getString(R.string.distributor))
+                dataList.add(0, getString(R.string.all_distributors))
                 return
             }
 
@@ -300,14 +309,16 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
     private fun populateFiltersObject(value: String) {
         val englishAndFrenchValues = value.split(":")
         if (productColumnName.isNotEmpty() &&
-            englishAndFrenchValues[0] != getString(R.string.crop) &&
-            englishAndFrenchValues[0] != getString(R.string.enemy_type) &&
-            englishAndFrenchValues[0] != getString(R.string.enemy) &&
-            englishAndFrenchValues[0] != getString(R.string.composition) &&
-            englishAndFrenchValues[0] != getString(R.string.product_category) &&
-            englishAndFrenchValues[0] != getString(R.string.distributor)
+            englishAndFrenchValues[0] != getString(R.string.all_crops) &&
+            englishAndFrenchValues[0] != getString(R.string.all_enemy_types) &&
+            englishAndFrenchValues[0] != getString(R.string.all_enemies) &&
+            englishAndFrenchValues[0] != getString(R.string.all_compositions) &&
+            englishAndFrenchValues[0] != getString(R.string.all_product_categories) &&
+            englishAndFrenchValues[0] != getString(R.string.all_distributors)
         ) {
             productFiltersHashMap[productColumnName] = englishAndFrenchValues[0]
+        } else {
+            productFiltersHashMap.remove(productColumnName)
         }
     }
 

@@ -12,6 +12,7 @@
         android:layout_marginStart="12dp"
         android:gravity="center"
         android:text="@string/search_result"
+        app:textAllCaps="true"
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

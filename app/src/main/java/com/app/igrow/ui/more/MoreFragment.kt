@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -76,6 +77,25 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
                 ).show()
             }
         }
+
+        binding.btnAbout.setOnClickListener {
+             findNavController().navigate(R.id.toAboutFragment)
+        }
+
+        binding.btnHelp.setOnClickListener {
+            findNavController().navigate(R.id.toHelpFragment)
+        }
+
+        binding.btnTermsAndCondition.setOnClickListener {
+            findNavController().navigate(R.id.toTermsAndConditionFragment)
+        }
+
+        binding.btnInviteAFriend.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.agricadvisors.com/"))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
     }
 
     private fun restartApp(context: Context) {
