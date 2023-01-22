@@ -33,7 +33,7 @@ class DealerDetailFragment : BaseFragment<FragmentDealerDetailBinding>() {
 
         binding.tvMobile.setOnClickListener {
             if ((it as TextView).text.toString().isEmpty().not())
-                openDialer((it).text.toString().trim())
+                openWhatsapp((it).text.toString().trim())
         }
 
         binding.btnHelp.setOnClickListener {
@@ -43,25 +43,31 @@ class DealerDetailFragment : BaseFragment<FragmentDealerDetailBinding>() {
     }
 
     private fun setPopulateViews(dealer: Dealers) {
-        var value = if(isLocaleFrench()) dealer.dealer_name_fr  else dealer.dealer_name
+        var value = if (isLocaleFrench()) dealer.dealer_name_fr else dealer.dealer_name
         binding.tvDealerName.text = value
-        value = if(isLocaleFrench()) dealer.city_town_fr  else dealer.city_town
+        value = if (isLocaleFrench()) dealer.city_town_fr else dealer.city_town
         binding.tvCityTown.text = value
-        value = if(isLocaleFrench()) dealer.region_fr  else dealer.region
+        value = if (isLocaleFrench()) dealer.region_fr else dealer.region
         binding.tvRegion.text = value
-        value = if(isLocaleFrench()) dealer.telephone_fr  else dealer.telephone
+        value = if (isLocaleFrench()) dealer.telephone_fr else dealer.telephone
         binding.tvTelephone.text = value
-        value = if(isLocaleFrench()) dealer.mobile_fr  else dealer.mobile
+        value = if (isLocaleFrench()) dealer.mobile_fr else dealer.mobile
         binding.tvMobile.text = value
-        value = if(isLocaleFrench()) dealer.address_fr  else dealer.address
+        value = if (isLocaleFrench()) dealer.address_fr else dealer.address
         binding.tvAddress.text = value
-        value = if(isLocaleFrench()) dealer.distributors_fr  else dealer.distributors
+        value = if (isLocaleFrench()) dealer.distributors_fr else dealer.distributors
         binding.tvDistributors.text = value
     }
 
-    private fun openDialer(number:String){
+    private fun openDialer(number: String) {
         val intent = Intent(Intent.ACTION_DIAL)
         intent.data = Uri.parse("tel:$number")
+        startActivity(intent)
+    }
+
+    private fun openWhatsapp(number: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$number")
         startActivity(intent)
     }
 

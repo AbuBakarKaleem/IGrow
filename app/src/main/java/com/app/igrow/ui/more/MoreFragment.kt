@@ -94,6 +94,7 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
             val webURL = "http://www.agricadvisors.com/"
             val i = Intent(Intent.ACTION_SEND)
             i.type = "text/plain"
+            i.putExtra(Intent.EXTRA_TEXT, webURL)
             i.putExtra(Intent.EXTRA_SUBJECT,webURL )
             startActivity(Intent.createChooser(i, "Invite a friend"))
         }

@@ -195,6 +195,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_telephone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="10dp"
@@ -233,6 +234,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_MobileNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="10dp"

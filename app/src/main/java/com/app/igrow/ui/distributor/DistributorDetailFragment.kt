@@ -34,7 +34,7 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
                     findNavController().navigate(R.id.distributorDetailToProductsFragment)
                 }
             }
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback);
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
 
         binding.btnWebsite.setOnClickListener {
@@ -42,10 +42,19 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+        binding.cvTelephone.setOnClickListener {
+            if (binding.tvTelephone.text.toString().isNotEmpty())
+                openDialer(binding.tvTelephone.text.toString())
+        }
+        binding.cvMobileNumber.setOnClickListener {
+            if (binding.tvMobile.text.toString().isNotEmpty())
+                openWhatsapp(binding.tvMobile.text.toString())
+        }
     }
 
     private fun setPopulateViews(distributor: Distributors) {
-        var value = if (Utils.isLocaleFrench()) distributor.distributor_name_fr else distributor.distributor_name
+        var value =
+            if (Utils.isLocaleFrench()) distributor.distributor_name_fr else distributor.distributor_name
         binding.tvDistributorsName.text = value
         value = if (Utils.isLocaleFrench()) distributor.city_town_fr else distributor.city_town
         binding.tvCityTown.text = value
@@ -57,5 +66,17 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
         binding.tvEmail.text = value
         value = if (Utils.isLocaleFrench()) distributor.address_fr else distributor.address
         binding.tvAddress.text = value
+    }
+
+    private fun openWhatsapp(number: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("https://api.whatsapp.com/send?phone=$number")
+        startActivity(intent)
+    }
+
+    private fun openDialer(number: String) {
+        val intent = Intent(Intent.ACTION_DIAL)
+        intent.data = Uri.parse("tel:$number")
+        startActivity(intent)
     }
 }
