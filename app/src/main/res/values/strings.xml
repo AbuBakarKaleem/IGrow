@@ -87,44 +87,29 @@
     <string name="or_select">or select</string>
 
     <string name="about">About Us</string>
-    <string name="about_content">  <font size="18"> <b><u>ABOUT US</u></b></font> \n <font size="18"> This application is developed by AgricAdvisors Sarl, a company specializing in agronomy consulting services, training and capacity building, and the development of innovations in the agricultural field.
+    <string name="about_content"> <font size="18"><b><u>ABOUT US\n</u></b></font>\nThis application is developed by AgricAdvisors Sarl, a company specializing in agronomy consulting services, training and capacity building, and the development of innovations in the agricultural field.
 The iGrow app is one of our recent innovations in AgriTech. Its purpose is to educate agricultural producers on healthy and sustainable Crop Protection and provide professionals with an effective tool to assist them in decision-making and Crop Protection advice.
 We work with agronomy professionals, agricultural producers, agro-industries, research centers, training schools, agricultural input distributors, Crop Protection dealers, government agencies and other actors in the agricultural value chain. If you would like to collaborate with us.
-        \n\n<b>Contact Us: AgricAdvisors Sarl \nAddress: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nWebsite: www.agricadvisors.com</b></font> </string>
-    <string name="help_content">
-        <font size="20"><u><b>Help\n</b></u></font>
-        <b><u>\n\nGeneral\n</u></b>
-        <b>\nHow to carry out a search for a plant health problems, a product or a Crop Protection dealer?</b>
+        \n\n<b>Contact Us: AgricAdvisors Sarl \nAddress: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nWebsite: www.agricadvisors.com</b> </string>
+
+    <string name="help_content"><font size="18"><u><b>HELP\n</b></u></font>
+        <b><u>\nGeneral\n</u></b><b>\nHow to carry out a search for a plant health problems, a product or a Crop Protection dealer?</b>
         \nYou have access to two search modes. You can directly enter the name of the item you are looking for if you know it, or select the different criteria to get a list of results corresponding to your search.\n
         <b>\nDo I need to enter all search criteria to display results?</b>
         \nYou do not need to meet all the criteria to find what you are looking for.\n
-        <b>\nHow do I change country or select another language?\n</b>
-        Go to app settings.\n
+        <b>\nHow do I change country or select another language?\n</b>Go to app settings.\n
         <b>\nI dont understand some technical terms, what should I do?</b>
         \nGo to the "Learning" section. This section contains short learning videos on crop protection in general and how to use the app in particular.\n
         <b>\nHow do I work with you or if I have other questions?</b>
-        \nPlease contact us. Our contact details can be found in the "About Us" section.\n\n
-        <u><b>Plant health Diagnosis</b></u>\n
-        <b>\nWhy arent all crops listed?\n</b>
-        We are working gradually to include as many crops as possible. Let us know if you have any special needs.\n
-        <b>\nCan I rely 100% on the diagnosis made with the images in the application?\n</b>
-        The application only serves as a guide to help you identify Crop Protection problems and does not replace professional advice. The interpretation and use of this information is your responsibility.\n
-        <b>\nWhat should I do if I have doubts about the diagnosis made from the information provided by the application?\n</b>
-        The information provided by the application is general and adapts to the most common situations. If in doubt, please consult a professional. Only a professional can make a field diagnosis and make the most precise recommendations specific to your situation.
+        \nPlease contact us. Our contact details can be found in the "About Us" section.\n\n<u><b>Plant health Diagnosis</b></u>\n
+        <b>\nWhy arent all crops listed?\n</b>We are working gradually to include as many crops as possible. Let us know if you have any special needs.\n
+        <b>\nCan I rely 100% on the diagnosis made with the images in the application?\n</b>The application only serves as a guide to help you identify Crop Protection problems and does not replace professional advice. The interpretation and use of this information is your responsibility.\n
+        <b>\nWhat should I do if I have doubts about the diagnosis made from the information provided by the application?\n</b>The information provided by the application is general and adapts to the most common situations. If in doubt, please consult a professional. Only a professional can make a field diagnosis and make the most precise recommendations specific to your situation.
         <u><b>\n\nSearch for a product\n</b></u>
-        <b>\nMy product search shows "No data available", what does this mean?\n</b>
-        For your search criteria, this may be due to one or more of the following reasons:\n
-        - There is no product currently registered or authorized.\n
-        - There is no product currently on the market.\n
-        - We are still working to get all the information about these products.\n
-        <b>\nWhy are some approved products not appearing in the results?\n</b>
-        We work with distributors of Crop Protection products in order to publish only approved AND actually marketed products. We regularly update our database to add new products or remove products that are no longer authorized or available for sale.\n
-        <b>\nIs the information provided sufficient to use the product?</b>
-        You should always read the label of a Crop Protection product before using it. It contains extensive information on the safe use of the product and specific recommendations from the supplier. We only provide the basic information necessary for decision making.
-        If you have specific questions about a particular product, please contact the distributor whose contact details are linked on each product page.\n
-        <u><b>\nFind a crop protection dealer</b></u>\n\n
-        <b>My search for Crop Protection dealers shows "No data available", what does this mean?</b>
-        This may mean that there is no Crop Protection dealers with the criteria you have selected or that existing dealers have not yet been integrated into our database. We are constantly working to provide you with the most complete information.\n
+        <b>\nMy product search shows "No data available", what does this mean?\n</b>For your search criteria, this may be due to one or more of the following reasons:\n- There is no product currently registered or authorized.\n- There is no product currently on the market.\n- We are still working to get all the information about these products.\n
+        <b>\nWhy are some approved products not appearing in the results?\n</b>We work with distributors of Crop Protection products in order to publish only approved AND actually marketed products. We regularly update our database to add new products or remove products that are no longer authorized or available for sale.\n
+        <b>\nIs the information provided sufficient to use the product?</b>You should always read the label of a Crop Protection product before using it. It contains extensive information on the safe use of the product and specific recommendations from the supplier. We only provide the basic information necessary for decision making.If you have specific questions about a particular product, please contact the distributor whose contact details are linked on each product page.\n
+        <u><b>\nFind a crop protection dealer</b></u>\n\n<b>My search for Crop Protection dealers shows "No data available", what does this mean?</b>This may mean that there is no Crop Protection dealers with the criteria you have selected or that existing dealers have not yet been integrated into our database. We are constantly working to provide you with the most complete information.\n
         <b>\nAre the Crop Protection dealers listed the ones you recommend?</b>
         \nWe do not make any particular recommendation in relation to Crop Protection dealers. We only make the information available. The Crop Protection dealers listed are those provided by distributors of Crop Protection dealers. We also work with independent shops to integrate them into our database.
     </string>

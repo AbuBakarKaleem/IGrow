@@ -34,10 +34,10 @@ class DealersViewModel@Inject constructor(
 
     private var showEmptyResponseMsg = false
 
-    fun getDistributorColumnData(columnName: String, sheetName: String) {
+    fun getDistributorColumnData(filtersMap: HashMap<String, String>,columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            getColumnDataUseCase.invoke(columnName = columnName, sheetName = sheetName).collect {
+            getColumnDataUseCase.invoke(filtersMap = filtersMap, columnName = columnName, sheetName = sheetName).collect {
                 when (it) {
                     is DataState.Success -> {
                         getDistributorColumnDataMutableLiveData.postValue(it.data)

@@ -61,15 +61,16 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
 
             binding.llRegion.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_REGION)
-                viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DEALERS)
+                viewModel.getDistributorColumnData(distributorsFiltersHashMap,distributorColumnName, Constants.SHEET_DEALERS)
             }
             binding.llCityTown.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_CITY_TOWN)
-                viewModel.getDistributorColumnData(distributorColumnName, Constants.SHEET_DEALERS)
+                viewModel.getDistributorColumnData(distributorsFiltersHashMap,distributorColumnName, Constants.SHEET_DEALERS)
             }
             binding.llDistributor.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME)
                 viewModel.getDistributorColumnData(
+                    distributorsFiltersHashMap,
                     distributorColumnName,
                     Constants.SHEET_DISTRIBUTORS
                 )

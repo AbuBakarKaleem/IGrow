@@ -91,9 +91,11 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
         }
 
         binding.btnInviteAFriend.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.agricadvisors.com/"))
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            val webURL = "http://www.agricadvisors.com/"
+            val i = Intent(Intent.ACTION_SEND)
+            i.type = "text/plain"
+            i.putExtra(Intent.EXTRA_SUBJECT,webURL )
+            startActivity(Intent.createChooser(i, "Invite a friend"))
         }
 
     }

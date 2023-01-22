@@ -23,7 +23,7 @@ import com.app.igrow.databinding.DialogeLayoutBinding
 import com.app.igrow.databinding.FragmentDiagnoseBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
-import com.app.igrow.utils.Constants
+import com.app.igrow.utils.*
 import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT
 import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT_FR
 import com.app.igrow.utils.Constants.COL_CROP
@@ -34,12 +34,10 @@ import com.app.igrow.utils.Constants.COL_PLANT_HEALTH_PROBLEM
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Constants.SHEET_DIAGNOSTIC
-import com.app.igrow.utils.Utils
 import com.app.igrow.utils.Utils.getLocalizeColumnName
-import com.app.igrow.utils.gone
-import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
@@ -68,19 +66,19 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
             binding.llCrop.setOnClickListener {
                 diagnosticColumnName = getLocalizeColumnName(COL_CROP)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+                viewModel.getDiagnosticColumnData(diagnosticFiltersHashMap, diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.llPartAffected.setOnClickListener {
                 diagnosticColumnName = getLocalizeColumnName(COL_PART_AFFECTED)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+                viewModel.getDiagnosticColumnData(diagnosticFiltersHashMap, diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.llCasualAgent.setOnClickListener {
                 diagnosticColumnName = getLocalizeColumnName(COL_CAUSAL_AGENT)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+                viewModel.getDiagnosticColumnData(diagnosticFiltersHashMap, diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.llEnemyType.setOnClickListener {
                 diagnosticColumnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
-                viewModel.getDiagnosticColumnData(diagnosticColumnName, SHEET_DIAGNOSTIC)
+                viewModel.getDiagnosticColumnData(diagnosticFiltersHashMap, diagnosticColumnName, SHEET_DIAGNOSTIC)
             }
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
@@ -290,6 +288,9 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         super.onStop()
         viewModel.filtersLiveData.value = arrayListOf()
         viewModel.getDiagnosticColumnDataLiveData.value = arrayListOf()
+
+        viewModel.getDiagnosticColumnDataLiveData.removeObservers(viewLifecycleOwner)
+        viewModel.filtersLiveData.removeObservers(viewLifecycleOwner)
     }
 
     override fun onResume() {

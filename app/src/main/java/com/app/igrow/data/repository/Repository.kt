@@ -37,7 +37,11 @@ interface Repository {
     //Users Side repo's
 
     //Diagnostic
-    suspend fun getColumnData(columnName:String,sheetName:String):Flow<DataState<ArrayList<String>>>
+    suspend fun getColumnData(
+        filtersMap: HashMap<String, String>,
+        columnName: String,
+        sheetName: String,
+    ): Flow<DataState<ArrayList<String>>>
     suspend fun searchByName(name:String,sheetName:String):Flow<DataState<ArrayList<String>>>
 
     suspend fun getAllDataOfGivenSheet(sheetName:String): Flow<DataState<ArrayList<HashMap<String,String>>>>

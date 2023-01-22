@@ -6,5 +6,5 @@ interface DiagnosticRepo {
     suspend fun getAllDiagnostic(): ArrayList<DiagnosticEntityName>
     suspend fun insertDiagnostic(dataList: List<DiagnosticEntityName>)
     suspend fun getDiagnosticCount(): Int
-    suspend fun getDiagnosticColumnData(sheetName: String, columnName: String): List<String>
+    suspend fun getDiagnosticColumnData(filtersMap: HashMap<String, String>, sheetName: String, columnName: String): List<String>
 }

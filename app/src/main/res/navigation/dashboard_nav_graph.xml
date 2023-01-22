@@ -65,6 +65,14 @@
             android:id="@+id/toProductsFragment"
             app:destination="@id/ProductsFragment" />
 
+        <action
+            android:id="@+id/toHelpFragmentFromDiagnoseDetailsFragment"
+            app:destination="@id/helpFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/diagnoseSearchResultDetailFragment"
+            app:popUpToInclusive="false"/>
+
+
     </fragment>
 
 
@@ -106,6 +114,13 @@
         <action
             android:id="@+id/toDistributorDetail"
             app:destination="@id/distributorDetailFragment" />
+
+        <action
+            android:id="@+id/toHelpFragmentFromProductDetailsFragment"
+            app:destination="@id/helpFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/productSearchResultDetailFragment"
+            app:popUpToInclusive="false"/>
 
     </fragment>
 
@@ -172,7 +187,17 @@
         android:id="@+id/dealersDetailFragment"
         android:name="com.app.igrow.ui.dealer.detail.DealerDetailFragment"
         android:label="DealersDetailFragment"
-        tools:layout="@layout/fragment_dealer_detail" />
+        tools:layout="@layout/fragment_dealer_detail" >
+
+        <action
+            android:id="@+id/toHelpFragmentFromDealersDetail"
+            app:destination="@id/helpFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/dealersDetailFragment"
+            app:popUpToInclusive="false"/>
+
+
+    </fragment>
 
 
     <fragment
@@ -186,12 +211,6 @@
         android:name="com.app.igrow.ui.help.HelpFragment"
         android:label="helpFragment"
         tools:layout="@layout/fragment_help" >
-        <action
-            android:id="@+id/helpFragToMoreFragment"
-            app:destination="@id/moreFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/moreFragment"
-            app:popUpToInclusive="true" />
 
     </fragment>
 

@@ -36,11 +36,13 @@ class ProductsRepoImpl @Inject constructor(
     }
 
     override suspend fun getProductsColumnData(
+        filtersMap: HashMap<String, String>,
         sheetName: String,
         columnName: String
     ): List<String> {
         return productsDao.getProductsColumnData(
             Utils.getColumnDataCustomQuery(
+                filtersMap= filtersMap,
                 sheetName = sheetName,
                 columnName = columnName
             )

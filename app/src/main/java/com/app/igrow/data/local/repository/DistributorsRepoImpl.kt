@@ -34,11 +34,13 @@ class DistributorsRepoImpl @Inject constructor(
     }
 
     override suspend fun getDistributorsColumnData(
+        filtersMap: HashMap<String, String>,
         sheetName: String,
         columnName: String
     ): List<String> {
         return distributorsDao.getDistributorsColumnData(
             Utils.getColumnDataCustomQuery(
+                filtersMap = filtersMap,
                 sheetName = sheetName,
                 columnName = columnName
             )

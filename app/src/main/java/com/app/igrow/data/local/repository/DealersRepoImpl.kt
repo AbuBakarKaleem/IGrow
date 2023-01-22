@@ -35,9 +35,10 @@ class DealersRepoImpl @Inject constructor(
         return dealersDao.getDealerCount()
     }
 
-    override suspend fun getDealersColumnData(sheetName: String, columnName: String): List<String> {
+    override suspend fun getDealersColumnData(filtersMap: HashMap<String, String>,sheetName: String, columnName: String): List<String> {
         return dealersDao.getDealersColumnData(
             Utils.getColumnDataCustomQuery(
+                filtersMap = filtersMap,
                 sheetName = sheetName,
                 columnName = columnName
             )

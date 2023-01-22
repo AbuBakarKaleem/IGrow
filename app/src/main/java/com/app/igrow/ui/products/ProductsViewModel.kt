@@ -33,10 +33,10 @@ class ProductsViewModel @Inject constructor(
 
     private var showEmptyResponseMsg = false
 
-    fun getProductColumnData(columnName: String, sheetName: String) {
+    fun getProductColumnData(filtersMap: HashMap<String, String>,columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            getColumnDataUsecase.invoke(columnName = columnName, sheetName = sheetName).collect {
+            getColumnDataUsecase.invoke(filtersMap = filtersMap, columnName = columnName, sheetName = sheetName).collect {
                 when (it) {
                     is DataState.Success -> {
                         getProductColumnDataMutableLiveData.postValue(it.data)

@@ -394,6 +394,7 @@ class RepositoryImpl @Inject constructor(
 
     // General
     override suspend fun getColumnData(
+        filtersMap: HashMap<String, String>,
         columnName: String,
         sheetName: String
     ): Flow<DataState<ArrayList<String>>> =
@@ -401,7 +402,7 @@ class RepositoryImpl @Inject constructor(
             try {
                 if (Utils.isInternetAvailable(IGrowApp.getInstance()).not()) {
                     val dataList =
-                        getColumnDataFromLocal(sheetName = sheetName, columnName = columnName)
+                        getColumnDataFromLocal(filtersMap = filtersMap, sheetName = sheetName, columnName = columnName)
                     if (dataList.isEmpty().not()) {
                         if (isActive) trySend(DataState.success(dataList))
                     } else {
@@ -596,6 +597,7 @@ class RepositoryImpl @Inject constructor(
     }
 
     private suspend fun getColumnDataFromLocal(
+        filtersMap: HashMap<String, String>,
         sheetName: String,
         columnName: String
     ): ArrayList<String> {
@@ -606,6 +608,7 @@ class RepositoryImpl @Inject constructor(
                     dataList =
                         localRepository.getDiagnosticRepoImpl()
                             .getDiagnosticColumnData(
+                                filtersMap = filtersMap,
                                 sheetName = sheetName,
                                 columnName = columnName
                             ) as ArrayList<String>
@@ -614,6 +617,7 @@ class RepositoryImpl @Inject constructor(
                     dataList =
                         localRepository.getDealersRepoImpl()
                             .getDealersColumnData(
+                                filtersMap = filtersMap,
                                 sheetName = sheetName,
                                 columnName = columnName
                             ) as ArrayList<String>
@@ -622,6 +626,7 @@ class RepositoryImpl @Inject constructor(
                     dataList =
                         localRepository.getDistributorsImpl()
                             .getDistributorsColumnData(
+                                filtersMap = filtersMap,
                                 sheetName = sheetName,
                                 columnName = columnName
                             ) as ArrayList<String>
@@ -630,6 +635,7 @@ class RepositoryImpl @Inject constructor(
                     dataList =
                         localRepository.getProductsImpl()
                             .getProductsColumnData(
+                                filtersMap = filtersMap,
                                 sheetName = sheetName,
                                 columnName = columnName
                             ) as ArrayList<String>

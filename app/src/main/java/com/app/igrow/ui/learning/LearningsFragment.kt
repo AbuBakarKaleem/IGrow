@@ -113,9 +113,10 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
     }
 
     private fun shareAppLink(youtubeVideoLink: String) {
+        val videoLink = youtubeVideoLink
         val i = Intent(Intent.ACTION_SEND)
         i.type = "text/plain"
-        i.putExtra(Intent.EXTRA_SUBJECT, youtubeVideoLink)
+        i.putExtra(Intent.EXTRA_SUBJECT, videoLink)
         startActivity(Intent.createChooser(i, "Share Video URL"))
     }
 

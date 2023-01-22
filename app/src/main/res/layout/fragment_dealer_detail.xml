@@ -11,16 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/round_edges_light_red_bg"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_dealer_name"
@@ -40,10 +41,11 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintVertical_chainStyle="spread">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -126,9 +128,9 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:layout_marginTop="20dp"
                         android:text="@string/region"
                         android:textColor="@android:color/holo_red_dark"
                         android:textSize="16sp"
@@ -179,10 +181,10 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_weight="1"
-                        android:drawableEnd="@drawable/ic_mobile"
+                        android:drawableEnd="@drawable/whatsapp_icon"
                         android:gravity="start"
                         android:text="@string/whatsapp"
                         android:textColor="@android:color/holo_red_dark"
@@ -277,20 +279,21 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:weightSum="2"
+        android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollView"
-        app:layout_constraintVertical_bias="1"
-        app:layout_constraintVertical_chainStyle="spread">
+        app:layout_constraintVertical_bias="3"
+        app:layout_constraintVertical_chainStyle="spread_inside">
 
         <com.google.android.material.button.MaterialButton
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
@@ -304,6 +307,7 @@
             app:iconTint="@null" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHelp"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

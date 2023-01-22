@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
 import com.app.igrow.data.usecase.user.general.FilterDataListOfGivenSheetUseCase
 import com.app.igrow.data.usecase.user.general.GetColumnDataUsecase
-import com.app.igrow.data.usecase.user.general.SearchByNameUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
@@ -19,7 +18,6 @@ import javax.inject.Inject
 @HiltViewModel
 class DiagnosticFragmentViewModel @Inject constructor(
     private val getColumnDataUsecase: GetColumnDataUsecase,
-    private val searchByNameUsecase: SearchByNameUsecase,
     private val filterDataListOfGivenSheetUseCase: FilterDataListOfGivenSheetUseCase
 ) : ViewModel() {
 
@@ -36,10 +34,13 @@ class DiagnosticFragmentViewModel @Inject constructor(
 
     private var showEmptyResponseMsg = false
 
-    fun getDiagnosticColumnData(columnName: String, sheetName: String) {
+    fun getDiagnosticColumnData(filtersMap: HashMap<String, String>, columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            getColumnDataUsecase.invoke(columnName = columnName, sheetName = sheetName).collect {
+            getColumnDataUsecase.invoke(
+                filtersMap = filtersMap,
+                columnName = columnName,
+                sheetName = sheetName).collect {
                 when (it) {
                     is DataState.Success -> {
                         getDiagnosticColumnDataMutableLiveData.postValue(it.data)

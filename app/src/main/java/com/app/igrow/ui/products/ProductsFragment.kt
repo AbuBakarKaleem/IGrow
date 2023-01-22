@@ -72,11 +72,12 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
             binding.llCrop.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_CROP)
-                viewModel.getProductColumnData(COL_CROP, Constants.SHEET_PRODUCTS)
+                viewModel.getProductColumnData(productFiltersHashMap,COL_CROP, Constants.SHEET_PRODUCTS)
             }
             binding.llEnemy.setOnClickListener {
                 productColumnName =getLocalizeColumnName( COL_ENEMY)
                 viewModel.getProductColumnData(
+                    productFiltersHashMap,
                     COL_ENEMY,
                     Constants.SHEET_PRODUCTS
                 )
@@ -84,6 +85,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.llComposition.setOnClickListener {
                 productColumnName =getLocalizeColumnName(COL_COMPOSITION)
                 viewModel.getProductColumnData(
+                    productFiltersHashMap,
                     COL_COMPOSITION,
                     Constants.SHEET_PRODUCTS
                 )
@@ -91,6 +93,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.llEnemyType.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
                 viewModel.getProductColumnData(
+                    productFiltersHashMap,
                     COL_TYPE_OF_ENEMY,
                     Constants.SHEET_PRODUCTS
                 )
@@ -98,6 +101,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.llProductCategory.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_PRODUCTS_CATEGORY)
                 viewModel.getProductColumnData(
+                    productFiltersHashMap,
                     COL_PRODUCTS_CATEGORY,
                     Constants.SHEET_PRODUCTS
                 )
@@ -105,6 +109,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.llDistributor.setOnClickListener {
                 productColumnName =getLocalizeColumnName (COL_DISTRIBUTOR)
                 viewModel.getProductColumnData(
+                    productFiltersHashMap,
                     COL_DISTRIBUTOR,
                     Constants.SHEET_PRODUCTS
                 )

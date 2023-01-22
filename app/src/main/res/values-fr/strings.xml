@@ -88,14 +88,14 @@
     <string name="edit_dealer">Modifier le concessionnaire</string>
     <string name="home_heading">Identifiez et trouvez la bonne solution pour protéger vos cultures contre les ravageurs et les maladies.</string>
     <string name="identify_a_plant_health_problem">Rechercher un \n produit phytosanitaire</string>
-    <string name="search_by_name">Rechercher par nom</string>
+    <string name="search_by_name">Recherche par nom de boutique</string>
     <string name="search_by_product_name">Rechercher par nom de produit</string>
 
     <string name="about">À propos de nous</string>
-    <string name="about_content">  <font size="18"> <b><u>À propos de nous</u></b></font> \n <font size="18"> Cette application est développée par AgricAdvisors Sarl, une entreprise spécialisée dans les services-conseil en agronomies, la formation et le renforcement des capacités, et le développement des innovations dans le domaine agricole.
+    <string name="about_content"><font size="18"><b><u>À propos de nous\n</u></b></font>\nCette application est développée par AgricAdvisors Sarl, une entreprise spécialisée dans les services-conseil en agronomies, la formation et le renforcement des capacités, et le développement des innovations dans le domaine agricole.
 L’application iGrow est l’une de nos récentes innovations en AgriTech. Son but d’éduquer les producteurs agricoles sur une protection saine et durable des cultures et fournir aux professionnels un outil efficace pour les assister dans la prise de décision et les conseils phytosanitaires.
 Nous travaillons avec les professionnels de l’agronomie, les producteurs agricoles, agro-industries, les centres de recherche, les écoles de formation, les distributeurs d’intrants agricoles, les boutiques phytosanitaires, les organismes gouvernementaux et autres acteurs de la chaine de valeur agricole. Si vous souhaitez collaborer avec nous.
-        \n\n<b>veuillez nous contacter: AgricAdvisors Sarl \Adresse: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nSite internet: www.agricadvisors.com</b></font> </string>
+        \n\n<b>Veuillez nous contacter: AgricAdvisors Sarl \Adresse: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nSite internet: www.agricadvisors.com</b></string>
     <string name="help_content">
         <font size="20"><u><b>Aide\n</b></u></font>
         <b><u>\n\Généralités\n</u></b>
@@ -146,7 +146,7 @@ Les produits phytosanitaires doivent être utilisés par des personnes responsab
     <string name="text_select_language">Choisir la langue</string>
     <string name="language_english">Anglais</string>
     <string name="language_french">Français</string>
-    <string name="setting">Réglages</string>
+    <string name="setting">Parametres</string>
     <string name="language_change_warning_message">Le changement de langue nécessite le redémarrage de l\'application</string>
     <string name="language_change_continue_message">Voulez-vous continuer ?</string>
     <string name="no_internet_error">Pas de connexion Internet</string>

@@ -87,6 +87,10 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
             findNavController().navigate(R.id.toDealerFragment)
         }
 
+        binding.btnHelp.setOnClickListener {
+            findNavController().navigate(R.id.toHelpFragmentFromProductDetailsFragment)
+        }
+
         binding.distributorsBtn.setOnClickListener {
             val value: String =
                 if (isLocaleFrench()) COL_DISTRIBUTORS_NAME_FR else COL_DISTRIBUTORS_NAME

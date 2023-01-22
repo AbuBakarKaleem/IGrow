@@ -59,5 +59,9 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
         binding.llControlProduct.setOnClickListener {
             findNavController().navigate(R.id.toProductsFragment)
         }
+
+        binding.btnHelp.setOnClickListener {
+            findNavController().navigate(R.id.toHelpFragmentFromDiagnoseDetailsFragment)
+        }
     }
 }

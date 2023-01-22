@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.databinding.FragmentDealerDetailBinding
@@ -33,6 +35,11 @@ class DealerDetailFragment : BaseFragment<FragmentDealerDetailBinding>() {
             if ((it as TextView).text.toString().isEmpty().not())
                 openDialer((it).text.toString().trim())
         }
+
+        binding.btnHelp.setOnClickListener {
+            findNavController().navigate(R.id.toHelpFragmentFromDealersDetail)
+        }
+
     }
 
     private fun setPopulateViews(dealer: Dealers) {

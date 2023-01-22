@@ -35,6 +35,7 @@
             android:textColor="@color/home_shop_front_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_two"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
 
         <com.google.android.material.card.MaterialCardView
@@ -46,6 +47,7 @@
             app:contentPaddingLeft="10dp"
             app:contentPaddingRight="10dp"
             app:contentPaddingTop="10dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="@id/et_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

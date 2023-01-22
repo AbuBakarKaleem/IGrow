@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetColumnDataUsecase @Inject constructor(private val repository: Repository) {
-    suspend operator fun invoke(columnName: String,sheetName:String): Flow<DataState<ArrayList<String>>> {
-        return repository.getColumnData(columnName = columnName, sheetName = sheetName)
+    suspend operator fun invoke(filtersMap: HashMap<String, String>,columnName: String,sheetName:String): Flow<DataState<ArrayList<String>>> {
+        return repository.getColumnData(filtersMap = filtersMap, columnName = columnName, sheetName = sheetName)
     }
 }
