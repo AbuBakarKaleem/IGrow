@@ -418,7 +418,7 @@ class RepositoryImpl @Inject constructor(
                                 return@addSnapshotListener
                             }
                             if (snapshot != null && !snapshot.isEmpty) {
-                                val dataList = ArrayList<String>()
+                                var dataList = ArrayList<String>()
                                 snapshot.documents.forEach {
                                     var value: HashMap<String, String> = HashMap()
                                     value = if (it.data?.values?.asIterable()
@@ -432,7 +432,11 @@ class RepositoryImpl @Inject constructor(
 
                                     dataList.add(value[columnName].toString())
                                 }
-                                if (isActive) trySend(DataState.success(dataList.distinct() as ArrayList<String>))
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    dataList =
+                                        getColumnDataFromLocal(filtersMap = filtersMap, sheetName = sheetName, columnName = columnName)
+                                    if (isActive) trySend(DataState.success(dataList))
+                                }
                             } else {
                                 if (isActive) trySend(DataState.error<ArrayList<String>>(stringUtils.noRecordFoundMsg()))
                             }

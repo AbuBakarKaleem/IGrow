@@ -67,15 +67,7 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
         }
 
         binding.btnLearningMaterial.setOnClickListener {
-            if (Utils.isInternetAvailable(requireContext())) {
                 findNavController().navigate(R.id.toLearningsFragment)
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    getText(R.string.no_internet_error),
-                    Toast.LENGTH_LONG
-                ).show()
-            }
         }
 
         binding.btnAbout.setOnClickListener {

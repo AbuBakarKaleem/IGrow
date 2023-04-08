@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="start"
+            android:gravity="center"
             android:textAllCaps="true"
             android:textColor="@color/brown"
             android:textSize="24sp"
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="10dp"
                         app:cardUseCompatPadding="true"
-                        app:cardBackgroundColor="@color/home_product_front_red"
+                        app:cardBackgroundColor="@android:color/holo_red_dark"
                         app:contentPadding="10dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -79,7 +79,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="@string/location_amp_contact"
+                            android:text="@string/distributor"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -349,7 +349,7 @@
             app:iconTint="@android:color/holo_red_dark" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_help"
+            android:id="@+id/btn_shop"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

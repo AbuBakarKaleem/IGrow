@@ -21,7 +21,7 @@ class DiagnosticSearchResultAdapter (val onImageClicked: (Item: Diagnostic) -> U
                 var value = if(Utils.isLocaleFrench()) model.crop_fr  else model.crop
                 this.tvSearchResultName.text = value
 
-                value = if(Utils.isLocaleFrench()) model.causal_agent_fr  else model.causal_agent
+                value = if(Utils.isLocaleFrench()) model.plant_health_problem_fr  else model.plant_health_problem
                 this.tvSearchResultDetail.text = value
                 this.cvSearchResult.setOnClickListener {
                     onImageClicked(model)

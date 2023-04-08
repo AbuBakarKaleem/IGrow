@@ -25,7 +25,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_heading"
             style="@style/headingStyle"
-            android:text="@string/identify_a_plant_health_problem"
+            android:text="@string/identify_by_pest"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
@@ -67,7 +67,7 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/icon_search_green"
             android:drawablePadding="4dp"
-            android:hint="@string/search_by_name"
+            android:hint="@string/search_pest"
             android:maxLines="1"
             android:imeOptions="actionDone"
             android:inputType="text"

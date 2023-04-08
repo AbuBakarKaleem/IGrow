@@ -24,15 +24,15 @@
     <string name="all_causal_agents">All Causal Agents</string>
      <string name="update">Update</string>
     <string name="control">Control</string>
-    <string name="symptoms_impact">Symptoms Impact</string>
-    <string name="part_affected">Part Affected</string>
+    <string name="symptoms_impact">Symptoms/Impact</string>
+    <string name="part_affected">Part(s) Affected</string>
     <string name="enemy_type">Enemy Type</string>
     <string name="all_parts_affected">All Plant Parts</string>
     <string name="all_enemy_types">All Enemy Types</string>
     <string name="product_category">Product Category</string>
     <string name="all_product_categories">All Product Categories</string>
     <string name="product_name">Product Name</string>
-    <string name="active_ingredient">Actives Ingredients</string>
+    <string name="active_ingredient">Active Ingredient(s)</string>
     <string name="registration_number">Registration Number</string>
     <string name="composition">Composition</string>
     <string name="all_compositions">All Compositions</string>
@@ -40,7 +40,7 @@
     <string name="toxicological_class">Toxicological Class</string>
     <string name="mode_of_action">Mode of action</string>
     <string name="enemy">Enemy</string>
-    <string name="enemies">Enemies</string>
+    <string name="enemies">Enemy(ies)</string>
     <string name="all_enemies">All Enemies</string>
     <string name="packaging">Packaging</string>
     <string name="application_rate">Application Rates</string>
@@ -82,7 +82,7 @@
     <string name="edit_dealer">Edit Dealer</string>
     <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
     <string name="identify_a_plant_health_problem">Search for a crop \n protection product</string>
-    <string name="search_by_name">Search by name</string>
+    <string name="search_by_name">Search by dealer name</string>
     <string name="search_by_product_name">Search by product name</string>
     <string name="or_select">or select</string>
 
@@ -90,7 +90,7 @@
     <string name="about_content"> <font size="18"><b><u>ABOUT US\n</u></b></font>\nThis application is developed by AgricAdvisors Sarl, a company specializing in agronomy consulting services, training and capacity building, and the development of innovations in the agricultural field.
 The iGrow app is one of our recent innovations in AgriTech. Its purpose is to educate agricultural producers on healthy and sustainable Crop Protection and provide professionals with an effective tool to assist them in decision-making and Crop Protection advice.
 We work with agronomy professionals, agricultural producers, agro-industries, research centers, training schools, agricultural input distributors, Crop Protection dealers, government agencies and other actors in the agricultural value chain. If you would like to collaborate with us.
-        \n\n<b>Contact Us: AgricAdvisors Sarl \nAddress: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nWebsite: www.agricadvisors.com</b> </string>
+        \n\n<b>Contact Us: \nAgricAdvisors Sarl \nAddress: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nWebsite: www.agricadvisors.com</b> </string>
 
     <string name="help_content"><font size="18"><u><b>HELP\n</b></u></font>
         <b><u>\nGeneral\n</u></b><b>\nHow to carry out a search for a plant health problems, a product or a Crop Protection dealer?</b>
@@ -119,8 +119,8 @@ This application does not serve as professional recommendations as to the use of
 This database is provided as we receive it from our partners. We make no express or implied warranties, including, but not limited to, warranties of merchantability and fitness for a particular purpose.
 Crop Protection products must be used by responsible and authorized persons, in accordance with the laws and regulations in force. Under no circumstances will we be held liable for any misuse of the information provided resulting in direct, special, indirect, consequential or other damages, whatever the cause.<b>\n\nLinks to other sites\n</b>This application may contain links to other websites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to consult the privacy policy of these sites. We have no control and assume no responsibility for the content, privacy policies or practices of any third-party site or service.<b>\n\nChanges to Terms and Conditions\n</b>We may make changes to these terms and conditions at any time without specific notice from us. We therefore advise you to consult this page regularly to be aware of any changes. These changes are effective immediately upon posting to this page. If you have any questions regarding the terms and conditions of use of our application, do not hesitate to contact us at agronomist@agricadvisors.com.
 </string>
-    <string name="terms_and_condition">Terms And Condition</string>
-    <string name="invite_a_friend">Invite a Friend</string>
+    <string name="terms_and_condition">Terms and Condition</string>
+    <string name="invite_a_friend">Invite a friend</string>
 
     <string name="or">or</string>
     <string name="text_select">Select</string>
@@ -152,7 +152,7 @@ Crop Protection products must be used by responsible and authorized persons, in 
     </string-array>
 
     <string name="crop">Crop</string>
-    <string name="crops">Crops</string>
+    <string name="crops">Crop(s)</string>
     <string name="all_crops">All Crops</string>
     <string name="casual_agent">Casual agent</string>
     <string name="clear_search">Clear Search</string>
@@ -184,4 +184,7 @@ Crop Protection products must be used by responsible and authorized persons, in 
     <string name="location_amp_contact"><![CDATA[Location & Contact]]></string>
     <string name="search_result">Search Results</string>
     <string name="more_info">More Info</string>
+    <string name="identify_by_pest">Identify a crop pest or disease</string>
+    <string name="search_pest">Search for a pest or disease</string>
+    <string name="control_methods">Control methods</string>
 </resources>

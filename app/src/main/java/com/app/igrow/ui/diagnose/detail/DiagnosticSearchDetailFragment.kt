@@ -39,11 +39,8 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
         value = if(Utils.isLocaleFrench()) model.crop_fr  else model.crop
         binding.tvIdentificationCrop.text = value
 
-        value = if(Utils.isLocaleFrench()) model.control_fr else model.control
+        value = if(Utils.isLocaleFrench()) model.part_affected_fr else model.part_affected
         binding.tvIdentificationCondition.text= value
-
-        value = if(Utils.isLocaleFrench()) model.symptoms_impact_fr else model.symptoms_impact
-        binding.tvSymptomsLeaves.text= value
 
         value = if(Utils.isLocaleFrench()) model.symptoms_impact_fr  else model.symptoms_impact
         binding.tvSymptomsImpact.text = value
@@ -51,7 +48,7 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
         //binding.tvBiologicalControl.text = itemArgs.control
         //tvBiologicalControl.text = itemArgs.control
         value = if(Utils.isLocaleFrench()) model.control_fr  else model.control
-        binding.tvCulturalControl.text = value
+        binding.tvControl.text = value
 
     }
 

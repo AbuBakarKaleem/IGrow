@@ -50,6 +50,10 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
             if (binding.tvMobile.text.toString().isNotEmpty())
                 openWhatsapp(binding.tvMobile.text.toString())
         }
+
+        binding.btnShop.setOnClickListener {
+            findNavController().navigate(R.id.distributorDetailToDealersFragment)
+        }
     }
 
     private fun setPopulateViews(distributor: Distributors) {

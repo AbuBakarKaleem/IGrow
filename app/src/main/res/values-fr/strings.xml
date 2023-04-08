@@ -22,26 +22,27 @@
 
     <string name="no_data_found">Aucune donnée disponible</string>
     <string name="or_select">ou sélectionnez</string>
-    <string name="invite_a_friend">Invite un ami</string>
+    <string name="invite_a_friend">Inviter un(e) ami(e)</string>
 
     <string name="crop_name">Nom de la culture</string>
     <string name="plant_problem">Problème de plante</string>
     <string name="causal_agent">Agents Causaux</string>
     <string name="all_enemies">Tous les ennemis</string>
-    <string name="all_compositions">Toutes Les Compositions</string>
-    <string name="all_product_categories">Toutes Les Catégories De Produits</string>
-    <string name="all_distributors">Tous Les Distributeurs</string>
-    <string name="all_city_towns">Toutes Les Villes / Villages</string>
+    <string name="all_compositions">Toutes les compositions</string>
+    <string name="all_product_categories">Toutes les catégories de produits</string>
+    <string name="all_distributors">Tous les distributeurs</string>
+    <string name="all_city_towns">Toutes les villes / Villages</string>
     <string name="all_region">Toutes les régions</string>
     <string name="update">mettre à jour</string>
     <string name="control">Contrôler</string>
-    <string name="symptoms_impact">Impact des symptômes</string>
-    <string name="part_affected">Partie affectée</string>
+    <string name="symptoms_impact">Symptômes/Impact</string>
+    <string name="part_affected">Partie(s) affectée(s)</string>
+    <string name="control_methods">Méthodes de lutte</string>
     <string name="enemy_type">Type d\'ennemi</string>
     <string name="product_category">Catégorie de produit</string>
     <string name="product_name">nom du produit</string>
-    <string name="active_ingredient">Matières Actives</string>
-    <string name="enemies">Ennemis</string>
+    <string name="active_ingredient">Matière(s) Active(s)</string>
+    <string name="enemies">Ennemi(s)</string>
     <string name="registration_number">Numéro d\'homologation</string>
     <string name="composition">Composition</string>
     <string name="formulation">Formulation</string>
@@ -49,7 +50,7 @@
     <string name="mode_of_action">Mode d\'action</string>
     <string name="enemy">Ennemi</string>
     <string name="packaging">Emballage</string>
-    <string name="application_rate">Doses d\'applications</string>
+    <string name="application_rate">Doses d\'application</string>
     <string name="treatment_time">Période d\'application</string>
     <string name="frequency_of_application">Fréquence d\'application</string>
     <string name="method_of_application">Méthode d\'application</string>
@@ -57,7 +58,7 @@
     <string name="re_entry_period">Délai de Réentrée</string>
     <string name="time_before_harvest">Délai avant récolte</string>
     <string name="all_crops">Toutes les cultures</string>
-    <string name="all_enemy_types">Tous les types dennemis</string>
+    <string name="all_enemy_types">Tous les types d\'ennemis</string>
     <string name="all_parts_affected">Toutes les parties de la plante</string>
     <string name="all_causal_agents">Tous les agents causaux</string>
     <string name="distributor">Distributeur</string>
@@ -95,9 +96,9 @@
     <string name="about_content"><font size="18"><b><u>À propos de nous\n</u></b></font>\nCette application est développée par AgricAdvisors Sarl, une entreprise spécialisée dans les services-conseil en agronomies, la formation et le renforcement des capacités, et le développement des innovations dans le domaine agricole.
 L’application iGrow est l’une de nos récentes innovations en AgriTech. Son but d’éduquer les producteurs agricoles sur une protection saine et durable des cultures et fournir aux professionnels un outil efficace pour les assister dans la prise de décision et les conseils phytosanitaires.
 Nous travaillons avec les professionnels de l’agronomie, les producteurs agricoles, agro-industries, les centres de recherche, les écoles de formation, les distributeurs d’intrants agricoles, les boutiques phytosanitaires, les organismes gouvernementaux et autres acteurs de la chaine de valeur agricole. Si vous souhaitez collaborer avec nous.
-        \n\n<b>Veuillez nous contacter: AgricAdvisors Sarl \Adresse: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nSite internet: www.agricadvisors.com</b></string>
+        \n\n<b>Veuillez nous contacter: \nAgricAdvisors Sarl \nAdresse: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nSite internet: www.agricadvisors.com</b></string>
     <string name="help_content">
-        <font size="20"><u><b>Aide\n</b></u></font>
+        <font size="20"><u><b>AIDE\n</b></u></font>
         <b><u>\n\Généralités\n</u></b>
         <b>\nComment effectuer une recherche d’attaque phytosanitaire, de produit ou de boutique phytosanitaire?</b>
         \nVous avez accès à deux modes de recherche. Vous pouvez saisir directement le nom de lélément que vous recherchez si vous le connaissez, ou sélectionner les différents critères pour avoir une liste de résultats correspondants à votre recherche.\n
@@ -134,8 +135,8 @@ Nous travaillons avec les professionnels de l’agronomie, les producteurs agric
         \nNous ne faisons aucune recommandation particulière par rapports aux boutiques phytosanitaires. Nous ne faisons que rendre l’information disponible. Nous travaillons aussi avec les boutiques indépendantes afin de les intégrer dans notre base de données.
     </string>
 
-    <string name="terms_and_condition">Termes et conditions</string>
-    <string name="terms"><font size="18"><b>Termes Et Conditions</b></font>\n\nEn accédant à cette application ou en utilisant nimporte quelle partie de lapplication ou tout contenu ou service de celle-ci, vous acceptez dêtre lié par ces termes et conditions. Si vous nacceptez pas tous les termes et conditions, vous ne devez pas utiliser cette application, son contenu ou les services quelle propose.<b>\n\nUtilisation de l’application\n</b>Cette application vous permet d’identifier les problèmes phytosanitaires de vos cultures, trouver les solutions efficaces et rechercher les points de vente afin de s’approvisionner. Les utilisateurs peuvent à travers cette application s’éduquer et trouver une assistance dans la protection saine et efficace des cultures.<b>\n\nGestion des données\n</b>Nous travaillons avec de nombreux partenaire et professionnels de l’agronomie pour construire une base de données efficace et utile pour les utilisateurs de l’application. Les produits phytosanitaires affichés sont homologués par les autorités compétentes et commercialisés par les distributeurs locaux. Nous travaillons avec les distributeurs locaux afin d’afficher les produits homologués et effectivement mis en marché. Les informations sur les nouvelles homologations, les mises en marché, les expirations d’homologation, les retraits du marché ou les interdictions des produits de protection des cultures sont régulièrement mises à jour au fur et à mesure de leur disponibilité au grand public. Nous mettons également à jour les informations sur les maladies et ravageurs, de même que sur les boutiques phytosanitaires.<b>\n\nResponsabilité\n</b>Cette application n’a pas vocation à se substituer à l’étiquette ou la fiche technique du produit et ne fournit que les informations de bases nécessaires à la prise de décision quant au choix de l’utilisation des produits phytosanitaires. Vous devez toujours lire attentivement l’étiquette de tout produit phytosanitaire avant son utilisation. En cas de doutes ou questions, veuillez contacter le distributeur.
+    <string name="terms_and_condition">Termes et Conditions</string>
+    <string name="terms"><font size="18"><b>TERMES ET CONDITIONS</b></font>\n\nEn accédant à cette application ou en utilisant nimporte quelle partie de lapplication ou tout contenu ou service de celle-ci, vous acceptez dêtre lié par ces termes et conditions. Si vous nacceptez pas tous les termes et conditions, vous ne devez pas utiliser cette application, son contenu ou les services quelle propose.<b>\n\nUtilisation de l’application\n</b>Cette application vous permet d’identifier les problèmes phytosanitaires de vos cultures, trouver les solutions efficaces et rechercher les points de vente afin de s’approvisionner. Les utilisateurs peuvent à travers cette application s’éduquer et trouver une assistance dans la protection saine et efficace des cultures.<b>\n\nGestion des données\n</b>Nous travaillons avec de nombreux partenaire et professionnels de l’agronomie pour construire une base de données efficace et utile pour les utilisateurs de l’application. Les produits phytosanitaires affichés sont homologués par les autorités compétentes et commercialisés par les distributeurs locaux. Nous travaillons avec les distributeurs locaux afin d’afficher les produits homologués et effectivement mis en marché. Les informations sur les nouvelles homologations, les mises en marché, les expirations d’homologation, les retraits du marché ou les interdictions des produits de protection des cultures sont régulièrement mises à jour au fur et à mesure de leur disponibilité au grand public. Nous mettons également à jour les informations sur les maladies et ravageurs, de même que sur les boutiques phytosanitaires.<b>\n\nResponsabilité\n</b>Cette application n’a pas vocation à se substituer à l’étiquette ou la fiche technique du produit et ne fournit que les informations de bases nécessaires à la prise de décision quant au choix de l’utilisation des produits phytosanitaires. Vous devez toujours lire attentivement l’étiquette de tout produit phytosanitaire avant son utilisation. En cas de doutes ou questions, veuillez contacter le distributeur.
 Cette application ne sert pas de recommandations professionnelles quant à lutilisation d’un produit en particulier ou un point de ventes en particulier. Nous ne faisons que rendre disponible les informations officielles et validées par les autorités compétentes afin de faciliter leur accessibilité au grand public.
 Cette base de données est fournie telle que nous la recevons de nos partenaires. Nous n’offrons aucune garantie explicite ou implicite, ce qui comprend, sans s’y limiter, les garanties de qualité marchande et d’adaptation à une fin particulière.
 Les produits phytosanitaires doivent être utilisés par des personnes responsables et autorisées, ceci conformément aux lois et réglementations en vigueur. En aucun cas, nous ne serons tenus responsables d’un mauvais usage des informations fournies entrainants des dommages directs, particuliers, indirects, consécutifs ou autres, quelle qu’en soit la cause.<b>\n\nLiens vers dautres sites\n</b>Cette application peut contenir des liens vers dautres sites internet. Si vous cliquez sur un lien tiers, vous serez dirigé vers ce site. Notez que ces sites externes ne sont pas exploités par nous. Par conséquent, nous vous conseillons vivement de consulter la politique de confidentialité de ces sites. Nous navons aucun contrôle et nassumons aucune responsabilité quant au contenu, aux politiques de confidentialité ou aux pratiques de tout site ou service tiers.<b>\n\nModifications des Termes et Conditions\n</b>Nous pouvons apporter des modifications à ces termes et conditions en tout temps sans préavis spécifique de notre part. Nous vous conseillons donc de consulter régulièrement cette page pour prendre connaissance des changements éventuels. Ces modifications entrent en vigueur immédiatement après leur publication sur cette page. Si vous avez des questions concernant les termes et conditions d’utilisation de notre application, nhésitez pas à nous contacter à ladresse agronomist@agricadvisors.com.</string>
@@ -169,12 +170,12 @@ Les produits phytosanitaires doivent être utilisés par des personnes responsab
     </string-array>
 
     <string name="crop">Culture</string>
-    <string name="casual_agent">Agent occasionnel</string>
+    <string name="casual_agent">Agent causal</string>
     <string name="clear_search">Effacer la recherche</string>
     <string name="identification">Identification</string>
     <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
     <string name="note_notice">TOUJOURS LIRE L’ÉTIQUETTE D’UN PESTICIDE AVANT USAGE</string>
-    <string name="crops">Cultures</string>
+    <string name="crops">Culture(s)</string>
 
     <string name="results">Résultats</string>
 
@@ -196,8 +197,10 @@ Les produits phytosanitaires doivent être utilisés par des personnes responsab
     <string name="text_solution">La solution</string>
     <string name="find_local_dealer">Recherchez une \n boutique phytosanitaire</string>
     <string name="suppliers">Fournisseurs</string>
-    <string name="location_amp_contact"><![CDATA[LOCALISATION & Contact]]></string>
+    <string name="location_amp_contact"><![CDATA[LOCALISATION & CONTACT]]></string>
     <string name="search_result">RÉSULTATS DE LA RECHERCHE</string>
     <string name="more_info">PLUS D’INFO</string>
+    <string name="identify_by_pest">Identifier une maladie ou un ravageur des cultures</string>
+    <string name="search_pest">Rechercher une maladie ou un ravageur</string>
 
 </resources>

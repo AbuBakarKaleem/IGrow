@@ -228,6 +228,13 @@
             app:popUpTo="@id/ProductsFragment"
             app:popUpToInclusive="true" />
 
+        <action
+            android:id="@+id/distributorDetailToDealersFragment"
+            app:destination="@id/dealerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/distributorDetailFragment"
+            app:popUpToInclusive="true" />
+
         <argument
             android:name="data"
             app:argType="com.app.igrow.data.model.sheets.Distributors" />

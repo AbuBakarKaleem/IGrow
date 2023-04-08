@@ -15,6 +15,7 @@ import com.app.igrow.adpters.LearningListAdapter
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Videos
 import com.app.igrow.databinding.FragmentLearningsBinding
+import com.app.igrow.utils.Utils
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,9 +47,18 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
 
     private fun initRecyclerView() {
         adapter = LearningListAdapter({ videoClickUrl ->
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoClickUrl.link))
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            if(Utils.isInternetAvailable(requireContext())){
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoClickUrl.link))
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    getText(R.string.no_internet_error),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
         }, { shareItemClick ->
             shareAppLink(shareItemClick.link)
         })
