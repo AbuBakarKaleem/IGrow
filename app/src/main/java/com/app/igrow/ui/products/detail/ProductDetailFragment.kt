@@ -26,10 +26,13 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentProductDetailBinding
         get() = FragmentProductDetailBinding::inflate
 
+    private var product = Products()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             val itemArgs = it.get(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY) as Products
+            product =  itemArgs
             setPopulateViews(itemArgs)
         }
         activateListener()
@@ -62,7 +65,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         binding.tvCrop.text = value
         value = if (isLocaleFrench()) product.treatment_time_fr else product.treatment_time
         binding.tvTreatmentTime.text = value
-        value = if (isLocaleFrench()) product.type_of_enemy_fr else product.type_of_enemy
+        value = if (isLocaleFrench()) product.enemy else product.enemy_fr
         binding.tvEnemyType.text = value
         value = if (isLocaleFrench()) product.application_rate_fr else product.application_rate
         binding.tvApplicationRate.text = value
@@ -101,7 +104,10 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     private fun activateObserver() {
         viewModel.getDistributorByNameDataLiveData.observe(viewLifecycleOwner) {
             if (it.id.isNotEmpty()) {
-                val itemBundle = bundleOf(DiagnoseFragment.ARG_DISTRIBUTOR_DATA_KEY to it)
+                val itemBundle = bundleOf(
+                    DiagnoseFragment.ARG_DIAGNOSE_DATA_KEY to it,
+                    DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to product
+                )
                 findNavController().navigate(R.id.toDistributorDetail, itemBundle)
             } else {
                 Toast.makeText(

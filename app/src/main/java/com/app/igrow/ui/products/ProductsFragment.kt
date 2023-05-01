@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -19,11 +20,13 @@ import com.app.igrow.R
 import com.app.igrow.adpters.DialogListAdapter
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.detail.SearchResult
+import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.DialogeLayoutBinding
 import com.app.igrow.databinding.FragmentProductsBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.diagnose.DiagnoseFragment.Companion.ARG_SEARCH_RESULT_ITEM_KEY
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.COL_COMPOSITION
 import com.app.igrow.utils.Constants.COL_COMPOSITION_FR
@@ -33,6 +36,7 @@ import com.app.igrow.utils.Constants.COL_DISTRIBUTOR
 import com.app.igrow.utils.Constants.COL_DISTRIBUTOR_FR
 import com.app.igrow.utils.Constants.COL_ENEMY
 import com.app.igrow.utils.Constants.COL_ENEMY_FR
+import com.app.igrow.utils.Constants.COL_PLANT_HEALTH_PROBLEM
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY_FR
 import com.app.igrow.utils.Constants.COL_PRODUCT_NAME
@@ -40,10 +44,13 @@ import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Utils
 import com.app.igrow.utils.Utils.getLocalizeColumnName
+import com.app.igrow.utils.Utils.isLocaleFrench
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
+import com.bumptech.glide.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
@@ -63,8 +70,54 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         activateListener()
         activateObserver()
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.toHomePageFromProducts)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupInitialData()
+    }
+
+    private fun setupInitialData() {
+
+        arguments?.let {
+            if (it.isEmpty.not() && it.containsKey(PRODUCT_INITIAL_DATA)) {
+                val argsItem = it.get(PRODUCT_INITIAL_DATA) as HashMap<*, *>
+                argsItem.forEach { item ->
+                    productColumnName = item.key.toString()
+                    setSelectedValueToView(item.value.toString())
+                    populateFiltersObject(item.value.toString() + ":")
+                }
+            } else if (it.isEmpty.not() && it.containsKey(ARG_SEARCH_RESULT_ITEM_KEY)) {
+                val argsItem = it.get(ARG_SEARCH_RESULT_ITEM_KEY) as Diagnostic
+
+                productColumnName = COL_CROP
+                var value = if (isLocaleFrench()) argsItem.crop_fr else argsItem.crop
+                setSelectedValueToView(value)
+                populateFiltersObject("$value:")
+
+//                productColumnName = COL_PLANT_HEALTH_PROBLEM
+//                value = if (isLocaleFrench()) argsItem.plant_health_problem_fr else argsItem.plant_health_problem
+//                setSelectedValueToView(value)
+//                populateFiltersObject("$value:")
+
+                productColumnName = COL_TYPE_OF_ENEMY
+                value = if (isLocaleFrench()) argsItem.type_of_enemy_fr else argsItem.type_of_enemy
+                setSelectedValueToView(value)
+                populateFiltersObject("$value:")
+            }
+        }
     }
 
     private fun activateListener() {
@@ -75,7 +128,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 viewModel.getProductColumnData(productFiltersHashMap,COL_CROP, Constants.SHEET_PRODUCTS)
             }
             binding.llEnemy.setOnClickListener {
-                productColumnName =getLocalizeColumnName( COL_ENEMY)
+                productColumnName = getLocalizeColumnName(COL_ENEMY)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
                     COL_ENEMY,
@@ -83,7 +136,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 )
             }
             binding.llComposition.setOnClickListener {
-                productColumnName =getLocalizeColumnName(COL_COMPOSITION)
+                productColumnName = getLocalizeColumnName(COL_COMPOSITION)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
                     COL_COMPOSITION,
@@ -107,7 +160,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 )
             }
             binding.llDistributor.setOnClickListener {
-                productColumnName =getLocalizeColumnName (COL_DISTRIBUTOR)
+                productColumnName = getLocalizeColumnName(COL_DISTRIBUTOR)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
                     COL_DISTRIBUTOR,
@@ -346,9 +399,8 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
         viewModel.getProductColumnDataLiveData.value = arrayListOf()
     }
 
-    override fun onResume() {
-        super.onResume()
-        productFiltersHashMap.clear()
+    companion object {
+        const val PRODUCT_INITIAL_DATA = "product_initial_data"
     }
 
 }

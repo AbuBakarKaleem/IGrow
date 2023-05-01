@@ -1,6 +1,5 @@
 package com.app.igrow.ui.dashboard
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DashBoardActivity : BaseActivity() {
 
     lateinit var navController: NavController
-    lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +35,12 @@ class DashBoardActivity : BaseActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        println("=-=>> Dashboard Activity ")
     }
 
 }

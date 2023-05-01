@@ -202,5 +202,8 @@ Les produits phytosanitaires doivent être utilisés par des personnes responsab
     <string name="more_info">PLUS D’INFO</string>
     <string name="identify_by_pest">Identifier une maladie ou un ravageur des cultures</string>
     <string name="search_pest">Rechercher une maladie ou un ravageur</string>
+    <string name="direction_of_use">Recommandations Dutilisation</string>
+    <string name="error_complete_pre_selection">Sélectionnez Dabord la Région et la Ville sil vous plaît</string>
+    <string name="problem_name">Problem Name</string>
 
 </resources>

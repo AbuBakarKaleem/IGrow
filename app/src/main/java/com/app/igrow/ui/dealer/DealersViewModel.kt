@@ -40,7 +40,12 @@ class DealersViewModel@Inject constructor(
             getColumnDataUseCase.invoke(filtersMap = filtersMap, columnName = columnName, sheetName = sheetName).collect {
                 when (it) {
                     is DataState.Success -> {
-                        getDistributorColumnDataMutableLiveData.postValue(it.data)
+                        it.data?.let { response ->
+                            showEmptyResponseMsg = response.isEmpty()
+                            getDistributorColumnDataMutableLiveData.postValue(it.data)
+                        } ?: run {
+                            showEmptyResponseMsg = true
+                        }
                     }
                     is DataState.Error -> {
                         getDistributorColumnDataMutableLiveData.postValue(null)

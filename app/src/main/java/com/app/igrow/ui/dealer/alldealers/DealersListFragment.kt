@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
@@ -14,7 +15,9 @@ import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.detail.SearchResult
 import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.databinding.FragmentDealerListBinding
+import com.app.igrow.ui.dealer.DealersFragment
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.Utils
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +39,7 @@ class DealersListFragment : BaseFragment<FragmentDealerListBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let { arg ->
-            val args = arg.get(DiagnoseFragment.ARG_RESULT_KEY) as SearchResult
+            val args = arg.get(DealersFragment.DEALER_INITIAL_DATA) as SearchResult
 
             filtersMap = args.filterMap
 
@@ -57,6 +60,16 @@ class DealersListFragment : BaseFragment<FragmentDealerListBinding>() {
 
         initialSetup()
         activateObserver()
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    val itemBundle = bundleOf(DealersFragment.DEALER_INITIAL_DATA to filtersMap)
+                    findNavController().navigate(R.id.toDealersFragmentHomePage,itemBundle)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
 
     }
 

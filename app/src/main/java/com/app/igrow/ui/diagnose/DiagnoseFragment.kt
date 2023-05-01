@@ -23,6 +23,7 @@ import com.app.igrow.databinding.DialogeLayoutBinding
 import com.app.igrow.databinding.FragmentDiagnoseBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
+import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.*
 import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT
 import com.app.igrow.utils.Constants.COL_CAUSAL_AGENT_FR
@@ -142,6 +143,21 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
                         getString(R.string.no_data_found),
                         Toast.LENGTH_LONG
                     ).show()
+            }
+        }
+    }
+
+
+    private fun setupInitialData() {
+        arguments?.let {
+            if (it.isEmpty || it.containsKey(ARG_DIAGNOSE_INITIAL_DATA_KEY).not())
+                return
+
+            val argsItem = it.get(ARG_DIAGNOSE_INITIAL_DATA_KEY) as HashMap<*,*>
+            argsItem.forEach { item ->
+                diagnosticColumnName = item.key.toString()
+                setSelectedValueToView(item.value.toString())
+                populateFiltersObject(item.value.toString())
             }
         }
     }
@@ -295,7 +311,7 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
 
     override fun onResume() {
         super.onResume()
-        diagnosticFiltersHashMap.clear()
+        setupInitialData()
         filteredList.clear()
     }
 
@@ -303,7 +319,8 @@ class DiagnoseFragment : BaseFragment<FragmentDiagnoseBinding>() {
         const val TAG = " DiagnoseFragment"
         const val ARG_RESULT_KEY = "filters"
         const val ARG_SEARCH_RESULT_ITEM_KEY = "diagnostic_data"
-        const val ARG_DISTRIBUTOR_DATA_KEY = "data"
+        const val ARG_DIAGNOSE_DATA_KEY = "data"
+        const val ARG_DIAGNOSE_INITIAL_DATA_KEY = "diagnose_initial_data"
     }
 
 }

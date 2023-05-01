@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
@@ -25,6 +26,7 @@ import com.app.igrow.databinding.FragmentDealerBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils
 import com.app.igrow.utils.gone
@@ -47,27 +49,67 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
     private lateinit var dialogListAdapter: DialogListAdapter
     private lateinit var listDialog: Dialog
     private lateinit var dialogLayoutBinding: DialogeLayoutBinding
-    private var selectedFilter = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         activateListener()
         activateObserver()
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.toHomePageFromDealers)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
     }
+
+
+    private fun setupInitialData() {
+
+        arguments?.let {
+            if (it.isEmpty || it.containsKey(DEALER_INITIAL_DATA).not())
+                return
+
+            val argsItem = it.get(DEALER_INITIAL_DATA) as HashMap<*, *>
+            argsItem.forEach { item ->
+                distributorColumnName = item.key.toString()
+                setSelectedValueToView(item.value.toString())
+                populateFiltersObject(item.value.toString())
+            }
+        }
+    }
+
 
     private fun activateListener() {
         try {
 
             binding.llRegion.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_REGION)
-                viewModel.getDistributorColumnData(distributorsFiltersHashMap,distributorColumnName, Constants.SHEET_DEALERS)
+                viewModel.getDistributorColumnData(distributorsFiltersHashMap,
+                    distributorColumnName,
+                    Constants.SHEET_DEALERS)
             }
             binding.llCityTown.setOnClickListener {
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_CITY_TOWN)
-                viewModel.getDistributorColumnData(distributorsFiltersHashMap,distributorColumnName, Constants.SHEET_DEALERS)
+                viewModel.getDistributorColumnData(distributorsFiltersHashMap,
+                    distributorColumnName,
+                    Constants.SHEET_DEALERS)
             }
             binding.llDistributor.setOnClickListener {
+                if (checkIfRegionAndCityTownSelected().not()) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_complete_pre_selection),
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                } else {
+
+                }
+
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME)
                 viewModel.getDistributorColumnData(
                     distributorsFiltersHashMap,
@@ -101,6 +143,14 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
         }
     }
 
+    private fun checkIfRegionAndCityTownSelected(): Boolean {
+        val itContainsRegion =
+            distributorsFiltersHashMap.contains(Utils.getLocalizeColumnName(Constants.COL_REGION))
+        val itContainsCityTown =
+            distributorsFiltersHashMap.contains(Utils.getLocalizeColumnName(Constants.COL_CITY_TOWN))
+        return itContainsRegion && itContainsCityTown
+    }
+
     private fun activateObserver() {
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) { state ->
             when (state) {
@@ -114,13 +164,20 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
             }
         }
         viewModel.getDistributorColumnDataLiveData.observe(viewLifecycleOwner) {
-            if (it != null && it.size > 0) {
+            if (!it.isNullOrEmpty()) {
                 it.sort()
                 if (distributorColumnName.isNotEmpty()) {
                     addPlaceholderInFilterList(it)
                 }
                 dialogList = it
                 showListDialog(it)
+            } else {
+                if (viewModel.showEmptyListMsg())
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.no_data_found),
+                        Toast.LENGTH_LONG
+                    ).show()
             }
         }
 
@@ -129,7 +186,7 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
                 val searchResultData =
                     SearchResult(distributorsFiltersHashMap, response)
                 val bundle =
-                    bundleOf(DiagnoseFragment.ARG_RESULT_KEY to searchResultData)
+                    bundleOf(DEALER_INITIAL_DATA to searchResultData)
                 findNavController().navigate(R.id.toDealersListFragment, bundle)
             } else {
                 if (viewModel.showEmptyListMsg())
@@ -229,7 +286,7 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
         }
     }
 
-    private fun addPlaceholderInFilterList(dataList: ArrayList<String>){
+    private fun addPlaceholderInFilterList(dataList: ArrayList<String>) {
         when (distributorColumnName) {
             Constants.COL_REGION, Constants.COL_REGION_FR -> {
                 dataList.add(0, getString(R.string.all_region))
@@ -273,9 +330,13 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
 
     override fun onResume() {
         super.onResume()
-        distributorsFiltersHashMap.clear()
+        setupInitialData()
         filteredList.clear()
         binding.etSearch.text?.clear()
     }
 
+    companion object {
+        const val DEALER_INITIAL_DATA = "dealer_initial_data"
+
+    }
 }

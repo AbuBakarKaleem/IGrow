@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Distributors
+import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.FragmentDistributorDetailBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Utils
@@ -20,18 +22,22 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDistributorDetailBinding
         get() = FragmentDistributorDetailBinding::inflate
 
+    private var productItem =  Products()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
-            val itemArgs = it.get(DiagnoseFragment.ARG_DISTRIBUTOR_DATA_KEY) as Distributors
+            val itemArgs = it.get(DiagnoseFragment.ARG_DIAGNOSE_DATA_KEY) as Distributors
+            productItem = it.get(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY) as Products
             setPopulateViews(itemArgs)
         }
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true /* enabled by default */) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.distributorDetailToProductsFragment)
+                    val itemBundle = bundleOf(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to productItem)
+                    findNavController().navigate(R.id.distributorDetailToProductsFragment,itemBundle)
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)

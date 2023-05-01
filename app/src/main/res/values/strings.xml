@@ -179,6 +179,7 @@ Crop Protection products must be used by responsible and authorized persons, in 
     <string name="slogan">Let\'s grow together</string>
     <string name="welcome_message">Welcome to iGrow, your crop protection tool.</string>
     <string name="no_data_found">No data found</string>
+    <string name="error_complete_pre_selection">First Select Region and City Please</string>
     <string name="find_local_dealer">Find a local \n Crop Protection dealer</string>
     <string name="suppliers">Suppliers</string>
     <string name="location_amp_contact"><![CDATA[Location & Contact]]></string>
@@ -187,4 +188,6 @@ Crop Protection products must be used by responsible and authorized persons, in 
     <string name="identify_by_pest">Identify a crop pest or disease</string>
     <string name="search_pest">Search for a pest or disease</string>
     <string name="control_methods">Control methods</string>
+    <string name="direction_of_use">Direction of Use</string>
+    <string name="problem_name">Problem Name</string>
 </resources>

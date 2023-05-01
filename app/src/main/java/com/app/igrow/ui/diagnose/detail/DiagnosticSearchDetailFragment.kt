@@ -4,22 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Diagnostic
+import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.FragmentDiagnosticSearchDetailBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.Utils
 
 class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDetailBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDiagnosticSearchDetailBinding
         get() = FragmentDiagnosticSearchDetailBinding::inflate
 
+    private var diagnostic = Diagnostic()
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             val itemArgs = it.get(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY) as Diagnostic
+            diagnostic =  itemArgs
             setPopulateViews(itemArgs)
         }
         activateListener()
@@ -54,7 +61,8 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
 
     private fun activateListener() {
         binding.llControlProduct.setOnClickListener {
-            findNavController().navigate(R.id.toProductsFragment)
+            val itemBundle = bundleOf(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to diagnostic)
+            findNavController().navigate(R.id.toProductsFragment,itemBundle)
         }
 
         binding.btnHelp.setOnClickListener {
