@@ -36,21 +36,19 @@ import com.app.igrow.utils.Constants.COL_DISTRIBUTOR
 import com.app.igrow.utils.Constants.COL_DISTRIBUTOR_FR
 import com.app.igrow.utils.Constants.COL_ENEMY
 import com.app.igrow.utils.Constants.COL_ENEMY_FR
-import com.app.igrow.utils.Constants.COL_PLANT_HEALTH_PROBLEM
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY_FR
 import com.app.igrow.utils.Constants.COL_PRODUCT_NAME
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
-import com.app.igrow.utils.Utils
+import com.app.igrow.utils.Constants.SHEET_PRODUCTS
 import com.app.igrow.utils.Utils.getLocalizeColumnName
 import com.app.igrow.utils.Utils.isLocaleFrench
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
-import com.bumptech.glide.util.Util
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.concurrent.schedule
 
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
@@ -104,18 +102,23 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
                 productColumnName = COL_CROP
                 var value = if (isLocaleFrench()) argsItem.crop_fr else argsItem.crop
-                setSelectedValueToView(value)
-                populateFiltersObject("$value:")
+                //setSelectedValueToView(value)
+                //populateFiltersObject("$value:")
+                viewModel.isColumnValueExist(productColumnName, value, SHEET_PRODUCTS)
 
 //                productColumnName = COL_PLANT_HEALTH_PROBLEM
 //                value = if (isLocaleFrench()) argsItem.plant_health_problem_fr else argsItem.plant_health_problem
 //                setSelectedValueToView(value)
 //                populateFiltersObject("$value:")
 
-                productColumnName = COL_TYPE_OF_ENEMY
-                value = if (isLocaleFrench()) argsItem.type_of_enemy_fr else argsItem.type_of_enemy
-                setSelectedValueToView(value)
-                populateFiltersObject("$value:")
+                //setSelectedValueToView(value)
+                //populateFiltersObject("$value:")
+                Timer().schedule(8000) {
+                    productColumnName = COL_TYPE_OF_ENEMY
+                    value =
+                        if (isLocaleFrench()) argsItem.type_of_enemy_fr else argsItem.type_of_enemy
+                    viewModel.isColumnValueExist(productColumnName, value, SHEET_PRODUCTS)
+                }
             }
         }
     }
@@ -125,7 +128,11 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
             binding.llCrop.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_CROP)
-                viewModel.getProductColumnData(productFiltersHashMap,COL_CROP, Constants.SHEET_PRODUCTS)
+                viewModel.getProductColumnData(
+                    productFiltersHashMap,
+                    COL_CROP,
+                    Constants.SHEET_PRODUCTS
+                )
             }
             binding.llEnemy.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_ENEMY)
@@ -170,7 +177,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
                     productFiltersHashMap.clear()
-                    productFiltersHashMap[Utils.getLocalizeColumnName(COL_PRODUCT_NAME)] =
+                    productFiltersHashMap[getLocalizeColumnName(COL_PRODUCT_NAME)] =
                         binding.etSearch.text.toString().trim()
                 }
                 viewModel.searchProduct(productFiltersHashMap)
@@ -179,7 +186,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
             binding.etSearch.doAfterTextChanged { editable ->
                 if (editable != null && (editable.isEmpty() || editable.isBlank())) {
-                    productFiltersHashMap.remove(Constants.COL_PRODUCT_NAME)
+                    productFiltersHashMap.remove(COL_PRODUCT_NAME)
                 }
             }
 
@@ -211,6 +218,8 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 }
                 dialogList = it
                 showListDialog(it)
+            } else {
+                Toast.makeText(requireContext(), "No data found ", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -227,6 +236,14 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                         getString(R.string.no_data_found),
                         Toast.LENGTH_LONG
                     ).show()
+            }
+        }
+        viewModel.columnDataExistLiveData.observe(viewLifecycleOwner) {
+            val data = it?.split("-")
+            if (data?.get(2)?.isNotEmpty() == true && data[2] != "null") {
+                val value = data[1]
+                setSelectedValueToView(value)
+                populateFiltersObject("$value:")
             }
         }
     }

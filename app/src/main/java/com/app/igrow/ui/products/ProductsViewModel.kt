@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
 import com.app.igrow.data.usecase.user.general.FilterDataListOfGivenSheetUseCase
 import com.app.igrow.data.usecase.user.general.GetColumnDataUsecase
+import com.app.igrow.data.usecase.user.general.ISColumnValueExistUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductsViewModel @Inject constructor(
     private val getColumnDataUsecase: GetColumnDataUsecase,
-    private val filterDataListOfGivenSheetUseCase: FilterDataListOfGivenSheetUseCase
+    private val filterDataListOfGivenSheetUseCase: FilterDataListOfGivenSheetUseCase,
+    private val isColumnValueExistUsecase: ISColumnValueExistUsecase
 ) : ViewModel() {
     private var _uiState = MutableLiveData<AdminUIStates>()
     var uiStateLiveData: LiveData<AdminUIStates> = _uiState
@@ -31,12 +33,24 @@ class ProductsViewModel @Inject constructor(
     var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> =
         filterResultMutableLiveData
 
+    private var columnDataExistMutableLiveData = MutableLiveData<String?>()
+    var columnDataExistLiveData: MutableLiveData<String?> =
+        columnDataExistMutableLiveData
+
     private var showEmptyResponseMsg = false
 
-    fun getProductColumnData(filtersMap: HashMap<String, String>,columnName: String, sheetName: String) {
+    fun getProductColumnData(
+        filtersMap: HashMap<String, String>,
+        columnName: String,
+        sheetName: String
+    ) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            getColumnDataUsecase.invoke(filtersMap = filtersMap, columnName = columnName, sheetName = sheetName).collect {
+            getColumnDataUsecase.invoke(
+                filtersMap = filtersMap,
+                columnName = columnName,
+                sheetName = sheetName
+            ).collect {
                 when (it) {
                     is DataState.Success -> {
                         getProductColumnDataMutableLiveData.postValue(it.data)
@@ -45,6 +59,23 @@ class ProductsViewModel @Inject constructor(
                         getProductColumnDataMutableLiveData.postValue(null)
                     }
 
+                }
+                _uiState.postValue(UnloadingState)
+            }
+        }
+    }
+
+    fun isColumnValueExist(columnName: String, columnValue: String, sheetName: String) {
+        _uiState.postValue(LoadingState)
+        viewModelScope.launch {
+            isColumnValueExistUsecase.invoke(columnName, columnValue, sheetName).collect {
+                when (it) {
+                    is DataState.Success -> {
+                        columnDataExistMutableLiveData.postValue(it.data)
+                    }
+                    else -> {
+                        columnDataExistMutableLiveData.postValue("")
+                    }
                 }
                 _uiState.postValue(UnloadingState)
             }
@@ -75,7 +106,7 @@ class ProductsViewModel @Inject constructor(
         }
     }
 
-    fun showEmptyListMsg() =  showEmptyResponseMsg
+    fun showEmptyListMsg() = showEmptyResponseMsg
 
 
 }

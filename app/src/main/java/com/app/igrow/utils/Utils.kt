@@ -78,20 +78,31 @@ object Utils {
         return gson.fromJson<Any>(jsonString, cls)
     }
 
-    fun getColumnDataCustomQuery(filtersMap: HashMap<String, String> = hashMapOf()
-                                 ,sheetName: String, columnName: String): SimpleSQLiteQuery {
+    fun isColumnValueExist(
+        columnName: String,
+        columnValue: String,
+        sheetName: String
+    ): SimpleSQLiteQuery {
+        val customQuery =
+            "SELECT DISTINCT $columnName FROM $sheetName WHERE $columnName = '$columnValue'"
+        return SimpleSQLiteQuery(customQuery)
+    }
+
+    fun getColumnDataCustomQuery(
+        filtersMap: HashMap<String, String> = hashMapOf(), sheetName: String, columnName: String
+    ): SimpleSQLiteQuery {
         try {
             if (sheetName.isNotEmpty() && columnName.isNotEmpty()) {
                 var customQuery = "SELECT DISTINCT $columnName FROM $sheetName"
 
-                if(filtersMap.isNotEmpty()){
+                if (filtersMap.isNotEmpty()) {
 
                     customQuery += " WHERE "
                     var iterationCount = 0
 
                     filtersMap.forEach {
                         iterationCount++
-                        customQuery += if( iterationCount == 1 )
+                        customQuery += if (iterationCount == 1)
                             " ${it.key} ='${it.value}' "
                         else
                             "AND ${it.key} ='${it.value}' "

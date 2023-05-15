@@ -48,4 +48,12 @@ class ProductsRepoImpl @Inject constructor(
             )
         )
     }
+
+    override suspend fun isColumnValueExist(
+        columnName: String,
+        columnValue: String,
+        sheetName: String
+    ): String {
+        return  productsDao.isColumnValueExist( Utils.isColumnValueExist(columnName,columnValue,sheetName))
+    }
 }

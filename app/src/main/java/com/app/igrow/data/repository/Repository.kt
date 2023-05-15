@@ -48,6 +48,7 @@ interface Repository {
 
     suspend fun getLearningData():Flow<DataState<ArrayList<Videos>>>
     suspend fun getDistributorDataByName(name : String,columnName:String): Flow<DataState<Distributors>>
+    suspend fun isColumnValueExist(columnName: String,columnValue: String, sheetName: String): Flow<DataState<String>>
 
 
 }

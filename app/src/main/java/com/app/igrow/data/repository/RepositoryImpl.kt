@@ -402,7 +402,11 @@ class RepositoryImpl @Inject constructor(
             try {
                 if (Utils.isInternetAvailable(IGrowApp.getInstance()).not()) {
                     val dataList =
-                        getColumnDataFromLocal(filtersMap = filtersMap, sheetName = sheetName, columnName = columnName)
+                        getColumnDataFromLocal(
+                            filtersMap = filtersMap,
+                            sheetName = sheetName,
+                            columnName = columnName
+                        )
                     if (dataList.isEmpty().not()) {
                         if (isActive) trySend(DataState.success(dataList))
                     } else {
@@ -434,7 +438,11 @@ class RepositoryImpl @Inject constructor(
                                 }
                                 CoroutineScope(Dispatchers.IO).launch {
                                     dataList =
-                                        getColumnDataFromLocal(filtersMap = filtersMap, sheetName = sheetName, columnName = columnName)
+                                        getColumnDataFromLocal(
+                                            filtersMap = filtersMap,
+                                            sheetName = sheetName,
+                                            columnName = columnName
+                                        )
                                     if (isActive) trySend(DataState.success(dataList))
                                 }
                             } else {
@@ -692,6 +700,37 @@ class RepositoryImpl @Inject constructor(
             }
             awaitClose()
         }
+
+    override suspend fun isColumnValueExist(
+        columnName: String,
+        columnValue: String,
+        sheetName: String
+    ): Flow<DataState<String>> = callbackFlow {
+        try {
+            val data = columnValueExist(columnName, columnValue, sheetName)
+            if (isActive) trySend(DataState.success("$columnName-$columnValue-$data"))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
+        }
+        awaitClose()
+    }
+
+    private suspend fun columnValueExist(
+        columnName: String,
+        columnValue: String,
+        sheetName: String
+    ): String {
+        var data = ""
+        withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            data = localRepository.getProductsImpl().isColumnValueExist(
+                columnName,
+                columnValue,
+                sheetName
+            )
+        }
+        return data
+    }
 
 }
 

@@ -36,6 +36,12 @@
         <action
             android:id="@+id/toDiagnoseSearchResultFragment"
             app:destination="@id/diagnoseSearchResultFragment" />
+        <action
+            android:id="@+id/toHomePageFromDiagnostic"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/diagnoseSearchResultFragment"
