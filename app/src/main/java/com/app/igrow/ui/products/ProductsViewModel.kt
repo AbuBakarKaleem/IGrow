@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
+import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.data.usecase.user.general.FilterDataListOfGivenSheetUseCase
 import com.app.igrow.data.usecase.user.general.GetColumnDataUsecase
-import com.app.igrow.data.usecase.user.general.ISColumnValueExistUsecase
+import com.app.igrow.data.usecase.user.general.GetDiagnosticValuesIfExistUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class ProductsViewModel @Inject constructor(
     private val getColumnDataUsecase: GetColumnDataUsecase,
     private val filterDataListOfGivenSheetUseCase: FilterDataListOfGivenSheetUseCase,
-    private val isColumnValueExistUsecase: ISColumnValueExistUsecase
+    private val getDiagnosticValuesIfExistUseCase: GetDiagnosticValuesIfExistUsecase
 ) : ViewModel() {
     private var _uiState = MutableLiveData<AdminUIStates>()
     var uiStateLiveData: LiveData<AdminUIStates> = _uiState
@@ -33,8 +34,8 @@ class ProductsViewModel @Inject constructor(
     var filtersLiveData: MutableLiveData<ArrayList<HashMap<String, String>>> =
         filterResultMutableLiveData
 
-    private var columnDataExistMutableLiveData = MutableLiveData<String?>()
-    var columnDataExistLiveData: MutableLiveData<String?> =
+    private var columnDataExistMutableLiveData = MutableLiveData<HashMap<String,String>>()
+    var columnDataExistLiveData: MutableLiveData<HashMap<String,String>> =
         columnDataExistMutableLiveData
 
     private var showEmptyResponseMsg = false
@@ -65,23 +66,20 @@ class ProductsViewModel @Inject constructor(
         }
     }
 
-    fun isColumnValueExist(columnName: String, columnValue: String, sheetName: String) {
+    fun getAllDiagnosticDataAtOnce(diagnostic: Diagnostic,sheetName: String){
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            isColumnValueExistUsecase.invoke(columnName, columnValue, sheetName).collect {
+            getDiagnosticValuesIfExistUseCase(diagnostic,sheetName).collect{
                 when (it) {
                     is DataState.Success -> {
-                        columnDataExistMutableLiveData.postValue(it.data)
+                        columnDataExistMutableLiveData.postValue(it.data!!)
                     }
-                    else -> {
-                        columnDataExistMutableLiveData.postValue("")
-                    }
+                    else -> {}
                 }
                 _uiState.postValue(UnloadingState)
             }
         }
     }
-
     fun searchProduct(filtersMap: HashMap<String, String>) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {

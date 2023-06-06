@@ -11,9 +11,13 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
+import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Distributors
 import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.FragmentDistributorDetailBinding
+import com.app.igrow.ui.dealer.alldealers.DealersListFragment
+import com.app.igrow.ui.dealer.detail.DealerDetailFragment
+import com.app.igrow.ui.dealer.detail.DealerDetailFragment.Companion.ARG_DEALER_INFO
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Utils
 
@@ -23,6 +27,7 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
         get() = FragmentDistributorDetailBinding::inflate
 
     private var productItem =  Products()
+    private var dealerInfo = Dealers()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,15 +35,26 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
         arguments?.let {
             val itemArgs = it.get(DiagnoseFragment.ARG_DIAGNOSE_DATA_KEY) as Distributors
             productItem = it.get(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY) as Products
+
+            if (it.containsKey(ARG_DEALER_INFO)) {
+                dealerInfo = it.get(ARG_DEALER_INFO) as Dealers
+            }
             setPopulateViews(itemArgs)
         }
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true /* enabled by default */) {
                 override fun handleOnBackPressed() {
-                    val itemBundle = bundleOf(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to productItem)
-                    findNavController().navigate(R.id.distributorDetailToProductsFragment,itemBundle)
-                }
+                    arguments?.let {
+                        if (it.containsKey(DealerDetailFragment.ARG_DISTRIBUTOR_NAVIGATION)) {
+                            val itemBundle = bundleOf(DealersListFragment.ARG_DEALER_DETAIL_ITEM_KEY to dealerInfo)
+                            findNavController().navigate(R.id.distributorDetailToDealersDetailsFragment,itemBundle)
+                        } else {
+                            val itemBundle = bundleOf(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to productItem)
+                            findNavController().navigate(R.id.distributorDetailToProductsFragment,itemBundle)
+                        }
+                    }
+                  }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
@@ -58,7 +74,14 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
         }
 
         binding.btnShop.setOnClickListener {
-            findNavController().navigate(R.id.distributorDetailToDealersFragment)
+            arguments?.let {
+                if (it.containsKey(DealerDetailFragment.ARG_DISTRIBUTOR_NAVIGATION)) {
+                    val itemBundle = bundleOf(DealersListFragment.ARG_DEALER_DETAIL_ITEM_KEY to dealerInfo)
+                    findNavController().navigate(R.id.distributorDetailToDealersFragment,itemBundle)
+                } else {
+                    findNavController().navigate(R.id.distributorDetailToDealersFragment)
+                }
+            }
         }
     }
 

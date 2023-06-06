@@ -99,26 +99,7 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 }
             } else if (it.isEmpty.not() && it.containsKey(ARG_SEARCH_RESULT_ITEM_KEY)) {
                 val argsItem = it.get(ARG_SEARCH_RESULT_ITEM_KEY) as Diagnostic
-
-                productColumnName = COL_CROP
-                var value = if (isLocaleFrench()) argsItem.crop_fr else argsItem.crop
-                //setSelectedValueToView(value)
-                //populateFiltersObject("$value:")
-                viewModel.isColumnValueExist(productColumnName, value, SHEET_PRODUCTS)
-
-//                productColumnName = COL_PLANT_HEALTH_PROBLEM
-//                value = if (isLocaleFrench()) argsItem.plant_health_problem_fr else argsItem.plant_health_problem
-//                setSelectedValueToView(value)
-//                populateFiltersObject("$value:")
-
-                //setSelectedValueToView(value)
-                //populateFiltersObject("$value:")
-                Timer().schedule(8000) {
-                    productColumnName = COL_TYPE_OF_ENEMY
-                    value =
-                        if (isLocaleFrench()) argsItem.type_of_enemy_fr else argsItem.type_of_enemy
-                    viewModel.isColumnValueExist(productColumnName, value, SHEET_PRODUCTS)
-                }
+                viewModel.getAllDiagnosticDataAtOnce(argsItem, SHEET_PRODUCTS)
             }
         }
     }
@@ -238,13 +219,38 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                     ).show()
             }
         }
-        viewModel.columnDataExistLiveData.observe(viewLifecycleOwner) {
-            val data = it?.split("-")
-            if (data?.get(2)?.isNotEmpty() == true && data[2] != "null") {
-                val value = data[1]
-                setSelectedValueToView(value)
-                populateFiltersObject("$value:")
+        viewModel.columnDataExistLiveData.observe(viewLifecycleOwner) { resultMap ->
+
+            println("=-=>> $resultMap")
+            resultMap.forEach{
+                productColumnName = it.key
+                setSelectedValueToView(it.value)
+                populateFiltersObject("${it.value}:")
             }
+//            resultMap.contains(COL_CROP).apply {
+//                if (this) {
+//                    productColumnName = COL_CROP
+//                    val value = resultMap[COL_CROP]!!
+//                    setSelectedValueToView(value)
+//                    populateFiltersObject("$value:")
+//                }
+//            }
+//
+//            resultMap.contains(COL_TYPE_OF_ENEMY).apply {
+//                if (this) {
+//                    productColumnName = COL_TYPE_OF_ENEMY
+//                    val value = resultMap[COL_TYPE_OF_ENEMY]!!
+//                    setSelectedValueToView(value)
+//                    populateFiltersObject("$value:")
+//                }
+//            }
+
+//            val data = it?.split("-")
+//            if (data?.get(2)?.isNotEmpty() == true && data[2] != "null") {
+//                val value = data[1]
+//                setSelectedValueToView(value)
+//                populateFiltersObject("$value:")
+//            }
         }
     }
 

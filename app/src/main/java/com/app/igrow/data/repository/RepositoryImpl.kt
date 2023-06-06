@@ -15,6 +15,8 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onCompletion
 import javax.inject.Inject
 
 /**
@@ -705,15 +707,14 @@ class RepositoryImpl @Inject constructor(
         columnName: String,
         columnValue: String,
         sheetName: String
-    ): Flow<DataState<String>> = callbackFlow {
+    ): Flow<DataState<String>> = flow {
         try {
             val data = columnValueExist(columnName, columnValue, sheetName)
-            if (isActive) trySend(DataState.success("$columnName-$columnValue-$data"))
+            emit(DataState.success("$columnName-$columnValue-$data"))
         } catch (e: Exception) {
             e.printStackTrace()
-            if (isActive) trySend(DataState.error(stringUtils.somethingWentWrong()))
+            emit(DataState.error(stringUtils.somethingWentWrong()))
         }
-        awaitClose()
     }
 
     private suspend fun columnValueExist(

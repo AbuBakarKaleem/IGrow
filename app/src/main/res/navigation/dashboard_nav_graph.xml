@@ -234,6 +234,16 @@
             app:popUpTo="@id/dealersDetailFragment"
             app:popUpToInclusive="false"/>
 
+        <action
+            android:id="@+id/toDistributorDetailFragment"
+            app:destination="@id/distributorDetailFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/dealersDetailFragment"
+            app:popUpToInclusive="false"/>
+        <argument
+            android:name="data"
+            app:argType="com.app.igrow.data.model.sheets.Distributors" />
+
 
     </fragment>
 
@@ -267,10 +277,17 @@
             app:popUpToInclusive="true" />
 
         <action
+            android:id="@+id/distributorDetailToDealersDetailsFragment"
+            app:destination="@id/dealersDetailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/dealersDetailFragment"
+            app:popUpToInclusive="true" />
+
+        <action
             android:id="@+id/distributorDetailToDealersFragment"
             app:destination="@id/dealerFragment"
             app:launchSingleTop="true"
-            app:popUpTo="@id/distributorDetailFragment"
+            app:popUpTo="@id/dealerFragment"
             app:popUpToInclusive="true" />
 
         <argument

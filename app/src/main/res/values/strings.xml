@@ -128,6 +128,9 @@ Crop Protection products must be used by responsible and authorized persons, in 
     <string name="language_english">English</string>
     <string name="language_french">French</string>
     <string name="no_internet_error">No Internet Connection</string>
+    <string name="exit_dialog_message">Are you sure you want to Exit?</string>
+    <string name="exit_dialog_header">Close this App?</string>
+    <string name="exit_dialog_button_text">Exit</string>
     <string name="no_internet_error_message">Please connect an Internet </string>
     <string name="text_select_country">Select Country</string>
     <string name="text_solution">Solution</string>

@@ -74,7 +74,7 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                         filters.contains(getLocalizeColumnName(Constants.COL_DEALER_NAME))
                     ) {
                         val result = data[getLocalizeColumnName(Constants.COL_DEALER_NAME)] ?: ""
-                        if (result.toLowerCase().contains(filterKey.value.toLowerCase())) {
+                        if (result.contains(filterKey.value, ignoreCase = true)) {
                             list.add(data)
                         }
                     } else {
@@ -90,12 +90,12 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                     ) {
 
                         val result = data[getLocalizeColumnName(Constants.COL_PRODUCT_NAME)] ?: ""
-                        if (result.toLowerCase().contains(filterKey.value.toLowerCase())) {
+                        if (result.contains(filterKey.value,ignoreCase = true)) {
                             list.add(data)
                         }
 
                     } else {
-                        if (filterKey.value == data[filterKey.key]) {
+                        if (data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) {
                             list.add(data)
                         }
                     }
@@ -106,17 +106,17 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                     ) {
 
                         val result = data[getLocalizeColumnName(Constants.COL_PLANT_HEALTH_PROBLEM)] ?: ""
-                        if (result.toLowerCase().contains(filterKey.value.toLowerCase())) {
+                        if (result.contains(filterKey.value , ignoreCase = true)) {
                             list.add(data)
                         }
 
                     } else {
-                        if (filterKey.value == data[filterKey.key]) {
+                        if (data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) {
                             list.add(data)
                         }
                     }
                 } else {
-                    if (filterKey.value == data[filterKey.key]) {
+                    if (data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) {
                         list.add(data)
                     }
                 }
