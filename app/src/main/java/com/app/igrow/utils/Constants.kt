@@ -104,5 +104,5 @@ object Constants {
     // Session Manager Constant
     const val KEY_LANGUAGE = "language"
     const val KEY_COUNTRY = "country"
-    const val DEFAULT_LANGUAGE = "fr"
+    const val DEFAULT_LANGUAGE = "en"
 }

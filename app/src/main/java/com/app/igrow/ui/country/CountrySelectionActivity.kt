@@ -17,14 +17,7 @@ class CountrySelectionActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCountrySelectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        init()
         activateListener()
-    }
-
-    private fun init() {
-        binding.info.text = getString(R.string.edit_diagnostic) + "-" +
-                getString(R.string.text_solution) + "-" +
-                getString(R.string.shop)
     }
 
     private fun activateListener() {

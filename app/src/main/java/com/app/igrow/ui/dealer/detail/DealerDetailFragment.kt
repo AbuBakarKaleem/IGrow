@@ -53,6 +53,14 @@ class DealerDetailFragment : BaseFragment<FragmentDealerDetailBinding>() {
         binding.btnHelp.setOnClickListener {
             findNavController().navigate(R.id.toHelpFragmentFromDealersDetail)
         }
+
+        binding.btnFacebook.setOnClickListener {
+//            TODO( "Get Facebook Page link from the model")
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.agricadvisors.com/"))
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(intent)
+        }
+
         binding.tvDistributors.setOnClickListener {
             if (!binding.tvDistributors.text.isNullOrEmpty()) {
                 val value: String =

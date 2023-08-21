@@ -80,7 +80,7 @@
     <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="edit_dealer">Edit Dealer</string>
-    <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
+    <string name="home_heading">Effectively protect your crops against pests and diseases.</string>
     <string name="identify_a_plant_health_problem">Search for a crop \n protection product</string>
     <string name="search_by_name">Search by dealer name</string>
     <string name="search_by_product_name">Search by product name</string>
@@ -121,6 +121,7 @@ Crop Protection products must be used by responsible and authorized persons, in 
 </string>
     <string name="terms_and_condition">Terms and Condition</string>
     <string name="invite_a_friend">Invite a friend</string>
+    <string name="leave_comment">Share your Comments</string>
 
     <string name="or">or</string>
     <string name="text_select">Select</string>

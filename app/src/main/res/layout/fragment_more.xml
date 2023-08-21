@@ -162,6 +162,22 @@
                         android:textSize="16sp"
                         app:cornerRadius="10dp" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_leave_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="15dp"
+                        android:padding="12dp"
+                        android:background="@drawable/spinner_background_white"
+                        android:drawableEnd="@drawable/ic_comment"
+                        android:text="@string/leave_comment"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:cornerRadius="10dp" />
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 

@@ -84,7 +84,6 @@ class DistributorsActivity : BaseActivity() {
         try {
             binding.etDistributorName.setText(Distributor.distributor_name)
             binding.etEmail.setText(Distributor.email)
-            binding.etFacebook.setText(Distributor.facebook)
             binding.etTelephone.setText(Distributor.telephone)
             binding.etWebsite.setText(Distributor.website)
             binding.etAddress.setText(Distributor.address)

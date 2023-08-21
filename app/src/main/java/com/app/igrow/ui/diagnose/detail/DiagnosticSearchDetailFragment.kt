@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
+import com.app.igrow.adpters.DiseaseImagesAdapter
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Diagnostic
-import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.FragmentDiagnosticSearchDetailBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
-import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.Utils
 
 class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDetailBinding>() {
@@ -20,17 +19,36 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
         get() = FragmentDiagnosticSearchDetailBinding::inflate
 
     private var diagnostic = Diagnostic()
+    private val diseaseImagesAdapter = DiseaseImagesAdapter(emptyList())
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         arguments?.let {
             val itemArgs = it.get(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY) as Diagnostic
             diagnostic =  itemArgs
             setPopulateViews(itemArgs)
         }
+        // Initialize data.
+//        val myDataset = loadImagesDataSet()
+        // Use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        binding.rvDiseases.adapter = diseaseImagesAdapter
+        binding.rvDiseases.setHasFixedSize(true)
+//        diseaseImagesAdapter.differ.submitList(myDataset)
+//        diseaseImagesAdapter.notifyDataSetChanged()
+
         activateListener()
     }
+
+//    private fun loadImagesDataSet(): List<DiagnosticImageData> {
+////        return listOf<DiagnosticImageData>(
+////            DiagnosticImageData(R.drawable.disease_one),
+////            DiagnosticImageData(R.drawable.disease_two),
+////            DiagnosticImageData(R.drawable.disease_three)
+////        )
+//    }
 
     private fun setPopulateViews(model: Diagnostic) {
 

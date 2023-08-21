@@ -87,7 +87,7 @@
     <string name="email_hint">E-mail</string>
     <string name="password">Mot de passe</string>
     <string name="edit_dealer">Modifier le concessionnaire</string>
-    <string name="home_heading">Identifiez et trouvez la bonne solution pour protéger vos cultures contre les ravageurs et les maladies.</string>
+    <string name="home_heading">Protégez efficacement vos cultures contre les maladies et ravageurs.</string>
     <string name="identify_a_plant_health_problem">Rechercher un \n produit phytosanitaire</string>
     <string name="search_by_name">Recherche par nom de boutique</string>
     <string name="search_by_product_name">Rechercher par nom de produit</string>
@@ -202,11 +202,12 @@ Les produits phytosanitaires doivent être utilisés par des personnes responsab
     <string name="more_info">PLUS D’INFO</string>
     <string name="identify_by_pest">Identifier une maladie ou un ravageur des cultures</string>
     <string name="search_pest">Rechercher une maladie ou un ravageur</string>
-    <string name="direction_of_use">Recommandations Dutilisation</string>
+    <string name="direction_of_use">Recommandations D’utilisation</string>
     <string name="error_complete_pre_selection">Sélectionnez Dabord la Région et la Ville sil vous plaît</string>
     <string name="problem_name">Nom du problème</string>
     <string name="exit_dialog_message">Êtes-vous sûr de vouloir quitter?</string>
     <string name="exit_dialog_header">Fermer cette appli?</string>
     <string name="exit_dialog_button_text">Sortie</string>
+    <string name="leave_comment">Partagez vos Commentaires</string>
 
 </resources>

@@ -106,8 +106,6 @@ class DealersFragment : BaseFragment<FragmentDealerBinding>() {
                         Toast.LENGTH_LONG
                     ).show()
                     return@setOnClickListener
-                } else {
-
                 }
 
                 distributorColumnName = Utils.getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME)

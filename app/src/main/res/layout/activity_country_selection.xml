@@ -5,15 +5,17 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="1"
         android:background="@drawable/bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/frameLayout" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/logo"
@@ -39,18 +41,6 @@
         app:layout_constraintTop_toBottomOf="@+id/logo"
         app:layout_constraintVertical_chainStyle="spread" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/info"
-        style="@style/headingStyle"
-        android:layout_margin="20dp"
-        android:padding="10dp"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_homeHeading"
-        app:layout_constraintVertical_chainStyle="spread" />
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_language_spinner"
         style="@style/spinnerLayoutStyle"
@@ -59,7 +49,7 @@
         android:background="@drawable/spinner_background_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info">
+        app:layout_constraintTop_toBottomOf="@+id/tv_homeHeading">
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerCountry"

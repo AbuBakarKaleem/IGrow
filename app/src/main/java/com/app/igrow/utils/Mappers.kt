@@ -29,7 +29,8 @@ fun ArrayList<HashMap<String, String>>.toDiagnosticEntityModel(): List<Diagnosti
             symptoms_impact = diagnostic.symptoms_impact,
             symptoms_impact_fr = diagnostic.symptoms_impact_fr,
             control = diagnostic.control,
-            control_fr = diagnostic.control_fr
+            control_fr = diagnostic.control_fr,
+            image_sample = diagnostic.image_sample
         ).run {
             diagnosticEntityList.add(this)
         }
@@ -147,8 +148,7 @@ fun ArrayList<HashMap<String, String>>.toDistributorEntityModel(): List<Distribu
             telephone_2 = distributor.telephone_2,
             email = distributor.email,
             email_fr = distributor.email_fr,
-            website = distributor.website,
-            facebook = distributor.facebook
+            website = distributor.website
         ).run {
             distributorEntityList.add(this)
         }
@@ -178,7 +178,6 @@ fun ArrayList<DistributorsEntityName>.toDistributorUIModel(): ArrayList<HashMap<
         entry[Constants.COL_EMAIL] = item.email
         entry[Constants.COL_EMAIL_FR] = item.email_fr
         entry[Constants.COL_WEBSITE] = item.website
-        entry[Constants.COL_FACEBOOK] = item.facebook
 
         distributorUIModelList.add(entry)
     }
@@ -203,7 +202,6 @@ fun DistributorsEntityName.toDistributorUIModel(): Distributors {
     distributorUIModel.email = this.email
     distributorUIModel.email_fr = this.email_fr
     distributorUIModel.website = this.website
-    distributorUIModel.facebook = this.facebook
 
     return distributorUIModel
 }

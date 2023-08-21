@@ -139,7 +139,6 @@ class AdminActivity : BaseActivity() {
         alertDialog.setOnShowListener {
             val positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setOnClickListener {
-                //TODO()
                 if (!dialogView.action_type.selectedItem.equals("Select")) {
                     when (dialogView.action_type.selectedItem.toString()) {
                         Constants.SHEET_DIAGNOSTIC -> {

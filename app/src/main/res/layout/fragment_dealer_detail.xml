@@ -281,17 +281,19 @@
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scrollView"
         app:layout_constraintVertical_bias="3"
         app:layout_constraintVertical_chainStyle="spread_inside">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFacebook"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
