@@ -61,6 +61,7 @@ fun ArrayList<DiagnosticEntityName>.toDiagnosticUIModel(): ArrayList<HashMap<Str
         entry[Constants.COL_SYMPTOMS_IMPACT_FR] = item.symptoms_impact_fr
         entry[Constants.COL_CONTROL] = item.control
         entry[Constants.COL_CONTROL_FR] = item.control_fr
+        entry[Constants.COL_IMAGE_SAMPLE] = item.image_sample
 
         diagnosticUIModelList.add(entry)
     }
@@ -90,7 +91,8 @@ fun ArrayList<HashMap<String, String>>.toDealerEntityModel(): List<DealersEntity
             mobile = dealer.mobile,
             mobile_fr = dealer.mobile_fr,
             distributors = dealer.distributors,
-            distributors_fr = dealer.distributors_fr
+            distributors_fr = dealer.distributors_fr,
+            facebook = dealer.facebook
         ).run {
             dealersEntityList.add(this)
         }
@@ -121,6 +123,7 @@ fun ArrayList<DealersEntityName>.toDealerUIModel(): ArrayList<HashMap<String, St
         entry[Constants.COL_MOBILE_FR] = item.mobile_fr
         entry[Constants.COL_DISTRIBUTORS] = item.distributors
         entry[Constants.COL_DISTRIBUTORS_FR] = item.distributors_fr
+        entry[Constants.COL_FACEBOOK] = item.facebook
 
         dealerUIModelList.add(entry)
     }

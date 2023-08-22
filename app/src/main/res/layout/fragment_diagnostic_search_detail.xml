@@ -46,16 +46,14 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_diseases"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImageSample"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:clipToPadding="true"
             android:orientation="horizontal"
             android:padding="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="3"
-            tools:listitem="@layout/diagnose_disease_list_item" />
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"

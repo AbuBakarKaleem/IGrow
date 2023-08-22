@@ -37,6 +37,7 @@ object Constants {
     const val COL_SYMPTOMS_IMPACT_FR = "symptoms_impact_fr"
     const val COL_CONTROL = "control"
     const val COL_CONTROL_FR = "control_fr"
+    const val COL_IMAGE_SAMPLE = "image_sample"
 
     //Products Sheet Columns
     const val COL_PRODUCTS_CATEGORY = "product_category"
@@ -104,5 +105,5 @@ object Constants {
     // Session Manager Constant
     const val KEY_LANGUAGE = "language"
     const val KEY_COUNTRY = "country"
-    const val DEFAULT_LANGUAGE = "en"
+    const val DEFAULT_LANGUAGE = "fr"
 }

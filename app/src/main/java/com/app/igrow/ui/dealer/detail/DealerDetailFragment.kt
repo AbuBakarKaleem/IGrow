@@ -55,10 +55,9 @@ class DealerDetailFragment : BaseFragment<FragmentDealerDetailBinding>() {
         }
 
         binding.btnFacebook.setOnClickListener {
-//            TODO( "Get Facebook Page link from the model")
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.agricadvisors.com/"))
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            startActivity(intent)
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(dealerInfo.facebook))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
 
         binding.tvDistributors.setOnClickListener {

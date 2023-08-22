@@ -13,6 +13,10 @@ import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.FragmentDiagnosticSearchDetailBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
 import com.app.igrow.utils.Utils
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 
 class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDetailBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentDiagnosticSearchDetailBinding
@@ -32,10 +36,8 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
         }
         // Initialize data.
 //        val myDataset = loadImagesDataSet()
-        // Use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        binding.rvDiseases.adapter = diseaseImagesAdapter
-        binding.rvDiseases.setHasFixedSize(true)
+//        binding.rvDiseases.adapter = diseaseImagesAdapter
+//        binding.rvDiseases.setHasFixedSize(true)
 //        diseaseImagesAdapter.differ.submitList(myDataset)
 //        diseaseImagesAdapter.notifyDataSetChanged()
 
@@ -70,8 +72,15 @@ class DiagnosticSearchDetailFragment : BaseFragment<FragmentDiagnosticSearchDeta
         value = if(Utils.isLocaleFrench()) model.symptoms_impact_fr  else model.symptoms_impact
         binding.tvSymptomsImpact.text = value
 
-        //binding.tvBiologicalControl.text = itemArgs.control
-        //tvBiologicalControl.text = itemArgs.control
+        Glide.with(this)
+            .load(model.image_sample)
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+            .apply(
+                RequestOptions()
+                    .error(R.drawable.ic_broken_image)
+            ).override(Target.SIZE_ORIGINAL)
+            .into(binding.ivImageSample)
+
         value = if(Utils.isLocaleFrench()) model.control_fr  else model.control
         binding.tvControl.text = value
 

@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity() {
     private fun activateListener() {
         binding.btnLogin.setOnClickListener {
             if (validation()) {
-                startActivity(Intent(this, AdminActivity::class.java))
+                startActivity(Intent(this, DashBoardActivity::class.java))
                 finish()
             } else {
                 Toast.makeText(this, "Invalid username/password", Toast.LENGTH_LONG).show()
