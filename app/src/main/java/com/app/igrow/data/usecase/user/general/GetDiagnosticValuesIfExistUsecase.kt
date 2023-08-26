@@ -7,6 +7,7 @@ import com.app.igrow.utils.Constants.COL_CROP
 import com.app.igrow.utils.Constants.COL_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Utils
+import com.app.igrow.utils.Utils.getLocalizeColumnName
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
@@ -24,29 +25,33 @@ class GetDiagnosticValuesIfExistUsecase @Inject constructor(private val reposito
                 coroutineScope.async {
                     val value =
                         if (Utils.isLocaleFrench()) diagnostic.crop_fr else diagnostic.crop
-                    repository.isColumnValueExist(COL_CROP, value, sheetName).collect { dataState ->
-                        getValue(dataState)?.let {
-                            resultHashMap[COL_CROP] = it
+                    val columnName = getLocalizeColumnName(COL_CROP)
+                    repository.isColumnValueExist(columnName, value, sheetName)
+                        .collect { dataState ->
+                            getValue(dataState)?.let {
+                                resultHashMap[columnName] = it
+                            }
                         }
-                    }
                 },
                 coroutineScope.async {
                     val value =
                         if (Utils.isLocaleFrench()) diagnostic.type_of_enemy_fr else diagnostic.type_of_enemy
-                    repository.isColumnValueExist(COL_TYPE_OF_ENEMY, value, sheetName)
+                    val columnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
+                    repository.isColumnValueExist(columnName, value, sheetName)
                         .collect { dataState ->
                             getValue(dataState)?.let {
-                                resultHashMap[COL_TYPE_OF_ENEMY] = it
+                                resultHashMap[columnName] = it
                             }
                         }
                 },
                 coroutineScope.async {
                     val value =
                         if (Utils.isLocaleFrench()) diagnostic.causal_agent_fr else diagnostic.causal_agent
-                    repository.isColumnValueExist(COL_ENEMY, value, sheetName)
+                    val columnName = getLocalizeColumnName(COL_ENEMY)
+                    repository.isColumnValueExist(columnName, value, sheetName)
                         .collect { dataState ->
                             getValue(dataState)?.let {
-                                resultHashMap[COL_ENEMY] = it
+                                resultHashMap[columnName] = it
                             }
                         }
                 }

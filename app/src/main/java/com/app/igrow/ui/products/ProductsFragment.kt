@@ -43,12 +43,10 @@ import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
 import com.app.igrow.utils.Constants.SHEET_PRODUCTS
 import com.app.igrow.utils.Utils.getLocalizeColumnName
-import com.app.igrow.utils.Utils.isLocaleFrench
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import kotlin.concurrent.schedule
 
 @AndroidEntryPoint
 class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
@@ -111,48 +109,48 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                 productColumnName = getLocalizeColumnName(COL_CROP)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
-                    COL_CROP,
-                    Constants.SHEET_PRODUCTS
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llEnemy.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_ENEMY)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
-                    COL_ENEMY,
-                    Constants.SHEET_PRODUCTS
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llComposition.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_COMPOSITION)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
-                    COL_COMPOSITION,
-                    Constants.SHEET_PRODUCTS
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llEnemyType.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
-                    COL_TYPE_OF_ENEMY,
-                    Constants.SHEET_PRODUCTS
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llProductCategory.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_PRODUCTS_CATEGORY)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
-                    COL_PRODUCTS_CATEGORY,
-                    Constants.SHEET_PRODUCTS
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llDistributor.setOnClickListener {
                 productColumnName = getLocalizeColumnName(COL_DISTRIBUTOR)
                 viewModel.getProductColumnData(
                     productFiltersHashMap,
-                    COL_DISTRIBUTOR,
-                    Constants.SHEET_PRODUCTS
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.btnSearch.setOnClickListener {
