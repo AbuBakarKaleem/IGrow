@@ -20,6 +20,11 @@
     <string name="cancel">Annuler</string>
     <string name="dealer_info">Informations sur la boutique</string>
 
+    <string-array name="countryList">
+        <item>@string/text_select_country</item>
+        <item>Cameroun</item>
+    </string-array>
+
     <string name="no_data_found">Aucune donnée disponible</string>
     <string name="or_select">ou sélectionnez</string>
     <string name="invite_a_friend">Inviter un(e) ami(e)</string>
