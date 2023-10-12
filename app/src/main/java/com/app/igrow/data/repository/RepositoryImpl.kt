@@ -16,7 +16,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
 import javax.inject.Inject
 
 /**
@@ -660,24 +659,24 @@ class RepositoryImpl @Inject constructor(
         return dataList
     }
 
-    override suspend fun getLearningData(): Flow<DataState<ArrayList<Videos>>> = callbackFlow {
+    override suspend fun getLearningData(): Flow<DataState<ArrayList<Video>>> = callbackFlow {
         val databaseInstance = FirebaseFirestore.getInstance()
         databaseInstance.collection(SHEET_VIDEOS).addSnapshotListener { snapshot, error ->
             if (error != null) {
-                if (isActive) trySend(DataState.error<ArrayList<Videos>>(stringUtils.somethingWentWrong()))
+                if (isActive) trySend(DataState.error<ArrayList<Video>>(stringUtils.somethingWentWrong()))
                 return@addSnapshotListener
             }
             if (snapshot != null && snapshot.isEmpty.not()) {
-                val videosList = ArrayList<Videos>()
+                val videoList = ArrayList<Video>()
                 for (doc in snapshot.documents) {
-                    val videosObject = doc.toObject(Videos::class.java)
-                    if (videosObject != null) {
-                        videosList.add(videosObject)
+                    val videoObject = doc.toObject(Video::class.java)
+                    if (videoObject != null) {
+                        videoList.add(videoObject)
                     }
                 }
-                if (isActive) trySend(DataState.success(videosList))
+                if (isActive) trySend(DataState.success(videoList))
             } else {
-                if (isActive) trySend(DataState.error<ArrayList<Videos>>(stringUtils.somethingWentWrong()))
+                if (isActive) trySend(DataState.error<ArrayList<Video>>(stringUtils.somethingWentWrong()))
             }
         }
         awaitClose()

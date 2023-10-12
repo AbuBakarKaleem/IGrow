@@ -1,14 +1,17 @@
 package com.app.igrow.ui.distributor
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.app.igrow.IGrowApp
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.sheets.Dealers
@@ -28,13 +31,16 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
 
     private var productItem =  Products()
     private var dealerInfo = Dealers()
+    private var website =  "http://www.agricadvisors.com/"
 
+    @SuppressLint("QueryPermissionsNeeded")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let {
             val itemArgs = it.get(DiagnoseFragment.ARG_DIAGNOSE_DATA_KEY) as Distributors
             productItem = it.get(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY) as Products
+            website = itemArgs.website
 
             if (it.containsKey(ARG_DEALER_INFO)) {
                 dealerInfo = it.get(ARG_DEALER_INFO) as Dealers
@@ -60,7 +66,7 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
 
 
         binding.btnWebsite.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.agricadvisors.com/"))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(website))
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
@@ -80,6 +86,26 @@ class DistributorDetailFragment : BaseFragment<FragmentDistributorDetailBinding>
                     findNavController().navigate(R.id.distributorDetailToDealersFragment,itemBundle)
                 } else {
                     findNavController().navigate(R.id.distributorDetailToDealersFragment)
+                }
+            }
+        }
+
+        binding.tvEmail.setOnClickListener {
+            if (binding.tvEmail.text.trim().isNotEmpty()){
+                val email = binding.tvEmail.text.trim().toString()
+
+                val emailIntent = Intent(Intent.ACTION_SEND)
+                emailIntent.type = "plain/text"
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "")
+                emailIntent.putExtra(Intent.EXTRA_TEXT, email)
+                // Check if the device has an app that can handle this intent
+                if(emailIntent.resolveActivity(IGrowApp.getInstance().packageManager) != null){
+                    startActivity(emailIntent)
+                } else {
+                    Toast.makeText(IGrowApp.getInstance(),
+                        R.string.no_email_app_found,
+                        Toast.LENGTH_SHORT).show()
                 }
             }
         }

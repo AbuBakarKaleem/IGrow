@@ -67,18 +67,20 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                         filters.contains(getLocalizeColumnName(Constants.COL_DISTRIBUTORS_NAME))
                     ) {
                         val result = data[getLocalizeColumnName(Constants.COL_DISTRIBUTORS)] ?: ""
-                        if (result.contains(filterKey.value)) {
+                        if (result.contains(filterKey.value) || filterKey.value.contains(result)) {
                             list.add(data)
                         }
                     } else if (filterKey.key == getLocalizeColumnName(Constants.COL_DEALER_NAME) &&
                         filters.contains(getLocalizeColumnName(Constants.COL_DEALER_NAME))
                     ) {
                         val result = data[getLocalizeColumnName(Constants.COL_DEALER_NAME)] ?: ""
-                        if (result.contains(filterKey.value, ignoreCase = true)) {
+                        if (result.contains(filterKey.value, ignoreCase = true) ||
+                            filterKey.value.contains(result, ignoreCase = true)) {
                             list.add(data)
                         }
                     } else {
-                        if (filterKey.value == data[filterKey.key]) {
+                        val result = data[filterKey.key] ?: ""
+                        if (filterKey.value.contains(result, ignoreCase = true) || result.contains(filterKey.value, ignoreCase = true)) {
                             list.add(data)
                         }
                     }
@@ -90,12 +92,14 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                     ) {
 
                         val result = data[getLocalizeColumnName(Constants.COL_PRODUCT_NAME)] ?: ""
-                        if (result.contains(filterKey.value,ignoreCase = true)) {
+                        if (result.contains(filterKey.value , ignoreCase = true) ||
+                            filterKey.value.contains(result , ignoreCase = true)  ) {
                             list.add(data)
                         }
 
                     } else {
-                        if (data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) {
+                        if ((data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) ||
+                            (data[filterKey.key]?.let { it.contains(filterKey.value, ignoreCase = true) } == true)) {
                             list.add(data)
                         }
                     }
@@ -106,17 +110,20 @@ class FilterDataListOfGivenSheetUseCase @Inject constructor(
                     ) {
 
                         val result = data[getLocalizeColumnName(Constants.COL_PLANT_HEALTH_PROBLEM)] ?: ""
-                        if (result.contains(filterKey.value , ignoreCase = true)) {
+                        if (result.contains(filterKey.value , ignoreCase = true) ||
+                            filterKey.value.contains(result , ignoreCase = true)  ) {
                             list.add(data)
                         }
 
                     } else {
-                        if (data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) {
+                        if ((data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) ||
+                            (data[filterKey.key]?.let { it.contains(filterKey.value, ignoreCase = true) } == true)) {
                             list.add(data)
                         }
                     }
                 } else {
-                    if (data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) {
+                    if ((data[filterKey.key]?.let { filterKey.value.contains(it, ignoreCase = true) } == true) ||
+                        (data[filterKey.key]?.let { it.contains(filterKey.value, ignoreCase = true) } == true)) {
                         list.add(data)
                     }
                 }

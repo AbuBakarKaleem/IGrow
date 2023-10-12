@@ -11,10 +11,8 @@ fun View.gone() {
     visibility = View.GONE
 }
 fun View.clear() {
-    var editText=this as EditText
-    editText.text.clear()
+    (this as EditText).text.clear()
 }
 fun View.disable() {
-    var editText=this as EditText
-    editText.isEnabled=false
+    (this as EditText).isEnabled = false
 }

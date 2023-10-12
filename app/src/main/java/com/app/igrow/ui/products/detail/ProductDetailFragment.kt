@@ -42,7 +42,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     private fun setPopulateViews(product: Products) {
         var value = if (isLocaleFrench()) product.product_name_fr else product.product_name
         binding.tvProductName.text = value
-        value = if (isLocaleFrench()) product.product_category else product.product_category_fr
+        value = if (isLocaleFrench()) product.product_category_fr else product.product_category
         binding.tvActiveAgent.text = value
         value = if (isLocaleFrench()) product.distributor_fr else product.distributor
         binding.tvDealer.text = value
@@ -65,7 +65,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         binding.tvCrop.text = value
         value = if (isLocaleFrench()) product.treatment_time_fr else product.treatment_time
         binding.tvTreatmentTime.text = value
-        value = if (isLocaleFrench()) product.enemy else product.enemy_fr
+        value = if (isLocaleFrench()) product.enemy_fr else product.enemy
         binding.tvEnemyType.text = value
         value = if (isLocaleFrench()) product.application_rate_fr else product.application_rate
         binding.tvApplicationRate.text = value

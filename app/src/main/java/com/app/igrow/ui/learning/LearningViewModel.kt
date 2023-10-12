@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
-import com.app.igrow.data.model.sheets.Videos
+import com.app.igrow.data.model.sheets.Video
 import com.app.igrow.data.usecase.user.videos.GetLearningDataUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
@@ -21,8 +21,8 @@ class LearningViewModel @Inject constructor(
     private var _uiState = MutableLiveData<AdminUIStates>()
     var uiStateLiveData: LiveData<AdminUIStates> = _uiState
 
-    private var getLearningDataMutableLiveData = MutableLiveData<ArrayList<Videos>?>()
-    var getLearningDataLiveData: MutableLiveData<ArrayList<Videos>?> = getLearningDataMutableLiveData
+    private var getLearningDataMutableLiveData = MutableLiveData<ArrayList<Video>?>()
+    var getLearningDataLiveData: MutableLiveData<ArrayList<Video>?> = getLearningDataMutableLiveData
 
     fun getLearningData() {
         _uiState.postValue(LoadingState)

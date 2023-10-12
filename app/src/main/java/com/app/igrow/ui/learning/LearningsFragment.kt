@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import com.app.igrow.R
 import com.app.igrow.adpters.LearningListAdapter
 import com.app.igrow.base.BaseFragment
-import com.app.igrow.data.model.sheets.Videos
+import com.app.igrow.data.model.sheets.Video
 import com.app.igrow.databinding.FragmentLearningsBinding
 import com.app.igrow.utils.Utils
 import com.app.igrow.utils.gone
@@ -27,8 +27,8 @@ import kotlin.collections.ArrayList
 class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
 
 
-    private var youtubeVideosList = arrayListOf<Videos>()
-    private var filteredList = arrayListOf<Videos>()
+    private var youtubeVideoList = arrayListOf<Video>()
+    private var filteredList = arrayListOf<Video>()
     private val viewModel: LearningViewModel by viewModels()
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLearningsBinding
         get() = FragmentLearningsBinding::inflate
@@ -46,9 +46,9 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
     }
 
     private fun initRecyclerView() {
-        adapter = LearningListAdapter({ videoClickUrl ->
+        adapter = LearningListAdapter({ videoClickLink ->
             if(Utils.isInternetAvailable(requireContext())){
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoClickUrl.link))
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoClickLink))
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             } else {
@@ -59,11 +59,11 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
                 ).show()
             }
 
-        }, { shareItemClick ->
-            shareAppLink(shareItemClick.link)
+        }, { shareVideoLink ->
+            shareAppLink(shareVideoLink)
         })
         binding.rcLearnings.adapter = adapter
-        updateDataInList(youtubeVideosList)
+        updateDataInList(youtubeVideoList)
     }
 
     private fun activateObserver() {
@@ -75,7 +75,7 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
                     Toast.LENGTH_LONG
                 ).show()
             } else {
-                youtubeVideosList.addAll(it)
+                youtubeVideoList.addAll(it)
                 updateDataInList(it)
             }
         }
@@ -95,22 +95,22 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
                 }
             } else {
                 filteredList.clear()
-                updateDataInList(youtubeVideosList)
+                updateDataInList(youtubeVideoList)
                 binding.tvNoRecordFound.gone()
             }
         }
     }
 
-    private fun searchList(searchValue: String): java.util.ArrayList<Videos> {
+    private fun searchList(searchValue: String): java.util.ArrayList<Video> {
         try {
             filteredList.clear()
-            if (youtubeVideosList.size < 0) {
+            if (youtubeVideoList.size < 0) {
                 return arrayListOf()
             }
-            filteredList = youtubeVideosList.filter { model ->
+            filteredList = youtubeVideoList.filter { model ->
                 model.title.lowercase(Locale.getDefault())
                     .contains(searchValue.lowercase(Locale.getDefault()))
-            } as java.util.ArrayList<Videos>
+            } as java.util.ArrayList<Video>
 
             if (filteredList.isEmpty()) {
                 return filteredList
@@ -131,7 +131,7 @@ class LearningsFragment : BaseFragment<FragmentLearningsBinding>() {
         startActivity(Intent.createChooser(i, "Share Video URL"))
     }
 
-    private fun updateDataInList(myList: ArrayList<Videos>) {
+    private fun updateDataInList(myList: ArrayList<Video>) {
         adapter.differ.submitList(myList)
         adapter.notifyDataSetChanged()
     }

@@ -103,12 +103,13 @@ object Utils {
                     filtersMap.forEach {
                         iterationCount++
                         customQuery += if (iterationCount == 1)
-                            " ${it.key} ='${it.value}' "
+                            " ${it.key} LIKE '${it.value}' "
                         else
-                            "AND ${it.key} ='${it.value}' "
+                            "AND ${it.key} LIKE '${it.value}' "
                     }
 
                 }
+                println("=-=>> ${customQuery}")
                 return SimpleSQLiteQuery(customQuery)
             }
         } catch (e: Exception) {

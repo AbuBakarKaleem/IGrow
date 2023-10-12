@@ -60,6 +60,13 @@ class AdminActivity : BaseActivity() {
         binding.delete.setOnClickListener {
             showActionTypeDialog(AdminActionType.DELETE.toString())
         }
+
+//        binding.btnfake.setOnClickListener {
+//            deleteFirebaseCollectionDocuments("Dealers","5000.0")
+//            deleteFirebaseCollectionDocuments("Products","5000.0")
+//            deleteFirebaseCollectionDocuments("Diagnostic","2000")
+//            deleteFirebaseCollectionDocuments("Distributors","2000")
+//        }
     }
 
     private fun deleteFirebaseCollectionDocuments(sheetName:String,documentIdToPreserve:String ){
