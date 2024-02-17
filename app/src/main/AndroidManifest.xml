@@ -3,14 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.igrow">
 
+<!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>-->
+
     <application
         android:name=".IGrowApp"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.IGrow"
         tools:targetApi="33">
@@ -31,7 +35,8 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".ui.admin.distributors.DistributorsActivity"
             android:exported="false"

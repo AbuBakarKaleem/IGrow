@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -19,11 +20,13 @@ import com.app.igrow.R
 import com.app.igrow.adpters.DialogListAdapter
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.data.model.detail.SearchResult
+import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.DialogeLayoutBinding
 import com.app.igrow.databinding.FragmentProductsBinding
 import com.app.igrow.ui.admin.LoadingState
 import com.app.igrow.ui.admin.UnloadingState
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.diagnose.DiagnoseFragment.Companion.ARG_SEARCH_RESULT_ITEM_KEY
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Constants.COL_COMPOSITION
 import com.app.igrow.utils.Constants.COL_COMPOSITION_FR
@@ -35,9 +38,11 @@ import com.app.igrow.utils.Constants.COL_ENEMY
 import com.app.igrow.utils.Constants.COL_ENEMY_FR
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY
 import com.app.igrow.utils.Constants.COL_PRODUCTS_CATEGORY_FR
+import com.app.igrow.utils.Constants.COL_PRODUCT_NAME
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY
 import com.app.igrow.utils.Constants.COL_TYPE_OF_ENEMY_FR
-import com.app.igrow.utils.Utils
+import com.app.igrow.utils.Constants.SHEET_PRODUCTS
+import com.app.igrow.utils.Utils.getLocalizeColumnName
 import com.app.igrow.utils.gone
 import com.app.igrow.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,61 +66,109 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         activateListener()
         activateObserver()
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.toHomePageFromProducts)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupInitialData()
+    }
+
+    private fun setupInitialData() {
+
+        arguments?.let {
+            if (it.isEmpty.not() && it.containsKey(PRODUCT_INITIAL_DATA)) {
+                val argsItem = it.get(PRODUCT_INITIAL_DATA) as HashMap<*, *>
+                argsItem.forEach { item ->
+                    productColumnName = item.key.toString()
+                    setSelectedValueToView(item.value.toString())
+                    populateFiltersObject(item.value.toString() + ":")
+                }
+            } else if (it.isEmpty.not() && it.containsKey(ARG_SEARCH_RESULT_ITEM_KEY)) {
+                val argsItem = it.get(ARG_SEARCH_RESULT_ITEM_KEY) as Diagnostic
+                viewModel.getAllDiagnosticDataAtOnce(argsItem, SHEET_PRODUCTS)
+            }
+        }
     }
 
     private fun activateListener() {
         try {
 
             binding.llCrop.setOnClickListener {
-                productColumnName = COL_CROP
-                viewModel.getProductColumnData(COL_CROP, Constants.SHEET_PRODUCTS)
+                productColumnName = getLocalizeColumnName(COL_CROP)
+                viewModel.getProductColumnData(
+                    productFiltersHashMap,
+                    productColumnName,
+                    SHEET_PRODUCTS
+                )
             }
             binding.llEnemy.setOnClickListener {
-                productColumnName = COL_ENEMY
+                productColumnName = getLocalizeColumnName(COL_ENEMY)
                 viewModel.getProductColumnData(
-                    COL_ENEMY,
-                    Constants.SHEET_PRODUCTS
+                    productFiltersHashMap,
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llComposition.setOnClickListener {
-                productColumnName = COL_COMPOSITION
+                productColumnName = getLocalizeColumnName(COL_COMPOSITION)
                 viewModel.getProductColumnData(
-                    COL_COMPOSITION,
-                    Constants.SHEET_PRODUCTS
+                    productFiltersHashMap,
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llEnemyType.setOnClickListener {
-                productColumnName = COL_TYPE_OF_ENEMY
+                productColumnName = getLocalizeColumnName(COL_TYPE_OF_ENEMY)
                 viewModel.getProductColumnData(
-                    COL_TYPE_OF_ENEMY,
-                    Constants.SHEET_PRODUCTS
+                    productFiltersHashMap,
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llProductCategory.setOnClickListener {
-                productColumnName = COL_PRODUCTS_CATEGORY
+                productColumnName = getLocalizeColumnName(COL_PRODUCTS_CATEGORY)
                 viewModel.getProductColumnData(
-                    COL_PRODUCTS_CATEGORY,
-                    Constants.SHEET_PRODUCTS
+                    productFiltersHashMap,
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.llDistributor.setOnClickListener {
-                productColumnName = COL_DISTRIBUTOR
+                productColumnName = getLocalizeColumnName(COL_DISTRIBUTOR)
                 viewModel.getProductColumnData(
-                    COL_DISTRIBUTOR,
-                    Constants.SHEET_PRODUCTS
+                    productFiltersHashMap,
+                    productColumnName,
+                    SHEET_PRODUCTS
                 )
             }
             binding.btnSearch.setOnClickListener {
                 if (binding.etSearch.text.toString().isNotEmpty()) {
                     productFiltersHashMap.clear()
-                    productFiltersHashMap[Utils.getLocalizeColumnName(COL_DISTRIBUTOR)] =
+                    productFiltersHashMap[getLocalizeColumnName(COL_PRODUCT_NAME)] =
                         binding.etSearch.text.toString().trim()
                 }
                 viewModel.searchProduct(productFiltersHashMap)
 
             }
+
+            binding.etSearch.doAfterTextChanged { editable ->
+                if (editable != null && (editable.isEmpty() || editable.isBlank())) {
+                    productFiltersHashMap.remove(COL_PRODUCT_NAME)
+                }
+            }
+
             binding.btnReset.setOnClickListener {
                 resetAllFilters()
             }
@@ -138,11 +191,14 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
         }
         viewModel.getProductColumnDataLiveData.observe(viewLifecycleOwner) {
             if (it != null && it.size > 0) {
+                it.sort()
                 if (productColumnName.isNotEmpty()) {
                     addPlaceholderInFilterList(it)
                 }
                 dialogList = it
                 showListDialog(it)
+            } else {
+                Toast.makeText(requireContext(), "No data found ", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -161,32 +217,65 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
                     ).show()
             }
         }
+        viewModel.columnDataExistLiveData.observe(viewLifecycleOwner) { resultMap ->
+
+            println("=-=>> $resultMap")
+            resultMap.forEach{
+                productColumnName = it.key
+                setSelectedValueToView(it.value)
+                populateFiltersObject("${it.value}:")
+            }
+//            resultMap.contains(COL_CROP).apply {
+//                if (this) {
+//                    productColumnName = COL_CROP
+//                    val value = resultMap[COL_CROP]!!
+//                    setSelectedValueToView(value)
+//                    populateFiltersObject("$value:")
+//                }
+//            }
+//
+//            resultMap.contains(COL_TYPE_OF_ENEMY).apply {
+//                if (this) {
+//                    productColumnName = COL_TYPE_OF_ENEMY
+//                    val value = resultMap[COL_TYPE_OF_ENEMY]!!
+//                    setSelectedValueToView(value)
+//                    populateFiltersObject("$value:")
+//                }
+//            }
+
+//            val data = it?.split("-")
+//            if (data?.get(2)?.isNotEmpty() == true && data[2] != "null") {
+//                val value = data[1]
+//                setSelectedValueToView(value)
+//                populateFiltersObject("$value:")
+//            }
+        }
     }
 
     private fun addPlaceholderInFilterList(dataList: ArrayList<String>) {
         when (productColumnName) {
             COL_CROP, COL_CROP_FR -> {
-                dataList.add(0, getString(R.string.crop))
+                dataList.add(0, getString(R.string.all_crops))
                 return
             }
             COL_TYPE_OF_ENEMY, COL_TYPE_OF_ENEMY_FR -> {
-                dataList.add(0, getString(R.string.enemy_type))
+                dataList.add(0, getString(R.string.all_enemy_types))
                 return
             }
             COL_ENEMY, COL_ENEMY_FR -> {
-                dataList.add(0, getString(R.string.enemy))
+                dataList.add(0, getString(R.string.all_enemies))
                 return
             }
             COL_COMPOSITION, COL_COMPOSITION_FR -> {
-                dataList.add(0, getString(R.string.composition))
+                dataList.add(0, getString(R.string.all_compositions))
                 return
             }
             COL_PRODUCTS_CATEGORY, COL_PRODUCTS_CATEGORY_FR -> {
-                dataList.add(0, getString(R.string.product_category))
+                dataList.add(0, getString(R.string.all_product_categories))
                 return
             }
             COL_DISTRIBUTOR, COL_DISTRIBUTOR_FR -> {
-                dataList.add(0, getString(R.string.distributor))
+                dataList.add(0, getString(R.string.all_distributors))
                 return
             }
 
@@ -299,14 +388,16 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
     private fun populateFiltersObject(value: String) {
         val englishAndFrenchValues = value.split(":")
         if (productColumnName.isNotEmpty() &&
-            englishAndFrenchValues[0] != getString(R.string.crop) &&
-            englishAndFrenchValues[0] != getString(R.string.enemy_type) &&
-            englishAndFrenchValues[0] != getString(R.string.enemy) &&
-            englishAndFrenchValues[0] != getString(R.string.composition) &&
-            englishAndFrenchValues[0] != getString(R.string.product_category) &&
-            englishAndFrenchValues[0] != getString(R.string.distributor)
+            englishAndFrenchValues[0] != getString(R.string.all_crops) &&
+            englishAndFrenchValues[0] != getString(R.string.all_enemy_types) &&
+            englishAndFrenchValues[0] != getString(R.string.all_enemies) &&
+            englishAndFrenchValues[0] != getString(R.string.all_compositions) &&
+            englishAndFrenchValues[0] != getString(R.string.all_product_categories) &&
+            englishAndFrenchValues[0] != getString(R.string.all_distributors)
         ) {
             productFiltersHashMap[productColumnName] = englishAndFrenchValues[0]
+        } else {
+            productFiltersHashMap.remove(productColumnName)
         }
     }
 
@@ -329,9 +420,8 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>() {
         viewModel.getProductColumnDataLiveData.value = arrayListOf()
     }
 
-    override fun onResume() {
-        super.onResume()
-        productFiltersHashMap.clear()
+    companion object {
+        const val PRODUCT_INITIAL_DATA = "product_initial_data"
     }
 
 }

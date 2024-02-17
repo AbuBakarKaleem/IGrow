@@ -61,7 +61,7 @@ object Utils {
     }
 
     fun getLocalizeColumnName(actualName: String): String {
-        if (Utils.getSystemLanguage().split("-")[0] == "fr") {
+        if (getSystemLanguage().split("-")[0] == "fr") {
             return actualName + "_fr"
         }
         return actualName
@@ -78,10 +78,50 @@ object Utils {
         return gson.fromJson<Any>(jsonString, cls)
     }
 
-    fun getColumnDataCustomQuery(sheetName: String, columnName: String): SimpleSQLiteQuery {
+    fun isColumnValueExist(
+        columnName: String,
+        columnValue: String,
+        sheetName: String
+    ): SimpleSQLiteQuery {
+        val customQuery =
+            "SELECT DISTINCT $columnName FROM $sheetName WHERE $columnName = '$columnValue'"
+        return SimpleSQLiteQuery(customQuery)
+    }
+
+    fun getColumnDataCustomQuery(
+        filtersMap: HashMap<String, String> = hashMapOf(), sheetName: String, columnName: String
+    ): SimpleSQLiteQuery {
         try {
             if (sheetName.isNotEmpty() && columnName.isNotEmpty()) {
-                val customQuery: String = "SELECT DISTINCT $columnName FROM $sheetName"
+                var customQuery = "SELECT DISTINCT $columnName FROM $sheetName"
+
+                if (filtersMap.isNotEmpty()) {
+
+                    customQuery += " WHERE "
+                    var iterationCount = 0
+
+                    filtersMap.forEach {
+                        iterationCount++
+                        customQuery += if (iterationCount == 1)
+                            " ${it.key} LIKE '${it.value}' "
+                        else
+                            "AND ${it.key} LIKE '${it.value}' "
+                    }
+
+                }
+                println("=-=>> ${customQuery}")
+                return SimpleSQLiteQuery(customQuery)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return SimpleSQLiteQuery("")
+    }
+
+    fun getDistributorByName(name: String, columnName: String): SimpleSQLiteQuery {
+        try {
+            if (name.isNotEmpty() && columnName.isNotEmpty()) {
+                val customQuery = "SELECT * FROM Distributors WHERE $columnName ='$name'"
                 return SimpleSQLiteQuery(customQuery)
             }
         } catch (e: Exception) {

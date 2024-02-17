@@ -18,6 +18,7 @@ object Constants {
     const val SHEET_PRODUCTS = "Products"
     const val SHEET_DISTRIBUTORS = "Distributors"
     const val SHEET_DEALERS = "Dealers"
+    const val SHEET_VIDEOS = "Videos"
     const val DOCUMENT_ID = "igrow"
 
     //Diagnostic Sheet Columns
@@ -36,6 +37,7 @@ object Constants {
     const val COL_SYMPTOMS_IMPACT_FR = "symptoms_impact_fr"
     const val COL_CONTROL = "control"
     const val COL_CONTROL_FR = "control_fr"
+    const val COL_IMAGE_SAMPLE = "image_sample"
 
     //Products Sheet Columns
     const val COL_PRODUCTS_CATEGORY = "product_category"
@@ -101,6 +103,8 @@ object Constants {
     const val COL_DISTRIBUTORS_FR = "distributors_fr"
 
     // Session Manager Constant
-    const val currentLanguage = "language"
-    const val country = "country"
+    const val KEY_LANGUAGE = "language"
+    const val KEY_COUNTRY = "country"
+    const val DEFAULT_LANGUAGE = "fr"
+    const val KEY_NOTIFICATION_SCHEDULED = "KEY_NOTIFICATION_SCHEDULED"
 }

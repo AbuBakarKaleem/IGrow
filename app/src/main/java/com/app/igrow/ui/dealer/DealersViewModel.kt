@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.igrow.data.DataState
-import com.app.igrow.data.usecase.admin.diagnostic.FilterDataListOfGivenSheetUseCase
+import com.app.igrow.data.usecase.user.general.FilterDataListOfGivenSheetUseCase
 import com.app.igrow.data.usecase.user.general.GetColumnDataUsecase
 import com.app.igrow.ui.admin.AdminUIStates
 import com.app.igrow.ui.admin.LoadingState
@@ -34,13 +34,18 @@ class DealersViewModel@Inject constructor(
 
     private var showEmptyResponseMsg = false
 
-    fun getDistributorColumnData(columnName: String, sheetName: String) {
+    fun getDistributorColumnData(filtersMap: HashMap<String, String>,columnName: String, sheetName: String) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            getColumnDataUseCase.invoke(columnName = columnName, sheetName = sheetName).collect {
+            getColumnDataUseCase.invoke(filtersMap = filtersMap, columnName = columnName, sheetName = sheetName).collect {
                 when (it) {
                     is DataState.Success -> {
-                        getDistributorColumnDataMutableLiveData.postValue(it.data)
+                        it.data?.let { response ->
+                            showEmptyResponseMsg = response.isEmpty()
+                            getDistributorColumnDataMutableLiveData.postValue(it.data)
+                        } ?: run {
+                            showEmptyResponseMsg = true
+                        }
                     }
                     is DataState.Error -> {
                         getDistributorColumnDataMutableLiveData.postValue(null)

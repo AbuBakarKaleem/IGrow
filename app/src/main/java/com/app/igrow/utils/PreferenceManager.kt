@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.app.igrow.IGrowApp
-import com.app.igrow.utils.Constants.country
-import com.app.igrow.utils.Constants.currentLanguage
-
+import com.app.igrow.utils.Constants.DEFAULT_LANGUAGE
+import com.app.igrow.utils.Constants.KEY_COUNTRY
+import com.app.igrow.utils.Constants.KEY_LANGUAGE
+import com.app.igrow.utils.Constants.KEY_NOTIFICATION_SCHEDULED
 
 class PreferenceManager(context: Context?) {
 
@@ -31,18 +32,26 @@ class PreferenceManager(context: Context?) {
     }
 
     fun getLanguage(): String? {
-        return pref!!.getString(currentLanguage, "en")
+        return pref!!.getString(KEY_LANGUAGE, DEFAULT_LANGUAGE)
     }
 
     fun setLanguage(language: String?) {
-        pref!!.edit().putString(currentLanguage, language).apply()
+        pref!!.edit().putString(KEY_LANGUAGE, language).apply()
     }
 
     fun getCountry(): String? {
-        return pref!!.getString(country, "")
+        return pref!!.getString(KEY_COUNTRY, "")
     }
 
     fun setCountry(countryName: String?) {
-        pref!!.edit().putString(country, countryName).apply()
+        pref!!.edit().putString(KEY_COUNTRY, countryName).apply()
+    }
+
+    fun notificationIsScheduled(status: Boolean) {
+        pref!!.edit().putBoolean(KEY_NOTIFICATION_SCHEDULED, status).apply()
+    }
+
+    fun isNotificationScheduled(): Boolean {
+        return pref!!.getBoolean(KEY_NOTIFICATION_SCHEDULED, false)
     }
 }

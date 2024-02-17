@@ -34,15 +34,32 @@ class DistributorsRepoImpl @Inject constructor(
     }
 
     override suspend fun getDistributorsColumnData(
+        filtersMap: HashMap<String, String>,
         sheetName: String,
         columnName: String
     ): List<String> {
         return distributorsDao.getDistributorsColumnData(
             Utils.getColumnDataCustomQuery(
+                filtersMap = filtersMap,
                 sheetName = sheetName,
                 columnName = columnName
             )
         )
+    }
+
+    override suspend fun getDistributorByName(
+        name: String,
+        columnName: String
+    ): DistributorsEntityName {
+        if (name.isNotEmpty() && columnName.isNotEmpty()) {
+            return distributorsDao.getDistributorByName(
+                Utils.getDistributorByName(
+                    name,
+                    columnName
+                )
+            )
+        }
+        return DistributorsEntityName()
     }
 
     companion object {

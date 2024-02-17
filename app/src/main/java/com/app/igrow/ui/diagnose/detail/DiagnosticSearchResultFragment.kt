@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -12,13 +13,17 @@ import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.adpters.DiagnosticSearchResultAdapter
 import com.app.igrow.data.model.detail.SearchResult
-import com.app.igrow.data.model.sheets.Dealers
 import com.app.igrow.data.model.sheets.Diagnostic
 import com.app.igrow.databinding.FragmentSearchResultBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.diagnose.DiagnoseFragment.Companion.ARG_DIAGNOSE_INITIAL_DATA_KEY
+import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.Utils
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 @AndroidEntryPoint
 class DiagnosticSearchResultFragment : Fragment() {
@@ -27,7 +32,7 @@ class DiagnosticSearchResultFragment : Fragment() {
     private val binding get() = fragmentSearchResultBinding
     private var dataListFromArgs = arrayListOf<Diagnostic>()
     private val viewModel: DiagnosticSearchResultViewModel by viewModels()
-    private var filtersMap = HashMap<String,String>()
+    private var filtersMap = HashMap<String, String>()
     private lateinit var adapter: DiagnosticSearchResultAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +70,17 @@ class DiagnosticSearchResultFragment : Fragment() {
         initialSetup()
         activateObserver()
 
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    val itemBundle = bundleOf(ARG_DIAGNOSE_INITIAL_DATA_KEY to filtersMap)
+                    findNavController().navigate(R.id.toDiagnoseFragmentHomePage,itemBundle)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+
+
     }
 
     private fun initialSetup() {
@@ -74,7 +90,7 @@ class DiagnosticSearchResultFragment : Fragment() {
 
         adapter = DiagnosticSearchResultAdapter {
             val itemBundle = bundleOf(DiagnoseFragment.ARG_SEARCH_RESULT_ITEM_KEY to it)
-            findNavController().navigate(R.id.toDiagnoseSearchResultDetailFragment,itemBundle)
+            findNavController().navigate(R.id.toDiagnoseSearchResultDetailFragment, itemBundle)
         }
 
         binding.rcSearchResult.adapter = adapter
@@ -122,13 +138,13 @@ class DiagnosticSearchResultFragment : Fragment() {
     }
 
     private fun updateDataInList(myList: ArrayList<Diagnostic>) {
-        binding.tvCount.text = myList.size.toString() +" "+ getString(R.string.results)
-        adapter.differ.submitList(myList)
+        binding.tvCount.text = myList.size.toString() + " " + getString(R.string.results)
+        adapter.differ.submitList(myList.sortedBy { it.crop.lowercase(Locale.getDefault()) })
         adapter.notifyDataSetChanged()
     }
 
     override fun onStop() {
         super.onStop()
-        viewModel.filtersLiveData.value =  arrayListOf()
+        viewModel.filtersLiveData.value = arrayListOf()
     }
 }

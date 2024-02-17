@@ -25,10 +25,33 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_heading"
             style="@style/headingStyle"
-            android:text="@string/identify_a_plant_health_problem"
+            android:text="@string/identify_by_pest"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="30dp"
+            app:contentPaddingBottom="10dp"
+            app:contentPaddingLeft="10dp"
+            app:contentPaddingRight="10dp"
+            app:contentPaddingTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/et_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_heading">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_diagnose_green" />
+
+        </com.google.android.material.card.MaterialCardView>
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_two"
@@ -44,12 +67,14 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/icon_search_green"
             android:drawablePadding="4dp"
-            android:hint="@string/search_by_name"
+            android:hint="@string/search_pest"
+            android:maxLines="1"
             android:imeOptions="actionDone"
+            android:inputType="text"
             app:backgroundTint="@color/bright_green"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_two" />
+            app:layout_constraintTop_toBottomOf="@id/header_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_or_select"

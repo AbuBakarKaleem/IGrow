@@ -21,30 +21,38 @@
     <string name="crop_name">Crop Name</string>
     <string name="plant_problem">Plant Problem</string>
     <string name="causal_agent">Causal Agent</string>
-    <string name="update">Update</string>
+    <string name="all_causal_agents">All Causal Agents</string>
+     <string name="update">Update</string>
     <string name="control">Control</string>
-    <string name="symptoms_impact">Symptoms Impact</string>
-    <string name="part_affected">Part Affected</string>
+    <string name="symptoms_impact">Symptoms/Impact</string>
+    <string name="part_affected">Part(s) Affected</string>
     <string name="enemy_type">Enemy Type</string>
+    <string name="all_parts_affected">All Plant Parts</string>
+    <string name="all_enemy_types">All Enemy Types</string>
     <string name="product_category">Product Category</string>
+    <string name="all_product_categories">All Product Categories</string>
     <string name="product_name">Product Name</string>
-    <string name="active_ingredient">Active Ingredient</string>
+    <string name="active_ingredient">Active Ingredient(s)</string>
     <string name="registration_number">Registration Number</string>
     <string name="composition">Composition</string>
+    <string name="all_compositions">All Compositions</string>
     <string name="formulation">Formulation</string>
     <string name="toxicological_class">Toxicological Class</string>
     <string name="mode_of_action">Mode of action</string>
     <string name="enemy">Enemy</string>
+    <string name="enemies">Enemy(ies)</string>
+    <string name="all_enemies">All Enemies</string>
     <string name="packaging">Packaging</string>
-    <string name="application_rate">Application Rate</string>
+    <string name="application_rate">Application Rates</string>
     <string name="treatment_time">Treatment Time</string>
     <string name="frequency_of_application">Frequency of Application</string>
     <string name="method_of_application">Method of Application</string>
     <string name="restrictions_of_use">Restrictions of Use</string>
     <string name="results">Results</string>
-    <string name="re_entry_period">Re-entry Period</string>
-    <string name="time_before_harvest">Time Before Harvest</string>
-    <string name="distributor">Distributor\'s</string>
+    <string name="re_entry_period">Re-entry Interval</string>
+    <string name="time_before_harvest">Pre-harvest Interval</string>
+    <string name="distributor">Distributor</string>
+    <string name="all_distributors">All Distributors</string>
     <string name="telephone">Telephone</string>
     <string name="email">Email</string>
     <string name="website">Website</string>
@@ -52,7 +60,9 @@
     <string name="dealer_name">Dealer Name</string>
     <string name="address">Address</string>
     <string name="city_town">City/Town</string>
+    <string name="all_city_towns">All Cities / Towns</string>
     <string name="region">Region</string>
+    <string name="all_region">All Regions</string>
     <string name="whatsapp">Whatsapp</string>
     <string name="id">ID</string>
     <string name="edit_diagnostic">Diagnostic</string>
@@ -70,10 +80,48 @@
     <string name="email_hint">Email</string>
     <string name="password">Password</string>
     <string name="edit_dealer">Edit Dealer</string>
-    <string name="home_heading">Identify and find the right solution to protect your crops against pests and diseases.</string>
-    <string name="identify_a_plant_health_problem">Identify pests and diseases in your farm</string>
-    <string name="search_by_name">Search by name</string>
+    <string name="home_heading">Effectively protect your crops against pests and diseases.</string>
+    <string name="identify_a_plant_health_problem">Search for a crop \n protection product</string>
+    <string name="search_by_name">Search by dealer name</string>
+    <string name="search_by_product_name">Search by product name</string>
     <string name="or_select">or select</string>
+
+    <string name="about">About Us</string>
+    <string name="about_content"> <font size="18"><b><u>ABOUT US\n</u></b></font>\nThis application is developed by AgricAdvisors Sarl, a company specializing in agronomy consulting services, training and capacity building, and the development of innovations in the agricultural field.
+The iGrow app is one of our recent innovations in AgriTech. Its purpose is to educate agricultural producers on healthy and sustainable Crop Protection and provide professionals with an effective tool to assist them in decision-making and Crop Protection advice.
+We work with agronomy professionals, agricultural producers, agro-industries, research centers, training schools, agricultural input distributors, Crop Protection dealers, government agencies and other actors in the agricultural value chain. If you would like to collaborate with us.
+        \n\n<b>Contact Us: \nAgricAdvisors Sarl \nAddress: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nWebsite: www.agricadvisors.com</b> </string>
+
+    <string name="help_content"><font size="18"><u><b>HELP\n</b></u></font>
+        <b><u>\nGeneral\n</u></b><b>\nHow to carry out a search for a plant health problems, a product or a Crop Protection dealer?</b>
+        \nYou have access to two search modes. You can directly enter the name of the item you are looking for if you know it, or select the different criteria to get a list of results corresponding to your search.\n
+        <b>\nDo I need to enter all search criteria to display results?</b>
+        \nYou do not need to meet all the criteria to find what you are looking for.\n
+        <b>\nHow do I change country or select another language?\n</b>Go to app settings.\n
+        <b>\nI dont understand some technical terms, what should I do?</b>
+        \nGo to the "Learning" section. This section contains short learning videos on crop protection in general and how to use the app in particular.\n
+        <b>\nHow do I work with you or if I have other questions?</b>
+        \nPlease contact us. Our contact details can be found in the "About Us" section.\n\n<u><b>Plant health Diagnosis</b></u>\n
+        <b>\nWhy arent all crops listed?\n</b>We are working gradually to include as many crops as possible. Let us know if you have any special needs.\n
+        <b>\nCan I rely 100% on the diagnosis made with the images in the application?\n</b>The application only serves as a guide to help you identify Crop Protection problems and does not replace professional advice. The interpretation and use of this information is your responsibility.\n
+        <b>\nWhat should I do if I have doubts about the diagnosis made from the information provided by the application?\n</b>The information provided by the application is general and adapts to the most common situations. If in doubt, please consult a professional. Only a professional can make a field diagnosis and make the most precise recommendations specific to your situation.
+        <u><b>\n\nSearch for a product\n</b></u>
+        <b>\nMy product search shows "No data available", what does this mean?\n</b>For your search criteria, this may be due to one or more of the following reasons:\n- There is no product currently registered or authorized.\n- There is no product currently on the market.\n- We are still working to get all the information about these products.\n
+        <b>\nWhy are some approved products not appearing in the results?\n</b>We work with distributors of Crop Protection products in order to publish only approved AND actually marketed products. We regularly update our database to add new products or remove products that are no longer authorized or available for sale.\n
+        <b>\nIs the information provided sufficient to use the product?</b>You should always read the label of a Crop Protection product before using it. It contains extensive information on the safe use of the product and specific recommendations from the supplier. We only provide the basic information necessary for decision making.If you have specific questions about a particular product, please contact the distributor whose contact details are linked on each product page.\n
+        <u><b>\nFind a crop protection dealer</b></u>\n\n<b>My search for Crop Protection dealers shows "No data available", what does this mean?</b>This may mean that there is no Crop Protection dealers with the criteria you have selected or that existing dealers have not yet been integrated into our database. We are constantly working to provide you with the most complete information.\n
+        <b>\nAre the Crop Protection dealers listed the ones you recommend?</b>
+        \nWe do not make any particular recommendation in relation to Crop Protection dealers. We only make the information available. The Crop Protection dealers listed are those provided by distributors of Crop Protection dealers. We also work with independent shops to integrate them into our database.
+    </string>
+
+    <string name="terms"><font size="18"><b>TERMS AND CONDITIONS</b></font>\n\nBy accessing this application or using any part of the application or any content or service thereof, you agree to be bound by these terms and conditions. If you do not agree to all of the terms and conditions, you should not use this application, its content or the services it offers.<b>\n\nUsing the app\n</b>This application allows you to identify your Crop Protection problems, find effective solutions and search for points of sale in order to obtain supplies. Users can through this application educate themselves and find assistance in healthy and effective crop protection.<b>\n\nData management\n</b>We work with many partners and agronomy professionals to build an efficient and useful database for users of the application. Crop Protection products displayed are approved by the competent authorities and marketed by local distributors. We work with local distributors to display products that are approved and actually marketed. Information on new registrations, releases, expiring registrations, withdrawals from the market or bans of Crop Protection products are regularly updated as they become available to the general public. We are also updating information on diseases and pests, as well as on Crop Protection dealers.<b>\n\nResponsibility\n</b>This application is not intended to replace the label or the technical data sheet of the product and only provides the basic information necessary for decision-making as to the choice of use of Crop Protection products. You should always read the label of any Crop Protection product carefully before using it. In case of doubts or questions, please contact the distributor.
+This application does not serve as professional recommendations as to the use of a particular product or a particular point of sale. We only make available official information validated by the competent authorities in order to facilitate its accessibility to the general public.
+This database is provided as we receive it from our partners. We make no express or implied warranties, including, but not limited to, warranties of merchantability and fitness for a particular purpose.
+Crop Protection products must be used by responsible and authorized persons, in accordance with the laws and regulations in force. Under no circumstances will we be held liable for any misuse of the information provided resulting in direct, special, indirect, consequential or other damages, whatever the cause.<b>\n\nLinks to other sites\n</b>This application may contain links to other websites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you to consult the privacy policy of these sites. We have no control and assume no responsibility for the content, privacy policies or practices of any third-party site or service.<b>\n\nChanges to Terms and Conditions\n</b>We may make changes to these terms and conditions at any time without specific notice from us. We therefore advise you to consult this page regularly to be aware of any changes. These changes are effective immediately upon posting to this page. If you have any questions regarding the terms and conditions of use of our application, do not hesitate to contact us at agronomist@agricadvisors.com.
+</string>
+    <string name="terms_and_condition">Terms and Condition</string>
+    <string name="invite_a_friend">Invite a friend</string>
+    <string name="leave_comment">Share your Comments</string>
 
     <string name="or">or</string>
     <string name="text_select">Select</string>
@@ -81,6 +129,9 @@
     <string name="language_english">English</string>
     <string name="language_french">French</string>
     <string name="no_internet_error">No Internet Connection</string>
+    <string name="exit_dialog_message">Are you sure you want to Exit?</string>
+    <string name="exit_dialog_header">Close this App?</string>
+    <string name="exit_dialog_button_text">Exit</string>
     <string name="no_internet_error_message">Please connect an Internet </string>
     <string name="text_select_country">Select Country</string>
     <string name="text_solution">Solution</string>
@@ -105,6 +156,8 @@
     </string-array>
 
     <string name="crop">Crop</string>
+    <string name="crops">Crop(s)</string>
+    <string name="all_crops">All Crops</string>
     <string name="casual_agent">Casual agent</string>
     <string name="clear_search">Clear Search</string>
     <string name="identification">Identifcation</string>
@@ -130,7 +183,17 @@
     <string name="slogan">Let\'s grow together</string>
     <string name="welcome_message">Welcome to iGrow, your crop protection tool.</string>
     <string name="no_data_found">No data found</string>
+    <string name="data_copied_in_clipboard">Data copied in clipboard</string>
+    <string name="error_complete_pre_selection">First Select Region and City Please</string>
     <string name="find_local_dealer">Find a local \n Crop Protection dealer</string>
     <string name="suppliers">Suppliers</string>
     <string name="location_amp_contact"><![CDATA[Location & Contact]]></string>
+    <string name="search_result">Search Results</string>
+    <string name="more_info">More Info</string>
+    <string name="no_email_app_found">No email app found</string>
+    <string name="identify_by_pest">Identify a crop pest or disease</string>
+    <string name="search_pest">Search for a pest or disease</string>
+    <string name="control_methods">Control methods</string>
+    <string name="direction_of_use">Direction of Use</string>
+    <string name="problem_name">Problem Name</string>
 </resources>

@@ -19,6 +19,11 @@ import com.app.igrow.ui.admin.distributors.DistributorsActivity
 import com.app.igrow.ui.admin.product.ProductsActivity
 import com.app.igrow.utils.Constants
 import com.app.igrow.utils.Utils.getFileMimeType
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.action_type_dialog.view.*
 import org.apache.poi.ss.usermodel.Workbook
@@ -55,6 +60,46 @@ class AdminActivity : BaseActivity() {
         binding.delete.setOnClickListener {
             showActionTypeDialog(AdminActionType.DELETE.toString())
         }
+
+//        binding.btnfake.setOnClickListener {
+//            deleteFirebaseCollectionDocuments("Dealers","5000.0")
+//            deleteFirebaseCollectionDocuments("Products","5000.0")
+//            deleteFirebaseCollectionDocuments("Diagnostic","2000")
+//            deleteFirebaseCollectionDocuments("Distributors","2000")
+//        }
+    }
+
+    private fun deleteFirebaseCollectionDocuments(sheetName:String,documentIdToPreserve:String ){
+        // Create a batch write operation
+        val batch = FirebaseFirestore.getInstance().batch()
+        // Query to get all documents except the one specified
+        FirebaseFirestore.getInstance().collection(sheetName)
+            .whereNotEqualTo(FieldPath.documentId(), documentIdToPreserve)
+            .get()
+            .addOnCompleteListener(OnCompleteListener<QuerySnapshot> { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        // Add each document to the batch for deletion
+                        val documentReference: DocumentReference =
+                            FirebaseFirestore.getInstance().collection(sheetName)
+                                .document(document.id)
+                        batch.delete(documentReference)
+                    }
+                    // Commit the batch write
+                    batch.commit()
+                        .addOnSuccessListener {
+                            // Batch write was successful
+                            println("Batch delete successful for $sheetName collection")
+                        }
+                        .addOnFailureListener { e ->
+                            // Handle any errors that may occur during the batch write
+                            println("Error batch deleting documents for $sheetName: $e")
+                        }
+                } else {
+                    // Handle any errors that may occur during the query
+                    println("Error querying documents for $sheetName: " + task.exception)
+                }
+            })
     }
 
     private fun startObserving() {
@@ -139,7 +184,6 @@ class AdminActivity : BaseActivity() {
         alertDialog.setOnShowListener {
             val positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
             positiveButton.setOnClickListener {
-                //TODO()
                 if (!dialogView.action_type.selectedItem.equals("Select")) {
                     when (dialogView.action_type.selectedItem.toString()) {
                         Constants.SHEET_DIAGNOSTIC -> {

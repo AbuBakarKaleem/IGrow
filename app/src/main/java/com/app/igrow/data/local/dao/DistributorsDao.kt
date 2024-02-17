@@ -18,4 +18,7 @@ abstract class DistributorsDao {
 
     @RawQuery
     abstract fun getDistributorsColumnData(query: SupportSQLiteQuery): List<String>
+
+    @RawQuery
+    abstract fun getDistributorByName(query: SupportSQLiteQuery): DistributorsEntityName
 }

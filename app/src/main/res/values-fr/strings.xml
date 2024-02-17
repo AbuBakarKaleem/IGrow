@@ -19,36 +19,56 @@
     <string name="ok">D\'accord</string>
     <string name="cancel">Annuler</string>
     <string name="dealer_info">Informations sur la boutique</string>
+    <string name="data_copied_in_clipboard">Données copiées dans le presse-papiers</string>
+    <string name="no_email_app_found">Aucune application de messagerie trouvée</string>
+
+    <string-array name="countryList">
+        <item>@string/text_select_country</item>
+        <item>Cameroun</item>
+    </string-array>
 
     <string name="no_data_found">Aucune donnée disponible</string>
     <string name="or_select">ou sélectionnez</string>
+    <string name="invite_a_friend">Inviter un(e) ami(e)</string>
 
     <string name="crop_name">Nom de la culture</string>
     <string name="plant_problem">Problème de plante</string>
-    <string name="causal_agent">Agent causal</string>
+    <string name="causal_agent">Agents Causaux</string>
+    <string name="all_enemies">Tous les ennemis</string>
+    <string name="all_compositions">Toutes les compositions</string>
+    <string name="all_product_categories">Toutes les catégories de produits</string>
+    <string name="all_distributors">Tous les distributeurs</string>
+    <string name="all_city_towns">Toutes les villes / Villages</string>
+    <string name="all_region">Toutes les régions</string>
     <string name="update">mettre à jour</string>
     <string name="control">Contrôler</string>
-    <string name="symptoms_impact">Impact des symptômes</string>
-    <string name="part_affected">Partie affectée</string>
+    <string name="symptoms_impact">Symptômes/Impact</string>
+    <string name="part_affected">Partie(s) affectée(s)</string>
+    <string name="control_methods">Méthodes de lutte</string>
     <string name="enemy_type">Type d\'ennemi</string>
-    <string name="product_category">catégorie de produit</string>
+    <string name="product_category">Catégorie de produit</string>
     <string name="product_name">nom du produit</string>
-    <string name="active_ingredient">Ingrédient actif</string>
-    <string name="registration_number">Numéro d\'enregistrement</string>
+    <string name="active_ingredient">Matière(s) Active(s)</string>
+    <string name="enemies">Ennemi(s)</string>
+    <string name="registration_number">Numéro d\'homologation</string>
     <string name="composition">Composition</string>
     <string name="formulation">Formulation</string>
     <string name="toxicological_class">Classe toxicologique</string>
     <string name="mode_of_action">Mode d\'action</string>
     <string name="enemy">Ennemi</string>
     <string name="packaging">Emballage</string>
-    <string name="application_rate">Taux d\'application</string>
-    <string name="treatment_time">Temps de traitement</string>
+    <string name="application_rate">Doses d\'application</string>
+    <string name="treatment_time">Période d\'application</string>
     <string name="frequency_of_application">Fréquence d\'application</string>
     <string name="method_of_application">Méthode d\'application</string>
     <string name="restrictions_of_use">Restrictions d\'utilisation</string>
-    <string name="re_entry_period">Période de réintégration</string>
-    <string name="time_before_harvest">Temps avant la récolte</string>
-    <string name="distributor">Distributeur(s)</string>
+    <string name="re_entry_period">Délai de Réentrée</string>
+    <string name="time_before_harvest">Délai avant récolte</string>
+    <string name="all_crops">Toutes les cultures</string>
+    <string name="all_enemy_types">Tous les types d\'ennemis</string>
+    <string name="all_parts_affected">Toutes les parties de la plante</string>
+    <string name="all_causal_agents">Tous les agents causaux</string>
+    <string name="distributor">Distributeur</string>
     <string name="telephone">Téléphone</string>
     <string name="email">E-mail</string>
     <string name="website">Site Internet</string>
@@ -74,15 +94,67 @@
     <string name="email_hint">E-mail</string>
     <string name="password">Mot de passe</string>
     <string name="edit_dealer">Modifier le concessionnaire</string>
-    <string name="home_heading">Identifiez et trouvez la bonne solution pour protéger vos cultures contre les ravageurs et les maladies.</string>
-    <string name="identify_a_plant_health_problem">Identifiez les ravageurs et les maladies de votre ferme</string>
-    <string name="search_by_name">Rechercher par nom</string>
+    <string name="home_heading">Protégez efficacement vos cultures contre les maladies et ravageurs.</string>
+    <string name="identify_a_plant_health_problem">Rechercher un \n produit phytosanitaire</string>
+    <string name="search_by_name">Recherche par nom de boutique</string>
+    <string name="search_by_product_name">Rechercher par nom de produit</string>
+
+    <string name="about">À propos de nous</string>
+    <string name="about_content"><font size="18"><b><u>À propos de nous\n</u></b></font>\nCette application est développée par AgricAdvisors Sarl, une entreprise spécialisée dans les services-conseil en agronomies, la formation et le renforcement des capacités, et le développement des innovations dans le domaine agricole.
+L’application iGrow est l’une de nos récentes innovations en AgriTech. Son but d’éduquer les producteurs agricoles sur une protection saine et durable des cultures et fournir aux professionnels un outil efficace pour les assister dans la prise de décision et les conseils phytosanitaires.
+Nous travaillons avec les professionnels de l’agronomie, les producteurs agricoles, agro-industries, les centres de recherche, les écoles de formation, les distributeurs d’intrants agricoles, les boutiques phytosanitaires, les organismes gouvernementaux et autres acteurs de la chaine de valeur agricole. Si vous souhaitez collaborer avec nous.
+        \n\n<b>Veuillez nous contacter: \nAgricAdvisors Sarl \nAdresse: Douala – Cameroon \nEmail: agronomist@agricadvisors.com \nSite internet: www.agricadvisors.com</b></string>
+    <string name="help_content">
+        <font size="20"><u><b>AIDE\n</b></u></font>
+        <b><u>\n\Généralités\n</u></b>
+        <b>\nComment effectuer une recherche d’attaque phytosanitaire, de produit ou de boutique phytosanitaire?</b>
+        \nVous avez accès à deux modes de recherche. Vous pouvez saisir directement le nom de lélément que vous recherchez si vous le connaissez, ou sélectionner les différents critères pour avoir une liste de résultats correspondants à votre recherche.\n
+        <b>\nEst-ce que jai besoin d’entrer tous les critères de recherche pour afficher les résultats?</b>
+        \nVous navez pas besoin de remplir tous les critères pour trouver ce que vous recherchez.\n
+        <b>\nComment faire pour changer de pays ou sélectionner une autre langue?\n</b>
+        Allez dans les paramètres de l’application.\n
+        <b>\nJe ne comprends pas certains termes techniques, que faire?</b>
+        \nAllez dans la rubrique « Apprentissage ». Cette rubrique contient de courtes vidéos d’apprentissage sur la protection des cultures en général et sur l’utilisation de l’application en particulier.\n
+        <b>\nComment faire pour collaborer avec vous ou si j’ai d’autres questions?</b>
+        \nVeuillez nous contacter. Nos coordonnées figurent dans la section « À propos de nous ».\n\n
+        <u><b>Diagnostic Phytosanitaire</b></u>\n
+        <b>\nPourquoi est-ce que toutes les cultures ne sont pas listées?\n</b>
+        Nous travaillons progressivement afin d’inclure le maximum de cultures possibles. Laissez-nous savoir si vous avez des besoins particuliers.\n
+        <b>\nPuis-je me fier à 100% au diagnostic fait avec les images de l’application?\n</b>
+        L’application ne sert que de guide pour vous aider à identifier les attaques phytosanitaires de vos cultures et ne remplace pas l’avis d’un professionnel. L’interprétation et l’utilisation de ces informations relèvent de votre responsabilité.\n
+        <b>\nQue faire si j’ai des doutes sur le diagnostic fait à partir des informations fournies par l’application?\n</b>
+        Les informations fournies par l’application sont générales et s’adaptent aux situations les plus communes. En cas de doutes, veuillez consulter un professionnel. Lui seul pourra faire un diagnostic de terrain  et vous faire les recommandations plus précises et spécifiques à votre situation.
+        <u><b>\n\nRechercher un produit\n</b></u>
+        <b>\nMa recherche de produits montre « Aucune donnée disponible », qu’est-ce que cela signifie?\n</b>
+        Pour les critères de votre recherche, cela peut être dû à l’une ou plusieurs des raisons suivantes:\n
+        - Il n’y a pas de produit actuellement homologué ou autorisé.\n
+        - Il n’y a pas de produit actuellement mis en marché.\n
+        - Nous travaillons encore à obtenir toutes les informations sur ces produits.\n
+        <b>\nPourquoi certains produits homologués ne figurent pas dans les résultats?\n</b>
+        Nous travaillons avec les distributeurs de produits phytosanitaires afin de ne publier que les produits homologués ET effectivement mis en marché. Nous faisons régulièrement des mises à jour de notre base de données afin d’ajouter de nouveaux produits ou de retirer les produits qui ne sont plus autorisés ou disponibles à la commercialisation.\n
+        <b>\nEst-ce que l’information fournie est suffisante pour utiliser le produit?</b>
+        Vous devez toujours lire l’étiquette d’un produit phytosanitaire avant de l’utiliser. Elle comporte de nombreuses informations sur l’utilisation sécuritaire du produit et les recommandations spécifiques du fournisseur. Nous ne fournissons que les informations de base nécessaires à la prise de décision.
+        Si vous avez des questions spécifiques sur un produit en particulier, veuillez contacter le distributeur dont le lien vers les coordonnées est disponible sur chaque page de produit.\n
+        <u><b>\nRechercher une boutique phytosanitaire</b></u>\n\n
+        <b>Ma recherche de boutiques phytosanitaires montre « Aucune donnée disponible », qu’est-ce que cela signifie?</b>
+        Cela peut signifier qu’il n’y a pas de boutique phytosanitaire avec les critères que vous avez sélectionné ou que les boutiques existantes n’ont pas encore été intégrées dans notre base de données. Nous travaillons en permanence afin de vous fournir l’information la plus complète.\n
+        <b>\nEst-ce que les boutiques phytosanitaires listées sont celles que vous nous recommandez?</b>
+        \nNous ne faisons aucune recommandation particulière par rapports aux boutiques phytosanitaires. Nous ne faisons que rendre l’information disponible. Nous travaillons aussi avec les boutiques indépendantes afin de les intégrer dans notre base de données.
+    </string>
+
+    <string name="terms_and_condition">Termes et Conditions</string>
+    <string name="terms"><font size="18"><b>TERMES ET CONDITIONS</b></font>\n\nEn accédant à cette application ou en utilisant nimporte quelle partie de lapplication ou tout contenu ou service de celle-ci, vous acceptez dêtre lié par ces termes et conditions. Si vous nacceptez pas tous les termes et conditions, vous ne devez pas utiliser cette application, son contenu ou les services quelle propose.<b>\n\nUtilisation de l’application\n</b>Cette application vous permet d’identifier les problèmes phytosanitaires de vos cultures, trouver les solutions efficaces et rechercher les points de vente afin de s’approvisionner. Les utilisateurs peuvent à travers cette application s’éduquer et trouver une assistance dans la protection saine et efficace des cultures.<b>\n\nGestion des données\n</b>Nous travaillons avec de nombreux partenaire et professionnels de l’agronomie pour construire une base de données efficace et utile pour les utilisateurs de l’application. Les produits phytosanitaires affichés sont homologués par les autorités compétentes et commercialisés par les distributeurs locaux. Nous travaillons avec les distributeurs locaux afin d’afficher les produits homologués et effectivement mis en marché. Les informations sur les nouvelles homologations, les mises en marché, les expirations d’homologation, les retraits du marché ou les interdictions des produits de protection des cultures sont régulièrement mises à jour au fur et à mesure de leur disponibilité au grand public. Nous mettons également à jour les informations sur les maladies et ravageurs, de même que sur les boutiques phytosanitaires.<b>\n\nResponsabilité\n</b>Cette application n’a pas vocation à se substituer à l’étiquette ou la fiche technique du produit et ne fournit que les informations de bases nécessaires à la prise de décision quant au choix de l’utilisation des produits phytosanitaires. Vous devez toujours lire attentivement l’étiquette de tout produit phytosanitaire avant son utilisation. En cas de doutes ou questions, veuillez contacter le distributeur.
+Cette application ne sert pas de recommandations professionnelles quant à lutilisation d’un produit en particulier ou un point de ventes en particulier. Nous ne faisons que rendre disponible les informations officielles et validées par les autorités compétentes afin de faciliter leur accessibilité au grand public.
+Cette base de données est fournie telle que nous la recevons de nos partenaires. Nous n’offrons aucune garantie explicite ou implicite, ce qui comprend, sans s’y limiter, les garanties de qualité marchande et d’adaptation à une fin particulière.
+Les produits phytosanitaires doivent être utilisés par des personnes responsables et autorisées, ceci conformément aux lois et réglementations en vigueur. En aucun cas, nous ne serons tenus responsables d’un mauvais usage des informations fournies entrainants des dommages directs, particuliers, indirects, consécutifs ou autres, quelle qu’en soit la cause.<b>\n\nLiens vers dautres sites\n</b>Cette application peut contenir des liens vers dautres sites internet. Si vous cliquez sur un lien tiers, vous serez dirigé vers ce site. Notez que ces sites externes ne sont pas exploités par nous. Par conséquent, nous vous conseillons vivement de consulter la politique de confidentialité de ces sites. Nous navons aucun contrôle et nassumons aucune responsabilité quant au contenu, aux politiques de confidentialité ou aux pratiques de tout site ou service tiers.<b>\n\nModifications des Termes et Conditions\n</b>Nous pouvons apporter des modifications à ces termes et conditions en tout temps sans préavis spécifique de notre part. Nous vous conseillons donc de consulter régulièrement cette page pour prendre connaissance des changements éventuels. Ces modifications entrent en vigueur immédiatement après leur publication sur cette page. Si vous avez des questions concernant les termes et conditions d’utilisation de notre application, nhésitez pas à nous contacter à l’adresse agronomist@agricadvisors.com.</string>
+
+
     <string name="or">ou</string>
     <string name="text_select">Sélectionner</string>
     <string name="text_select_language">Choisir la langue</string>
     <string name="language_english">Anglais</string>
     <string name="language_french">Français</string>
-    <string name="setting">Réglages</string>
+    <string name="setting">Parametres</string>
     <string name="language_change_warning_message">Le changement de langue nécessite le redémarrage de l\'application</string>
     <string name="language_change_continue_message">Voulez-vous continuer ?</string>
     <string name="no_internet_error">Pas de connexion Internet</string>
@@ -104,12 +176,13 @@
         <item>@string/language_french</item>
     </string-array>
 
-    <string name="crop">Recadrer</string>
-    <string name="casual_agent">Agent occasionnel</string>
+    <string name="crop">Culture</string>
+    <string name="casual_agent">Agent causal</string>
     <string name="clear_search">Effacer la recherche</string>
     <string name="identification">Identification</string>
     <string name="search_detail_symptoms_impact"><![CDATA[SYMPTOMS & IMPACT]]></string>
-    <string name="note_notice">Lisez toujours létiquette avant dutiliser un pesticide</string>
+    <string name="note_notice">TOUJOURS LIRE L’ÉTIQUETTE D’UN PESTICIDE AVANT USAGE</string>
+    <string name="crops">Culture(s)</string>
 
     <string name="results">Résultats</string>
 
@@ -131,6 +204,17 @@
     <string name="text_solution">La solution</string>
     <string name="find_local_dealer">Recherchez une \n boutique phytosanitaire</string>
     <string name="suppliers">Fournisseurs</string>
-    <string name="location_amp_contact"><![CDATA[LOCALISATION & Contact]]></string>
+    <string name="location_amp_contact"><![CDATA[LOCALISATION & CONTACT]]></string>
+    <string name="search_result">RÉSULTATS DE LA RECHERCHE</string>
+    <string name="more_info">PLUS D’INFO</string>
+    <string name="identify_by_pest">Identifier une maladie ou un ravageur des cultures</string>
+    <string name="search_pest">Rechercher une maladie ou un ravageur</string>
+    <string name="direction_of_use">Recommandations D’utilisation</string>
+    <string name="error_complete_pre_selection">Sélectionnez Dabord la Région et la Ville sil vous plaît</string>
+    <string name="problem_name">Nom du problème</string>
+    <string name="exit_dialog_message">Êtes-vous sûr de vouloir quitter?</string>
+    <string name="exit_dialog_header">Fermer cette appli?</string>
+    <string name="exit_dialog_button_text">Sortie</string>
+    <string name="leave_comment">Partagez vos Commentaires</string>
 
 </resources>

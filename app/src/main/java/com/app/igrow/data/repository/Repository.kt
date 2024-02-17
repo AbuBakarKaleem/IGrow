@@ -1,10 +1,7 @@
 package com.app.igrow.data.repository
 
 import com.app.igrow.data.DataState
-import com.app.igrow.data.model.sheets.Dealers
-import com.app.igrow.data.model.sheets.Diagnostic
-import com.app.igrow.data.model.sheets.Distributors
-import com.app.igrow.data.model.sheets.Products
+import com.app.igrow.data.model.sheets.*
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -40,10 +37,18 @@ interface Repository {
     //Users Side repo's
 
     //Diagnostic
-    suspend fun getColumnData(columnName:String,sheetName:String):Flow<DataState<ArrayList<String>>>
+    suspend fun getColumnData(
+        filtersMap: HashMap<String, String>,
+        columnName: String,
+        sheetName: String,
+    ): Flow<DataState<ArrayList<String>>>
     suspend fun searchByName(name:String,sheetName:String):Flow<DataState<ArrayList<String>>>
 
     suspend fun getAllDataOfGivenSheet(sheetName:String): Flow<DataState<ArrayList<HashMap<String,String>>>>
+
+    suspend fun getLearningData():Flow<DataState<ArrayList<Video>>>
+    suspend fun getDistributorDataByName(name : String,columnName:String): Flow<DataState<Distributors>>
+    suspend fun isColumnValueExist(columnName: String,columnValue: String, sheetName: String): Flow<DataState<String>>
 
 
 }

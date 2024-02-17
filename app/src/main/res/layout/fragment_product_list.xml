@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/screen_background"
     android:layout_height="match_parent"
     tools:context=".ui.diagnose.detail.DiagnosticSearchResultFragment">
 
@@ -10,8 +11,9 @@
         android:id="@+id/tv_heading"
         style="@style/headingStyle"
         android:layout_marginStart="12dp"
-        android:text="Search Result"
-        android:gravity="start"
+        android:gravity="center"
+        android:text="@string/search_result"
+        app:textAllCaps="true"
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +24,8 @@
         android:id="@+id/chip_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_heading" />
@@ -31,14 +33,14 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_count"
         style="@style/headingStyle"
-        tools:text="150 Result"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:textColor="@android:color/darker_gray"
         android:layout_marginStart="12dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chip_group"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:text="150 Result" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,10 +50,10 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_count"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:itemCount="3"
         tools:listitem="@layout/search_result_list_item" />
 

@@ -21,6 +21,5 @@ data class DistributorsEntityName(
     var telephone_2: String = "",
     var email: String = "",
     var email_fr: String = "",
-    var website: String = "",
-    var facebook: String = "",
+    var website: String = ""
 )
