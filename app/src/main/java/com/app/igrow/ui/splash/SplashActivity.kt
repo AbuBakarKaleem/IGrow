@@ -20,6 +20,7 @@ import androidx.work.WorkManager
 import com.app.igrow.R
 import com.app.igrow.base.BaseActivity
 import com.app.igrow.databinding.ActivitySplashBinding
+import com.app.igrow.ui.admin.AdminActivity
 import com.app.igrow.ui.country.CountrySelectionActivity
 import com.app.igrow.ui.dashboard.DashBoardActivity
 import com.app.igrow.utils.Constants
@@ -137,21 +138,7 @@ class SplashActivity : BaseActivity() {
                     .setInterpolator(AccelerateInterpolator())
                     .start()
                 binding.pbProduct.gone()
-
-                appUpdateManager.appUpdateInfo.addOnSuccessListener {info ->
-                    if (info.updateAvailability() == UpdateAvailability.UPDATE_NOT_AVAILABLE){
-                        if (getPreferenceManager()?.getCountry()?.isEmpty() == true) {
-                            startActivity(Intent(this, CountrySelectionActivity::class.java))
-                        } else {
-                            startActivity(Intent(this, DashBoardActivity::class.java))
-                        }
-                        finish()
-                    } else if(info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                        showAppUpdateDialog()
-                    } else {
-                        startActivity(Intent(this, DashBoardActivity::class.java))
-                    }
-                }
+                startActivity(Intent(this, AdminActivity::class.java))
             }
             .start()
     }
@@ -205,15 +192,6 @@ class SplashActivity : BaseActivity() {
         }
         runCatching {
             alertDialog.show()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        appUpdateManager.appUpdateInfo.addOnSuccessListener {info ->
-            if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                showAppUpdateDialog()
-            }
         }
     }
 
