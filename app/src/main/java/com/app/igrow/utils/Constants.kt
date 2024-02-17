@@ -106,4 +106,5 @@ object Constants {
     const val KEY_LANGUAGE = "language"
     const val KEY_COUNTRY = "country"
     const val DEFAULT_LANGUAGE = "fr"
+    const val KEY_NOTIFICATION_SCHEDULED = "KEY_NOTIFICATION_SCHEDULED"
 }

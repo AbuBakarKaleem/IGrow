@@ -85,8 +85,7 @@
             android:textColor="@color/home_shop_front_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_search"
-            app:layout_constraintBottom_toTopOf="@id/cv_corp"/>
+            app:layout_constraintTop_toBottomOf="@+id/et_search"/>
 
 
         <com.google.android.material.card.MaterialCardView

@@ -92,12 +92,16 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
         }
 
         binding.btnLeaveComment.setOnClickListener {
-            val webURL = "http://www.agricadvisors.com/contact-us/"
-            val i = Intent(Intent.ACTION_SEND)
-            i.type = "text/plain"
-            i.putExtra(Intent.EXTRA_TEXT, webURL)
-            i.putExtra(Intent.EXTRA_SUBJECT,webURL )
-            startActivity(Intent.createChooser(i, "Share Your Comments"))
+            val webURL = "http://www.agricadvisors.com/"
+//            val i = Intent(Intent.ACTION_SEND)
+//            i.type = "text/plain"
+//            i.putExtra(Intent.EXTRA_TEXT, webURL)
+//            i.putExtra(Intent.EXTRA_SUBJECT,webURL )
+//            startActivity(Intent.createChooser(i, "Share Your Comments"))
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webURL))
+            startActivity(intent)
+
         }
 
     }

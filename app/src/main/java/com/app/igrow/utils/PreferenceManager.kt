@@ -7,7 +7,7 @@ import com.app.igrow.IGrowApp
 import com.app.igrow.utils.Constants.DEFAULT_LANGUAGE
 import com.app.igrow.utils.Constants.KEY_COUNTRY
 import com.app.igrow.utils.Constants.KEY_LANGUAGE
-
+import com.app.igrow.utils.Constants.KEY_NOTIFICATION_SCHEDULED
 
 class PreferenceManager(context: Context?) {
 
@@ -45,5 +45,13 @@ class PreferenceManager(context: Context?) {
 
     fun setCountry(countryName: String?) {
         pref!!.edit().putString(KEY_COUNTRY, countryName).apply()
+    }
+
+    fun notificationIsScheduled(status: Boolean) {
+        pref!!.edit().putBoolean(KEY_NOTIFICATION_SCHEDULED, status).apply()
+    }
+
+    fun isNotificationScheduled(): Boolean {
+        return pref!!.getBoolean(KEY_NOTIFICATION_SCHEDULED, false)
     }
 }
