@@ -36,14 +36,24 @@ class ProductsRepoImpl @Inject constructor(
     }
 
     override suspend fun getProductsColumnData(
+        filtersMap: HashMap<String, String>,
         sheetName: String,
         columnName: String
     ): List<String> {
         return productsDao.getProductsColumnData(
             Utils.getColumnDataCustomQuery(
+                filtersMap= filtersMap,
                 sheetName = sheetName,
                 columnName = columnName
             )
         )
+    }
+
+    override suspend fun isColumnValueExist(
+        columnName: String,
+        columnValue: String,
+        sheetName: String
+    ): String {
+        return  productsDao.isColumnValueExist( Utils.isColumnValueExist(columnName,columnValue,sheetName))
     }
 }

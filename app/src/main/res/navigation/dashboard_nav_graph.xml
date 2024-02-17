@@ -12,23 +12,21 @@
         <action
             android:id="@+id/homeToDiagnoseFragment"
             app:destination="@id/diagnoseFragment"
-            app:popUpToInclusive="true"
             app:launchSingleTop="true"
             app:popUpTo="@id/homeFragment"
-            />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/homeToProductsFragment"
             app:destination="@id/ProductsFragment"
-            app:popUpToInclusive="true"
             app:launchSingleTop="true"
-            app:popUpTo="@id/homeFragment"/>
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/homeToDealerFragment"
             app:destination="@id/dealerFragment"
-            app:popUpToInclusive="true"
             app:launchSingleTop="true"
             app:popUpTo="@id/homeFragment"
-            />
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/diagnoseFragment"
@@ -38,12 +36,25 @@
         <action
             android:id="@+id/toDiagnoseSearchResultFragment"
             app:destination="@id/diagnoseSearchResultFragment" />
+        <action
+            android:id="@+id/toHomePageFromDiagnostic"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/diagnoseSearchResultFragment"
         android:name="com.app.igrow.ui.diagnose.detail.DiagnosticSearchResultFragment"
         android:label="DiagnoseDetailFragment"
-        tools:layout="@layout/fragment_search_result" >
+        tools:layout="@layout/fragment_search_result">
+
+        <action
+            android:id="@+id/toDiagnoseFragmentHomePage"
+            app:destination="@id/diagnoseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/diagnoseFragment"
+            app:popUpToInclusive="true" />
 
         <argument
             android:name="filters"
@@ -58,7 +69,7 @@
         android:id="@+id/diagnoseSearchResultDetailFragment"
         android:name="com.app.igrow.ui.diagnose.detail.DiagnosticSearchDetailFragment"
         android:label="DiagnosticSearchDetailFragment"
-        tools:layout="@layout/fragment_diagnostic_search_detail" >
+        tools:layout="@layout/fragment_diagnostic_search_detail">
 
         <argument
             android:name="diagnostic_data"
@@ -67,6 +78,14 @@
             android:id="@+id/toProductsFragment"
             app:destination="@id/ProductsFragment" />
 
+        <action
+            android:id="@+id/toHelpFragmentFromDiagnoseDetailsFragment"
+            app:destination="@id/helpFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/diagnoseSearchResultDetailFragment"
+            app:popUpToInclusive="false"/>
+
+
     </fragment>
 
 
@@ -74,29 +93,44 @@
         android:id="@+id/ProductsFragment"
         android:name="com.app.igrow.ui.products.ProductsFragment"
         android:label="ProductsFragment"
-        tools:layout="@layout/fragment_products" >
+        tools:layout="@layout/fragment_products">
         <action
             android:id="@+id/toProductsSearchResultFragment"
             app:destination="@id/productsSearchResultFragment" />
+
+        <action
+            android:id="@+id/toHomePageFromProducts"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+
     </fragment>
     <fragment
         android:id="@+id/productsSearchResultFragment"
         android:name="com.app.igrow.ui.products.detail.ProductListFragment"
         android:label="ProductsSearchResultFragment"
-        tools:layout="@layout/fragment_product_list" >
+        tools:layout="@layout/fragment_product_list">
         <argument
             android:name="filters"
             app:argType="com.app.igrow.data.model.detail.SearchResult" />
         <action
             android:id="@+id/toProductSearchResultDetailFragment"
             app:destination="@id/productSearchResultDetailFragment" />
+
+        <action
+            android:id="@+id/toProductsFragmentHomePage"
+            app:destination="@id/ProductsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/ProductsFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/productSearchResultDetailFragment"
         android:name="com.app.igrow.ui.products.detail.ProductDetailFragment"
         android:label="ProductsSearchDetailFragment"
-        tools:layout="@layout/fragment_product_detail" >
+        tools:layout="@layout/fragment_product_detail">
 
         <argument
             android:name="diagnostic_data"
@@ -105,6 +139,16 @@
         <action
             android:id="@+id/toDealerFragment"
             app:destination="@id/dealerFragment" />
+        <action
+            android:id="@+id/toDistributorDetail"
+            app:destination="@id/distributorDetailFragment" />
+
+        <action
+            android:id="@+id/toHelpFragmentFromProductDetailsFragment"
+            app:destination="@id/helpFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/productSearchResultDetailFragment"
+            app:popUpToInclusive="false"/>
 
     </fragment>
 
@@ -112,14 +156,18 @@
         android:id="@+id/dealerFragment"
         android:name="com.app.igrow.ui.dealer.DealersFragment"
         android:label="DealerFragment"
-        app:popUpToInclusive="true"
-        app:launchSingleTop="true"
-        app:popUpTo="@id/homeFragment"
         tools:layout="@layout/fragment_dealer">
 
         <action
             android:id="@+id/toDealersListFragment"
             app:destination="@id/dealersListFragment" />
+
+        <action
+            android:id="@+id/toHomePageFromDealers"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
@@ -127,15 +175,27 @@
         android:id="@+id/moreFragment"
         android:name="com.app.igrow.ui.more.MoreFragment"
         android:label="MoreFragment"
-        tools:layout="@layout/fragment_more" >
+        tools:layout="@layout/fragment_more">
 
         <action
             android:id="@+id/toLearningsFragment"
             app:destination="@id/learningsFragment"
-            app:popUpToInclusive="true"
             app:launchSingleTop="true"
             app:popUpTo="@id/moreFragment"
-            />
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/toAboutFragment"
+            app:destination="@id/aboutFragment" />
+
+        <action
+            android:id="@+id/toHelpFragment"
+            app:destination="@id/helpFragment" />
+
+        <action
+            android:id="@+id/toTermsAndConditionFragment"
+            app:destination="@id/termsAndConditionFragment" />
+
 
     </fragment>
 
@@ -143,7 +203,7 @@
         android:id="@+id/dealersListFragment"
         android:name="com.app.igrow.ui.dealer.alldealers.DealersListFragment"
         android:label="DealersListFragment"
-        tools:layout="@layout/fragment_dealer_list" >
+        tools:layout="@layout/fragment_dealer_list">
 
         <argument
             android:name="dealers_data"
@@ -153,14 +213,39 @@
             android:id="@+id/toDealersDetailsFragment"
             app:destination="@id/dealersDetailFragment" />
 
+        <action
+            android:id="@+id/toDealersFragmentHomePage"
+            app:destination="@id/dealerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/dealerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/dealersDetailFragment"
         android:name="com.app.igrow.ui.dealer.detail.DealerDetailFragment"
         android:label="DealersDetailFragment"
-        tools:layout="@layout/fragment_dealer_detail" />
+        tools:layout="@layout/fragment_dealer_detail" >
 
+        <action
+            android:id="@+id/toHelpFragmentFromDealersDetail"
+            app:destination="@id/helpFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/dealersDetailFragment"
+            app:popUpToInclusive="false"/>
+
+        <action
+            android:id="@+id/toDistributorDetailFragment"
+            app:destination="@id/distributorDetailFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/dealersDetailFragment"
+            app:popUpToInclusive="false"/>
+        <argument
+            android:name="data"
+            app:argType="com.app.igrow.data.model.sheets.Distributors" />
+
+
+    </fragment>
 
 
     <fragment
@@ -169,6 +254,76 @@
         android:label="LearningsFragment"
         tools:layout="@layout/fragment_learnings" />
 
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.app.igrow.ui.help.HelpFragment"
+        android:label="helpFragment"
+        tools:layout="@layout/fragment_help" >
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/distributorDetailFragment"
+        android:name="com.app.igrow.ui.distributor.DistributorDetailFragment"
+        android:label="DistributorFragment"
+        tools:layout="@layout/fragment_distributor_detail">
+
+        <action
+            android:id="@+id/distributorDetailToProductsFragment"
+            app:destination="@id/productSearchResultDetailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/productSearchResultDetailFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/distributorDetailToDealersDetailsFragment"
+            app:destination="@id/dealersDetailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/dealersDetailFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/distributorDetailToDealersFragment"
+            app:destination="@id/dealerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/dealerFragment"
+            app:popUpToInclusive="true" />
+
+        <argument
+            android:name="data"
+            app:argType="com.app.igrow.data.model.sheets.Distributors" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.app.igrow.ui.about.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about" >
+
+        <action
+            android:id="@+id/aboutFragToMoreFragment"
+            app:destination="@id/moreFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/moreFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/termsAndConditionFragment"
+        android:name="com.app.igrow.ui.terms.TermsAndConditionFragment"
+        android:label="termsAndConditionFragment"
+        tools:layout="@layout/fragment_terms_and_condition" >
+
+        <action
+            android:id="@+id/termsFragToMoreFragment"
+            app:destination="@id/moreFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/moreFragment"
+            app:popUpToInclusive="true" />
+
+    </fragment>
 
 
 

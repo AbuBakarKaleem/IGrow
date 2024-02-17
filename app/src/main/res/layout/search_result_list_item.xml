@@ -23,9 +23,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_search_result"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_person"
+            android:src="@drawable/diagnose_leaf_icon"
+            android:layout_marginEnd="10dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_one"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -18,4 +18,7 @@ abstract class ProductsDao {
 
     @RawQuery
     abstract fun getProductsColumnData(query: SupportSQLiteQuery): List<String>
+
+    @RawQuery
+    abstract fun isColumnValueExist(query: SupportSQLiteQuery): String
 }

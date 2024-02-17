@@ -29,7 +29,8 @@ fun ArrayList<HashMap<String, String>>.toDiagnosticEntityModel(): List<Diagnosti
             symptoms_impact = diagnostic.symptoms_impact,
             symptoms_impact_fr = diagnostic.symptoms_impact_fr,
             control = diagnostic.control,
-            control_fr = diagnostic.control_fr
+            control_fr = diagnostic.control_fr,
+            image_sample = diagnostic.image_sample
         ).run {
             diagnosticEntityList.add(this)
         }
@@ -60,6 +61,7 @@ fun ArrayList<DiagnosticEntityName>.toDiagnosticUIModel(): ArrayList<HashMap<Str
         entry[Constants.COL_SYMPTOMS_IMPACT_FR] = item.symptoms_impact_fr
         entry[Constants.COL_CONTROL] = item.control
         entry[Constants.COL_CONTROL_FR] = item.control_fr
+        entry[Constants.COL_IMAGE_SAMPLE] = item.image_sample
 
         diagnosticUIModelList.add(entry)
     }
@@ -89,7 +91,8 @@ fun ArrayList<HashMap<String, String>>.toDealerEntityModel(): List<DealersEntity
             mobile = dealer.mobile,
             mobile_fr = dealer.mobile_fr,
             distributors = dealer.distributors,
-            distributors_fr = dealer.distributors_fr
+            distributors_fr = dealer.distributors_fr,
+            facebook = dealer.facebook
         ).run {
             dealersEntityList.add(this)
         }
@@ -120,6 +123,7 @@ fun ArrayList<DealersEntityName>.toDealerUIModel(): ArrayList<HashMap<String, St
         entry[Constants.COL_MOBILE_FR] = item.mobile_fr
         entry[Constants.COL_DISTRIBUTORS] = item.distributors
         entry[Constants.COL_DISTRIBUTORS_FR] = item.distributors_fr
+        entry[Constants.COL_FACEBOOK] = item.facebook
 
         dealerUIModelList.add(entry)
     }
@@ -147,8 +151,7 @@ fun ArrayList<HashMap<String, String>>.toDistributorEntityModel(): List<Distribu
             telephone_2 = distributor.telephone_2,
             email = distributor.email,
             email_fr = distributor.email_fr,
-            website = distributor.website,
-            facebook = distributor.facebook
+            website = distributor.website
         ).run {
             distributorEntityList.add(this)
         }
@@ -178,11 +181,32 @@ fun ArrayList<DistributorsEntityName>.toDistributorUIModel(): ArrayList<HashMap<
         entry[Constants.COL_EMAIL] = item.email
         entry[Constants.COL_EMAIL_FR] = item.email_fr
         entry[Constants.COL_WEBSITE] = item.website
-        entry[Constants.COL_FACEBOOK] = item.facebook
 
         distributorUIModelList.add(entry)
     }
     return distributorUIModelList
+}
+
+fun DistributorsEntityName.toDistributorUIModel(): Distributors {
+
+    val distributorUIModel = Distributors()
+
+    distributorUIModel.id = this.id
+    distributorUIModel.distributor_name = this.distributor_name
+    distributorUIModel.distributor_name_fr = this.distributor_name_fr
+    distributorUIModel.address = this.address
+    distributorUIModel.address_fr = this.address_fr
+    distributorUIModel.city_town = this.city_town
+    distributorUIModel.city_town_fr = this.city_town_fr
+    distributorUIModel.region = this.region
+    distributorUIModel.region_fr = this.region_fr
+    distributorUIModel.telephone = this.telephone
+    distributorUIModel.telephone_2 = this.telephone_2
+    distributorUIModel.email = this.email
+    distributorUIModel.email_fr = this.email_fr
+    distributorUIModel.website = this.website
+
+    return distributorUIModel
 }
 
 // Products Mappers
@@ -240,10 +264,10 @@ fun ArrayList<HashMap<String, String>>.toProductsEntityModel(): List<ProductsEnt
     return productsEntityName
 }
 
-fun ArrayList<ProductsEntityName>.toProductsUIModel(): ArrayList<HashMap<String,String>>{
+fun ArrayList<ProductsEntityName>.toProductsUIModel(): ArrayList<HashMap<String, String>> {
     val productsUIModelList: ArrayList<HashMap<String, String>> = ArrayList()
 
-    this.forEach {products ->
+    this.forEach { products ->
         val entry: HashMap<String, String> = HashMap<String, String>()
 
         entry[Constants.COL_ID] = products.id
@@ -261,7 +285,7 @@ fun ArrayList<ProductsEntityName>.toProductsUIModel(): ArrayList<HashMap<String,
         entry[Constants.COL_ACTIVE_INGREDIENT_FR] = products.active_ingredient_fr
         entry[Constants.COL_COMPOSITION] = products.composition
         entry[Constants.COL_COMPOSITION_FR] = products.composition_fr
-        entry[Constants.COL_FORMULATION]   = products.formulation
+        entry[Constants.COL_FORMULATION] = products.formulation
         entry[Constants.COL_FORMULATION_FR] = products.formulation_fr
         entry[Constants.COL_TOXICOLOGICAL_CLASS] = products.toxicological_class
         entry[Constants.COL_TOXICOLOGICAL_CLASS_FR] = products.toxicological_class_fr

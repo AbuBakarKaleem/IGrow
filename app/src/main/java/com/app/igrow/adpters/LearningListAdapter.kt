@@ -5,36 +5,41 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.app.igrow.data.model.sheets.Video
 import com.app.igrow.databinding.LearningsListItemBinding
+import com.app.igrow.utils.Utils
 
-class LearningListAdapter(val onItemClicked: (Item: String) -> Unit,
-                          val onShareClicked: (Item: String) -> Unit) :
+class LearningListAdapter(val onItemClicked: (videoLink: String) -> Unit,
+                          val onShareClicked: (videoLink: String) -> Unit) :
     RecyclerView.Adapter<LearningListAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(
         private val itemBinding: LearningsListItemBinding
     ) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(model: String) {
+        fun bind(model: Video) {
             itemBinding.apply {
-                this.tvSearchResultName.text = model    
+                val title = if (Utils.isLocaleFrench()) model.title_fr else model.title
+                this.tvSearchResultName.text = title
+
+                val link = if (Utils.isLocaleFrench()) model.link_fr else model.link
                 this.tvSearchResultName.setOnClickListener {
-                    onItemClicked(model)
+                    onItemClicked(link)
                 }
                 this.ivShareItem.setOnClickListener {
-                    onShareClicked(model)
+                    onShareClicked(link)
                 }
             }
         }
     }
 
-    private val differCallBack = object : DiffUtil.ItemCallback<String>() {
+    private val differCallBack = object : DiffUtil.ItemCallback<Video>() {
 
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: Video, newItem: Video): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Video, newItem: Video): Boolean {
             return oldItem == newItem
         }
     }

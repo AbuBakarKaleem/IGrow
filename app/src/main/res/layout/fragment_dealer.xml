@@ -35,6 +35,7 @@
             android:textColor="@color/home_shop_front_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_two"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
 
         <com.google.android.material.card.MaterialCardView
@@ -46,6 +47,7 @@
             app:contentPaddingLeft="10dp"
             app:contentPaddingRight="10dp"
             app:contentPaddingTop="10dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="@id/et_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +69,9 @@
             android:drawableStart="@drawable/icon_search_blue"
             android:drawablePadding="4dp"
             android:hint="@string/search_by_name"
+            android:maxLines="1"
             android:imeOptions="actionDone"
+            android:inputType="text"
             app:backgroundTint="@color/home_shop_front_blue"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +85,7 @@
             android:textColor="@color/home_shop_front_blue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_search"
-            app:layout_constraintBottom_toTopOf="@id/cv_corp"/>
+            app:layout_constraintTop_toBottomOf="@+id/et_search"/>
 
 
         <com.google.android.material.card.MaterialCardView

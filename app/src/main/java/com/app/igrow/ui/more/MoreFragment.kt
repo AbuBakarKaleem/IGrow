@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -11,11 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.app.igrow.R
 import com.app.igrow.base.BaseFragment
 import com.app.igrow.databinding.FragmentMoreBinding
 import com.app.igrow.utils.PreferenceManager
+import com.app.igrow.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -64,8 +67,43 @@ class MoreFragment : BaseFragment<FragmentMoreBinding>() {
         }
 
         binding.btnLearningMaterial.setOnClickListener {
-            findNavController().navigate(R.id.toLearningsFragment)
+                findNavController().navigate(R.id.toLearningsFragment)
         }
+
+        binding.btnAbout.setOnClickListener {
+             findNavController().navigate(R.id.toAboutFragment)
+        }
+
+        binding.btnHelp.setOnClickListener {
+            findNavController().navigate(R.id.toHelpFragment)
+        }
+
+        binding.btnTermsAndCondition.setOnClickListener {
+            findNavController().navigate(R.id.toTermsAndConditionFragment)
+        }
+
+        binding.btnInviteAFriend.setOnClickListener {
+            val webURL = "http://www.agricadvisors.com/"
+            val i = Intent(Intent.ACTION_SEND)
+            i.type = "text/plain"
+            i.putExtra(Intent.EXTRA_TEXT, webURL)
+            i.putExtra(Intent.EXTRA_SUBJECT,webURL )
+            startActivity(Intent.createChooser(i, "Invite a friend"))
+        }
+
+        binding.btnLeaveComment.setOnClickListener {
+            val webURL = "http://www.agricadvisors.com/"
+//            val i = Intent(Intent.ACTION_SEND)
+//            i.type = "text/plain"
+//            i.putExtra(Intent.EXTRA_TEXT, webURL)
+//            i.putExtra(Intent.EXTRA_SUBJECT,webURL )
+//            startActivity(Intent.createChooser(i, "Share Your Comments"))
+
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webURL))
+            startActivity(intent)
+
+        }
+
     }
 
     private fun restartApp(context: Context) {

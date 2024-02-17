@@ -180,7 +180,7 @@ class FileConverter {
             while (rowIterator.hasNext()) {
                 val row = rowIterator.next()
                 if (row.rowNum != 0) {
-                    var dealers = Dealers()
+                    val dealers = Dealers()
                     row.forEach {
                         dealersColumnsValueMapper(
                             dealers,
@@ -297,6 +297,10 @@ class FileConverter {
                     diagnosticData.control_fr = cellValue
                     return
                 }
+                15 -> {
+                    diagnosticData.image_sample = cellValue
+                    return
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -366,10 +370,6 @@ class FileConverter {
                     distributors.website = cellValue
                     return
                 }
-                14 -> {
-                    distributors.facebook = cellValue
-                    return
-                }
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -437,6 +437,10 @@ class FileConverter {
                 }
                 14 -> {
                     dealers.distributors_fr = cellValue
+                    return
+                }
+                15 -> {
+                    dealers.facebook = cellValue
                     return
                 }
             }

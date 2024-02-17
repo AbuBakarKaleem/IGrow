@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:text="Problem Name"
+                android:text="@string/problem_name"
                 android:textColor="@color/bright_green"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -46,93 +46,38 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImageSample"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_height="180dp"
+            android:clipToPadding="true"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/round_edges_light_blue_bg"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="@string/identification"
-            android:textAllCaps="true"
-            android:textColor="@color/bright_green"
-            android:textSize="20sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/enemy_type"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvIdentificationTypeOfEnemy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:gravity="start"
-                    android:text="@string/type"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textSize="16sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvIdentificationTypeOfEnemy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:text="Maladie" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="5dp"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="@string/crop"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textSize="16sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvIdentificationCrop"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:text="Bananier et banamier" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="Maladie" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -140,12 +85,38 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
-            android:textStyle="bold"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:text="@string/crops"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvIdentificationCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            tools:text="Bananier et banamier" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:gravity="start"
-            android:text="@string/condition"
+            android:text="@string/part_affected"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvIdentificationCondition"
@@ -161,30 +132,15 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/round_edges_light_blue_bg"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="@string/search_detail_symptoms_impact"
-            android:textAllCaps="true"
-            android:textColor="@color/bright_green"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
-            android:textStyle="bold"
             android:layout_weight="1"
             android:gravity="start"
             android:text="@string/symptoms_impact"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvSymptomsImpact"
@@ -194,7 +150,6 @@
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
             android:gravity="start"
-
             android:textColor="@color/black"
             android:textSize="16sp"
             tools:text="sympasdfa" />
@@ -207,51 +162,8 @@
             android:layout_marginEnd="15dp"
             android:orientation="horizontal">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:text="@string/leaves"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textSize="16sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvSymptomsLeaves"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="start"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:text="Maladie" />
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/round_edges_light_blue_bg"
-            android:gravity="center"
-            android:padding="4dp"
-            android:text="@string/control"
-            android:textAllCaps="true"
-            android:textColor="@color/bright_green"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -260,59 +172,13 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="15dp"
             android:gravity="start"
-            android:text="@string/cultural_control"
+            android:text="@string/control_methods"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvCulturalControl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:gravity="start"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:gravity="start"
-            android:text="@string/biological_control"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvBiologicalControl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:gravity="start"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="15dp"
-            android:gravity="start"
-            android:text="@string/chemical_control"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvChemicalControl"
+            android:id="@+id/tvControl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
@@ -346,6 +212,7 @@
                 app:iconGravity="start" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHelp"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

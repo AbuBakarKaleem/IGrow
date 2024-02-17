@@ -19,5 +19,6 @@ data class Dealers(
     var mobile: String = "",
     var mobile_fr: String = "",
     var distributors: String = "",
-    var distributors_fr: String = ""
+    var distributors_fr: String = "",
+    var facebook: String = ""
 ) : Parcelable

@@ -30,12 +30,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline_one" />
 
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="100dp" />
+            app:layout_constraintGuide_begin="120dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header_icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:cardCornerRadius="30dp"
+            app:contentPaddingBottom="10dp"
+            app:contentPaddingLeft="10dp"
+            app:contentPaddingRight="10dp"
+            app:contentPaddingTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/et_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline_two">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_flask_red" />
+
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_search"
@@ -44,12 +67,14 @@
             android:layout_marginTop="20dp"
             android:drawableStart="@drawable/icon_search_red"
             android:drawablePadding="4dp"
-            android:hint="@string/search_by_name"
+            android:hint="@string/search_by_product_name"
+            android:maxLines="1"
             android:imeOptions="actionDone"
+            android:inputType="text"
             app:backgroundTint="@android:color/holo_red_dark"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_two" />
+            app:layout_constraintTop_toBottomOf="@id/header_icon" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_or_select"
@@ -94,7 +119,7 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_corp">
+            app:layout_constraintTop_toBottomOf="@+id/cv_enemy_type">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_enemy"
@@ -119,7 +144,7 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_enemy">
+            app:layout_constraintTop_toBottomOf="@+id/cv_corp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_enemy_type"
@@ -143,7 +168,7 @@
             app:cardCornerRadius="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_enemy_type">
+            app:layout_constraintTop_toBottomOf="@+id/cv_enemy">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/ll_product_category"

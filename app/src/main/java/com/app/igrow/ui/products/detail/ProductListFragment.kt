@@ -1,10 +1,10 @@
 package com.app.igrow.ui.products.detail
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -16,9 +16,11 @@ import com.app.igrow.data.model.detail.SearchResult
 import com.app.igrow.data.model.sheets.Products
 import com.app.igrow.databinding.FragmentProductListBinding
 import com.app.igrow.ui.diagnose.DiagnoseFragment
+import com.app.igrow.ui.products.ProductsFragment
 import com.app.igrow.utils.Utils
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class ProductListFragment : Fragment() {
@@ -28,8 +30,8 @@ class ProductListFragment : Fragment() {
 
     private var dataListFromArgs = arrayListOf<Products>()
     private lateinit var adapter: ProductsSearchResultAdapter
-    private var filtersMap= HashMap<String,String>()
-    private val viewModel:ProductsListViewModel by viewModels()
+    private var filtersMap = HashMap<String, String>()
+    private val viewModel: ProductsListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,11 +67,20 @@ class ProductListFragment : Fragment() {
 
         activateObserver()
         initialSetup()
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    val itemBundle = bundleOf(ProductsFragment.PRODUCT_INITIAL_DATA to filtersMap)
+                    findNavController().navigate(R.id.toProductsFragmentHomePage,itemBundle)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     private fun initialSetup() {
 
-        filtersMap.forEach{
+        filtersMap.forEach {
             addChipToGroup(it)
         }
 
@@ -123,8 +134,8 @@ class ProductListFragment : Fragment() {
 
 
     private fun updateDataInList(myList: ArrayList<Products>) {
-        binding.tvCount.text = myList.size.toString() +" "+ getString(R.string.results)
-        adapter.differ.submitList(myList)
+        binding.tvCount.text = myList.size.toString() + " " + getString(R.string.results)
+        adapter.differ.submitList(myList.sortedBy { it.product_name.lowercase(Locale.getDefault()) })
         adapter.notifyDataSetChanged()
     }
 

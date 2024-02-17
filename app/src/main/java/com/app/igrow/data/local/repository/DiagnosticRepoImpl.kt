@@ -36,11 +36,13 @@ class DiagnosticRepoImpl @Inject constructor(
     }
 
     override suspend fun getDiagnosticColumnData(
+        filtersMap: HashMap<String, String>,
         sheetName: String,
         columnName: String
     ): List<String> {
         return diagnosticDao.getDiagnosticColumnData(
             Utils.getColumnDataCustomQuery(
+                filtersMap = filtersMap,
                 sheetName = sheetName,
                 columnName = columnName
             )

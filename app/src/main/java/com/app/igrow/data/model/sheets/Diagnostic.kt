@@ -20,4 +20,5 @@ data class Diagnostic(
     var symptoms_impact_fr: String = "",
     var control: String = "",
     var control_fr: String = "",
+    var image_sample:String = ""
 ): Parcelable

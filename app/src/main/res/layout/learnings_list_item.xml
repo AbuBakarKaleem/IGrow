@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="4dp"
     android:id="@+id/cv_learning_item"
+    app:cardElevation="5dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,8 +23,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_youtube"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_youtube"
             app:layout_constraintEnd_toStartOf="@+id/guideline_one"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,7 @@
             android:textSize="20sp"
             android:clickable="true"
             Tool:text="Title"
+            android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@id/iv_share_item"
             app:layout_constraintStart_toEndOf="@+id/guideline_one"
             app:layout_constraintTop_toTopOf="parent"
