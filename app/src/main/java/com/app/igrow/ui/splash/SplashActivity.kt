@@ -48,8 +48,8 @@ class SplashActivity : BaseActivity() {
         setContentView(R.layout.activity_splash)
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         observer()
-        checkForNotificationPermission()
-        scheduleNotificationWorker()
+//        checkForNotificationPermission()
+//        scheduleNotificationWorker()
 
     }
 
@@ -113,13 +113,13 @@ class SplashActivity : BaseActivity() {
             if (it) {
                 if (Utils.isInternetAvailable(this)) {
                     createDatabase()
-                    if (permissionGranted)
+//                    if (permissionGranted)
                         navigateToNext()
                 } else {
                     showConnectInternetAlert()
                 }
             } else {
-                if (permissionGranted)
+//                if (permissionGranted)
                     navigateToNext()
             }
         }
@@ -184,8 +184,8 @@ class SplashActivity : BaseActivity() {
 
     private fun showAppUpdateDialog(){
         val builder = AlertDialog.Builder(this)
-        builder.setTitle("App Update")
-        builder.setMessage("Please update your app to the latest version!")
+        builder.setTitle(getString(R.string.app_update))
+        builder.setMessage(getString(R.string.please_update_your_app))
         builder.setIcon(ContextCompat.getDrawable(this, R.drawable.ic_google_play))
         builder.setPositiveButton(getString(R.string.update), null)
         //performing positive action

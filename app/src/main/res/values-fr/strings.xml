@@ -212,6 +212,8 @@ Les produits phytosanitaires doivent être utilisés par des personnes responsab
     <string name="direction_of_use">Recommandations D’utilisation</string>
     <string name="error_complete_pre_selection">Sélectionnez Dabord la Région et la Ville sil vous plaît</string>
     <string name="problem_name">Nom du problème</string>
+    <string name="please_update_your_app">Veuillez mettre à jour votre application avec la dernière version!</string>
+    <string name="app_update">Mise à jour de lapplication</string>
     <string name="exit_dialog_message">Êtes-vous sûr de vouloir quitter?</string>
     <string name="exit_dialog_header">Fermer cette appli?</string>
     <string name="exit_dialog_button_text">Sortie</string>

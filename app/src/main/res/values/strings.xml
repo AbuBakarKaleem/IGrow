@@ -190,6 +190,8 @@ Crop Protection products must be used by responsible and authorized persons, in 
     <string name="location_amp_contact"><![CDATA[Location & Contact]]></string>
     <string name="search_result">Search Results</string>
     <string name="more_info">More Info</string>
+    <string name="please_update_your_app">Please update your app to the latest version!</string>
+    <string name="app_update">App Update</string>
     <string name="no_email_app_found">No email app found</string>
     <string name="identify_by_pest">Identify a crop pest or disease</string>
     <string name="search_pest">Search for a pest or disease</string>
